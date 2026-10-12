@@ -42,6 +42,6 @@ Höyrypesuririvejä (osuma otsikossa tai kategoriassa, sisältää lisävarustei
 ## Avoimet tehtävät
 1. ✅ Feedien siivous tehty 2026-10-05, katso `FEEDIT.md`: 98 laitetta, joista 89 on varastossa. Kärcher-linkitys päätetty 2026-10-12: Kärcherin feedistä puuttuvista malleista mukaan otetaan vain SC 1 EasyFix, SC 2 EasyFix ja SC 3 EasyFix, jotka linkitetään karcher.comiin. Muut mallit ovat affiliate-malleja.
 2. **Adtraction:** oma kanava hoyrypesuri.fi:lle ja sille kumppanuudet (Kärcher, Proshop, CS Megastore, Multitronic).
-3. **Writer-skilli,** CLAUDE.md ja Vercel-projekti. GitHub-repo `Wibah/Hoyrypesuri` (yksityinen) luotu 2026-10-12, päähaara `main`.
+3. ✅ Writer-skilli `hoyrypesuri-writer` tehty 2026-10-12 (`~/.claude/skills/hoyrypesuri-writer/`). Auki: CLAUDE.md ja Vercel-projekti. GitHub-repo `Wibah/Hoyrypesuri` (yksityinen) luotu 2026-10-12, päähaara `main`.
 4. Valinnaisesti hoyrypesurit.fi:n rekisteröinti ohjaukseksi.
 5. Rakennetaan tekstiilipesuri.comin jälkeen, koska sen volyymi on noin kolminkertainen.
