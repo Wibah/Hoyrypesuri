@@ -1,0 +1,255 @@
+---
+// SCN: pilari, intentti Definition + Decision. Hakusanat: höyrypesuri 5 300, höyrypuhdistin 250, paras höyrypesuri 150,
+// höyrypesuri kokemuksia 100, höyrypesurit 80, hyvä höyrypesuri 40, tehokas höyrypesuri 40, höyrypesuri tarjous 40,
+// höyrypesuri hinta 30, höyrypesuri vertailu 20, höyrypesuri testivoittaja 20, paras höyrypesuri kotiin 10 (Ahrefs 2026-10).
+// Etusivu omistaa myös paras-haun, joten erillistä paras-sivua ei tehdä. Kotikäyttöhaut ovat osiona ja UKK:ssa, ei omana
+// sivuna (Villen päätös 2026-10-12). Sohvan ja maton pesu ohjataan tekstiilipesuri.comiin. Kirjoitettu
+// hoyrypesuri-writer-skillillä (2026-10-12). Vain Suomen markkinoilla myytävät mallit.
+import Layout from '../layouts/Layout.astro';
+import Korttirivi from '../components/tuote/Korttirivi.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { paatuote, tuote, merkinTuotteet, euroa, luku, paiva, mallisivut, hintavali, karcherComissa, lammitysaika, tyyppinimet } from '../lib/tuotteet';
+
+const sc1 = await paatuote('SC 1');
+const sc2 = await paatuote('SC 2');
+const sc3 = await paatuote('SC 3');
+const sc5 = await paatuote('SC 5');
+const sv7 = await paatuote('SV 7');
+const sc4 = await paatuote('SC 4');
+const karcher = await merkinTuotteet('Kärcher');
+const kotiCom = karcherComissa(karcher.filter((t) => !t.ammattilaite));
+const sailiomallit = kotiCom.filter((t) => t.tyyppi === 'sailio');
+const alennetut = kotiCom.filter((t) => t.hintaEnnenAlennusta != null && t.hintaEnnenAlennusta > t.hinta!);
+const k3 = sc3.tekniset;
+const k5 = sc5.tekniset;
+
+const suositukset = [
+	{ t: sc3, otsikko: 'Kärcher SC 3', otsikkoH3: 'Paras höyrypesuri kotiin: Kärcher SC 3 EasyFix', sivu: mallisivut['SC 3'], tagi: 'Paras kotiin', kuvaus: `Lämmitysaika on ${lammitysaika(k3.lammitysaikaMin)}, ja ${luku(k3.sailioL!)} litran säiliön voi täyttää kesken työn. Puhdistaa lattiat, laatat, saumat ja ikkunat.` },
+	{ t: sc2, otsikko: 'Kärcher SC 2 Upright', sivu: mallisivut['SC 2'], tagi: 'Lattioille', kuvaus: `Höyrymoppi pelkille lattioille. Lämmitysaika on ${lammitysaika(sc2.tekniset.lammitysaikaMin)}, ja moppi painaa ${luku(sc2.tekniset.painoKg!)} kg.` },
+	{ t: sc1, otsikko: 'Kärcher SC 1', sivu: mallisivut['SC 1'], tagi: 'Edullisin', kuvaus: `Käsimalli saumoihin, hanoihin, liesiin ja suihkuseiniin. Painaa ${luku(sc1.tekniset.painoKg!)} kg, mutta ei sovi lattioille.` },
+	{ t: sc5, otsikko: 'Kärcher SC 5', sivu: mallisivut['SC 5'], tagi: 'Isoon kotiin', kuvaus: `${luku(k5.paineBar!)} barin paine ja ${luku(k5.sailioL!)} litran säiliö, joka riittää valmistajan mukaan noin ${luku(k5.pintaAlaM2!)} neliöön.` },
+	{ t: sv7, otsikko: 'Kärcher SV 7', sivu: mallisivut['SV 7'], tagi: 'Imevä', kuvaus: 'Höyryttää ja imee irronneen lian ja kosteuden samalla vedolla. Kallis ja painava, mutta lattia jää kuivemmaksi.' },
+];
+
+const pikavalinnat = [
+	['Lattiat', '/hoyrymoppi/'],
+	['Kylpyhuone', '/hoyrypesuri-kylpyhuoneeseen/'],
+	['Koko koti', mallisivut['SC 3']],
+	['Imevä malli', '/imeva-hoyrypesuri/'],
+	['Vuokraus', '/hoyrypesuri-vuokraus-vai-osto/'],
+];
+
+const tyypit = [
+	{ otsikko: 'Säiliömalli koko kotiin', teksti: 'Pyörillä kulkeva runko, letku ja monta suutinta. Puhdistaa lattiat, laatat, saumat, lieden ja ikkunat. Isompi säiliö ja paine, mutta vie tilaa.', esim: 'Esim. Kärcher SC 3–SC 5, Polti Vaporetto', sivu: '/karcher-hoyrypesurit/' },
+	{ otsikko: 'Höyrymoppi lattioille', teksti: 'Lämpenee nopeasti ja on helppo ottaa esiin. Puhdistaa vain lattiat, ja osaan mopeista saa mattoliukurin raikastamaan mattoa.', esim: 'Esim. Vileda Steam, Kärcher SC 2 Upright', sivu: '/hoyrymoppi/' },
+	{ otsikko: 'Höyrymoppi, josta irtoaa käsiosa', teksti: 'Sama laite lattioille ja pienille pinnoille. Säiliö ja teho ovat pienemmät kuin säiliömallissa.', esim: 'Esim. Black+Decker Steam-Mop, Kärcher SC 1 Multi & Up', sivu: '/hoyrymoppi/' },
+	{ otsikko: 'Käsimalli pieniin kohteisiin', teksti: 'Kevyt ja helppo säilyttää. Sopii saumoihin, hanoihin, uuniin ja suihkuseiniin, mutta ei lattioille.', esim: 'Esim. Kärcher SC 1, Bissell Steam Shot', sivu: mallisivut['SC 1'] },
+	{ otsikko: 'Imevä höyrypesuri', teksti: 'Höyryttää ja imee irronneen lian samalla vedolla, joten lattia jää kuivemmaksi. Painava ja kallis.', esim: 'Esim. Kärcher SV 7, Polti Vaporetto 3 Clean', sivu: '/imeva-hoyrypesuri/' },
+	{ otsikko: 'Kuivahöyry- ja ammattilaite', teksti: 'Korkeampi paine, iso kattila ja jatkuva täyttö pitkiin töihin. Hinta on moninkertainen kotikäyttöön tarkoitettuihin malleihin verrattuna.', esim: 'Esim. Kärcher SG 4/4', sivu: '/hoyrypesuri-ammattikayttoon/' },
+];
+
+const merkit = [
+	['/karcher-hoyrypesurit/', 'Kärcher', `SC 1–SC 5, SV 7 ja ammattikäyttöön tarkoitetut SG-laitteet. Kärcher.com myy nyt ${kotiCom.length} kotikäyttöön tarkoitettua höyrylaitetta.`],
+	['/vileda-hoyrymoppi/', 'Vileda', 'Steam-höyrymopit lattioille. Kärcherin jälkeen haetuin merkki.'],
+	['/polti-hoyrypesurit/', 'Polti', 'Vaporetto-säiliömallit, -höyrymopit ja imevä Vaporetto 3 Clean.'],
+	['/black-decker-hoyrypesurit/', 'Black+Decker', 'Steam-Mop-höyrymopit, joista monesta irtoaa käsiosa.'],
+	['/hoyrypesurimerkit/', 'Muut merkit', 'Dolphin, H2O, Emax, Silvercrest ja muut.'],
+];
+
+const oppaat = [
+	['/hoyrypesuri-kylpyhuoneeseen/', 'Höyrypesuri kylpyhuoneeseen', 'Saumat, laatat, kalkki ja saunan lauteet.'],
+	['/hoyrymoppi-laminaatille/', 'Höyrymoppi laminaatille', 'Mille lattioille höyry sopii ja mille ei.'],
+	['/hoyrypesuri-vuokraus-vai-osto/', 'Vuokraa vai osta', 'Milloin oma laite kannattaa.'],
+];
+
+const ukk = [
+	{
+		kysymys: 'Mikä on paras höyrypesuri kotiin?',
+		vastaus: `Useimpiin koteihin suosittelemme säiliömallia <a href="${mallisivut['SC 3']}">Kärcher SC 3 EasyFix</a> (${euroa(sc3.hinta!)}). Sen lämmitysaika on valmistajan mukaan ${lammitysaika(k3.lammitysaikaMin)}, ja säiliön voi täyttää kesken työn. Mukana on lattiasuutin ja suuttimet saumoihin ja ikkunoihin. Jos puhdistat vain lattioita, kevyempi <a href="/hoyrymoppi/">höyrymoppi</a> riittää.`,
+	},
+	{
+		kysymys: 'Mikä on paras höyrypesuri?',
+		vastaus: `Paras höyrypesuri riippuu siitä, mitä puhdistat. Koko kotiin sopii säiliömalli, kuten Kärcher SC 3, jonka Guardian valitsi testinsä (2025) parhaaksi kokonaisuudeksi. Pelkkiin lattioihin riittää höyrymoppi, ja pieniin kohteisiin käsimalli, kuten <a href="${mallisivut['SC 1']}">Kärcher SC 1</a> (${euroa(sc1.hinta!)}).`,
+	},
+	{
+		kysymys: 'Miten höyrypesuri toimii?',
+		vastaus: 'Höyrypesuri kuumentaa veden kattilassa höyryksi ja puhaltaa sen paineella pintaan. Kuumuus ja kosteus irrottavat rasvan, kalkin ja pinttyneen lian, jonka pyyhit liinalla pois. Pesuainetta ei yleensä tarvita.',
+	},
+	{
+		kysymys: 'Paljonko höyrypesuri maksaa?',
+		vastaus: `Kärcherin kotikäyttöön tarkoitetut höyrylaitteet maksavat Kärcher.comissa ${hintavali(kotiCom)}. Kuluttaja.fi:n testissä (2024) höyrypesurit maksoivat noin 100–600 euroa ja useimmat höyrymopit 100–200 euroa. Jos tarvitset laitetta harvoin, sen voi myös <a href="/hoyrypesuri-vuokraus-vai-osto/">vuokrata</a>.`,
+	},
+	{
+		kysymys: 'Voiko höyrypesurilla pestä sohvan tai maton?',
+		vastaus: 'Höyrypesuri ei pese sohvaa tai mattoa, koska se ei ime likaa pois kankaasta. Testeissä matot vain kostuivat. Tekstiilisuuttimella voi raikastaa kangasta, mutta pesuun tarvitaan tekstiilipesuri. Erot on koottu <a href="https://tekstiilipesuri.com/tekstiilipesuri-vai-hoyrypesuri/">tekstiilipesuri vai höyrypesuri -vertailuun</a>.',
+	},
+	{
+		kysymys: 'Sopiiko höyrypesuri laminaatille ja parketille?',
+		vastaus: 'Laatta- ja vinyylilattiat kestävät höyryn hyvin. Laminaatin ja parketin kohdalla lähteet ovat eri mieltä, ja vanha parketti voi vaurioitua. Tarkista aina lattian valmistajan ohje, ja käytä pienintä höyrytehoa. Ohjeet ovat <a href="/hoyrymoppi-laminaatille/">laminaattioppaassa</a>.',
+	},
+	{
+		kysymys: 'Tappaako höyry bakteerit?',
+		vastaus: 'Valmistajat lupaavat, että höyry poistaa jopa 99,99 % bakteereista. Kärcherin mukaan luku koskee perusteellista puhdistusta kovilla lattiapinnoilla ja tiettyjä bakteereja. Testit eivät ole mitanneet tätä, joten pidä lukua valmistajan väitteenä.',
+	},
+	{
+		kysymys: 'Höyrypesuri vai höyrymoppi?',
+		vastaus: 'Kuluttaja.fi:n testissä (2024) höyrypesurit puhdistivat yleensä paremmin, mutta höyrymopit olivat helpompia ja nopeampia ottaa käyttöön. Valitse höyrymoppi, jos puhdistat vain lattioita. Valitse säiliömalli, jos haluat puhdistaa myös kylpyhuoneen, keittiön ja ikkunat.',
+	},
+];
+---
+<Layout
+	title="Höyrypesuri 2026 – paras höyrypesuri kotiin, vertailu ja testit"
+	description="Höyrypesuri vertailu 2026: paras höyrypesuri kotiin, höyrymopit, imevät mallit, hinnat, testit ja käyttäjien kokemukset."
+>
+	<main>
+		<section class="hero">
+			<h1>Höyrypesuri – vertailu ja ostajan opas 2026</h1>
+			<p>Höyrypesuri eli höyrypuhdistin irrottaa kuumalla höyryllä rasvan, kalkin ja pinttyneen lian laatoista, saumoista, lattioista ja keittiön pinnoista ilman pesuaineita. Vertailemme Suomessa myytäviä höyrypesureita valmistajien tietojen ja nimettyjen testien perusteella.</p>
+			<p class="es-ohjaus">Haluatko pestä sohvan tai maton? Tarvitset tekstiilipesurin. Lue <a href="https://tekstiilipesuri.com/tekstiilipesuri-vai-hoyrypesuri/">tekstiilipesurin ja höyrypesurin erot</a>.</p>
+			<span class="es-kysymys">Mitä aiot puhdistaa?</span>
+			<div class="es-pikavalinnat" role="group" aria-label="Pikavalinnat käyttötarpeen mukaan">
+				{pikavalinnat.map(([nimi, sivu]) => <a href={sivu}>{nimi}</a>)}
+			</div>
+		</section>
+
+		<div class="es-luottamus">
+			<div><b>{karcher.length} Kärcherin mallia</b>SC-, SV- ja SG-laitteet valmistajan tiedoin</div>
+			<div><b>Tekniset tiedot</b>suoraan valmistajan sivuilta</div>
+			<div><b>Hinnat tarkistettu</b>{paiva(sc3.haettu)}</div>
+		</div>
+
+		<div class="es-sisalto">
+			<section class="es-osio">
+				<div class="es-otsikko"><div><span class="tp-label">Suositukset</span><h2 id="suositukset">Hyvä höyrypesuri kotikäyttöön – suosituksemme 2026</h2></div><a class="es-lisaa" href="/karcher-hoyrypesurit/">Kaikki Kärcherin mallit →</a></div>
+				<p>Hyvä höyrypesuri kotikäyttöön lämpenee nopeasti, ja sitä on helppo käyttää. Siinä on myös suuttimet niille pinnoille, joita aiot puhdistaa. Valitsimme suositukset teknisten tietojen, testien ja hinnan perusteella. Paras höyrypesuri kotiin on useimmille Kärcher SC 3 EasyFix. Kärcher SC 3 puhdistaa sekä lattiat että kylpyhuoneen ja keittiön, ja sen lämmitysaika on valmistajan mukaan puoli minuuttia. Pelkkiin lattioihin suosittelemme kevyempää höyrymoppia ja pieniin kohteisiin käsimallia.</p>
+				<div class="mk-lista">
+					{suositukset.map((r, i) => (
+						<Korttirivi tuote={r.t} sija={i + 1} tagi={r.tagi} otsikko={r.otsikko} otsikkoH3={r.otsikkoH3} versio sivu={r.sivu} kuvaus={r.kuvaus} />
+					))}
+				</div>
+				<p>Muiden merkkien höyrymopeista Viledan, Poltin ja Black+Deckerin malleja vertaillaan <a href="/hoyrymoppi/">höyrymoppisivulla</a>.</p>
+			</section>
+
+			<section class="es-osio">
+				<div class="es-otsikko"><div><span class="tp-label">Laitetyypit</span><h2 id="tyypit">Höyrypesuri kotikäyttöön: mikä tyyppi sopii mihinkin?</h2></div></div>
+				<p>Höyrypesurit jaetaan rakenteen mukaan kuuteen tyyppiin. Mitä enemmän pintoja haluat puhdistaa, sitä enemmän tarvitset suuttimia, letkua ja vettä. Samalla laite kuitenkin painaa enemmän ja lämpenee hitaammin.</p>
+				<div class="es-kortit">
+					{tyypit.map((k) => (
+						<a class="es-kortti" href={k.sivu}>
+							<h3>{k.otsikko}</h3>
+							<p>{k.teksti}</p>
+							<span>{k.esim} →</span>
+						</a>
+					))}
+				</div>
+			</section>
+
+			<section class="es-osio">
+				<div class="es-otsikko"><div><span class="tp-label">Käyttökohteet</span><h2 id="kayttokohteet">Mihin höyrypuhdistin sopii ja mihin ei?</h2></div></div>
+				<p>Höyrypuhdistin on tehty koville pinnoille. Guardianin (2025) ja Independentin (2026) testeissä höyry toimi parhaiten saumoissa, pesualtaissa ja suihkuseinissä. Kuluttaja.fi:n testissä (2024) heikoimmat tulokset tulivat matoista. Näissä kohteissa höyrystä on eniten hyötyä:</p>
+				<ul>
+					<li><strong>Kylpyhuone ja sauna:</strong> laattojen saumat, suihkuseinät, hanat ja lattiakaivo. Käytä pistesuutinta ja pyöröharjaa. Ohje on <a href="/hoyrypesuri-kylpyhuoneeseen/">kylpyhuoneoppaassa</a>.</li>
+					<li><strong>Keittiö:</strong> liesi, uuni, liesituuletin ja välitilan laatat. Höyry pehmentää rasvan, ja liina vie sen pois.</li>
+					<li><strong>Lattiat:</strong> laatta- ja vinyylilattiat. Höyrymoppi tai lattiasuutin ja mikrokuituliina.</li>
+					<li><strong>Ikkunat:</strong> ikkunasuutin ja vetolasta. Kylmä ikkuna lämmitetään varovasti.</li>
+					<li><strong>Muut kohteet:</strong> patterit, pakastimen sulatus, jäteastiat ja muovilelut.</li>
+				</ul>
+				<p><strong>Varo näitä pintoja:</strong> käsittelemätöntä puuta, vanhaa parkettia, maalattuja pintoja, silkkiä, samettia ja villamattoja. Sähkölaitteita ja pistorasioita ei höyrytetä. Kokeile ensin piilossa olevaan kohtaan, jos et ole varma. Höyrypuhdistin ei myöskään pese sohvaa tai mattoa, koska se ei ime likaa pois kankaasta. Matot vain kostuvat. Niihin tarvitaan <a href="https://tekstiilipesuri.com/">tekstiilipesuri</a>.</p>
+			</section>
+
+			<section class="es-osio">
+				<div class="es-otsikko"><div><span class="tp-label">Ostajan opas</span><h2 id="ostajan-opas">Miten höyrypesuri toimii ja mitä kannattaa vertailla?</h2></div></div>
+				<p>Höyrypesuri kuumentaa veden kattilassa höyryksi ja puhaltaa sen paineella suuttimesta. Kuumuus ja kosteus irrottavat lian, ja liina tai harja vie sen pois. Höyry ei siis poista likaa itse, ja liinoja tarvitaan aina. Ennen ostoa kannattaa vertailla viittä asiaa:</p>
+				<div class="es-opas">
+					<div class="model-box">
+						<h3>1. Mitä puhdistat?</h3>
+						<p>Pelkkiin lattioihin riittää höyrymoppi. Jos haluat puhdistaa myös saumat, liesi ja ikkunat, tarvitset säiliömallin tai mopin, josta irtoaa käsiosa. Pieniin kohteisiin riittää käsimalli.</p>
+					</div>
+					<div class="model-box">
+						<h3>2. Lämpenemisaika</h3>
+						<p>Kärcherin SC 2 Upright -höyrymoppi ja SC 3 lämpenevät valmistajan mukaan puolessa minuutissa. Kattilalla varustetut mallit tarvitsevat enemmän aikaa: Kärcher SC 5:n lämmitysaika on {lammitysaika(k5.lammitysaikaMin)} ja SC 1:n {lammitysaika(sc1.tekniset.lammitysaikaMin)}. Jos otat laitteen esiin usein ja lyhyiksi hetkiksi, nopea lämpeneminen on tärkeä.</p>
+					</div>
+					<div class="model-box">
+						<h3>3. Säiliö ja jatkuva täyttö</h3>
+						<p>Kärcherin säiliömalleissa säiliön voi täyttää kesken työn. Säiliö on SC 3:ssa {luku(k3.sailioL!)} litraa ja SC 5:ssä {luku(k5.sailioL!)} litraa. Käsimalleissa ja osassa mopeista on vain kattila, jota ei saa avata kuumana. Silloin laitteen on jäähdyttävä ennen täyttöä.</p>
+					</div>
+					<div class="model-box">
+						<h3>4. Paine ja teho</h3>
+						<p>Test.se:n koosteen (2026) mukaan säiliömallien maksimipaine on tyypillisesti noin 3–6 baria. Kärcherin säiliömalleissa paine on {luku(k3.paineBar!)} baria (SC 3) – {luku(k5.paineBar!)} baria (SC 5). Suurempi teho tuottaa enemmän höyryä, mutta myös kuluttaa vettä ja sähköä nopeammin.</p>
+					</div>
+					<div class="model-box">
+						<h3>5. Suuttimet ja kalkki</h3>
+						<p>Tarkista, mitkä suuttimet kuuluvat valitsemaasi versioon. Saman mallin versiot eroavat usein vain suuttimien osalta. Kalkki on höyrypesurin tavallisin huoltoasia, varsinkin kovan veden alueilla. Kärcherin SC 3:ssa on kalkinpoistopatruuna, ja SC 4:n ja SC 5:n mukana tulee kalkinpoistojauhetta.</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="es-osio">
+				<div class="es-otsikko"><div><span class="tp-label">Hinnat</span><h2 id="hinnat">Höyrypesurin hinta ja tarjoukset</h2></div><a class="es-lisaa" href="/karcher-hoyrypesurit/">Kärcher-opas →</a></div>
+				<p>Kärcherin kotikäyttöön tarkoitetut höyrylaitteet maksavat Kärcher.comissa {hintavali(kotiCom)}, ja säiliömallit {hintavali(sailiomallit)}. {alennetut.length ? `Kärcher.comissa on nyt tarjouksessa ${alennetut.length} höyrylaitetta.` : `Kärcher.comissa ei ole tällä hetkellä alennettuja höyrylaitteita (tarkistettu ${paiva(sc3.haettu)}).`} Kun höyrypesuri on tarjouksessa, kortissa näkyy alennettu hinta ja hinta ennen alennusta.</p>
+				<div class="tp-taulu">
+					<table class="es-ksarja">
+						<thead><tr><th scope="col">Malli</th><th scope="col">Tyyppi</th><th scope="col">Paine</th><th scope="col">Lämpenee</th><th scope="col">Hinta</th></tr></thead>
+						<tbody>
+							{[sc1, sc2, sc3, sc4, sc5, sv7].map((t) => (
+								<tr>
+									<th scope="row"><a href={mallisivut[t.sarja as keyof typeof mallisivut]}>Kärcher {t.nimi}</a></th>
+									<td>{tyyppinimet[t.tyyppi]}</td>
+									<td>{t.tekniset.paineBar != null ? `${luku(t.tekniset.paineBar)} bar` : '–'}</td>
+									<td>{lammitysaika(t.tekniset.lammitysaikaMin) ?? '–'}</td>
+									<td>{t.hinta != null ? euroa(t.hinta) : '–'}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+				<p class="tp-lahde">Paine ja lämpenemisaika: Kärcherin tekniset tiedot. Höyrymopin painetta valmistaja ei ilmoita.</p>
+			</section>
+
+			<section class="es-osio">
+				<div class="es-otsikko"><div><span class="tp-label">Testit</span><h2 id="testit">Paras höyrypesuri testeissä 2024–2026</h2></div></div>
+				<p>Laajin Suomessa julkaistu testi on Kuluttaja.fi:n laboratoriotesti (3.12.2024). Siinä oli 9 höyrypesuria ja 15 höyrymoppia, muun muassa Kärcherin SC 1–SC 5, Poltin Vaporetto-mallit, Black+Deckerin Steam-Mopit ja Vileda Steam Plus XXL. Mallikohtaiset tulokset ovat maksumuurin takana. Julkisten havaintojen mukaan höyrypesurit puhdistivat paremmin ja höyrymopit olivat helpompia ottaa käyttöön. Kovat pinnat puhdistuivat hyvin, mutta matoissa onnistui vain yksi laite. Kallein laite ei ollut paras, eikä halvin moppi pärjännyt.</p>
+				<p>Brittiläiset testit nostavat esiin Kärcher SC 3:n. Guardian (12.3.2025) valitsi sen brittiläisen version parhaaksi kokonaisuudeksi, ja Independent (19.8.2026) parhaaksi isoon kotiin. Guardianin mukaan SC 3 oli erinomainen pesualtaissa ja suihkuseinissä, mutta lattia jäi melko märäksi. Testin parhaaksi höyrymopiksi Guardian valitsi Vileda Steam Mop Plussan. Kärcher SC 5:tä Guardian piti tehokkaimpana, mutta liian suurena ja kalliina useimmille kotitalouksille.</p>
+				<p>Testit kertovat myös rajat. Råd & Rönin testissä (2019) monen laitteen kokoaminen oli työlästä, ja käsi oli lähellä kuumaa höyryä. Consumer Reportsin (2026) mukaan höyrytin ei tee ihmeitä, ja liinoja tarvitaan aina. Käyttäjien kokemuksia keräämme <a href="#kokemuksia">sivun lopussa olevalla lomakkeella</a>.</p>
+				<p class="tp-lahde">Lähteet: <a href="https://kuluttaja.fi/testi/hoyrypesurit/" target="_blank" rel="nofollow noopener">Kuluttaja.fi</a>, <a href="https://www.theguardian.com/thefilter/2025/mar/12/best-steam-cleaner-mop" target="_blank" rel="nofollow noopener">Guardian</a>, <a href="https://www.independent.co.uk/extras/indybest/house-garden/household-appliances/best-steam-cleaner-uk-b1783309.html" target="_blank" rel="nofollow noopener">Independent</a>, <a href="https://www.radron.se/tester/koksmaskiner-stadning/angtvattar/" target="_blank" rel="nofollow noopener">Råd & Rön</a>, <a href="https://www.consumerreports.org/home-garden/cleaning/best-handheld-steam-cleaners-of-the-year-a2051557754/" target="_blank" rel="nofollow noopener">Consumer Reports</a>. Brittiläisissä testeissä testattiin Britannian myyntiversioita, joiden varusteet voivat poiketa Suomessa myytävistä.</p>
+			</section>
+
+			<section class="es-osio">
+				<div class="es-otsikko"><div><span class="tp-label">Merkit</span><h2 id="merkit">Höyrypesurit merkeittäin</h2></div></div>
+				<div class="es-kortit">
+					{merkit.map(([sivu, otsikko, teksti]) => (
+						<a class="es-kortti" href={sivu}><h3>{otsikko}</h3><p>{teksti}</p><span>Katso mallit →</span></a>
+					))}
+				</div>
+			</section>
+
+			<section class="es-osio">
+				<div class="es-otsikko"><div><span class="tp-label">Oppaat</span><h2 id="muut-oppaat">Muut oppaat</h2></div></div>
+				<div class="es-kortit">
+					{oppaat.map(([sivu, otsikko, teksti]) => (
+						<a class="es-kortti" href={sivu}><h3>{otsikko}</h3><p>{teksti}</p><span>Lue opas →</span></a>
+					))}
+				</div>
+			</section>
+
+			<section class="es-osio">
+				<Ukk kysymykset={ukk} />
+			</section>
+
+			<section class="es-osio">
+				<Kokemuslomake malli="Höyrypesuri" polku="/" mallikentta otsikko="Höyrypesuri kokemuksia">
+					<p>Testit kertovat, miten höyrypesuri toimii testaajan kotona. Käyttäjän kokemus kertoo, miten se toimii vuosien käytössä. Kerro, mikä höyrypesuri tai höyrymoppi sinulla on, mitä olet sillä puhdistanut ja mikä on toiminut tai jäänyt kesken.</p>
+					<p>Luemme jokaisen kokemuksen ennen julkaisua, ja julkaisemme kokemukset nimimerkillä tällä sivulla ja mallin omalla sivulla. Emme muokkaa kokemuksen sisältöä emmekä julkaise sähköpostiosoitetta.</p>
+				</Kokemuslomake>
+			</section>
+		</div>
+		<script type="application/ld+json" set:html={JSON.stringify({
+			'@context': 'https://schema.org',
+			'@type': 'WebSite',
+			name: 'Höyrypesuri.fi',
+			url: 'https://hoyrypesuri.fi/',
+			inLanguage: 'fi',
+		})} />
+	</main>
+</Layout>

@@ -1,0 +1,43 @@
+---
+import { luku, type Tuote } from '../../lib/tuotteet';
+
+interface Props {
+	tuote: Tuote;
+}
+
+const { tuote } = Astro.props;
+const t = tuote.tekniset;
+const rivit = [
+	['Lämmitysteho', t.tehoW, 'W'],
+	['Maksimi höyrynpaine', t.paineBar, 'bar'],
+	['Lämmitysaika', t.lammitysaikaMin, 'min'],
+	['Vesisäiliö', t.sailioL, 'l'],
+	['Höyrykattila', t.kattilaL, 'l'],
+	['Pinta-ala yhdellä täytöllä (noin)', t.pintaAlaM2, 'm²'],
+	['Höyryn määrä', t.hoyryGmin, 'g/min'],
+	['Kattilan lämpötila (enintään)', t.lampotilaC, '°C'],
+	['Virtajohto', t.virtajohtoM, 'm'],
+	['Paino ilman varusteita', t.painoKg, 'kg'],
+] as const;
+---
+<div class="tp-tekniset">
+	<div class="tp-taulu">
+		<table class="tp-spec">
+			<tbody>
+				{rivit.filter(([, arvo]) => arvo != null).map(([nimi, arvo, yksikko]) => (
+					<tr><th scope="row">{nimi}</th><td>{luku(arvo!)} {yksikko}</td></tr>
+				))}
+				{t.mitatMm && <tr><th scope="row">Mitat (p × l × k)</th><td>{t.mitatMm.replaceAll(' x ', ' × ')} mm</td></tr>}
+			</tbody>
+		</table>
+	</div>
+	<div>
+		{tuote.toimitusSisaltaa.length > 0 && (
+			<>
+				<h3>Toimitus sisältää</h3>
+				<ul class="tp-lista">{tuote.toimitusSisaltaa.map((rivi) => <li>{rivi.replace('::', ':')}</li>)}</ul>
+			</>
+		)}
+		<p class="tp-lahde">Lähde: <a href={tuote.lahde} target="_blank" rel="nofollow noopener">{tuote.merkki} {tuote.nimi} valmistajan sivuilla</a></p>
+	</div>
+</div>

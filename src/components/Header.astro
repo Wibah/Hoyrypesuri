@@ -1,0 +1,94 @@
+---
+---
+<header>
+	<a href="/" class="logo">♨️ Höyrypesuri.fi</a>
+	<button class="hamburger" id="navToggle" aria-label="Avaa valikko" aria-expanded="false" aria-controls="mainNav">
+		<span></span><span></span><span></span>
+	</button>
+	<nav id="mainNav">
+		<a href="/" class="nav-link">Etusivu</a>
+		<div class="dropdown">
+			<button class="dropbtn" aria-expanded="false">Kärcher ▾</button>
+			<div class="dropdown-content">
+				<a href="/karcher-hoyrypesurit/">Kaikki Kärcher-höyrypesurit</a>
+				<a href="/karcher-sc-1-hoyrypesuri/">Kärcher SC 1</a>
+				<a href="/karcher-sc-2-hoyrypesuri/">Kärcher SC 2</a>
+				<a href="/karcher-sc-3-hoyrypesuri/">Kärcher SC 3</a>
+				<a href="/karcher-sc-4-hoyrypesuri/">Kärcher SC 4</a>
+				<a href="/karcher-sc-5-hoyrypesuri/">Kärcher SC 5</a>
+				<a href="/karcher-sv-7-hoyryimuri/">Kärcher SV 7</a>
+				<a href="/karcher-hoyrypesuri-varaosat/">Kärcher-varaosat</a>
+			</div>
+		</div>
+		<div class="dropdown">
+			<button class="dropbtn" aria-expanded="false">Laitetyypit ▾</button>
+			<div class="dropdown-content">
+				<a href="/hoyrymoppi/">Höyrymoppi</a>
+				<a href="/imeva-hoyrypesuri/">Imevä höyrypesuri</a>
+				<a href="/kuivahoyrypesuri/">Kuivahöyrypesuri</a>
+				<a href="/hoyrypesuri-ammattikayttoon/">Ammattikäyttöön</a>
+			</div>
+		</div>
+		<div class="dropdown">
+			<button class="dropbtn" aria-expanded="false">Muut merkit ▾</button>
+			<div class="dropdown-content">
+				<a href="/vileda-hoyrymoppi/">Vileda</a>
+				<a href="/polti-hoyrypesurit/">Polti</a>
+				<a href="/black-decker-hoyrypesurit/">Black+Decker</a>
+				<a href="/hoyrypesurimerkit/">Muut merkit</a>
+			</div>
+		</div>
+		<div class="dropdown">
+			<button class="dropbtn" aria-expanded="false">Oppaat ▾</button>
+			<div class="dropdown-content">
+				<a href="/hoyrypesuri-kylpyhuoneeseen/">Höyrypesuri kylpyhuoneeseen</a>
+				<a href="/hoyrymoppi-laminaatille/">Höyrymoppi laminaatille</a>
+				<a href="/hoyrypesuri-vuokraus-vai-osto/">Vuokraa vai osta</a>
+			</div>
+		</div>
+	</nav>
+</header>
+
+<script>
+	const navToggle = document.getElementById('navToggle');
+	const mainNav = document.getElementById('mainNav');
+
+	navToggle?.addEventListener('click', () => {
+		const isOpen = mainNav?.classList.toggle('open');
+		navToggle.setAttribute('aria-expanded', String(!!isOpen));
+		if (!isOpen) {
+			document.querySelectorAll('.dropdown.open').forEach((d) => {
+				d.classList.remove('open');
+				d.querySelector('.dropbtn')?.setAttribute('aria-expanded', 'false');
+			});
+		}
+	});
+
+	document.querySelectorAll('.dropdown > .dropbtn').forEach((btn) => {
+		btn.addEventListener('click', () => {
+			const dropdown = btn.parentElement;
+			const isOpen = dropdown?.classList.toggle('open');
+			btn.setAttribute('aria-expanded', String(!!isOpen));
+			document.querySelectorAll('.dropdown.open').forEach((d) => {
+				if (d !== dropdown) {
+					d.classList.remove('open');
+					d.querySelector('.dropbtn')?.setAttribute('aria-expanded', 'false');
+				}
+			});
+		});
+	});
+
+	document.addEventListener('click', (e) => {
+		if (!(e.target instanceof Node) || !mainNav || !navToggle) return;
+		const clickedInsideNav = mainNav.contains(e.target);
+		const clickedToggle = navToggle.contains(e.target);
+		if (!clickedInsideNav && !clickedToggle) {
+			mainNav.classList.remove('open');
+			navToggle.setAttribute('aria-expanded', 'false');
+			document.querySelectorAll('.dropdown.open').forEach((d) => {
+				d.classList.remove('open');
+				d.querySelector('.dropbtn')?.setAttribute('aria-expanded', 'false');
+			});
+		}
+	});
+</script>

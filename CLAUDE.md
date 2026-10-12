@@ -2,7 +2,7 @@
 
 Suomenkielinen affiliate-sivusto, joka vertailee Suomessa myytäviä höyrypesureita, höyrypuhdistimia ja höyrymoppeja. Kärcher on pääpainopiste, mutta sivusto on monimerkkinen vertailusivusto, ei Kärcherin mikrosivusto (Villen päätös 2026-10-12). Omistaja on Ville Hinkkanen. Sisarsivusto on tekstiilipesuri.com (`~/Projects/tekstiilipesuri`).
 
-**Tila 2026-10-12: alustava versio.** Sivustoa ei ole rakennettu. Suunnitelma on tiedostoissa `SUUNNITELMA.md` (tausta ja avoimet tehtävät), `SCN.md` (sivut, linkit ja riskit) ja `FEEDIT.md` (kumppanifeedien laitteet). Kun rakentaminen alkaa, koodipohja kopioidaan painepesurit.fi:stä, ja tämä tiedosto täydennetään tekstiilipesuri.comin `CLAUDE.md`:n mallilla. Siitä puuttuvat vielä osiot Rakenne ja Data, ja Tekniikka-osio on vain luonnos.
+**Tila 2026-10-12:** koodipohja on kopioitu tekstiilipesuri.comista, ja etusivu on rakennettu. Sivustoa ei julkaista ennen kuin se on kokonaan valmis (Villen ohje 2026-10-12), joten `JULKAISTU = false` tiedostossa `src/layouts/Layout.astro` (noindex), eikä Vercel-projektia tai domainia kytketä. Suunnitelma on tiedostoissa `SUUNNITELMA.md` (tausta ja avoimet tehtävät), `SCN.md` (sivut, linkit ja riskit) ja `FEEDIT.md` (kumppanifeedien laitteet). Kun rakentaminen alkaa, koodipohja kopioidaan painepesurit.fi:stä, ja tämä tiedosto täydennetään tekstiilipesuri.comin `CLAUDE.md`:n mallilla. Siitä puuttuvat vielä osiot Rakenne ja Data, ja Tekniikka-osio on vain luonnos.
 
 ## Tekniikka ja julkaisu
 
@@ -10,7 +10,14 @@ Suomenkielinen affiliate-sivusto, joka vertailee Suomessa myytäviä höyrypesur
 - **Koodipohja:** kopioidaan painepesurit.fi:stä (`~/Projects/painepesurit`) samaan tapaan kuin tekstiilipesuri.comiin (Astro, `src/styles/site.css`, tuotekomponentit, affiliate-middleware). Tarkista ensin tekstiilipesuri.comin ratkaisut, koska se on uudempi kopio samasta pohjasta.
 - **Kanoninen domain on `https://hoyrypesuri.fi`** (ostettu 2026-10-04, ilman ääkkösiä; brändi kirjoitetaan sivuilla muodossa Höyrypesuri.fi). höyrypesuri.fi kuuluu Yellow Service Oy:lle. hoyrypesurit.fi oli vapaana, ja sen voi rekisteröidä ohjaukseksi.
 - **Vercel:** projektia ei ole vielä. Kun se tehdään, jokainen push `main`-haaraan julkaisee sivuston, joten aja `npm run build` ennen pushia.
-- **Dev-palvelimen portti:** valitse vapaa portti. Painepesurit.fi käyttää porttia 4321 ja tekstiilipesuri.com porttia 4331.
+- **Dev-palvelin:** `.claude/launch.json` → `hoyrypesuri-dev`, portti 4341 (painepesurit.fi 4321, tekstiilipesuri.com 4331). Node 22 (nvm: `~/.nvm/versions/node/v22.23.2`).
+
+## Data
+
+- **Kärcher:** `npm run hae:karcher` (`scripts/hae-karcher.mjs`) lukee karcher.com/fi:n listaukset `/fi/home-garden/hoeyrypuhdistimet.html` sekä ammattipuolen höyrypuhdistimet ja höyryimurit, tuotesivujen teknisten tietojen taulukon ja hinta-API:n → `src/data/tuotteet/karcher.json` (23 tuotetta 2026-10-12). Kentät `sarja` (SC 1 … SGV 8/5) ja `tyyppi` (sailio, kasi, moppi, 2-in-1, imeva, ammatti) päätellään mallin nimestä. Kaikki valmistajan taulukon rivit ovat kentässä `teknisetValmistajalta`.
+- **Tuotekuvat:** `npm run hae:kuvat` (`scripts/hae_kuvat.py`) lataa kuvat Kärcherin, CS Megastoren ja Multitronicin feedeistä tuotenumerolla kansioon `src/assets/tuotteet/`.
+- **Muiden merkkien data** (Vileda, Polti, Black+Decker) puuttuu vielä. Se lisätään merkkisivujen yhteydessä tekstiilipesuri.comin mallilla (oma tiedosto per merkki, `MERKKITIEDOSTOT` tiedostossa `src/content.config.ts`).
+- **Mallisivujen päätuotteet ja polut:** `src/lib/tuotteet.ts` (`paatuotteet`, `mallisivut`).
 
 ## Affiliate
 

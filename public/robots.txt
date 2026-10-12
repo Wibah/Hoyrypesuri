@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hoyrypesuri.fi/sitemap-index.xml
