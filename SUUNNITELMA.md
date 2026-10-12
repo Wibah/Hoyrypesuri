@@ -4,7 +4,7 @@ Siirretty keskustelusta ”Uudet ideat saitteihin” (2026-10-04). Sivustoa ei o
 
 ## Taustaa
 - Domain **hoyrypesuri.fi** ostettu 2026-10-04. Yksikkömuoto valittiin, koska ”höyrypesuri” saa 5 300 hakua ja ”höyrypesurit” vain 80. Ääkköset puuttuvat, mutta Google rinnastaa ö:n ja o:n, ja brändi kirjoitetaan sivuilla muodossa Höyrypesuri.fi. höyrypesuri.fi:n omistaa Yellow Service Oy (vuodesta 2005, ei sivua). **hoyrypesurit.fi** oli vapaana ohjaukseksi.
-- Sisarsivusto **tekstiilipesuri.com** (`~/Projects/tekstiilipesuri`). Sivustot ovat erillisiä EMD-sivustoja yhteisellä koodipohjalla (painepesurit.fi:n pohja), ja ne ristiinlinkitetään siltasivuilla. Käyttäjät sekoittavat tuotetyypit, mutta Google näyttää hauille eri URLit, ja Ahrefsin Parent keywordit ovat erilliset.
+- Sisarsivusto **tekstiilipesuri.com** (`~/Projects/tekstiilipesuri`). Sivustot ovat erillisiä EMD-sivustoja yhteisellä koodipohjalla (painepesurit.fi:n pohja). hoyrypesuri.fi:n etusivu linkittää tekstiilipesuri.comin vertailusivulle, ja se linkittää takaisin. Käyttäjät sekoittavat tuotetyypit, mutta Google näyttää hauille eri URLit, ja Ahrefsin Parent keywordit ovat erilliset.
 - Rakennetaan `semantic-content-network`-skillin mukaan, ja tekstit kirjoitetaan `microsemantic-writer`- ja `finnish-humanizer`-skilleillä. Mitään ei keksitä.
 - Ahrefs-data: https://docs.google.com/spreadsheets/d/1xpF1KUAiwyBSNvJiGO7uPAW6hxgu7_wkuCkIZn6Yc00/ (höyrypesurin välilehdet gid=1 ja gid=992037549). CSV-export: `.../export?format=csv&gid=<gid>`.
 
@@ -14,7 +14,7 @@ Siirretty keskustelusta ”Uudet ideat saitteihin” (2026-10-04). Sivustoa ei o
 - **Imevä höyrypesuri ja höyryimuri:** noin 650 hakua yhteensä (höyryimuri 300, imevä 200, paras imevä höyrypuhdistin 90, SV 7, kokemuksia).
 - **Kuivahöyrypesuri** 200, **höyrypuhdistin** 250, **kylpyhuone** 150, **laminaatti/parketti/höyrymoppi** pieniä.
 - **Vuokraus:** noin 1 400 hakua (”höyrypesuri vuokraus” 600, Helsinki, Tampere, Oulu, Turku).
-- **Sekaannus tekstiilipesuriin:** ”tekstiili höyrypesuri” 250, ”höyrypesuri sohva” 100, ”höyrypesuri sohvalle” 90 ja jopa ”kärcher höyrypesuri se 6.100” (SE on tekstiilipesuri). Google kysyy hauissa: ”Mikä on tekstiilipesurin ja höyrypesurin ero?” ja ”Voiko höyrypesurilla pestä maton?”. Nämä ohjataan siltasivulla tekstiilipesuri.comiin.
+- **Sekaannus tekstiilipesuriin:** ”tekstiili höyrypesuri” 250, ”höyrypesuri sohva” 100, ”höyrypesuri sohvalle” 90 ja jopa ”kärcher höyrypesuri se 6.100” (SE on tekstiilipesuri). Google kysyy hauissa: ”Mikä on tekstiilipesurin ja höyrypesurin ero?” ja ”Voiko höyrypesurilla pestä maton?”. Nämä jätetään tekstiilipesuri.comille, jonka sivu `/tekstiilipesuri-vai-hoyrypesuri/` vastaa niihin. Omaa siltasivua ei tehdä (Villen päätös 2026-10-12), vaan etusivun yläosan ohjaus linkittää tekstiilipesuri.comiin.
 - Muut merkit: Emax 100, Ryobi 60, Nilfisk 30, Lumira, Vileda, H2O. Kauppahakuja (Tokmanni, Biltema, Prisma, Puuilo, Lidl, Clas Ohlson) ei tavoitella.
 - KD lähes kaikkialla 0. Poikkeukset: ”höyrypesuri kärcher” 52 ja ”höyrypesuri laminaatti” 26.
 
@@ -33,7 +33,6 @@ Siirretty keskustelusta ”Uudet ideat saitteihin” (2026-10-04). Sivustoa ei o
 | Käyttökohteet: kylpyhuone, laminaatti/parketti ja höyrymoppi | Tuki | Use Case | 40–210 kukin |
 | `/hoyrypesuri-ammattikayttoon/` | Tuki | Decision | 90, SG 4/4 |
 | `/karcher-hoyrypesuri-varaosat/` | Tuki | Outcome | 150 |
-| `/hoyrypesuri-tekstiileille/` (muutettu 2026-10-12, ks. SCN.md) | Silta → tekstiilipesuri.com | Use Case | sohva- ja tekstiilihaut, noin 500 |
 
 Etusivun yläosaan ohjaus: ”Haluatko pestä sohvan tai maton? Tarvitset tekstiilipesurin.” Etusivu omistaa myös paras-haun, joten erillistä paras-sivua ei tehdä.
 

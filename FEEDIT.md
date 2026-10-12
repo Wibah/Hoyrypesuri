@@ -11,7 +11,7 @@ Kaikki kahdeksan Adtraction-feediä ladattiin painepesurit.fi:n kanavalla (21134
 - **Muut merkit:** 62 mallia 67:stä on varastossa. Linkit tulevat lähinnä CS Megastoresta, Proshopista ja Multitronicista. Vaikka hakuja on vähän (Emax 100, Ryobi 60, Nilfisk 30, Lumira), näiden merkkien laitteita ei ole yhdessäkään feedissä. Vileda on mukana (5 mopia), mutta H2O:ta ei ole.
 - **Kuivahöyry:** feedeissä on vain yksi kuivahöyrypesuri, EV International Atlantis EV3000i (Virtasenkauppa, 3 490 €), joka on ammattilaite. Sitä voi käyttää kuivahöyrypesurisivulla.
 - **Imevät mallit:** Kärcher SV 7 ja SCV 4, Polti Vaporetto 3 Clean, Bissell Vac & Steam 4266N sekä Bissell CrossWave HydroSteam 3527N ja 3528N. Viimeiset kaksi ovat lattianpesureita, joissa on höyry, joten niitä ei kannata esitellä höyryimureina. Tineco Floor One S9 Steam Pro (CS Megastore) on samaa tyyppiä.
-- **Siltasivun ehdokkaat:** Bissell SpotClean HydroSteam Pro 3700N ja Select 3697N, Revolution HydroSteam 3670N, PowerWash HydroSteam 4199N ja Dreame N20 Steam. Ne ovat tekstiilipesureita, joissa on höyry, joten ne kuuluvat tekstiilipesuri.comiin.
+- **Tekstiilipesuri.comin laitteet:** Bissell SpotClean HydroSteam Pro 3700N ja Select 3697N, Revolution HydroSteam 3670N, PowerWash HydroSteam 4199N ja Dreame N20 Steam. Ne ovat tekstiilipesureita, joissa on höyry, joten ne kuuluvat tekstiilipesuri.comiin.
 
 ## Estore (lisätty 2026-10-05)
 Villen antama feed (apid 1960533616, pfid 2749) on ladattu **ikkunanpesurobotti.fi:n kanavalla (2083764081)**. Kartoitukseen se kelpaa, mutta sivustolle tulevat linkit on haettava hoyrypesuri.fi:n omalla kanavalla, kun kanava ja kumppanuus ovat olemassa. Raakarivit ovat tiedostossa `data/feedit-2026-10-05-estore.json`.
@@ -164,7 +164,7 @@ Villen antama feed (apid 1960533616, pfid 2749) on ladattu **ikkunanpesurobotti.
 | Kärcher SGV 8/5 | 4039784846463 | ei Kärcherin feedissä | Proshop (loppu), Staypro (loppu) |
 | Kärcher SGV 8/5 Classic | 4066529041210 | ei Kärcherin feedissä | Staypro (loppu) |
 
-### Höyryä käyttävät tekstiilipesurit (siltasivu tekstiilipesuri.comiin) (5)
+### Höyryä käyttävät tekstiilipesurit (kuuluvat tekstiilipesuri.comiin) (5)
 
 | Malli | EAN | Varastossa (halvin) | Kaikki kaupat |
 |---|---|---|---|
