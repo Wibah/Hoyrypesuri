@@ -7,7 +7,7 @@ Hakumäärät ovat Ahrefsista (välilehdet gid=1 ja gid=992037549 sekä höyrymo
 **Pääentiteetti:** höyrypesuri eli höyrypuhdistin, joka puhdistaa kovia pintoja kuumalla höyryllä. Alatyypit ovat säiliömalli, käsimalli, höyrymoppi, imevä höyrypesuri ja kuivahöyrypesuri.
 **Pilari:** etusivu `/`. Se omistaa myös haut ”paras höyrypesuri” ja ”höyrypesuri vertailu”, joten erillistä paras-sivua ei tehdä.
 **Kärcher-klusteri:** `/karcher-hoyrypesurit/` on alapilari, jonka alla ovat SC-mallisivut, SV 7, varaosat sekä käyttö ja huolto.
-**Topical spine:** höyrypesuri (`/`) → laitetyypit (imevä, höyrymoppi, kuivahöyry, ammatti) → Kärcher → SC-sarjat. Sivuhaaroina ovat käyttökohteet (kylpyhuone, lattiat), päätökset (vuokraus vai osto) ja ylläpito (varaosat, huolto). Silta vie tekstiilipesuri.comiin.
+**Topical spine:** höyrypesuri (`/`) → laitetyypit (imevä, höyrymoppi, kuivahöyry, ammatti) → Kärcher → SC-sarjat. Sivuhaaroina ovat käyttökohteet (kylpyhuone, lattiat), päätökset (vuokraus vai osto) ja ylläpito (varaosat, huolto). Silta `/hoyrypesuri-tekstiileille/` vie tekstiilipesuri.comiin. Kun hoyrypesuri.fi julkaistaan, tekstiilipesuri.comin sivulla `/tekstiilipesuri-vai-hoyrypesuri/` vaihdetaan `HOYRYPESURI_JULKAISTU = true`, jolloin sivu linkittää tänne.
 
 ## 1. SCN-kartta
 
@@ -25,7 +25,7 @@ Hakumäärät ovat Ahrefsista (välilehdet gid=1 ja gid=992037549 sekä höyrymo
 | `/hoyrymoppi/` | Tuki | `/` | Comparison / Use Case | Support + Conversion | Feedeissä on 44 höyrymoppia (Black+Decker, Polti, Vileda, Shark, Kärcher Upright ym.). Kärcherin Upright-mallit osiona. H2O/Tvins ja Philips mainitaan, vaikka niitä ei ole feedeissä. | höyrymoppi 800 (TP vain 10, joten hakutulosta hallitsevat kaupat), kokemuksia 50, paras 40, kärcher höyrymoppi 60 + 20, akkukäyttöinen ja johdoton 20 | 1 |
 | `/vileda-hoyrymoppi/` | Tuki (merkki ja mallisto) | `/hoyrymoppi/` | Decision | Conversion | Vileda Steam 3.0, Steam Plus, Steam Plus XXL 3.0, Plus Pro ja XXL Pro (CS Megastore, Multitronic, Proshop). Mallierot, liinat ja käyttöohje. Kokemuslomake. | vileda höyrymoppi 350 (TP 400), kokemuksia 100, steam plus 80, höyrymoppi vileda 30, xxl plus ja käyttöohje 30 | 1 |
 | `/hoyrypesuri-vuokraus-vai-osto/` | Tuki | `/` | Decision | Support | Vuokrauksen ja oston kustannusvertailu; kaupunkihaut ohjataan tänne, eikä kaupunkisivuja tehdä | vuokraus 600, vuokra 150, vuokraa 100, kaupungit noin 500, imevä vuokraus 40 | 1 |
-| `/hoyrypesuri-vai-tekstiilipesuri/` | Silta → tekstiilipesuri.com | `/` | Comparison | Support (ulos) | Ero, ”voiko höyrypesurilla pestä sohvan tai maton”; Bissell HydroSteam ja Dreame N20 Steam mainitaan | tekstiili höyrypesuri 250, sohva 100, sohvalle 90, tekstiileille 80, vai-haut noin 110, auton penkit 50, matto noin 40 | 1 |
+| `/hoyrypesuri-tekstiileille/` Höyrypesuri sohvalle ja tekstiileille | Silta → tekstiilipesuri.com | `/` | Use Case / Risk | Support (ulos) + Conversion | Näkökulmajako (Villen päätös 2026-10-12): tekstiilipesuri.comin julkaistu sivu `/tekstiilipesuri-vai-hoyrypesuri/` omistaa vai-haut (molemmat järjestykset) ja HydroSteam-mallit. Tämä sivu puhuu höyrypesurin omistajalle tai ostajalle: mitä höyry tekee kankaalle (raikastus, Kärcherin tekstiilisuutin, SC 1 Multi & Up Textile Edition), mihin se ei riitä (ei ime likaa pois) ja milloin tarvitaan tekstiilipesuri. Linkki tekstiilipesuri.comin vertailusivulle ja sohvan pesu -sivulle. Vai-hakuja ei tavoitella titlessä eikä H1:ssä. | tekstiili höyrypesuri 250, höyrypesuri sohva 100, sohvalle 90, tekstiileille 80, auton penkit 50, matto noin 40, höyrypesuri tekstiili 30, sohvan pesu 30 (noin 670) | 1 |
 | `/polti-hoyrypesurit/` | Tuki (merkki) | `/` | Decision / Comparison | Support + Conversion | Polti Vaporetto: säiliömallit (Smart 100_T, Eco Pro 3.0), mopit (SV440, SV450, SV460, SV610), käsimalli Vaporetto First ja imevä Vaporetto 3 Clean. Kortteihin tulevat vain varastossa olevat affiliate-mallit. Valmistajan tiedot polti.com:sta. | polti vaporetto 10; muut Polti-haut ovat Villen tarkistuksessa (2026-10-12) nollassa, ja sivu rakennetaan Dolphin-kyselyjen mallilla (ks. alla) | 2 |
 | `/black-decker-hoyrypesurit/` | Tuki (merkki) | `/` | Decision / Comparison | Support + Conversion | Black+Decker FSM-, FSMH- ja BHSM-sarjat (11 varastossa). Ne ovat höyrymoppeja, joista monessa on irrotettava käsiosa, ja feedit kutsuvat BHSM-malleja höyrypesureiksi. Sivuttainen linkki höyrymoppisivulle. | Villen tarkistuksessa (2026-10-12) nollassa; sivu rakennetaan Dolphin-kyselyjen mallilla (ks. alla) | 2 |
 | `/hoyrypesurimerkit/` | Tuki (merkkikooste) | `/` | Comparison | Support | Merkit, joille on hakuja mutta ei affiliate-linkkiä: Silvercrest/Lidl, Dolphin (CWN), H2O/Tvins, Emax, Ryobi ja Philips. Jokaisella merkillä on oma osio valmistajan tiedoilla ilman ostolinkkiä. Omia merkkisivuja tehdään vasta, jos Search Console näyttää kysyntää. Jokaisen merkin tietolähde tarkistetaan ennen kirjoittamista. | Dolphin noin 130 (Villen taulukko 2026-10-12: dolphin höyrypesuri 40, hinta 40, kokemuksia 20, cwn dolphin 10, käyttöohje 10, höyrypesuri dolphin 10), Silvercrest/Lidl noin 200, H2O noin 110, Emax noin 100, Ryobi 60, Philips 40 (yhteensä noin 650) | 2 |
@@ -54,7 +54,7 @@ Hakumäärät ovat Ahrefsista (välilehdet gid=1 ja gid=992037549 sekä höyrymo
 |---|---|---|---|---|
 | `/` | `/karcher-hoyrypesurit/` | Kärcherin höyrypesurit SC 1–SC 5 | Support | Suurin merkkihaku, kaksi kolmasosaa feedin Kärcher-tuotteista |
 | `/` | `/imeva-hoyrypesuri/`, `/hoyrymoppi/` | imevä höyrypesuri, höyrymopit lattioille | Support | Laitetyypit, joita pilari määrittelee |
-| `/` | `/hoyrypesuri-vai-tekstiilipesuri/` | sohvan ja maton pesuun tarvitset tekstiilipesurin | Support | Sekaannushaut, yläosan ohjaus |
+| `/` | `/hoyrypesuri-tekstiileille/` | voiko höyrypesurilla pestä sohvan | Support | Sekaannushaut, yläosan ohjaus |
 | `/` | `/hoyrypesuri-vuokraus-vai-osto/` | kannattaako höyrypesuri vuokrata | Support | Vuokraushaut noin 1 400 |
 | `/karcher-hoyrypesurit/` | SC 1–SC 5, SV 7 | Kärcher SC 3 -höyrypesurin versiot ja hinnat | Conversion | Mallisivut |
 | SC-mallisivut | `/karcher-hoyrypesurit/` | koko Kärcherin höyrypesurimallisto | Support (ylös) | Emopilari |
@@ -70,7 +70,8 @@ Hakumäärät ovat Ahrefsista (välilehdet gid=1 ja gid=992037549 sekä höyrymo
 | Merkkisivut | `/` | koko höyrypesurivertailu | Support (ylös) | Emopilari |
 | `/black-decker-hoyrypesurit/` | `/hoyrymoppi/` | höyrymoppien vertailu muilta merkeiltä | Support (sivuttain) | Yhteinen laitetyyppi |
 | `/polti-hoyrypesurit/` | `/imeva-hoyrypesuri/` | imevät höyrypesurit | Support (sivuttain) | Vaporetto 3 Clean |
-| `/hoyrypesuri-vai-tekstiilipesuri/` | tekstiilipesuri.com | tekstiilipesurivertailu | Support (ulos) | Siltasivu |
+| `/hoyrypesuri-tekstiileille/` | tekstiilipesuri.com/tekstiilipesuri-vai-hoyrypesuri/ | tekstiilipesurin ja höyrypesurin erot | Support (ulos) | Vai-haut omistaa tekstiilipesuri.com |
+| `/hoyrypesuri-tekstiileille/` | tekstiilipesuri.com/sohvan-pesu-tekstiilipesurilla/ | sohvan pesu tekstiilipesurilla | Support (ulos) | Sohva-intentin varsinainen ratkaisu |
 
 ## 3. Riskit (QA ennen rakentamista)
 

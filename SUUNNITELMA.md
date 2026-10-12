@@ -33,7 +33,7 @@ Siirretty keskustelusta ”Uudet ideat saitteihin” (2026-10-04). Sivustoa ei o
 | Käyttökohteet: kylpyhuone, laminaatti/parketti ja höyrymoppi | Tuki | Use Case | 40–210 kukin |
 | `/hoyrypesuri-ammattikayttoon/` | Tuki | Decision | 90, SG 4/4 |
 | `/karcher-hoyrypesuri-varaosat/` | Tuki | Outcome | 150 |
-| `/hoyrypesuri-vai-tekstiilipesuri/` | Silta → tekstiilipesuri.com | Comparison | sohva- ja tekstiilihaut, noin 500 |
+| `/hoyrypesuri-tekstiileille/` (muutettu 2026-10-12, ks. SCN.md) | Silta → tekstiilipesuri.com | Use Case | sohva- ja tekstiilihaut, noin 500 |
 
 Etusivun yläosaan ohjaus: ”Haluatko pestä sohvan tai maton? Tarvitset tekstiilipesurin.” Etusivu omistaa myös paras-haun, joten erillistä paras-sivua ei tehdä.
 
