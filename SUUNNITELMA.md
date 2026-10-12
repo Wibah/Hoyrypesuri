@@ -41,7 +41,7 @@ Etusivun yläosaan ohjaus: ”Haluatko pestä sohvan tai maton? Tarvitset teksti
 Höyrypesuririvejä (osuma otsikossa tai kategoriassa, sisältää lisävarusteita ja duplikaatteja): Proshop 83, CS Megastore 63, Multitronic 32, Staypro 14, Kärcher 12, Hobbybox 9, Uittokalusto 0. Virtasenkauppa jäi laskematta. Feedien tunnukset ja URL ovat tiedostossa `~/Projects/painepesurit/scripts/hae_affiliate.py`.
 
 ## Avoimet tehtävät
-1. Erottele feedeistä oikeat laitteet lisävarusteista, poista duplikaatit ja selvitä merkit ja hinnat. Laske Virtasenkauppa (huomioi rivit ilman otsikkoa).
+1. ✅ Feedien siivous tehty 2026-10-05, katso `FEEDIT.md`: 98 laitetta, joista 89 on varastossa. Kärcher-linkitys päätetty 2026-10-12: Kärcherin feedistä puuttuvista malleista mukaan otetaan vain SC 1 EasyFix, SC 2 EasyFix ja SC 3 EasyFix, jotka linkitetään karcher.comiin. Muut mallit ovat affiliate-malleja.
 2. **Adtraction:** oma kanava hoyrypesuri.fi:lle ja sille kumppanuudet (Kärcher, Proshop, CS Megastore, Multitronic).
 3. **Writer-skilli,** CLAUDE.md, GitHub-repo ja Vercel-projekti.
 4. Valinnaisesti hoyrypesurit.fi:n rekisteröinti ohjaukseksi.
