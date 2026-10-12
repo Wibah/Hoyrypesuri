@@ -16,7 +16,7 @@ Siirretty keskustelusta ”Uudet ideat saitteihin” (2026-10-04). Sivustoa ei o
 - **Vuokraus:** noin 1 400 hakua (”höyrypesuri vuokraus” 600, Helsinki, Tampere, Oulu, Turku).
 - **Sekaannus tekstiilipesuriin:** ”tekstiili höyrypesuri” 250, ”höyrypesuri sohva” 100, ”höyrypesuri sohvalle” 90 ja jopa ”kärcher höyrypesuri se 6.100” (SE on tekstiilipesuri). Google kysyy hauissa: ”Mikä on tekstiilipesurin ja höyrypesurin ero?” ja ”Voiko höyrypesurilla pestä maton?”. Nämä jätetään tekstiilipesuri.comille, jonka sivu `/tekstiilipesuri-vai-hoyrypesuri/` vastaa niihin. Omaa siltasivua ei tehdä (Villen päätös 2026-10-12), vaan etusivun yläosan ohjaus linkittää tekstiilipesuri.comiin.
 - Muut merkit: Emax 100, Ryobi 60, Nilfisk 30, Lumira, Vileda, H2O. Kauppahakuja (Tokmanni, Biltema, Prisma, Puuilo, Lidl, Clas Ohlson) ei tavoitella.
-- KD lähes kaikkialla 0. Poikkeukset: ”höyrypesuri kärcher” 52 ja ”höyrypesuri laminaatti” 26.
+- KD lähes kaikkialla 0. Poikkeukset: ”höyrypesuri laminaatti” 26 ja ”paras höyrymoppi” 32. Taulukossa ”höyrypesuri kärcher” sai KD:n 52, mutta Villen Ahrefs-tarkistuksessa (2026-10-12) arvo on 0.
 
 ## Google.fi (2026-10-04)
 - **”höyrypesuri”:** Kärcher.com, Prisma, Clas Ohlson, Motonet, Verkkokauppa.com, Netrauta, parasverkossa.fi/paras-hoyrypesuri/ (vain Kärcher-mallit) ja Hobbyhall. Mainoksia näytti kaksi (Rennoa ja Clas Ohlson).
