@@ -24,6 +24,29 @@ export const mallisivut: Record<Mallisarja, string> = {
 	'SV 7': '/karcher-sv-7-hoyryimuri/',
 };
 
+// Kärcherin mallit, jotka sivustolla esitellään (Villen päätös 2026-10-12, ks. CLAUDE.md): Kärcherin affiliate-feedin
+// mallit (FEEDIT.md, 2026-10-05) sekä feedistä puuttuvat SC 1, SC 2 EasyFix ja SC 3 EasyFix karcher.comin linkillä.
+// Muita Kärcherin malleja (esim. SC 2 Deluxe, SC 4 EasyFix, SG 4/2 ja SGV 8/5) ei näytetä korteissa eikä taulukoissa.
+export const KARCHER_ESITELTAVAT = new Set([
+	'sc-1',
+	'sc-1-multi-up-textile-edition',
+	'sc-2-easyfix',
+	'sc-2-upright',
+	'sc-3-easyfix',
+	'sc-3-easyfix-plus',
+	'sc-3-deluxe-easyfix',
+	'sc-3-easyfix-go-further',
+	'sc-4-easyfix-plus',
+	'sc-4-deluxe-easyfix',
+	'sc-5-easyfix',
+	'sc-5-deluxe-signature-line',
+	'sc-5-easyfix-iron-select-bath-edition',
+	'sv-7',
+	'scv-4',
+	'sg-4-4',
+]);
+export const esiteltavat = (tt: Tuote[]) => tt.filter((t) => t.merkki !== 'Kärcher' || KARCHER_ESITELTAVAT.has(t.id));
+
 // Laitetyypin nimi teksteihin ja taulukoihin (tyypit: hoyrypesuri-writerin tietopohja, kohta 3).
 export const tyyppinimet: Record<string, string> = {
 	sailio: 'Säiliömalli',

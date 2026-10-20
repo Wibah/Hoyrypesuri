@@ -9,7 +9,7 @@ import Layout from '../layouts/Layout.astro';
 import Korttirivi from '../components/tuote/Korttirivi.astro';
 import Ukk from '../components/Ukk.astro';
 import Kokemuslomake from '../components/Kokemuslomake.astro';
-import { paatuote, tuote, merkinTuotteet, euroa, luku, paiva, mallisivut, hintavali, karcherComissa, lammitysaika, tyyppinimet } from '../lib/tuotteet';
+import { paatuote, tuote, merkinTuotteet, esiteltavat, euroa, luku, paiva, mallisivut, hintavali, karcherComissa, lammitysaika, tyyppinimet } from '../lib/tuotteet';
 
 const sc1 = await paatuote('SC 1');
 const sc2 = await paatuote('SC 2');
@@ -17,7 +17,7 @@ const sc3 = await paatuote('SC 3');
 const sc5 = await paatuote('SC 5');
 const sv7 = await paatuote('SV 7');
 const sc4 = await paatuote('SC 4');
-const karcher = await merkinTuotteet('Kärcher');
+const karcher = esiteltavat(await merkinTuotteet('Kärcher'));
 const kotiCom = karcherComissa(karcher.filter((t) => !t.ammattilaite));
 const sailiomallit = kotiCom.filter((t) => t.tyyppi === 'sailio');
 const alennetut = kotiCom.filter((t) => t.hintaEnnenAlennusta != null && t.hintaEnnenAlennusta > t.hinta!);
