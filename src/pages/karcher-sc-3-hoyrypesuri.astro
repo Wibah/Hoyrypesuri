@@ -1,0 +1,145 @@
+---
+// SCN: tuki (malli), intentti Decision, emopilari /karcher-hoyrypesurit/. Hakusanat: kärcher höyrypesuri sc3 80
+// (Parent keyword kärcher sc 3, TP 200), kärcher höyrypesuri sc 3 easy fix 20, kärcher sc3 höyrypesuri 10,
+// kärcher höyrypesuri sc 3 10, höyrypesuri sc3 10, höyrypesuri kärcher sc 3 easyfix 10 (Ahrefs 2026-10).
+// Versiot: SC 3 EasyFix (karcher.com) sekä Deluxe EasyFix, EasyFix Plus ja Go!Further (Kärcherin feed). Suositus Deluxe
+// EasyFix (Villen päätös 2026-10-20). Kirjoitettu hoyrypesuri-writer-skillillä (2026-10-20). Testiviittaukset:
+// hoyrypesuri-writerin tietopohja, kohta 8 (luettu 2026-10-12).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import TuoteSchema from '../components/tuote/TuoteSchema.astro';
+import TuoteHero from '../components/tuote/TuoteHero.astro';
+import TeknisetTiedot from '../components/tuote/TeknisetTiedot.astro';
+import VersioVertailu from '../components/tuote/VersioVertailu.astro';
+import Tuotekortti from '../components/tuote/Tuotekortti.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { paatuote, tuote, versiot, esiteltavat, luku, paiva, euroa, mallisivut, lammitysaika } from '../lib/tuotteet';
+
+const suositus = await paatuote('SC 3');
+const easyfix = await tuote('sc-3-easyfix');
+const plus = await tuote('sc-3-easyfix-plus');
+const go = await tuote('sc-3-easyfix-go-further');
+const kaikki = esiteltavat(await versiot('SC 3'));
+const sc2 = await paatuote('SC 2');
+const sc2easy = await tuote('sc-2-easyfix');
+const sc4 = await paatuote('SC 4');
+const sc5 = await paatuote('SC 5');
+
+const t = suositus.tekniset;
+const t4 = sc4.tekniset;
+const alennettu = suositus.hintaEnnenAlennusta != null && suositus.hintaEnnenAlennusta > suositus.hinta!;
+
+const ukk = [
+	{
+		kysymys: 'Mikä ero on Kärcher SC 3 EasyFixillä ja SC 3 Deluxe EasyFixillä?',
+		vastaus: `Höyrypesuri on sama: ${luku(t.tehoW!)} W, ${luku(t.paineBar!)} bar ja ${luku(t.sailioL!)} litran säiliö. Deluxe EasyFixissä höyryn määrää säädetään laitteesta eikä kahvasta, ja mukana on lisäksi rakoharja. Deluxe on ${luku(suositus.tekniset.painoKg! - easyfix.tekniset.painoKg!)} kg painavampi. Hinnat ovat nyt ${euroa(suositus.hinta!)} (Deluxe) ja ${euroa(easyfix.hinta!)} (EasyFix).`,
+	},
+	{
+		kysymys: 'Voiko Kärcher SC 3:een lisätä vettä kesken siivouksen?',
+		vastaus: 'Voi. Kärcherin mukaan SC 3:n säiliön voi täyttää aina tarvittaessa, joten työtä ei tarvitse keskeyttää laitteen jäähtymisen takia. Pienemmissä SC 1:ssä ja SC 2 EasyFixissä on vain kattila, johon vettä lisätään vasta jäähtyneenä.',
+	},
+	{
+		kysymys: 'Kuinka nopeasti Kärcher SC 3 lämpenee?',
+		vastaus: `Kärcherin mukaan SC 3 on käyttövalmis ${lammitysaika(t.lammitysaikaMin)}:ssa. Guardianin testissä (2025) SC 3:n brittiläinen versio antoi täyden höyryn noin 36 sekunnissa. Isommat SC 4 ja SC 5 lämpenevät valmistajan mukaan 3–4 minuutissa.`,
+	},
+	{
+		kysymys: 'Mikä kalkinpoistopatruuna sopii Kärcher SC 3:een?',
+		vastaus: 'Kaikkien SC 3 -versioiden mukana tulee kalkinpoistopatruuna, ja uusi patruuna on Kärcherin osa 2.863-018.0. Patruuna asetetaan säiliön täyttöaukkoon. Varaosat ja liinat ovat <a href="/karcher-hoyrypesuri-varaosat/">Kärcherin varaosasivulla</a>.',
+	},
+	{
+		kysymys: 'Sopiiko Kärcher SC 3 laminaatille ja parketille?',
+		vastaus: 'Kärcher neuvoo käyttämään laminaatilla pienempää höyrytehoa, ja SC 3:ssa on kaksi höyrytasoa. Lähteet ovat laminaatista eri mieltä, ja vanha parketti voi vaurioitua, joten tarkista aina lattian valmistajan ohje. Lisää tietoa on <a href="/hoyrymoppi-laminaatille/">laminaattioppaassa</a>.',
+	},
+];
+---
+<Layout
+	title="Kärcher SC 3 höyrypesuri kokemuksia – EasyFix, Deluxe, Plus ja hinnat (2026)"
+	description={`Kärcher SC 3 -höyrypesurin versiot, hinnat ja testit. Lämmitysaika ${lammitysaika(t.lammitysaikaMin)}, ${luku(t.paineBar!)} bar ja ${luku(t.sailioL!)} litran säiliö, jonka voi täyttää kesken työn.`}
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Kärcher', sivu: '/karcher-hoyrypesurit/' }, { nimi: 'Kärcher SC 3', sivu: mallisivut['SC 3'] }]} />
+		<TuoteSchema tuote={suositus} />
+		<TuoteHero tuote={suositus} otsikko="Kärcher SC 3 -höyrypesuri – EasyFix, Deluxe ja Plus" yla="Kärcher · Säiliömalli koko kotiin" merkinta="Suosituksemme">
+			<p>Kärcher SC 3 on säiliömalli, joka puhdistaa höyryllä lattiat, laatat, saumat, lieden ja hanat. Sen lämmitysaika on valmistajan mukaan {lammitysaika(t.lammitysaikaMin)}, ja {luku(t.sailioL!)} litran säiliön voi täyttää kesken työn. Yhdellä täytöllä puhdistaa Kärcherin mukaan noin {luku(t.pintaAlaM2!)} neliötä.</p>
+			<p>Suosittelemme Deluxe EasyFix -versiota. Siinä on sama höyrypesuri kuin muissa SC 3 -versioissa, mutta mukana on lisäksi rakoharja. {alennettu ? `Deluxe on nyt alennettu, ja se maksaa ${euroa(suositus.hinta!)}, kun normaalihinta on ${euroa(suositus.hintaEnnenAlennusta!)}.` : `Deluxe maksaa ${euroa(suositus.hinta!)}.`}</p>
+		</TuoteHero>
+
+		<h2>Kenelle Kärcher SC 3 sopii?</h2>
+		<div class="pros-cons-mini">
+			<div class="pros-mini">
+				<strong>+ Sopii:</strong>
+				<ul>
+					<li>Kotiin, jossa höyrytetään sekä lattioita että kylpyhuonetta ja keittiötä: mukana ovat lattiasuutin, käsisuutin, kohdesuutin ja pyöreä harja</li>
+					<li>Lyhyisiin siivouksiin: lämmitysaika on {lammitysaika(t.lammitysaikaMin)}, kun SC 4:llä ja SC 5:llä se on 3–4 minuuttia</li>
+					<li>Isompiin pintoihin: säiliön voi täyttää kesken työn, eikä laitteen tarvitse jäähtyä</li>
+					<li>Kovan veden alueille: mukana on kalkinpoistopatruuna</li>
+				</ul>
+			</div>
+			<div class="cons-mini">
+				<strong>- Ei sovi:</strong>
+				<ul>
+					<li>Mattojen ja sohvan pesuun: höyry ei ime likaa pois kankaasta, ja Plus-version mattoliukuri vain raikastaa mattoa</li>
+					<li>Kauas pistorasiasta: virtajohto on {luku(t.virtajohtoM!)} m ja höyryletku 2,2 m</li>
+					<li>Ikkunoiden pesuun ilman lisävarustetta: ikkunasuutin myydään erikseen</li>
+					<li>Isoon kotiin, jossa on paljon laattalattiaa: <a href={mallisivut['SC 5']}>SC 5</a>:n säiliö on {luku(sc5.tekniset.sailioL!)} litraa ja paine {luku(sc5.tekniset.paineBar!)} bar</li>
+				</ul>
+			</div>
+		</div>
+
+		<h2>Kärcher SC 3 EasyFix, Deluxe, Plus ja Go!Further – versiot vertailussa</h2>
+		<p>Kaikissa SC 3 -versioissa on sama {luku(t.tehoW!)} watin höyrypesuri, {luku(t.paineBar!)} barin paine ja {luku(t.sailioL!)} litran säiliö. Kaikkien mukana tulevat EasyFix-lattiasuutin, kohdesuutin, pyöreä harja, kaksi 0,5 metrin jatkoputkea ja kalkinpoistopatruuna. Versiot eroavat varusteiden ja höyrynsäädön osalta.</p>
+
+		<h3>Kärcher SC 3 Deluxe EasyFix</h3>
+		<p>SC 3 Deluxe EasyFixissä ({suositus.tuotenumero}) höyryn määrää säädetään laitteesta, kun muissa versioissa säätö on kahvassa. Mukana on rakoharja, ja runko on hieman isompi ({t.mitatMm!.replaceAll(' x ', ' × ')} mm, {luku(t.painoKg!)} kg). Kärcherin mukaan Deluxessa on säilytyspaikka varusteille ja irrotettava säiliö.</p>
+
+		<h3>Kärcher SC 3 EasyFix</h3>
+		<p>SC 3 EasyFix ({easyfix.tuotenumero}) on SC 3:n perusversio, ja se maksaa {euroa(easyfix.hinta!)}. Höyryä säädetään kahvasta, ja mukana ovat käsisuutin mikrokuituliinalla ja yksi EasyFix-lattialiina.</p>
+
+		<h3>Kärcher SC 3 EasyFix Plus</h3>
+		<p>SC 3 EasyFix Plussan ({plus.tuotenumero}) mukana tulevat perusversion varusteiden lisäksi voimasuutin, suuri pyöreä harja, toinen lattialiina ja mattoliukuri. Plus maksaa {euroa(plus.hinta!)}.</p>
+
+		<h3>Kärcher SC 3 EasyFix Go!Further</h3>
+		<p>Go!Further ({go.tuotenumero}) on musta erikoisversio, jonka rungossa on Kärcherin mukaan 35 % kierrätettyä materiaalia. Mukana ovat nivelletty käsisuutin ja kaksi Re!Fibe-lattialiinaa, ja se maksaa {euroa(go.hinta!)}.</p>
+		<VersioVertailu versiot={kaikki} paatuoteId={suositus.id} />
+		<p class="tp-lahde">Hinnat: Kärcher.com, tarkistettu {paiva(suositus.haettu)}.</p>
+
+		<h2>Tekniset tiedot: Kärcher {suositus.nimi}</h2>
+		<TeknisetTiedot tuote={suositus} />
+
+		<h2>Kärcher SC 3 testeissä</h2>
+		<p>SC 3 on ollut mukana testeissä Suomessa ja Britanniassa sekä ruotsalaisessa testikoosteessa. Testaajat kehuvat nopeaa lämpenemistä, höyryn määrää ja jatkuvaa täyttöä. Moitteita saavat lattialle jäävä kosteus, melu ja se, että runkoa joutuu vetämään perässä.</p>
+		<ul>
+			<li><strong>Kuluttaja.fi (3.12.2024):</strong> SC 3 EasyFix oli mukana ICRT:n laboratoriotestissä, jossa testattiin 9 höyrypesuria ja 15 höyrymoppia. Mallikohtaiset tulokset ovat maksumuurin takana, joten SC 3:n arvosanoja emme tiedä.</li>
+			<li><strong>Guardian (12.3.2025):</strong> SC 3:n brittiläinen versio oli testin paras kokonaisuus. Täysi höyry tuli noin 36 sekunnissa, ja laite puhdisti kuivuneen mudan ja ketsupin toisella vedolla. Testaajan mukaan SC 3 oli erinomainen pesualtaissa, laatoissa ja suihkuseinissä. Lattia jäi kuitenkin melko märäksi, ja täysi säiliö riitti noin kuuden ja puolen minuutin höyrytykseen.</li>
+			<li><strong>The English Home (6.1.2026):</strong> brittiläinen versio lämpeni 30 sekunnissa. Testaaja kehui kalkinpoistopatruunaa ja ikkunasuuttimella saatua raidatonta jälkeä, mutta pienimmällä höyryteholla laitteesta tuli ylimääräistä vettä.</li>
+			<li><strong>Independent (19.8.2026):</strong> SC 3:n brittiläinen versio valittiin parhaaksi isoon kotiin litran säiliön ja runsaan höyryn takia. Se oli kuitenkin äänekkäämpi kuin muut testatut laitteet.</li>
+			<li><strong>Test.se (päivitetty 17.8.2026):</strong> ruotsalainen koostesivu nimesi SC 3 EasyFixin parhaaksi höyrypesuriksi testien ja käyttäjäarvioiden perusteella.</li>
+		</ul>
+		<p>Brittiläisissä testeissä testattiin Britannian myyntiversioita (EasyFix Extra ja Deluxe Home), joiden varusteet poikkeavat Suomessa myytävistä versioista. Höyrypesuri on kuitenkin sama, joten havainnot lämpenemisestä, höyrystä ja säiliöstä pätevät myös suomalaisiin versioihin.</p>
+		<p class="tp-lahde">Lähteet: <a href="https://kuluttaja.fi/testi/hoyrypesurit/" target="_blank" rel="nofollow noopener">Kuluttaja.fi</a>, <a href="https://www.theguardian.com/thefilter/2025/mar/12/best-steam-cleaner-mop" target="_blank" rel="nofollow noopener">Guardian</a>, <a href="https://www.theenglishhome.co.uk/buyers-guide/shopping/best-steam-cleaners/" target="_blank" rel="nofollow noopener">The English Home</a>, <a href="https://www.independent.co.uk/extras/indybest/house-garden/household-appliances/best-steam-cleaner-uk-b1783309.html" target="_blank" rel="nofollow noopener">Independent</a>, <a href="https://www.test.se/angtvatt/" target="_blank" rel="nofollow noopener">Test.se</a>.</p>
+
+		<h2>Näin puhdistat Kärcher SC 3:lla</h2>
+		<ol>
+			<li>Imuroi lattia ensin, jotta et levitä irtolikaa.</li>
+			<li>Aseta kalkinpoistopatruuna paikalleen, täytä säiliö ja odota, että laite on käyttövalmis.</li>
+			<li>Valitse suutin pinnan mukaan: lattiasuutin lattioille, kohdesuutin ja pyöreä harja saumoihin ja hanoihin.</li>
+			<li>Käytä herkillä pinnoilla, kuten laminaatilla, pienempää höyrytehoa.</li>
+			<li>Tee hitaita vetoja ja pyyhi irronnut lika liinalla. Lisää vettä säiliöön tarvittaessa kesken työn.</li>
+			<li>Pese mikrokuituliinat 60 asteessa, ja tyhjennä säiliö käytön jälkeen.</li>
+		</ol>
+		<p>Kylpyhuoneen saumoista ja kalkista kerrotaan lisää <a href="/hoyrypesuri-kylpyhuoneeseen/">kylpyhuoneoppaassa</a>. Kaikki Kärcherin mallit ovat <a href="/karcher-hoyrypesurit/">Kärcherin höyrypesureiden mallistotaulukossa</a>.</p>
+
+		<h2>Kärcher SC 3 vai SC 2 tai SC 4?</h2>
+		<p><a href={mallisivut['SC 2']}>SC 2</a> on SC 3:a pienempi. SC 2 Upright on höyrymoppi pelkille lattioille, ja se maksaa {euroa(sc2.hinta!)}. SC 2 EasyFix -säiliömallissa on vain {luku(sc2easy.tekniset.kattilaL!)} litran kattila ja lämmitysaika {luku(sc2easy.tekniset.lammitysaikaMin!)} minuuttia, ja vettä voi lisätä vasta jäähtyneenä. Jos haluat puhdistaa myös kylpyhuoneen ja keittiön, SC 3 on käytännöllisempi.</p>
+		<p><a href={mallisivut['SC 4']}>SC 4</a>:ssä on sekä kattila että irrotettava säiliö, ja sen paine on {luku(t4.paineBar!)}–4 bar. Lämmitysaika on kuitenkin {luku(t4.lammitysaikaMin!)} minuuttia, ja SC 4 EasyFix Plus maksaa {euroa(sc4.hinta!)}. Valitse SC 4, jos tarvitset enemmän painetta pinttyneeseen likaan ja puhdistat kerralla pitkään.</p>
+		<div class="mk-lista">
+			<Tuotekortti tuote={sc2} otsikko="Kärcher SC 2 Upright" sivu={mallisivut['SC 2']} kenelle="Höyrymoppi pelkille lattioille" tagi="Lattioille" />
+			<Tuotekortti tuote={sc4} otsikko="Kärcher SC 4" sivu={mallisivut['SC 4']} kenelle="Kattila ja irrotettava säiliö, enemmän painetta" tagi="Enemmän painetta" />
+		</div>
+		<p>Jos puhdistat lähinnä lattioita, vertaa myös muiden merkkien <a href="/hoyrymoppi/">höyrymoppeja</a>.</p>
+
+		<Kokemuslomake malli="Kärcher SC 3" polku={mallisivut['SC 3']} />
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>

@@ -1,5 +1,5 @@
 ---
-import { luku, type Tuote } from '../../lib/tuotteet';
+import { luku, lammitysaika, type Tuote } from '../../lib/tuotteet';
 
 interface Props {
 	tuote: Tuote;
@@ -10,7 +10,6 @@ const t = tuote.tekniset;
 const rivit = [
 	['Lämmitysteho', t.tehoW, 'W'],
 	['Maksimi höyrynpaine', t.paineBar, 'bar'],
-	['Lämmitysaika', t.lammitysaikaMin, 'min'],
 	['Vesisäiliö', t.sailioL, 'l'],
 	['Höyrykattila', t.kattilaL, 'l'],
 	['Pinta-ala yhdellä täytöllä (noin)', t.pintaAlaM2, 'm²'],
@@ -27,6 +26,7 @@ const rivit = [
 				{rivit.filter(([, arvo]) => arvo != null).map(([nimi, arvo, yksikko]) => (
 					<tr><th scope="row">{nimi}</th><td>{luku(arvo!)} {yksikko}</td></tr>
 				))}
+				{t.lammitysaikaMin != null && <tr><th scope="row">Lämmitysaika</th><td>{lammitysaika(t.lammitysaikaMin)}</td></tr>}
 				{t.mitatMm && <tr><th scope="row">Mitat (p × l × k)</th><td>{t.mitatMm.replaceAll(' x ', ' × ')} mm</td></tr>}
 			</tbody>
 		</table>
