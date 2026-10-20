@@ -8,7 +8,9 @@ export type Tuote = CollectionEntry<'tuotteet'>['data'] & { id: string };
 export const paatuotteet = {
 	'SC 1': 'sc-1',
 	'SC 2': 'sc-2-upright',
-	'SC 3': 'sc-3-easyfix',
+	// SC 3: Deluxe EasyFix (Kärcherin feed, Villen päätös 2026-10-20), koska se on SC 3 EasyFixiä halvempi ja
+	// siinä on lisäksi rakoharja. Jos alennus päättyy, tarkista suositus.
+	'SC 3': 'sc-3-deluxe-easyfix',
 	'SC 4': 'sc-4-easyfix-plus',
 	'SC 5': 'sc-5-easyfix',
 	'SV 7': 'sv-7',
@@ -25,7 +27,8 @@ export const mallisivut: Record<Mallisarja, string> = {
 };
 
 // Kärcherin mallit, jotka sivustolla esitellään (Villen päätös 2026-10-12, ks. CLAUDE.md): Kärcherin affiliate-feedin
-// mallit (FEEDIT.md, 2026-10-05) sekä feedistä puuttuvat SC 1, SC 2 EasyFix ja SC 3 EasyFix karcher.comin linkillä.
+// mallit (FEEDIT.md, 2026-10-05) sekä feedistä puuttuvat SC 1 (perusmalli 1.516-400, koska karcher.com ei myy SC 1
+// EasyFixiä), SC 2 EasyFix (ei myynnissä 2026-10-20) ja SC 3 EasyFix karcher.comin linkillä (Villen hyväksyntä 2026-10-20).
 // Muita Kärcherin malleja (esim. SC 2 Deluxe, SC 4 EasyFix, SG 4/2 ja SGV 8/5) ei näytetä korteissa eikä taulukoissa.
 export const KARCHER_ESITELTAVAT = new Set([
 	'sc-1',

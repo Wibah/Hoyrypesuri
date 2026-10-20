@@ -25,7 +25,7 @@ const k3 = sc3.tekniset;
 const k5 = sc5.tekniset;
 
 const suositukset = [
-	{ t: sc3, otsikko: 'Kärcher SC 3', otsikkoH3: 'Paras höyrypesuri kotiin: Kärcher SC 3 EasyFix', sivu: mallisivut['SC 3'], tagi: 'Paras kotiin', kuvaus: `Lämmitysaika on ${lammitysaika(k3.lammitysaikaMin)}, ja ${luku(k3.sailioL!)} litran säiliön voi täyttää kesken työn. Puhdistaa lattiat, laatat, saumat ja ikkunat.` },
+	{ t: sc3, otsikko: 'Kärcher SC 3', otsikkoH3: `Paras höyrypesuri kotiin: Kärcher ${sc3.nimi}`, sivu: mallisivut['SC 3'], tagi: 'Paras kotiin', kuvaus: `Lämmitysaika on ${lammitysaika(k3.lammitysaikaMin)}, ja ${luku(k3.sailioL!)} litran säiliön voi täyttää kesken työn. Mukana ovat lattiasuutin, käsisuutin, kohdesuutin ja rakoharja.` },
 	{ t: sc2, otsikko: 'Kärcher SC 2 Upright', sivu: mallisivut['SC 2'], tagi: 'Lattioille', kuvaus: `Höyrymoppi pelkille lattioille. Lämmitysaika on ${lammitysaika(sc2.tekniset.lammitysaikaMin)}, ja moppi painaa ${luku(sc2.tekniset.painoKg!)} kg.` },
 	{ t: sc1, otsikko: 'Kärcher SC 1', sivu: mallisivut['SC 1'], tagi: 'Edullisin', kuvaus: `Käsimalli saumoihin, hanoihin, liesiin ja suihkuseiniin. Painaa ${luku(sc1.tekniset.painoKg!)} kg, mutta ei sovi lattioille.` },
 	{ t: sc5, otsikko: 'Kärcher SC 5', otsikkoH3: 'Tehokas höyrypesuri isoon kotiin: Kärcher SC 5', sivu: mallisivut['SC 5'], tagi: 'Isoon kotiin', kuvaus: `${luku(k5.paineBar!)} barin paine ja ${luku(k5.sailioL!)} litran säiliö, joka riittää valmistajan mukaan noin ${luku(k5.pintaAlaM2!)} neliöön.` },
@@ -66,7 +66,7 @@ const oppaat = [
 const ukk = [
 	{
 		kysymys: 'Mikä on paras höyrypesuri kotiin?',
-		vastaus: `Useimpiin koteihin suosittelemme säiliömallia <a href="${mallisivut['SC 3']}">Kärcher SC 3 EasyFix</a> (${euroa(sc3.hinta!)}). Sen lämmitysaika on valmistajan mukaan ${lammitysaika(k3.lammitysaikaMin)}, ja säiliön voi täyttää kesken työn. Mukana on lattiasuutin ja suuttimet saumoihin ja ikkunoihin. Jos puhdistat vain lattioita, kevyempi <a href="/hoyrymoppi/">höyrymoppi</a> riittää.`,
+		vastaus: `Useimpiin koteihin suosittelemme säiliömallia <a href="${mallisivut['SC 3']}">Kärcher ${sc3.nimi}</a> (${euroa(sc3.hinta!)}). Sen lämmitysaika on valmistajan mukaan ${lammitysaika(k3.lammitysaikaMin)}, ja säiliön voi täyttää kesken työn. Mukana ovat lattiasuutin sekä suuttimet ja harjat saumoihin ja hanoihin. Jos puhdistat vain lattioita, kevyempi <a href="/hoyrymoppi/">höyrymoppi</a> riittää.`,
 	},
 	{
 		kysymys: 'Mikä on paras höyrypesuri?',
@@ -122,7 +122,7 @@ const ukk = [
 		<div class="es-sisalto">
 			<section class="es-osio">
 				<div class="es-otsikko"><div><span class="tp-label">Suositukset</span><h2 id="suositukset">Hyvä höyrypesuri kotikäyttöön – suosituksemme 2026</h2></div><a class="es-lisaa" href="/karcher-hoyrypesurit/">Kaikki Kärcherin mallit →</a></div>
-				<p>Hyvä höyrypesuri kotikäyttöön lämpenee nopeasti, ja sitä on helppo käyttää. Siinä on myös suuttimet niille pinnoille, joita aiot puhdistaa. Valitsimme suositukset teknisten tietojen, testien ja hinnan perusteella. Paras höyrypesuri kotiin on useimmille Kärcher SC 3 EasyFix. Kärcher SC 3 puhdistaa sekä lattiat että kylpyhuoneen ja keittiön, ja sen lämmitysaika on valmistajan mukaan puoli minuuttia. Pelkkiin lattioihin suosittelemme kevyempää höyrymoppia ja pieniin kohteisiin käsimallia.</p>
+				<p>Hyvä höyrypesuri kotikäyttöön lämpenee nopeasti, ja sitä on helppo käyttää. Siinä on myös suuttimet niille pinnoille, joita aiot puhdistaa. Valitsimme suositukset teknisten tietojen, testien ja hinnan perusteella. Paras höyrypesuri kotiin on useimmille Kärcher {sc3.nimi}. Kärcher SC 3 puhdistaa sekä lattiat että kylpyhuoneen ja keittiön, ja sen lämmitysaika on valmistajan mukaan puoli minuuttia. Pelkkiin lattioihin suosittelemme kevyempää höyrymoppia ja pieniin kohteisiin käsimallia.</p>
 				<div class="mk-lista">
 					{suositukset.map((r, i) => (
 						<Korttirivi tuote={r.t} sija={i + 1} tagi={r.tagi} otsikko={r.otsikko} otsikkoH3={r.otsikkoH3} versio sivu={r.sivu} kuvaus={r.kuvaus} />

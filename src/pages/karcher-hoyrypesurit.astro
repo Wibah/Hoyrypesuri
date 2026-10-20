@@ -40,7 +40,7 @@ const t = suositus.tekniset;
 const ukk = [
 	{
 		kysymys: 'Mikä Kärcher höyrypesuri kannattaa ostaa?',
-		vastaus: `Useimpiin koteihin suosittelemme <a href="${mallisivut['SC 3']}">Kärcher SC 3 EasyFixiä</a> (${euroa(suositus.hinta!)}). Sen lämmitysaika on valmistajan mukaan ${lammitysaika(t.lammitysaikaMin)}, ja säiliön voi täyttää kesken työn. Isoon kotiin, jossa on paljon laattalattiaa, sopii <a href="${mallisivut['SC 5']}">SC 5</a>, ja pelkkiin lattioihin kevyempi <a href="${mallisivut['SC 2']}">SC 2 Upright</a> -höyrymoppi.`,
+		vastaus: `Useimpiin koteihin suosittelemme <a href="${mallisivut['SC 3']}">Kärcher ${suositus.nimi} -mallia</a> (${euroa(suositus.hinta!)}). Sen lämmitysaika on valmistajan mukaan ${lammitysaika(t.lammitysaikaMin)}, ja säiliön voi täyttää kesken työn. Isoon kotiin, jossa on paljon laattalattiaa, sopii <a href="${mallisivut['SC 5']}">SC 5</a>, ja pelkkiin lattioihin kevyempi <a href="${mallisivut['SC 2']}">SC 2 Upright</a> -höyrymoppi.`,
 	},
 	{
 		kysymys: 'Mikä ero on Kärcherin SC 1-, SC 2-, SC 3-, SC 4- ja SC 5-malleilla?',
@@ -69,7 +69,7 @@ const ukk = [
 		<TuoteSchema tuote={suositus} />
 		<TuoteHero tuote={suositus} otsikko="Kärcher höyrypesurit – kaikki mallit ja hinnat 2026" yla="Kärcher · Koko mallisto" merkinta="Suosituksemme">
 			<p>Kärcherin höyrypesurit kuuluvat SC-sarjaan, ja Kärcher.com myy niitä nimellä höyrypuhdistin. Sarjassa on käsimalli, säiliömalleja ja Upright-höyrymoppeja, ja niiden lisäksi Kärcher myy imeviä höyrypesureita (SV 7 ja SCV 4) sekä ammattilaitteita (SG). Kärcher.comissa on nyt myynnissä {myynnissaKoti.length} kotikäyttöön tarkoitettua höyrylaitetta hintaan {hintavali(myynnissaKoti)}.</p>
-			<p>Suosittelemme useimpiin koteihin Kärcher {suositus.nimi} -mallia. Sen lämmitysaika on valmistajan mukaan {lammitysaika(t.lammitysaikaMin)}, ja {luku(t.sailioL!)} litran säiliön voi täyttää kesken työn. Mukana ovat lattiasuutin ja suuttimet saumoihin, hanoihin ja ikkunoihin.</p>
+			<p>Suosittelemme useimpiin koteihin Kärcher {suositus.nimi} -mallia. Sen lämmitysaika on valmistajan mukaan {lammitysaika(t.lammitysaikaMin)}, ja {luku(t.sailioL!)} litran säiliön voi täyttää kesken työn. Mukana ovat lattiasuutin, käsisuutin, kohdesuutin, pyöreä harja ja rakoharja. Ikkunasuutin on lisävaruste.</p>
 		</TuoteHero>
 
 		<h2>Paras Kärcher höyrypesuri ja höyrypuhdistin: mikä malli sopii mihinkin?</h2>
@@ -81,7 +81,7 @@ const ukk = [
 				<tbody>
 					<tr><th scope="row"><a href={mallisivut['SC 1']}>Kärcher SC 1</a></th><td>Käsimalli saumoihin, hanoihin ja liesiin, ei lattioille</td><td>{hintavali(sarja('SC 1'))}</td></tr>
 					<tr><th scope="row"><a href={mallisivut['SC 2']}>Kärcher SC 2</a></th><td>Upright-höyrymoppi lattioille; SC 2 EasyFix -säiliömalli {sc2easy.myynnissa ? `${euroa(sc2easy.hinta!)}` : 'ei nyt myynnissä Kärcher.comissa'}</td><td>{hintavali(sarja('SC 2'))}</td></tr>
-					<tr><th scope="row"><a href={mallisivut['SC 3']}>Kärcher SC 3</a></th><td>Koko koti: lattiat, kylpyhuone, keittiö ja ikkunat</td><td>{hintavali(sarja('SC 3'))}</td></tr>
+					<tr><th scope="row"><a href={mallisivut['SC 3']}>Kärcher SC 3</a></th><td>Koko koti: lattiat, kylpyhuone ja keittiö</td><td>{hintavali(sarja('SC 3'))}</td></tr>
 					<tr><th scope="row"><a href={mallisivut['SC 4']}>Kärcher SC 4</a></th><td>Kattila ja irrotettava säiliö, {luku(Math.min(...sarja('SC 4').map((x) => x.tekniset.paineBar!)))}–{luku(Math.max(...sarja('SC 4').map((x) => x.tekniset.paineBar!)))} bar</td><td>{hintavali(sarja('SC 4'))}</td></tr>
 					<tr><th scope="row"><a href={mallisivut['SC 5']}>Kärcher SC 5</a></th><td>Suurin säiliö ({luku(sc5.tekniset.sailioL!)} l) ja paine ({luku(sc5.tekniset.paineBar!)} bar) isoon kotiin</td><td>{hintavali(sarja('SC 5'))}</td></tr>
 					<tr><th scope="row"><a href={mallisivut['SV 7']}>Kärcher SV 7 ja SCV 4</a></th><td>Imevät höyrypesurit: höyry ja imu samalla vedolla</td><td>{hintavali(karcherComissa(koti.filter((x) => x.tyyppi === 'imeva')))}</td></tr>
