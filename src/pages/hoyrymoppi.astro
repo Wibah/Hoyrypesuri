@@ -1,0 +1,130 @@
+---
+// SCN: tuki (laitetyyppi), intentti Comparison / Use Case, emopilari /. Hakusanat: höyrymoppi 800 (TP 10), kärcher höyrymoppi
+// 60 + höyrymoppi kärcher 20, höyrymoppi kokemuksia 50, paras höyrymoppi 40 (KD 32), philips höyrymoppi 40, h2o höyrymoppi
+// 40 + h20 20, silvercrest höyrymoppi 20, akkukäyttöinen ja johdoton höyrymoppi 20 (Ahrefs 2026-10). Vileda-haut kuuluvat
+// sivulle /vileda-hoyrymoppi/ ja lattiamateriaalit sivulle /hoyrymoppi-laminaatille/. Kokemuslomake on vain Vileda-sivulla
+// (SCN.md, riski 2). Mallit: tyypit 'moppi' ja '2-in-1' kaikilta merkeiltä, korteissa vain varastossa olevat.
+// Kirjoitettu hoyrypesuri-writer-skillillä (2026-10-21).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import Korttirivi from '../components/tuote/Korttirivi.astro';
+import MallistoTaulu from '../components/tuote/MallistoTaulu.astro';
+import Ukk from '../components/Ukk.astro';
+import { getCollection } from 'astro:content';
+import { tuote, esiteltavat, euroa, luku, paiva, mallisivut, hintavali, lammitysaika, type Tuote } from '../lib/tuotteet';
+
+const kaikki: Tuote[] = esiteltavat((await getCollection('tuotteet')).map((t) => ({ ...t.data, id: t.id })));
+const mopit = kaikki
+	.filter((t) => (t.tyyppi === 'moppi' || t.tyyppi === '2-in-1') && t.myynnissa && t.hinta != null)
+	.sort((a, b) => a.hinta! - b.hinta!);
+const pelkat = mopit.filter((t) => t.tyyppi === 'moppi');
+const kasiosalla = mopit.filter((t) => t.tyyppi === '2-in-1');
+const merkit = [...new Set(mopit.map((t) => t.merkki))];
+
+const vileda = await tuote('vileda-steam-plus');
+const viledaXxl = await tuote('vileda-steam-plus-xxl');
+const bd = await tuote('black-decker-fsm13e1');
+const bd2 = await tuote('black-decker-bhsm1610dsm');
+const bissell = await tuote('bissell-powerfresh-slimsteam-4268n');
+const sc2 = await tuote('sc-2-upright');
+const sc1multi = await tuote('sc-1-multi-up-textile-edition');
+const polti = await tuote('polti-vaporetto-sv440-double');
+
+// Merkkien sivut taulukon linkeiksi (sarja → sivu).
+const sivut: Record<string, string> = {
+	'SC 1': mallisivut['SC 1'],
+	'SC 2': mallisivut['SC 2'],
+	'Vileda Steam': '/vileda-hoyrymoppi/',
+	'Polti Vaporetto SV': '/polti-hoyrypesurit/',
+	'Black+Decker Steam-Mop': '/black-decker-hoyrypesurit/',
+};
+
+const suositukset = [
+	{ t: vileda, otsikko: 'Vileda Steam Plus', otsikkoH3: 'Paras höyrymoppi: Vileda Steam Plus', sivu: '/vileda-hoyrymoppi/', tagi: 'Paras höyrymoppi', kuvaus: `Lämmitysaika on valmistajan mukaan ${lammitysaika(vileda.tekniset.lammitysaikaMin)}, ja paino ${luku(vileda.tekniset.painoKg!)} kg. Guardianin testissä (2025) brittiläinen versio oli paras höyrymoppi.` },
+	{ t: bd2, otsikko: 'Black+Decker BHSM1610DSM', sivu: '/black-decker-hoyrypesurit/', tagi: 'Käsiosalla', kuvaus: `Moppi, josta irtoaa käsiosa. Mukana on valmistajan mukaan ${bd2.teknisetValmistajalta['Number of Accessories']} varustetta, kuten kolmiomainen suutin, SteaMitt-liina ja mattoliukuri.` },
+	{ t: sc2, otsikko: 'Kärcher SC 2 Upright', sivu: mallisivut['SC 2'], tagi: 'Kärcher', kuvaus: `Kärcherin höyrymoppi lattioille. ${luku(sc2.tekniset.sailioL!)} litran säiliö irrotetaan täyttöä varten.` },
+	{ t: bissell, otsikko: 'Bissell PowerFresh SlimSteam', sivu: undefined, tagi: 'Kevyt ja kääntyvä', kuvaus: 'Lattiamoppi, jatkovarsi ja käsihöyrypuhdistin samassa laitteessa. Independent (2026) kehui keveyttä ja kääntyvyyttä.' },
+	{ t: bd, otsikko: 'Black+Decker FSM13E1', sivu: '/black-decker-hoyrypesurit/', tagi: 'Edullisin', kuvaus: 'Yksinkertainen höyrymoppi ilman käsiosaa. Guardianin testissä (2025) se oli lähellä parasta, mutta moppi jätti lattian kostean.' },
+];
+
+const ukk = [
+	{
+		kysymys: 'Mikä on paras höyrymoppi?',
+		vastaus: `Suosittelemme useimmille <a href="/vileda-hoyrymoppi/">Vileda Steam Plussaa</a> (${euroa(vileda.hinta!)}). Guardian valitsi testissään (2025) sen brittiläisen version parhaaksi höyrymopiksi, ja sen lämmitysaika on valmistajan mukaan ${lammitysaika(vileda.tekniset.lammitysaikaMin)}. Jos haluat höyryttää myös saumoja ja hanoja, valitse moppi, josta irtoaa käsiosa, kuten Black+Decker BHSM1610DSM.`,
+	},
+	{
+		kysymys: 'Mikä on hyvä höyrymoppi?',
+		vastaus: 'Hyvä höyrymoppi lämpenee nopeasti, siinä on säädettävä höyry herkempiä lattioita varten, ja sen liinat voi pestä koneessa. Kuluttaja.fi:n testissä (2024) halvin moppi ei pärjännyt, mutta kalleinkaan ei ollut paras, joten hinta ei yksin kerro laadusta.',
+	},
+	{
+		kysymys: 'Höyrymoppi vai höyrypesuri?',
+		vastaus: `Kuluttaja.fi:n testissä (2024) höyrypesurit puhdistivat yleensä paremmin, mutta höyrymopit olivat helpompia ja nopeampia ottaa käyttöön. Valitse höyrymoppi, jos puhdistat vain lattioita. Jos haluat puhdistaa myös kylpyhuoneen ja keittiön, katso säiliömalli, kuten <a href="${mallisivut['SC 3']}">Kärcher SC 3</a>.`,
+	},
+	{
+		kysymys: 'Voiko höyrymopilla pestä maton?',
+		vastaus: 'Mattoliukurilla höyrymopilla voi raikastaa lyhytnukkaista mattoa, mutta se ei pese mattoa, koska höyry ei ime likaa pois. Testeissä matot vain kostuivat. Maton pesuun tarvitaan <a href="https://tekstiilipesuri.com/">tekstiilipesuri</a>.',
+	},
+	{
+		kysymys: 'Onko akkukäyttöistä höyrymoppia?',
+		vastaus: 'Tarkistamissamme suomalaisissa kumppanikaupoissa ei ollut akkukäyttöisiä höyrymoppeja lokakuussa 2026. Kaikki vertailun höyrymopit toimivat verkkovirralla, ja virtajohdon pituus kannattaa tarkistaa, jos pistorasioita on vähän.',
+	},
+	{
+		kysymys: 'Kuinka usein höyrymopin liina pestään?',
+		vastaus: 'Pese liina jokaisen siivouksen jälkeen. Vileda neuvoo pesemään Steam Plus Pro -mallien liinat enintään 60 asteessa ja vaihtamaan ne puolen vuoden välein. Guardianin mukaan mopin liinat ja harjat voivat kulua noin vuodessa, joten varaliinojen saatavuus kannattaa tarkistaa ennen ostoa.',
+	},
+];
+---
+<Layout
+	title="Höyrymoppi 2026 – paras höyrymoppi, vertailu ja kokemuksia"
+	description={`Höyrymoppi vertailussa: ${mopit.length} Suomessa myytävää höyrymoppia ${merkit.length} merkiltä, hinnat ${hintavali(mopit)}. Paras höyrymoppi testien mukaan, Kärcherin höyrymopit ja kokemukset.`}
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Höyrymoppi', sivu: '/hoyrymoppi/' }]} />
+		<span class="tp-label">Laitetyyppi</span>
+		<h1>Höyrymoppi – vertailu ja ostajan opas 2026</h1>
+		<p>Höyrymoppi on varrellinen höyrypesuri lattioiden puhdistukseen. Se kuumentaa veden höyryksi ja puhaltaa sen mopin mikrokuituliinaan, joka irrottaa lian lattiasta ilman pesuaineita. Vertailimme {mopit.length} Suomessa myytävää höyrymoppia {merkit.length} merkiltä, ja niiden hinnat ovat {hintavali(mopit)}.</p>
+		<p>Höyrymoppi sopii laatta-, vinyyli- ja muille tiivistetyille lattioille. Kylpyhuoneen saumoihin, hanoihin ja liesiin tarvitaan höyrymoppi, josta irtoaa käsiosa, tai <a href="/">säiliömallinen höyrypesuri</a>.</p>
+
+		<h2>Paras höyrymoppi: suosituksemme 2026</h2>
+		<p>Valitsimme suositukset valmistajien tietojen, testien ja hintojen perusteella. Hinnat ovat suomalaisista verkkokaupoista, ja ne tarkistettiin {paiva(vileda.haettu)}.</p>
+		<div class="mk-lista">
+			{suositukset.map((r, i) => (
+				<Korttirivi tuote={r.t} sija={i + 1} tagi={r.tagi} otsikko={r.otsikko} otsikkoH3={r.otsikkoH3} sivu={r.sivu} kuvaus={r.kuvaus} />
+			))}
+		</div>
+
+		<h2>Höyrymoppi vai höyrymoppi, josta irtoaa käsiosa?</h2>
+		<p>Höyrymopit jaetaan kahteen tyyppiin. Pelkkä höyrymoppi on kevyt ja yksinkertainen, ja se puhdistaa vain lattioita. Vertailussa sellaisia on {pelkat.length}, ja ne maksavat {hintavali(pelkat)}. Mopista, josta irtoaa käsiosa, saa käsihöyrypuhdistimen saumoihin, hanoihin, liesiin ja ikkunoihin. Niitä on vertailussa {kasiosalla.length}, ja ne maksavat {hintavali(kasiosalla)}.</p>
+		<p>Guardianin testissä (2025) tuli esiin tyyppien ero: käsiosallisessa mopissa on pienempi säiliö ja vähemmän tehoa kuin säiliömallisessa höyrypesurissa, ja runko on painavampi kuin tavallisessa höyrymopissa. Esimerkiksi Polti Vaporetto SV460 Doublen käsiosaa testaaja piti kömpelönä. Pelkkiin lattioihin kannattaa siis valita pelkkä höyrymoppi.</p>
+
+		<h2>Kärcher höyrymoppi</h2>
+		<p>Kärcher myy kahta höyrymoppia, joita vertailemme. <a href={mallisivut['SC 2']}>Kärcher SC 2 Upright</a> ({euroa(sc2.hinta!)}) on höyrymoppi lattioille: lämmitysaika on valmistajan mukaan {lammitysaika(sc2.tekniset.lammitysaikaMin)}, säiliö {luku(sc2.tekniset.sailioL!)} litraa ja paino {luku(sc2.tekniset.painoKg!)} kg. <a href={mallisivut['SC 1']}>Kärcher SC 1 Multi & Up Textile Edition</a> ({euroa(sc1multi.hinta!)}) on kevyempi moppi, josta irtoaa käsiosa ja jonka mukana tulee tekstiilihöyrystin.</p>
+		<p>Kärcherin säiliömalleihin, kuten <a href={mallisivut['SC 3']}>SC 3:een</a>, saa myös lattiasuuttimen. Ne puhdistavat lattioiden lisäksi kylpyhuoneen ja keittiön. Kaikki Kärcherin mallit ovat <a href="/karcher-hoyrypesurit/">Kärcherin höyrypesureiden sivulla</a>.</p>
+
+		<h2>Höyrymopit vertailussa</h2>
+		<p>Taulukossa ovat kaikki varastossa olevat höyrymopit halvimmasta alkaen. Lämmitysaika ja paino ovat valmistajien tiedoista, ja tyhjä kohta tarkoittaa, ettei valmistaja ilmoita arvoa.</p>
+		<MallistoTaulu tuotteet={mopit} sivut={sivut} />
+		<p class="tp-lahde">Tekniset tiedot: Vileda, Kärcher, Polti, Black+Decker, Bissell ja SharkNinja. Hinnat suomalaisista verkkokaupoista, tarkistettu {paiva(vileda.haettu)}.</p>
+
+		<h2>Mille lattioille höyrymoppi sopii?</h2>
+		<p>Laatta- ja vinyylilattiat kestävät höyryn hyvin. Laminaatin ja parketin kohdalla lähteet ovat eri mieltä: Guardianin mukaan monet laminaatit kestävät höyryn, mutta vanha parketti voi vaurioitua. The Sprucen mukaan höyrymoppia ei suositella vedelle herkille puulattioille. Vileda kertoo, että Steam Plussan säädettävä höyry sopii myös parketille, ja Vileda Steam Plus Pro -malleissa on erillinen asetus herkille lattioille.</p>
+		<p>Tarkista aina lattian valmistajan ohje, ja käytä herkillä lattioilla pienintä höyrytehoa. Lattiamateriaalit käydään läpi <a href="/hoyrymoppi-laminaatille/">höyrymoppi laminaatille -oppaassa</a>.</p>
+
+		<h2>Höyrymopit testeissä</h2>
+		<ul>
+			<li><strong>Kuluttaja.fi (3.12.2024):</strong> laboratoriotestissä oli 15 höyrymoppia, muun muassa Vileda Steam Plus XXL, Shark S6003, Black+Deckerin ja Poltin mopit sekä Kärcherin Upright-mallit. Höyrymopit olivat helpompia ottaa käyttöön kuin höyrypesurit, mutta puhdistivat yleensä heikommin. Halvin moppi ei pärjännyt, ja yksi moppi oli selvästi muita parempi. Mallikohtaiset tulokset ovat maksumuurin takana.</li>
+			<li><strong>Guardian (12.3.2025):</strong> Vileda Steam Mop Plus oli testin paras höyrymoppi. Se lämpeni 17 sekunnissa, ja kunnollinen höyry tuli noin 30 sekuntia myöhemmin. Black+Decker FSM13E1 oli lähellä, mutta moppi oli 29 cm leveä ja jätti lattian kostean. Shark S1000:n höyry jäi vähäiseksi, ja siitä puuttui mattoliukuri.</li>
+			<li><strong>Independent (19.8.2026):</strong> Bissell PowerFresh SlimSteamia kehuttiin keveydestä ja kääntyvyydestä, ja sen liina kiertää koko mopin ympäri. Suurimmalla teholla lattia kuivui hitaammin.</li>
+		</ul>
+		<p>Guardianin ja Independentin testeissä testattiin Britannian myyntiversioita, joiden varusteet voivat poiketa Suomessa myytävistä.</p>
+		<p class="tp-lahde">Lähteet: <a href="https://kuluttaja.fi/testi/hoyrypesurit/" target="_blank" rel="nofollow noopener">Kuluttaja.fi</a>, <a href="https://www.theguardian.com/thefilter/2025/mar/12/best-steam-cleaner-mop" target="_blank" rel="nofollow noopener">Guardian</a>, <a href="https://www.independent.co.uk/extras/indybest/house-garden/household-appliances/best-steam-cleaner-uk-b1783309.html" target="_blank" rel="nofollow noopener">Independent</a>.</p>
+
+		<h2>Höyrymoppi kokemuksia</h2>
+		<p>Keräämme käyttäjien kokemuksia Vileda-höyrymopeista <a href="/vileda-hoyrymoppi/#kokemuksia">Vileda-sivun lomakkeella</a>, koska Vileda on Suomessa haetuin höyrymoppimerkki. Muista malleista voit kertoa kokemuksesi <a href="/#kokemuksia">etusivun lomakkeella</a>.</p>
+
+		<h2>H2O, Philips ja Silvercrest -höyrymopit</h2>
+		<p>H2O-, Philips- ja Silvercrest-höyrymoppeja haetaan Suomessa, mutta niitä ei ollut tarkistamissamme kumppanikaupoissa lokakuussa 2026. Siksi ne eivät ole vertailussa. Merkeistä kerrotaan lisää <a href="/hoyrypesurimerkit/">höyrypesurimerkkien sivulla</a>.</p>
+
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>
