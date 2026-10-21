@@ -1,0 +1,98 @@
+---
+// SCN: tuki (merkki), intentti Decision / Comparison, emopilari /. Hakusanat: polti vaporetto 10; muut Polti-haut nollassa
+// (Villen tarkistus 2026-10-12). Merkkisivujen kyselypohja (Dolphin): "<merkki> höyrypesuri", hinta, kokemuksia ja
+// käyttöohje. Tekniset tiedot polti.com (data/polti/), hinnat suomalaisista verkkokaupoista. Kirjoitettu
+// hoyrypesuri-writer-skillillä (2026-10-21).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import TuoteSchema from '../components/tuote/TuoteSchema.astro';
+import TuoteHero from '../components/tuote/TuoteHero.astro';
+import MallistoTaulu from '../components/tuote/MallistoTaulu.astro';
+import Merkkikortit from '../components/tuote/Merkkikortit.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { merkinTuotteet, tuote, euroa, luku, paiva, hintavali, lammitysaika, mallisivut, paatuote } from '../lib/tuotteet';
+
+const mallit = await merkinTuotteet('Polti');
+const myynnissa = mallit.filter((t) => t.myynnissa && t.hinta != null);
+const smart = await tuote('polti-vaporetto-smart-110-eco');
+const eco = await tuote('polti-vaporetto-eco-pro-3-0');
+const sv440 = await tuote('polti-vaporetto-sv440-double');
+const clean = await tuote('polti-vaporetto-3-clean-blue');
+const first = await tuote('polti-vaporetto-first');
+const sc3 = await paatuote('SC 3');
+// Suositus: myynnissä oleva säiliömalli, jonka säiliön voi täyttää kesken työn (Smart 110 Eco).
+const suositus = smart.myynnissa ? smart : myynnissa.find((t) => t.tyyppi === 'sailio') ?? myynnissa[0];
+const t = suositus.tekniset;
+
+const ukk = [
+	{
+		kysymys: 'Mikä Polti-höyrypesuri kannattaa ostaa?',
+		vastaus: `Koko kotiin sopii säiliömalli, kuten Polti Vaporetto Smart 110 Eco${smart.myynnissa ? ` (${euroa(smart.hinta!)})` : ''}. Poltin mukaan sen kattilan paine on enintään 4 bar, ja käyttöaika on rajaton. Lattioille ja pieniin kohteisiin sopii Vaporetto SV-sarjan höyrymoppi, josta irtoaa käsiosa.`,
+	},
+	{
+		kysymys: 'Mikä ero on Polti Vaporetto Smartilla ja Eco Prolla?',
+		vastaus: `Molemmat ovat säiliömalleja, joiden höyryn määrä on Poltin mukaan enintään 110 g/min. Eco Pro 3.0:ssa on 2 litran kattila, jonka korkki avataan vasta jäähtyneenä, ja sen lämmitysaika on ${luku(eco.tekniset.lammitysaikaMin!)} minuuttia. Smart 110 Eco lämpenee ${luku(smart.tekniset.lammitysaikaMin!)} minuutissa, ja sen käyttöaika on Poltin mukaan rajaton.`,
+	},
+	{
+		kysymys: 'Mistä löydän Polti-höyrypesurin käyttöohjeen?',
+		vastaus: 'Polti julkaisee käyttöohjeet (User manual) ja vianetsintäohjeet (Troubleshooting) jokaisen mallin tuotesivulla polti.comissa. Linkit tuotesivuille ovat tämän sivun taulukossa olevien mallien lähteinä.',
+	},
+	{
+		kysymys: 'Tappaako Polti-höyrypesuri bakteerit?',
+		vastaus: 'Poltin mukaan sen höyrypesurit poistavat jopa 99,99 % viruksista, bakteereista ja muista mikrobeista, ja SV-sarjan höyrymopit jopa 99,9 %. Poltin mukaan väite perustuu riippumattomien laboratorioiden testeihin yleisimmillä mikrobeilla. Lukemamme vertailutestit eivät ole mitanneet sitä.',
+	},
+];
+---
+<Layout
+	title="Polti höyrypesuri kokemuksia – Vaporetto Smart, SV ja 3 Clean, hinnat (2026)"
+	description={`Polti Vaporetto -höyrypesurit vertailussa: säiliömallit, SV-höyrymopit, käsimalli First ja imevä 3 Clean. Hinnat ${hintavali(myynnissa)}, tekniset tiedot ja kokemukset.`}
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Polti höyrypesurit', sivu: '/polti-hoyrypesurit/' }]} />
+		<TuoteSchema tuote={suositus} />
+		<TuoteHero tuote={suositus} otsikko="Polti höyrypesuri – Vaporetto-mallit ja hinnat" yla="Polti · Koko mallisto" merkinta="Suosituksemme">
+			<p>Poltin höyrypesurit myydään Vaporetto-nimellä. Mallistossa on säiliömalleja, höyrymoppeja, joista irtoaa käsiosa, käsimalli ja imevä höyrypesuri. Vertailussa on {mallit.length} Polti-mallia, ja niistä {myynnissa.length} on nyt myynnissä suomalaisissa verkkokaupoissa hintaan {hintavali(myynnissa)}.</p>
+			<p>Suosittelemme koko kotiin Polti {suositus.nimi} -mallia. Sen lämmitysteho on Poltin mukaan {luku(t.tehoW!)} W, höyryä tulee enintään {luku(t.hoyryGmin!)} g/min, ja lämmitysaika on {lammitysaika(t.lammitysaikaMin)}.</p>
+		</TuoteHero>
+
+		<h2>Polti höyrypesuri: mallisarjat</h2>
+		<ul>
+			<li><strong>Vaporetto Smart ja Eco Pro:</strong> säiliömallit koko kotiin. Höyryn määrä on Poltin mukaan enintään 85–110 g/min. Eco Pro 3.0:ssa on 2 litran kattila ja lämmitysaika {luku(eco.tekniset.lammitysaikaMin!)} minuuttia.</li>
+			<li><strong>Vaporetto SV Double ja SV Style:</strong> höyrymopit, joista irtoaa käsihöyrypuhdistin. Lämmitysaika on Poltin mukaan 15–20 sekuntia, ja säiliö irrotetaan täyttöä varten. Esimerkiksi SV440 Double maksaa {sv440.myynnissa ? euroa(sv440.hinta!) : 'ei nyt myynnissä'}.</li>
+			<li><strong>Vaporetto First:</strong> käsimalli saumoihin ja pieniin kohteisiin. Paine on Poltin mukaan {luku(first.tekniset.paineBar!)} bar, ja paino {luku(first.tekniset.painoKg!)} kg.</li>
+			<li><strong>Vaporetto 3 Clean:</strong> imuroiva höyrymoppi, jossa on syklonimuri ja irrotettava käsihöyrypuhdistin. Siitä kerrotaan lisää <a href="/imeva-hoyrypesuri/">imevä höyrypesuri -sivulla</a>.</li>
+		</ul>
+
+		<Merkkikortit tuotteet={mallit} otsikko="Polti höyrypesuri hinta: myynnissä olevat mallit hintajärjestyksessä" ohita={suositus.id} />
+
+		<h2>Polti Vaporetto -mallit taulukkona</h2>
+		<p>Taulukossa ovat kaikki Suomessa myydyt Polti-mallit, joita vertailemme. Osa malleista ei ollut tarkistushetkellä varastossa yhdessäkään kumppanikaupassa.</p>
+		<MallistoTaulu tuotteet={mallit} suositusId={suositus.id} />
+		<p class="tp-lahde">Tekniset tiedot: polti.com. Hinnat suomalaisista verkkokaupoista, tarkistettu {paiva(suositus.haettu)}.</p>
+
+		<h2>Polti höyrypesuri testeissä</h2>
+		<ul>
+			<li><strong>Guardian (12.3.2025):</strong> Polti Vaporetto SV460 Doublella sai yhdellä täytöllä yli 15 minuuttia käyttöaikaa, ja mukana tuli kaksi kalkkisuodatinta. Testaaja piti käsiosaa kuitenkin liian kömpelönä ja varusteiden kiinnittämistä hankalana.</li>
+			<li><strong>Kuluttaja.fi (3.12.2024):</strong> laboratoriotestissä olivat mukana muun muassa Polti Vaporetto Eco Pro 3.0, SV440 Double ja SV460 Double. Mallikohtaiset tulokset ovat maksumuurin takana.</li>
+		</ul>
+		<p class="tp-lahde">Lähteet: <a href="https://www.theguardian.com/thefilter/2025/mar/12/best-steam-cleaner-mop" target="_blank" rel="nofollow noopener">Guardian</a>, <a href="https://kuluttaja.fi/testi/hoyrypesurit/" target="_blank" rel="nofollow noopener">Kuluttaja.fi</a>. Guardian testasi Britannian myyntiversiota.</p>
+
+		<h2>Polti höyrypesuri käyttöohje</h2>
+		<p>Polti julkaisee jokaisen mallin käyttöohjeen ja vianetsintäohjeen polti.comin tuotesivulla. Säiliömallien käyttöön pätevät samat perusasiat kuin muissakin höyrypesureissa:</p>
+		<ol>
+			<li>Täytä kattila tai säiliö, ja odota, että merkkivalo näyttää laitteen olevan käyttövalmis.</li>
+			<li>Valitse varuste pinnan mukaan: lattiaharja lattioille, saumaharja laattojen saumoille ja höyrykeskitin hanoille ja liesille.</li>
+			<li>Pyyhi irronnut lika mikrokuituliinalla.</li>
+			<li>Kattilallisissa malleissa, kuten Eco Pro 3.0:ssa, turvakorkki avataan vasta, kun laite on jäähtynyt.</li>
+		</ol>
+
+		<h2>Polti vai Kärcher?</h2>
+		<p>Kärcherin vastaava säiliömalli on <a href={mallisivut['SC 3']}>Kärcher SC 3</a>: suosittelemamme {sc3.nimi} maksaa {euroa(sc3.hinta!)}, ja sen lämmitysaika on {lammitysaika(sc3.tekniset.lammitysaikaMin)}. Kärcherin malleja on Suomen kaupoissa enemmän, ja ne ovat olleet useammissa testeissä. Kaikki merkit ovat <a href="/">höyrypesurivertailussa</a>, ja höyrymopit <a href="/hoyrymoppi/">höyrymoppivertailussa</a>.</p>
+
+		<Kokemuslomake malli="Polti" polku="/polti-hoyrypesurit/" mallikentta otsikko="Onko sinulla Polti höyrypesuri kokemuksia? Kerro ne meille!">
+			<p>Keräämme Poltin höyrypesureiden käyttäjien kokemuksia. Kerro, mikä Vaporetto sinulla on, mitä puhdistat ja mikä toimii tai ei toimi. Luemme jokaisen kokemuksen ennen julkaisua.</p>
+		</Kokemuslomake>
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>

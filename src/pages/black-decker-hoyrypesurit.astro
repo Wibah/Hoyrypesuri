@@ -1,0 +1,97 @@
+---
+// SCN: tuki (merkki), intentti Decision / Comparison, emopilari /. Hakusanat: black&decker höyrymoppi (volyymi tyhjä),
+// muut haut nollassa (Villen tarkistus 2026-10-12). Merkkisivujen kyselypohja (Dolphin): "<merkki> höyrypesuri", hinta,
+// kokemuksia ja käyttöohje. Tekniset tiedot blackanddecker.co.uk (data/blackdecker/; virheelliset arvot hylätty), hinnat
+// suomalaisista verkkokaupoista. Feedeissä varastossa olleet FSM1616, FSMH1351SM, BHSM1615DSG, BHSM15FX08 ja FSMH1321-QS
+// 7-in-1 puuttuvat, koska niille ei löytynyt valmistajan tietoja. Kirjoitettu hoyrypesuri-writer-skillillä (2026-10-21).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import TuoteSchema from '../components/tuote/TuoteSchema.astro';
+import TuoteHero from '../components/tuote/TuoteHero.astro';
+import MallistoTaulu from '../components/tuote/MallistoTaulu.astro';
+import Merkkikortit from '../components/tuote/Merkkikortit.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { merkinTuotteet, tuote, euroa, paiva, hintavali } from '../lib/tuotteet';
+
+const mallit = await merkinTuotteet('Black+Decker');
+const myynnissa = mallit.filter((t) => t.myynnissa && t.hinta != null);
+const suositus = await tuote('black-decker-bhsm1610dsm');
+const fsm = await tuote('black-decker-fsm13e1');
+const e5 = await tuote('black-decker-fsmh13e5');
+const e10 = await tuote('black-decker-fsmh13e10');
+const vileda = await tuote('vileda-steam-plus');
+const v = suositus.teknisetValmistajalta;
+const kayttoaika = (t: typeof suositus) => t.teknisetValmistajalta['Käyttöaika yhdellä täytöllä (min)'];
+
+const ukk = [
+	{
+		kysymys: 'Mikä Black+Decker-höyrypesuri kannattaa ostaa?',
+		vastaus: `Jos haluat puhdistaa lattioiden lisäksi saumoja, hanoja ja ikkunoita, valitse BHSM1610DSM (${euroa(suositus.hinta!)}). Siitä irtoaa käsiosa, ja mukana on valmistajan mukaan ${v['Number of Accessories']} varustetta. Pelkkiin lattioihin riittää FSM13E1 (${euroa(fsm.hinta!)}).`,
+	},
+	{
+		kysymys: 'Mikä ero on Black+Deckerin FSM- ja BHSM-malleilla?',
+		vastaus: 'FSM13E1 on pelkkä höyrymoppi. FSMH-mallit ovat moppeja, joista irtoaa käsiosa, ja FSMH13E5:n ja FSMH13E10:n teho on 1300 W. BHSM-mallit ovat 1600 watin mopit, joista irtoaa käsiosa ja joiden mukana on kolmiomainen suutin ja SteaMitt-liina. Mallin perässä oleva numero, kuten 5-in-1 tai 10-in-1, kertoo varusteiden määrästä.',
+	},
+	{
+		kysymys: 'Mistä löydän Black+Decker-höyrymopin käyttöohjeen?',
+		vastaus: 'Black+Decker julkaisee käyttöohjeet tuotesivuillaan (Support Manual). Black+Deckerin suomalainen sivusto oli tarkistushetkellä rakenteilla, joten ohjeet löytyvät esimerkiksi Britannian sivustolta mallinumerolla.',
+	},
+	{
+		kysymys: 'Kauanko Black+Decker-höyrymopilla voi siivota yhdellä täytöllä?',
+		vastaus: `Black+Deckerin mukaan yksi täyttö riittää ${kayttoaika(fsm)} minuuttia (FSM13E1) – ${kayttoaika(suositus)} minuuttia (BHSM1610DSM). Bygghemman tuotevertailussa (2026) FSMH13E5:n käyttöajaksi kerrottiin 15 minuuttia ja lämpenemisajaksi 30 sekuntia.`,
+	},
+];
+---
+<Layout
+	title="Black+Decker höyrypesuri kokemuksia – Steam-Mop-höyrymopit ja hinnat (2026)"
+	description={`Black+Decker Steam-Mop -höyrymopit vertailussa: FSM13E1, FSMH- ja BHSM-mallit. Hinnat ${hintavali(myynnissa)}, tekniset tiedot, testit ja käyttäjien kokemukset.`}
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Black+Decker höyrypesurit', sivu: '/black-decker-hoyrypesurit/' }]} />
+		<TuoteSchema tuote={suositus} />
+		<TuoteHero tuote={suositus} otsikko="Black+Decker höyrypesuri – Steam-Mop-mallit ja hinnat" yla="Black+Decker · Höyrymopit" merkinta="Suosituksemme">
+			<p>Black+Deckerin höyrypesurit ovat Steam-Mop-höyrymoppeja. Useimmista irtoaa käsiosa, jolla puhdistaa myös saumoja, hanoja ja ikkunoita. Vertailussa on {mallit.length} Black+Decker-mallia, ja ne maksavat suomalaisissa verkkokaupoissa {hintavali(myynnissa)}.</p>
+			<p>Suosittelemme BHSM1610DSM-mallia, jos haluat yhden laitteen lattioille ja pienille pinnoille. Sen teho on valmistajan mukaan {v['Power [W]']} W, yksi täyttö riittää noin {kayttoaika(suositus)} minuuttiin, ja mukana on {v['Number of Accessories']} varustetta.</p>
+		</TuoteHero>
+
+		<h2>Black+Decker höyrypesuri: mallit</h2>
+		<ul>
+			<li><strong>FSM13E1:</strong> pelkkä höyrymoppi lattioille, 1300 W. Edullisin malli, {euroa(fsm.hinta!)}.</li>
+			<li><strong>FSMH13E5 ja FSMH13E10:</strong> 1300 watin mopit, joista irtoaa käsiosa. Mukana on viisi tai kymmenen varustetta. Hinnat {euroa(e5.hinta!)} ja {euroa(e10.hinta!)}.</li>
+			<li><strong>FSMH1321:</strong> moppi, josta irtoaa käsiosa, ja mukana on taipuisa varusteletku ja ikkunalasta.</li>
+			<li><strong>BHSM166DSM ja BHSM1610DSM:</strong> 1600 watin mopit, joista irtoaa käsiosa. Mukana ovat kolmiomainen suutin, SteaMitt-liina ja mattoliukuri.</li>
+		</ul>
+		<p>Black+Deckerin Britannian sivuston teknisissä tiedoissa on selviä virheitä, kuten 0,0029 kilon paino ja 300 sekunnin lämpenemisaika 10-in-1-mallille. Näitä arvoja emme käytä, joten taulukossa on tyhjiä kohtia. Osa suomalaisten kauppojen Black+Decker-malleista (esimerkiksi FSM1616 ja BHSM15FX08) puuttuu vertailusta, koska niille ei löytynyt valmistajan tietoja.</p>
+
+		<Merkkikortit tuotteet={mallit} otsikko="Black+Decker höyrypesuri hinta: mallit hintajärjestyksessä" ohita={suositus.id} />
+
+		<h2>Black+Decker-höyrymopit taulukkona</h2>
+		<MallistoTaulu tuotteet={mallit} suositusId={suositus.id} />
+		<p class="tp-lahde">Tekniset tiedot: blackanddecker.co.uk. Hinnat suomalaisista verkkokaupoista, tarkistettu {paiva(suositus.haettu)}.</p>
+
+		<h2>Black+Decker höyrypesuri testeissä</h2>
+		<ul>
+			<li><strong>Guardian (12.3.2025):</strong> FSM13E1 oli testissä lähellä parasta höyrymoppia. Se puhdisti ketsupin ja kahvin helposti ja lämpeni alle 30 sekunnissa. Moppi oli kuitenkin 29 cm leveä, kapean täyttöaukon takia säiliön täyttäminen oli hankalaa, ja lattia jäi kosteaksi.</li>
+			<li><strong>Kuluttaja.fi (3.12.2024):</strong> laboratoriotestissä olivat mukana muun muassa BHSM1610DSM ja FSMH13E5. Mallikohtaiset tulokset ovat maksumuurin takana.</li>
+		</ul>
+		<p class="tp-lahde">Lähteet: <a href="https://www.theguardian.com/thefilter/2025/mar/12/best-steam-cleaner-mop" target="_blank" rel="nofollow noopener">Guardian</a>, <a href="https://kuluttaja.fi/testi/hoyrypesurit/" target="_blank" rel="nofollow noopener">Kuluttaja.fi</a>. Guardian testasi Britannian myyntiversiota.</p>
+
+		<h2>Black+Decker höyrypesuri käyttöohje</h2>
+		<ol>
+			<li>Täytä säiliö vesijohtovedellä ja kytke moppi verkkovirtaan.</li>
+			<li>Odota, että moppi on käyttövalmis, ja kiinnitä mikrokuituliina.</li>
+			<li>Käytä lattialla mopin suutinta. Käsiosalla varustetuissa malleissa irrota käsiosa ja kiinnitä varuste, kuten saumaharja tai ikkunalasta.</li>
+			<li>Pese liinat käytön jälkeen.</li>
+		</ol>
+		<p>Black+Deckerin mukaan mopit sopivat kaikille tiivistetyille lattioille. Lattiamateriaaleista kerrotaan lisää <a href="/hoyrymoppi-laminaatille/">laminaattioppaassa</a>.</p>
+
+		<h2>Black+Decker vai Vileda?</h2>
+		<p>Guardianin testissä (2025) Vileda Steam Mop Plus oli paras höyrymoppi, ja Black+Decker FSM13E1 oli lähellä. Vileda Steam Plus maksaa nyt {euroa(vileda.hinta!)}. Black+Deckerin etu on käsiosa, jota Viledan mopeissa ei ole. Kaikki merkit ovat <a href="/hoyrymoppi/">höyrymoppivertailussa</a>.</p>
+
+		<Kokemuslomake malli="Black+Decker" polku="/black-decker-hoyrypesurit/" mallikentta otsikko="Onko sinulla Black+Decker höyrypesuri kokemuksia? Kerro ne meille!">
+			<p>Keräämme Black+Deckerin höyrymoppien käyttäjien kokemuksia. Kerro, mikä malli sinulla on, millä pinnoilla käytät sitä ja mikä toimii tai ei toimi. Luemme jokaisen kokemuksen ennen julkaisua.</p>
+		</Kokemuslomake>
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>
