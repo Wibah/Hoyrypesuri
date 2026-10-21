@@ -34,7 +34,7 @@ Hakumäärät ovat Ahrefsista (välilehdet gid=1 ja gid=992037549 sekä höyrymo
 | `/hoyrypesuri-ammattikayttoon/` | Tuki | `/` | Decision | Support | Kärcher SG 4/4, SG 4/2 ja SGV 8/5 sekä EV Atlantis | ammattikäyttöön 90 | 2 |
 | `/karcher-hoyrypesuri-varaosat/` | Tuki | `/karcher-hoyrypesurit/` | Use Case (ylläpito) | Conversion | Suuttimet, liinat, harjat ja kalkinpoisto; Kärcherin feedissä noin 30 osaa (12 %) | varaosat 150, lisäosat 30, liinat 20, tarvikkeet 10, SC 2 varaosat 10 | 2 |
 | `/karcher-hoyrypesurin-kaytto-ja-huolto/` | Tuki | `/karcher-hoyrypesurit/` | Risk | Support | Käyttöohje, korkki ei aukea, ei toimi, kalkinpoisto. Vain valmistajan ohjeiden pohjalta. | käyttöohje 60, korkki ei aukea 20, ei toimi 10, käyttö 30 | 3 |
-| `/nain-pisteytamme/`, `/tietoa-meista/`, `/ota-yhteytta/`, `/tietosuojaseloste/` | Luottamus / hyöty | – | – | Navigation | Kuten painepesurit.fi:ssä | – | 1 |
+| `/nain-vertailemme/` (korvaa suunnitelman /nain-pisteytamme/, koska sivusto ei pisteytä laitteita), `/tietoa-meista/`, `/ota-yhteytta/`, `/tietosuojaseloste/` | Luottamus / hyöty | – | Definition (menetelmä) | Navigation | Tietolähteet, hinnat, testisäännöt ja suositusten perusteet | – | 1, rakennettu 2026-10-21 |
 
 **Ei omia sivuja nyt:**
 - **Käsihöyrypuhdistin** on pilarin osio, koska ”pieni höyrypesuri” kuuluu SC 1:lle ja ”käsikäyttöinen höyrypesuri” saa vain 10 hakua.

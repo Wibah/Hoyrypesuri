@@ -1,0 +1,68 @@
+---
+// SCN: luottamussolmu, intentti Definition (menetelmä), emopilari /. Korvaa suunnitelman "Näin pisteytämme" -sivun, koska
+// hoyrypesuri.fi ei pisteytä laitteita (2026-10-21). Kertoo tietolähteet, hintojen ja kuvien alkuperän, testiviittausten
+// säännöt ja suositusten perusteet. Luvut tulevat datasta, joten ne päivittyvät hakuskriptien mukana.
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import { getCollection } from 'astro:content';
+import { esiteltavat, paiva, type Tuote } from '../lib/tuotteet';
+
+const kaikki: Tuote[] = esiteltavat((await getCollection('tuotteet')).map((t) => ({ ...t.data, id: t.id })));
+const merkit = [...new Set(kaikki.map((t) => t.merkki))];
+const hinnalliset = kaikki.filter((t) => t.myynnissa && t.hinta != null);
+const karcher = kaikki.find((t) => t.merkki === 'Kärcher')!;
+const muu = kaikki.find((t) => t.merkki !== 'Kärcher')!;
+---
+<Layout
+	title="Näin vertailemme höyrypesureita – Höyrypesuri.fi"
+	description="Mistä Höyrypesuri.fi:n tekniset tiedot, hinnat ja testitulokset tulevat, ja miten valitsemme suosittelemamme höyrypesurit."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Näin vertailemme', sivu: '/nain-vertailemme/' }]} />
+		<h1>Näin vertailemme höyrypesureita</h1>
+		<p>Höyrypesuri.fi vertailee Suomessa myytäviä höyrypesureita, höyrymoppeja ja imeviä höyrypesureita. Emme testaa laitteita itse. Vertailu perustuu valmistajien teknisiin tietoihin, suomalaisten verkkokauppojen hintoihin ja nimettyihin testeihin. Tällä sivulla kerromme, mistä tiedot tulevat ja miten valitsemme suositukset.</p>
+
+		<h2>Mitkä laitteet ovat mukana?</h2>
+		<p>Vertailussa on nyt {kaikki.length} mallia {merkit.length} merkiltä ({merkit.join(', ')}), ja niistä {hinnalliset.length} on myynnissä tarkistushetkellä. Esittelemme vain malleja, joita myydään Suomessa. Kärcheriltä mukana ovat mallit, joita Kärcher myy Suomessa, ja muilta merkeiltä mallit, joita suomalaiset verkkokaupat myyvät.</p>
+		<p>Merkit, joita haetaan Suomessa mutta joita emme löytäneet tarkistamistamme verkkokaupoista, kuten Dolphin, H2O ja Emax, esittelemme <a href="/hoyrypesurimerkit/">höyrypesurimerkkien sivulla</a> ilman hintoja.</p>
+
+		<h2>Mistä tekniset tiedot tulevat?</h2>
+		<p>Haemme tekniset tiedot valmistajien omilta sivuilta:</p>
+		<ul>
+			<li><strong>Kärcher:</strong> karcher.com/fi. Tiedot ja hinnat haetaan hakuskriptillä suoraan Kärcherin suomalaisesta verkkokaupasta.</li>
+			<li><strong>Vileda:</strong> vileda.fi ja vileda.de</li>
+			<li><strong>Polti:</strong> polti.com</li>
+			<li><strong>Black+Decker:</strong> blackanddecker.co.uk, koska Black+Deckerin suomalainen sivusto oli tarkistushetkellä rakenteilla</li>
+			<li><strong>Bissell:</strong> bissell.de</li>
+			<li><strong>Shark:</strong> sharkninja.de</li>
+		</ul>
+		<p>Kun valmistajan sivulla on selvästi virheellinen arvo, kuten 0,0029 kilon paino tai senttimetreinä ilmoitettu virtajohto, jätämme arvon pois. Tyhjä kohta taulukossa tarkoittaa, että valmistaja ei ilmoita arvoa tai että ilmoitettu arvo on ristiriitainen. Emme arvaa puuttuvia lukuja.</p>
+		<p>Ulkomaisen sivuston tiedot yhdistetään Suomessa myytävään malliin EAN-koodilla, jotta tiedot koskevat samaa myyntiversiota. Jos versio on eri, emme käytä tietoja. Esimerkiksi Bissell Steam Shotin saksalainen versio on eri malli kuin Suomessa myytävä, joten sitä ei ole vertailussa.</p>
+
+		<h2>Mistä hinnat tulevat?</h2>
+		<p>Kärcherin hinnat tulevat Kärcherin suomalaisesta verkkokaupasta. Muiden merkkien hinnat tulevat suomalaisten verkkokauppojen tuotetiedoista, ja näytämme halvimman hinnan kaupasta, jossa malli on varastossa. Kaupan nimeä emme näytä. Hinta ja ostolinkki tulevat aina samasta kaupasta.</p>
+		<p>Hintojen tarkistuspäivä näkyy sivuilla. Kärcherin hinnat tarkistettiin viimeksi {paiva(karcher.haettu)} ja muiden merkkien {paiva(muu.haettu)}. Hinnat voivat muuttua, joten tarkista lopullinen hinta kaupasta.</p>
+		<p>Tuotekuvat ovat verkkokauppojen tuotetiedoista. Jos kuvaa ei ole, näytämme yleisen piirroksen.</p>
+
+		<h2>Miten käytämme testejä?</h2>
+		<ul>
+			<li>Kerromme aina testaajan nimen ja testin ajankohdan, ja linkitämme lähteeseen.</li>
+			<li>Käytämme vain Suomessa myytäviä malleja koskevia havaintoja. Brittiläisissä testeissä testataan usein Britannian myyntiversioita, joiden varusteet poikkeavat Suomessa myytävistä, ja kerromme siitä tekstissä.</li>
+			<li>Jos testin tulokset ovat maksumuurin takana, kuten Kuluttaja.fi:n höyrypesuritestissä (2024), kerromme vain julkiset havainnot emmekä arvaa tuloksia.</li>
+			<li>Myynnistä poistuneiden mallien testejä emme käytä.</li>
+			<li>Valmistajien väitteet, kuten "poistaa 99,9 % bakteereista", kerromme valmistajan nimissä, koska testit eivät ole mitanneet niitä.</li>
+		</ul>
+
+		<h2>Miten valitsemme suositukset?</h2>
+		<p>Suosittelemme laitetta käyttötarpeen mukaan: mitä pintoja puhdistat, kuinka usein ja kuinka paljon. Perusteina ovat valmistajan tekniset tiedot (esimerkiksi lämpenemisaika, paine, säiliö ja mukana tulevat suuttimet), testien havainnot ja hinta. Emme laske laitteille kokonaispisteitä, koska yksi luku ei kerro, sopiiko laite juuri sinun kotiisi.</p>
+		<p>Kärcherillä on Suomessa laajin höyrypesurimallisto, joten Kärcherin malleja on vertailussa eniten. Sivusto on kuitenkin monimerkkinen, ja suosittelemme muita merkkejä, kun ne sopivat käyttötarpeeseen paremmin. Esimerkiksi parhaaksi höyrymopiksi suosittelemme Vileda Steam Plussaa.</p>
+
+		<h2>Käyttäjien kokemukset</h2>
+		<p>Keräämme käyttäjien kokemuksia sivujen lomakkeilla. Luemme jokaisen kokemuksen ennen julkaisua, emmekä muokkaa sen sisältöä. Emme julkaise keksittyjä kokemuksia.</p>
+
+		<h2>Kumppanilinkit</h2>
+		<p>Sivusto voi jatkossa sisältää kumppanilinkkejä. Jos ostat tuotteen niiden kautta, kauppa maksaa meille pienen provision. Se ei nosta hintaa, jonka maksat, eikä vaikuta suosituksiimme. Sivuilla, joilla on kumppanilinkkejä, kerromme siitä erikseen.</p>
+
+		<p>Lisää tietoa sivustosta on <a href="/tietoa-meista/">tietoa meistä -sivulla</a>.</p>
+	</main>
+</Layout>
