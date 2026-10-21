@@ -1,0 +1,132 @@
+---
+// SCN: tuki, intentti Decision, emopilari /. Sivun tehtävä on näyttää, milloin oma höyrypesuri kannattaa ja milloin
+// vuokra riittää (tekstiilipesuri.comin linja: emme vuokraa laitteita, joten sivu ohjaa ostamaan). Hakusanat: höyrypesuri
+// vuokraus 600, höyrypesuri vuokra 150, vuokraa höyrypesuri 100, kaupunkihaut (Tampere 100, Helsinki 80, Oulu 70, Turku 40,
+// Kuopio 30, Espoo 30, Lahti 20, Jyväskylä 20, Vantaa 10 ym.), imevä höyrypesuri vuokraus 40, vuokrataan höyrypesuri 30,
+// kärcher höyrypesuri vuokraus 10 (Ahrefs 2026-10, yhteensä noin 1 400). Vuokrahinnat tiedostosta src/data/vuokrahinnat.json
+// (tarkistettu käsin 2026-10-21). Kaupunkikohtaiset tiedot vain tarkistetuista vuokraamoista; Tampereelta ja Oulusta ei
+// löytynyt hintoja. Kirjoitettu hoyrypesuri-writer-skillillä (2026-10-21).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import VuokraTaulu from '../components/tuote/VuokraTaulu.astro';
+import Tuotekortti from '../components/tuote/Tuotekortti.astro';
+import Ukk from '../components/Ukk.astro';
+import vuokrahinnat from '../data/vuokrahinnat.json';
+import { paatuote, tuote, euroa, luku, paiva, mallisivut, lammitysaika } from '../lib/tuotteet';
+
+const sc1 = await paatuote('SC 1');
+const sc2 = await paatuote('SC 2');
+const sc3 = await paatuote('SC 3');
+const sc5 = await paatuote('SC 5');
+const sv7 = await paatuote('SV 7');
+const sg44 = await tuote('sg-4-4');
+
+// Halvin ja kallein tarkistettu vuorokausivuokra.
+const vrkHinnat = vuokrahinnat.flatMap((v) => v.hinnat).filter((h) => h.kesto === '1 vuorokausi').map((h) => h.hinta);
+const halvin = Math.min(...vrkHinnat);
+const kallein = Math.max(...vrkHinnat);
+const paivaa = (hinta: number) => luku(Math.round((hinta / halvin) * 10) / 10);
+const laskelma = [
+	{ t: sc1, nimi: 'Kärcher SC 1 (käsimalli)', sivu: mallisivut['SC 1'] },
+	{ t: sc2, nimi: 'Kärcher SC 2 Upright (höyrymoppi)', sivu: mallisivut['SC 2'] },
+	{ t: sc3, nimi: `Kärcher ${sc3.nimi} (säiliömalli)`, sivu: mallisivut['SC 3'] },
+	{ t: sc5, nimi: `Kärcher ${sc5.nimi} (säiliömalli)`, sivu: mallisivut['SC 5'] },
+	{ t: sv7, nimi: 'Kärcher SV 7 (imevä)', sivu: mallisivut['SV 7'] },
+];
+
+const kaupungit = [
+	['Helsinki, Espoo ja Vantaa', 'Otto Vuokraus (Kärcher SG 4/4, nouto Vantaalta tai kotiinkuljetus)'],
+	['Lahti ja Hollola', 'Vuokraväline ja HT-Konevuokraamo (Kärcher SG 4/4)'],
+	['Turku ja Raisio', 'Vuokraamo 24/7 Raisiossa (Kärcher SG 4/2, itsepalvelunouto ympäri vuorokauden)'],
+	['Salo', 'Salon Rakennuskonevuokraamo (Kärcher SG 4/4)'],
+	['Tampere, Oulu ja muut paikkakunnat', 'Emme löytäneet hinnoiteltua höyrypesurin vuokrausta. Kysy paikallisista rakennuskonevuokraamoista.'],
+];
+
+const ukk = [
+	{
+		kysymys: 'Kannattaako höyrypesuri ostaa vai vuokrata?',
+		vastaus: `Osta, jos käytät höyrypesuria useammin kuin muutaman kerran vuodessa. Suosittelemamme <a href="${mallisivut['SC 3']}">Kärcher ${sc3.nimi}</a> (${euroa(sc3.hinta!)}) maksaa saman verran kuin noin ${paivaa(sc3.hinta!)} vuorokauden vuokra halvimmasta tarkistamastamme vuokraamosta. Vuokraa, jos tarvitset höyryä kerran, esimerkiksi muuttosiivoukseen tai tapetin irrotukseen.`,
+	},
+	{
+		kysymys: 'Paljonko höyrypesurin vuokraus maksaa?',
+		vastaus: `Tarkistamissamme vuokraamoissa höyrypesuri maksoi lokakuussa 2026 ${luku(halvin)}–${luku(kallein)} € vuorokaudelta. Lisävuorokausi maksoi 18–25 €, ja Otto Vuokraus vuokrasi laitetta viikoksi 180 eurolla. Vuokraamo 24/7 Raisiossa vuokrasi neljäksi tunniksi 25 eurolla.`,
+	},
+	{
+		kysymys: 'Millaisen höyrypesurin vuokraamosta saa?',
+		vastaus: `Kaikki tarkistamamme vuokraamot vuokrasivat Kärcherin ammattilaitteita: neljä SG 4/4:ää ja yksi SG 4/2:ta. SG 4/4:ssä on ${luku(sg44.tekniset.kattilaL!)} litran kattila, ${luku(sg44.tekniset.paineBar!)} barin paine ja jatkuva täyttö, ja uutena se maksaa Kärcher.comissa ${euroa(sg44.hinta!)}. Lämmitysaika on valmistajan mukaan ${luku(sg44.tekniset.lammitysaikaMin!)} minuuttia.`,
+	},
+	{
+		kysymys: 'Voiko imevän höyrypesurin vuokrata?',
+		vastaus: `Tarkistamissamme vuokraamoissa ei ollut imeviä höyrypesureita, vaan ne vuokrasivat tavallisia SG-ammattilaitteita. Imevä <a href="${mallisivut['SV 7']}">Kärcher SV 7</a> maksaa ${euroa(sv7.hinta!)}. Imevistä höyrypesureista kerrotaan lisää <a href="/imeva-hoyrypesuri/">imevä höyrypesuri -sivulla</a>.`,
+	},
+	{
+		kysymys: 'Voiko höyrypesurilla pestä sohvan tai maton vuokrakerralla?',
+		vastaus: 'Höyrypesuri ei pese sohvaa tai mattoa, koska se ei ime likaa pois kankaasta. Sohvan ja maton pesuun vuokrataan tekstiilipesuri. Vuokrahinnat ja vertailu ovat tekstiilipesuri.comin <a href="https://tekstiilipesuri.com/tekstiilipesuri-vuokraus-vai-osto/">vuokraus vai osto -sivulla</a>.',
+	},
+];
+---
+<Layout
+	title="Höyrypesuri vuokraus vai oma? Vuokrahinnat ja milloin oma laite kannattaa (2026)"
+	description={`Höyrypesurin vuokraus maksaa ${luku(halvin)}–${luku(kallein)} € vuorokaudelta. Laskimme, milloin oma höyrypesuri tulee vuokrausta halvemmaksi ja mistä höyrypesurin voi vuokrata.`}
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Höyrypesuri vuokraus vai osto', sivu: '/hoyrypesuri-vuokraus-vai-osto/' }]} />
+		<span class="tp-label">Opas</span>
+		<h1>Höyrypesuri vuokraus vai osto – milloin oma höyrypesuri kannattaa?</h1>
+		<p>Höyrypesurin vuokraus maksaa tarkistamissamme vuokraamoissa {luku(halvin)}–{luku(kallein)} € vuorokaudelta. Oma höyrypesuri maksaa Kärcher.comissa {euroa(sc1.hinta!)} (käsimalli SC 1) – {euroa(sc3.hinta!)} (säiliömalli {sc3.nimi}). Säiliömalli maksaa siis saman verran kuin noin {paivaa(sc3.hinta!)} vuokravuorokautta. Jos käytät höyryä useammin kuin muutaman kerran vuodessa, oma laite tulee halvemmaksi.</p>
+
+		<h2>Laskelma: milloin oma höyrypesuri maksaa itsensä takaisin?</h2>
+		<p>Taulukko kertoo, montako vuorokautta laitteen hinnalla saa vuokrata halvimmasta tarkistamastamme vuokraamosta ({euroa(halvin)} / vrk).</p>
+		<div class="tp-taulu">
+			<table class="tp-versiot">
+				<thead><tr><th scope="col">Oma laite</th><th scope="col">Hinta Kärcher.comissa</th><th scope="col">Vastaa vuokravuorokausia</th></tr></thead>
+				<tbody>
+					{laskelma.map(({ t, nimi, sivu }) => (
+						<tr><th scope="row"><a href={sivu}>{nimi}</a></th><td>{euroa(t.hinta!)}</td><td>noin {paivaa(t.hinta!)}</td></tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+		<p class="tp-lahde">Laitteiden hinnat tarkistettu {paiva(sc3.haettu)} Kärcher.comista.</p>
+		<p>Vertailu ei ole täysin reilu, koska vuokraamot vuokraavat ammattilaitteita. Vuokralaitteessa on isompi kattila ja jatkuva täyttö, mutta SG 4/4:n lämmitysaika on valmistajan mukaan {luku(sg44.tekniset.lammitysaikaMin!)} minuuttia ja paino {luku(sg44.tekniset.painoKg!)} kg. Vuokrassa jokainen kerta tarkoittaa myös noutoa ja palautusta. Oma laite taas on käsillä heti, ja nopeasti lämpenevä malli, kuten SC 3 ({lammitysaika(sc3.tekniset.lammitysaikaMin)}), sopii lyhyisiinkin siivouksiin.</p>
+
+		<h2>Osta oma höyrypesuri, jos…</h2>
+		<ul>
+			<li>puhdistat kylpyhuoneen saumoja, liettä tai lattioita säännöllisesti</li>
+			<li>haluat puhdistaa ilman pesuaineita osana tavallista viikkosiivousta</li>
+			<li>tarvitset höyryä lyhyisiin töihin, joissa vuokralaitteen nouto ei kannata</li>
+		</ul>
+
+		<h2>Mikä höyrypesuri kannattaa ostaa vuokraamisen sijaan?</h2>
+		<p>Suosittelemme useimpiin koteihin säiliömallia Kärcher {sc3.nimi}. Pelkkiin lattioihin riittää höyrymoppi SC 2 Upright ({euroa(sc2.hinta!)}), ja pieniin kohteisiin käsimalli SC 1 ({euroa(sc1.hinta!)}). Mopin ja käsimallin hinnalla saa vain noin {paivaa(sc1.hinta!)}–{paivaa(sc2.hinta!)} vuokravuorokautta, joten ne maksavat itsensä takaisin nopeasti.</p>
+		<div class="mk-lista">
+			<Tuotekortti tuote={sc3} otsikko="Kärcher SC 3" sivu={mallisivut['SC 3']} kenelle="Säiliömalli lattioille, kylpyhuoneeseen ja keittiöön" tagi="Suosituksemme kotiin" />
+			<Tuotekortti tuote={sc2} otsikko="Kärcher SC 2 Upright" sivu={mallisivut['SC 2']} kenelle="Höyrymoppi pelkille lattioille" tagi="Lattioille" />
+			<Tuotekortti tuote={sc1} otsikko="Kärcher SC 1" sivu={mallisivut['SC 1']} kenelle="Käsimalli saumoihin, hanoihin ja liesiin" tagi="Edullisin" />
+		</div>
+		<p>Kaikki ostettavat mallit ja suosituksemme eri käyttöön ovat <a href="/">höyrypesurivertailussa</a>.</p>
+
+		<h2>Höyrypesuri vuokra: hinnat vuokraamoissa</h2>
+		<p>Tarkistimme viiden vuokraamon hinnat. Kaikki vuokrasivat Kärcherin ammattilaitteita: neljä SG 4/4:ää ja yksi SG 4/2:ta. Kärcher.comissa SG 4/4 maksaa uutena {euroa(sg44.hinta!)}, ja siinä on {luku(sg44.tekniset.kattilaL!)} litran kattila ja {luku(sg44.tekniset.paineBar!)} barin paine.</p>
+		<VuokraTaulu />
+
+		<h2>Vuokraa höyrypesuri, jos…</h2>
+		<ul>
+			<li>tarvitset höyryä kerran, esimerkiksi muuttosiivoukseen tai tapetin irrotukseen</li>
+			<li>puhdistettavaa on kerralla paljon, ja haluat isomman kattilan ja jatkuvan täytön</li>
+			<li>et ole varma, tuleeko omaa laitetta käytettyä</li>
+		</ul>
+		<p>Viimeinen kohta on aiheellinen. Ruotsalaisella Byggahus.se-foorumilla yksi kirjoittaja kertoi, että hänen ostamansa höyrypesuri jäi lähes käyttämättä. Toinen taas on käyttänyt samaa Kärcheriä vuodesta 1995. Hyöty riippuu siis siitä, kuinka usein höyryä oikeasti tarvitsee.</p>
+
+		<h2>Höyrypesuri vuokraus paikkakunnittain</h2>
+		<p>Lista kattaa vain ne viisi vuokraamoa, joiden sivut tarkistimme 21.10.2026.</p>
+		<div class="tp-taulu">
+			<table class="tp-versiot">
+				<thead><tr><th scope="col">Paikkakunta</th><th scope="col">Vuokraamot</th></tr></thead>
+				<tbody>{kaupungit.map(([k, v]) => <tr><th scope="row">{k}</th><td>{v}</td></tr>)}</tbody>
+			</table>
+		</div>
+
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>

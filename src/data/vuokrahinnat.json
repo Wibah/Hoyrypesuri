@@ -1,0 +1,65 @@
+[
+	{
+		"vuokraamo": "Otto Vuokraus",
+		"laite": "Kärcher SG 4/4",
+		"paikkakunnat": "Helsinki, Espoo ja Vantaa (nouto Vantaalta tai kotiinkuljetus)",
+		"hinnat": [
+			{ "kesto": "1 vuorokausi", "hinta": 45 },
+			{ "kesto": "lisävuorokausi", "hinta": 25 },
+			{ "kesto": "1 viikko", "hinta": 180 }
+		],
+		"lisat": "Kotiinkuljetus ja nouto pääkaupunkiseudulla 20 €. Mukana lattiasuutin, käsisuutin, pistesuuttimet ja jatkoputket.",
+		"lahde": "https://ottovuokraus.com/en/tuote/rent-steam-cleaner-karcher-sg4-4/",
+		"tarkistettu": "2026-10-21"
+	},
+	{
+		"vuokraamo": "Vuokraväline",
+		"laite": "Kärcher SG 4/4",
+		"paikkakunnat": "Lahti (Karisto)",
+		"hinnat": [
+			{ "kesto": "1 vuorokausi", "hinta": 45 },
+			{ "kesto": "3 päivää", "hinta": 60 },
+			{ "kesto": "5 päivää", "hinta": 85 }
+		],
+		"lisat": "Vuokrataan vain kotitalouden pintojen puhdistukseen. Mukana lattiasuuttimet, käsisuutin, harjat, voima- ja pistesuuttimet sekä kirjalliset ohjeet.",
+		"lahde": "https://vuokravaline.fi/karcher-sg4-4-hoyrypesuri/",
+		"tarkistettu": "2026-10-21"
+	},
+	{
+		"vuokraamo": "HT-Konevuokraamo",
+		"laite": "Kärcher SG 4/4",
+		"paikkakunnat": "Hollola (Lahden seutu)",
+		"hinnat": [
+			{ "kesto": "1 vuorokausi", "hinta": 40 },
+			{ "kesto": "viikonloppu", "hinta": 60 }
+		],
+		"lisat": "Hinnat sisältävät arvonlisäveron.",
+		"lahde": "https://htkonevuokraamo.fi/hoyrypesuri-vuokraus-lahti/",
+		"tarkistettu": "2026-10-21"
+	},
+	{
+		"vuokraamo": "Salon Rakennuskonevuokraamo",
+		"laite": "Kärcher SG 4/4",
+		"paikkakunnat": "Salo",
+		"hinnat": [
+			{ "kesto": "1 vuorokausi", "hinta": 36.82 },
+			{ "kesto": "lisävuorokausi", "hinta": 18.37 }
+		],
+		"lisat": "Hinnat sisältävät arvonlisäveron. Mahdolliset kuluma- ja tarvikeveloitukset tulevat lisäksi.",
+		"lahde": "https://srkv.fi/tuotteet/hoyrypesuri/",
+		"tarkistettu": "2026-10-21"
+	},
+	{
+		"vuokraamo": "Vuokraamo 24/7",
+		"laite": "Kärcher SG 4/2",
+		"paikkakunnat": "Raisio (itsepalvelunouto ympäri vuorokauden)",
+		"hinnat": [
+			{ "kesto": "4 tuntia", "hinta": 25 },
+			{ "kesto": "1 vuorokausi", "hinta": 39 },
+			{ "kesto": "3 vuorokautta", "hinta": 99 }
+		],
+		"lisat": "Mukana 2,5 metrin höyryletku ja käsisuutin harjalla.",
+		"lahde": "https://vuokraamo247.fi/tuote/hoyrypesuri-karcher-sg-4-2/",
+		"tarkistettu": "2026-10-21"
+	}
+]
