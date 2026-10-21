@@ -1,0 +1,126 @@
+---
+// SCN: tuki (malli), intentti Decision, emopilari /karcher-hoyrypesurit/. Hakusanat: pieni höyrypesuri 90 (Parent keyword
+// kärcher sc1), kärcher höyrypesuri sc1 50, höyrypesuri kärcher sc 1 30, kärcher sc1 höyrypesuri 20, kärcher sc 1
+// höyrypesuri 20, kärcher höyrypesuri sc 1 20, höyrypesuri pieni 20, käsikäyttöinen höyrypesuri 10 (Ahrefs 2026-10).
+// Versiot: SC 1 (perusmalli 1.516-400, karcher.com) ja SC 1 Multi & Up Textile Edition (Kärcherin feed) (Villen hyväksyntä
+// 2026-10-20). Kirjoitettu hoyrypesuri-writer-skillillä (2026-10-21).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import TuoteSchema from '../components/tuote/TuoteSchema.astro';
+import TuoteHero from '../components/tuote/TuoteHero.astro';
+import TeknisetTiedot from '../components/tuote/TeknisetTiedot.astro';
+import VersioVertailu from '../components/tuote/VersioVertailu.astro';
+import Tuotekortti from '../components/tuote/Tuotekortti.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { paatuote, tuote, versiot, esiteltavat, luku, paiva, euroa, mallisivut, lammitysaika } from '../lib/tuotteet';
+
+const suositus = await paatuote('SC 1');
+const multi = await tuote('sc-1-multi-up-textile-edition');
+const kaikki = esiteltavat(await versiot('SC 1'));
+const sc2 = await paatuote('SC 2');
+const sc3 = await paatuote('SC 3');
+
+const t = suositus.tekniset;
+const tm = multi.tekniset;
+const t3 = sc3.tekniset;
+const multiAle = multi.hintaEnnenAlennusta != null && multi.hintaEnnenAlennusta > multi.hinta!;
+
+const ukk = [
+	{
+		kysymys: 'Mikä on hyvä pieni höyrypesuri?',
+		vastaus: `Pieneksi höyrypesuriksi sopii käsimalli, kuten <strong>Kärcher SC 1</strong> (${euroa(suositus.hinta!)}). Se painaa ${luku(t.painoKg!)} kg ja on ${t.mitatMm!.replaceAll(' x ', ' × ')} mm, joten se mahtuu kaappiin. Käsimalli sopii saumoihin, hanoihin, liesiin ja suihkuseiniin, mutta ei lattioille. Jos haluat pienen laitteen myös lattioille, katso SC 1 Multi & Up -höyrymoppi.`,
+	},
+	{
+		kysymys: 'Voiko Kärcher SC 1:llä pestä lattiaa?',
+		vastaus: `SC 1:n perusmallin mukana ei tule lattiasuutinta, joten se ei sovi lattioille. SC 1 Multi & Up Textile Editionissa on EasyFix-lattiasuutin ja kaksi jatkoputkea, joten sillä puhdistaa myös lattiat. Pelkkiin lattioihin sopii myös <a href="${mallisivut['SC 2']}">SC 2 Upright</a> -höyrymoppi.`,
+	},
+	{
+		kysymys: 'Miksi Kärcher SC 1:een ei voi lisätä vettä kesken työn?',
+		vastaus: `SC 1:ssä on ${luku(t.kattilaL!)} litran höyrykattila eikä erillistä säiliötä. Kattila on paineistettu, joten sen korkki avataan vasta, kun laite on jäähtynyt. Kärcherin mukaan yksi täyttö riittää noin ${luku(t.pintaAlaM2!)} neliöön. Jos haluat lisätä vettä kesken työn, valitse <a href="${mallisivut['SC 3']}">SC 3</a>, jonka säiliön voi täyttää aina tarvittaessa.`,
+	},
+	{
+		kysymys: 'Mikä ero on Kärcher SC 1:llä ja SC 1 Multi & Up Textile Editionilla?',
+		vastaus: `SC 1 on käsimalli, jossa on kattila, ${luku(t.paineBar!)} barin paine ja ${luku(t.lammitysaikaMin!)} minuutin lämmitysaika. SC 1 Multi & Up Textile Edition on höyrymoppi, josta irtoaa käsiosa, ja Kärcherin mukaan sitä voi käyttää kolmessa asennossa sekä tekstiilihöyrystimenä. Sen lämmitysaika on ${lammitysaika(tm.lammitysaikaMin)}, ja ${luku(tm.sailioL!)} litran säiliö irrotetaan täyttöä varten.`,
+	},
+	{
+		kysymys: 'Myykö Kärcher SC 1 EasyFixiä?',
+		vastaus: `Kärcher.comin höyrypuhdistinvalikoimassa ei ollut SC 1 EasyFixiä, kun tarkistimme sen ${paiva(suositus.haettu)}. Kärcher.com myi SC 1:n perusmallia (${suositus.tuotenumero}) ja SC 1 Multi & Up Textile Editionia, jotka esittelemme tällä sivulla.`,
+	},
+];
+---
+<Layout
+	title="Kärcher SC 1 höyrypesuri kokemuksia – pieni höyrypesuri ja Multi & Up (2026)"
+	description={`Kärcher SC 1 on pieni käsikäyttöinen höyrypesuri saumoihin, hanoihin ja liesiin. ${luku(t.paineBar!)} bar, ${luku(t.painoKg!)} kg ja ${euroa(suositus.hinta!)}. Vertailussa myös SC 1 Multi & Up -höyrymoppi.`}
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Kärcher', sivu: '/karcher-hoyrypesurit/' }, { nimi: 'Kärcher SC 1', sivu: mallisivut['SC 1'] }]} />
+		<TuoteSchema tuote={suositus} />
+		<TuoteHero tuote={suositus} otsikko="Kärcher SC 1 – pieni höyrypesuri käsikäyttöön" yla="Kärcher · Käsimalli" merkinta="Suosituksemme">
+			<p>Kärcher SC 1 on pieni käsikäyttöinen höyrypesuri saumoihin, hanoihin, liesiin, suihkuseiniin ja muihin pieniin kohteisiin. Se painaa {luku(t.painoKg!)} kg, sen paine on {luku(t.paineBar!)} bar, ja se maksaa Kärcher.comissa {euroa(suositus.hinta!)}. SC 1 on Kärcherin edullisin höyrypesuri.</p>
+			<p>Suosittelemme SC 1:tä, jos tarvitset höyryä pieniin kohteisiin ja haluat laitteen, joka mahtuu kaappiin. Lattioita varten valitse SC 1 Multi & Up Textile Edition tai isompi malli.</p>
+		</TuoteHero>
+
+		<h2>Kenelle pieni höyrypesuri Kärcher SC 1 sopii?</h2>
+		<div class="pros-cons-mini">
+			<div class="pros-mini">
+				<strong>+ Sopii:</strong>
+				<ul>
+					<li>Saumoihin, hanoihin, liesiin ja suihkuseiniin: mukana ovat kohdesuutin, voimasuutin, pyöreä harja ja käsisuutin</li>
+					<li>Pieneen säilytystilaan: laite on {t.mitatMm!.replaceAll(' x ', ' × ')} mm ja painaa {luku(t.painoKg!)} kg</li>
+					<li>Edulliseksi ensimmäiseksi höyrypesuriksi: hinta on {euroa(suositus.hinta!)}</li>
+					<li>Lapsiperheeseen: Kärcherin mukaan laitteessa on lapsilukko ja turvaventtiili</li>
+				</ul>
+			</div>
+			<div class="cons-mini">
+				<strong>- Ei sovi:</strong>
+				<ul>
+					<li>Lattioille: mukana ei ole lattiasuutinta</li>
+					<li>Pitkiin töihin: {luku(t.kattilaL!)} litran kattila riittää Kärcherin mukaan noin {luku(t.pintaAlaM2!)} neliöön, ja lisää vettä voi kaataa vasta jäähtyneenä</li>
+					<li>Nopeaan käyttöön: lämmitysaika on {luku(t.lammitysaikaMin!)} minuuttia</li>
+				</ul>
+			</div>
+		</div>
+
+		<h2>Kärcher SC 1 ja SC 1 Multi & Up Textile Edition – versiot vertailussa</h2>
+		<p>Kärcher myy SC 1 -nimellä kahta erilaista laitetta.</p>
+
+		<h3>Kärcher SC 1</h3>
+		<p>SC 1 ({suositus.tuotenumero}) on käsimalli, jossa on {luku(t.tehoW!)} watin lämmitysteho ja {luku(t.kattilaL!)} litran kattila. Mukana ovat käsisuutin mikrokuituliinalla, kohdesuutin, voimasuutin, pyöreä harja ja 200 ml:n mittakuppi. Hinta on Kärcher.comissa {euroa(suositus.hinta!)}.</p>
+
+		<h3>Kärcher SC 1 Multi & Up Textile Edition</h3>
+		<p>SC 1 Multi & Up Textile Edition ({multi.tuotenumero}) on höyrymoppi, josta irtoaa käsiosa. Kärcherin mukaan sitä voi käyttää kolmessa asennossa sekä tekstiilihöyrystimenä. Mukana ovat iso EasyFix-lattiasuutin, käsisuutin, tekstiilihöyrystin, kaksi jatkoputkea ja kalkinpoistopatruuna. Lämmitysaika on {lammitysaika(tm.lammitysaikaMin)}, ja {luku(tm.sailioL!)} litran säiliö irrotetaan täyttöä varten. {multiAle ? `Hinta on nyt ${euroa(multi.hinta!)}, kun normaalihinta on ${euroa(multi.hintaEnnenAlennusta!)}.` : `Hinta on ${euroa(multi.hinta!)}.`}</p>
+		<p>Tekstiilihöyrystin raikastaa kangasta ja oikaisee ryppyjä, mutta se ei pese sohvaa tai mattoa, koska höyry ei ime likaa pois kankaasta. Pesuun tarvitaan <a href="https://tekstiilipesuri.com/">tekstiilipesuri</a>.</p>
+		<VersioVertailu versiot={kaikki} paatuoteId={suositus.id} />
+		<p class="tp-lahde">Hinnat ja tekniset tiedot: Kärcher.com, tarkistettu {paiva(suositus.haettu)}.</p>
+
+		<h2>Tekniset tiedot: Kärcher {suositus.nimi}</h2>
+		<TeknisetTiedot tuote={suositus} />
+
+		<h2>Kärcher SC 1 testeissä</h2>
+		<p>Kuluttaja.fi:n laboratoriotestissä (3.12.2024) olivat mukana SC 1:n EasyFix-versio ja SC 1 Upright -höyrymoppi. Mallikohtaiset tulokset ovat maksumuurin takana, joten SC 1:n arvosanoja emme tiedä. Ruotsalainen Test.se nimesi koosteessaan (päivitetty 17.8.2026) SC 1:n parhaaksi käsikäyttöiseksi höyrypesuriksi, koska se on pieni ja helppokäyttöinen ja sopii erityisesti keittiön ja kylpyhuoneen koville pinnoille.</p>
+		<p>Consumer Reportsin käsimallien testissä (2026) huomautettiin, että höyrytin ei tee ihmeitä: pinttynyt lika irtoaa, mutta se pyyhitään liinalla pois. Sama pätee SC 1:een. Käyttäjien kokemuksia keräämme <a href="#kokemuksia">sivun lopussa olevalla lomakkeella</a>.</p>
+		<p class="tp-lahde">Lähteet: <a href="https://kuluttaja.fi/testi/hoyrypesurit/" target="_blank" rel="nofollow noopener">Kuluttaja.fi</a>, <a href="https://www.test.se/angtvatt/" target="_blank" rel="nofollow noopener">Test.se</a>, <a href="https://www.consumerreports.org/home-garden/cleaning/best-handheld-steam-cleaners-of-the-year-a2051557754/" target="_blank" rel="nofollow noopener">Consumer Reports</a>.</p>
+
+		<h2>Näin puhdistat saumat ja hanat Kärcher SC 1:llä</h2>
+		<ol>
+			<li>Täytä kattila mittakupilla kylmällä laitteella, sulje korkki ja odota, että SC 1 on käyttövalmis.</li>
+			<li>Valitse suutin: kohdesuutin tai voimasuutin saumoihin ja hanoihin, pyöreä harja pinttyneeseen likaan, käsisuutin ja liina tasaisille pinnoille.</li>
+			<li>Höyrytä likaa hetki, ja pyyhi irronnut lika heti liinalla.</li>
+			<li>Kun höyry loppuu, irrota pistoke ja anna laitteen jäähtyä ennen kuin avaat korkin ja lisäät vettä.</li>
+			<li>Pese mikrokuituliina 60 asteessa.</li>
+		</ol>
+		<p>Kylpyhuoneen saumoista ja kalkista kerrotaan lisää <a href="/hoyrypesuri-kylpyhuoneeseen/">kylpyhuoneoppaassa</a>. Kaikki Kärcherin mallit ovat <a href="/karcher-hoyrypesurit/">Kärcherin höyrypesureiden mallistotaulukossa</a>.</p>
+
+		<h2>Kärcher SC 1 vai SC 2 tai SC 3?</h2>
+		<p><a href={mallisivut['SC 2']}>Kärcher SC 2 Upright</a> on höyrymoppi lattioille, ja se maksaa {euroa(sc2.hinta!)}. <a href={mallisivut['SC 3']}>Kärcher SC 3</a> on säiliömalli, jolla puhdistaa sekä lattiat että pienet kohteet. Sen lämmitysaika on {lammitysaika(t3.lammitysaikaMin)}, ja {luku(t3.sailioL!)} litran säiliön voi täyttää kesken työn. Suosittelemamme {sc3.nimi} maksaa {euroa(sc3.hinta!)}.</p>
+		<p>Valitse SC 1, jos tarvitset höyryä vain pieniin kohteisiin. Jos haluat yhden laitteen koko kotiin, SC 3 on käytännöllisempi.</p>
+		<div class="mk-lista">
+			<Tuotekortti tuote={sc3} otsikko="Kärcher SC 3" sivu={mallisivut['SC 3']} kenelle="Säiliömalli lattioille, kylpyhuoneeseen ja keittiöön" tagi="Koko kotiin" />
+			<Tuotekortti tuote={sc2} otsikko="Kärcher SC 2 Upright" sivu={mallisivut['SC 2']} kenelle="Höyrymoppi pelkille lattioille" tagi="Lattioille" />
+		</div>
+
+		<Kokemuslomake malli="Kärcher SC 1" polku={mallisivut['SC 1']} />
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>
