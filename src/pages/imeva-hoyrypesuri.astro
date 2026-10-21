@@ -1,0 +1,101 @@
+---
+// SCN: tuki (laitetyyppi), intentti Mechanism / Comparison, emopilari /. Hakusanat: höyryimuri 300 (Parent keyword
+// höyrypesuri, TP 6 700), imevä höyrypesuri 200 (TP 4 100), paras imevä höyrypuhdistin 90, imuroiva höyrypesuri 20,
+// höyrypesuri imuri 20, höyrypesuri imevä 20, imevä höyrypesuri kokemuksia 20 (Ahrefs 2026-10). Kärcher-haut ("kärcher
+// imevä höyrypesuri", SV 7) kuuluvat SV 7 -sivulle ja vuokraushaut vuokraus vai osto -sivulle. Bissell CrossWave
+// HydroSteam on höyryllinen lattianpesuri, eikä sitä esitellä (tekstiilipesuri.comin linja). Mallit: tyyppi 'imeva',
+// ei ammattilaitteita. Kirjoitettu hoyrypesuri-writer-skillillä (2026-10-21).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import Korttirivi from '../components/tuote/Korttirivi.astro';
+import MallistoTaulu from '../components/tuote/MallistoTaulu.astro';
+import Ukk from '../components/Ukk.astro';
+import { getCollection } from 'astro:content';
+import { tuote, esiteltavat, euroa, luku, paiva, mallisivut, hintavali, lammitysaika, type Tuote } from '../lib/tuotteet';
+
+const kaikki: Tuote[] = esiteltavat((await getCollection('tuotteet')).map((t) => ({ ...t.data, id: t.id })));
+const imevat = kaikki.filter((t) => t.tyyppi === 'imeva' && !t.ammattilaite && t.myynnissa && t.hinta != null).sort((a, b) => a.hinta! - b.hinta!);
+const sv7 = await tuote('sv-7');
+const scv4 = await tuote('scv-4');
+const polti = await tuote('polti-vaporetto-3-clean-blue');
+const vac = await tuote('bissell-vac-steam-4266n');
+const sc3 = await tuote('sc-3-deluxe-easyfix');
+const vs = vac.teknisetValmistajalta;
+const sivut: Record<string, string> = { 'SV 7': mallisivut['SV 7'], 'SCV 4': mallisivut['SV 7'], 'Polti Vaporetto 3 Clean': '/polti-hoyrypesurit/' };
+
+const kortit = [
+	{ t: sv7, otsikko: 'Kärcher SV 7', otsikkoH3: 'Paras imevä höyrypuhdistin: Kärcher SV 7', sivu: mallisivut['SV 7'], tagi: 'Koko kotiin', kuvaus: `Pyörillä kulkeva höyryimuri, jossa on vesisuodatin, HEPA-suodatin ja suuttimet lattioille, ikkunoille ja huonekaluille. Paine ${luku(sv7.tekniset.paineBar!)} bar.` },
+	{ t: vac, otsikko: 'Bissell Vac & Steam', sivu: undefined, tagi: 'Edullisin', kuvaus: `Imuroi ja höyryttää kovat lattiat samalla vedolla tai erikseen. Bissellin mukaan lika pysyy ${luku(Number(vs['Tank für Schmutzwasser'].replace(/\D/g, '')) / 1000)} litran säiliössä kuivana.` },
+	{ t: scv4, otsikko: 'Kärcher SCV 4', sivu: mallisivut['SV 7'], tagi: 'Lattioille', kuvaus: `Pystymallinen höyryimuri, jossa on tela. Lämmitysaika on valmistajan mukaan ${lammitysaika(scv4.tekniset.lammitysaikaMin)}.` },
+	{ t: polti, otsikko: 'Polti Vaporetto 3 Clean', sivu: '/polti-hoyrypesurit/', tagi: 'Käsiosalla', kuvaus: `Syklonimuri ja höyrymoppi, josta irtoaa käsihöyrypuhdistin. Kolme höyrytasoa, lämmitysaika ${lammitysaika(polti.tekniset.lammitysaikaMin)}.` },
+];
+
+const ukk = [
+	{
+		kysymys: 'Mikä on paras imevä höyrypuhdistin?',
+		vastaus: `Koko kotiin suosittelemme <a href="${mallisivut['SV 7']}">Kärcher SV 7:ää</a> (${euroa(sv7.hinta!)}), koska sillä puhdistaa lattioiden lisäksi ikkunat, laatat ja huonekalut. Pelkkiin kovien lattioiden imurointiin ja höyrytykseen riittää edullisempi Bissell Vac & Steam (${euroa(vac.hinta!)}). Testejä imevistä höyrypesureista on vähän, joten vertailu perustuu valmistajien tietoihin.`,
+	},
+	{
+		kysymys: 'Mikä on höyryimuri?',
+		vastaus: 'Höyryimuri on imevä höyrypesuri: laite, joka höyryttää ja imee samalla vedolla. Höyry irrottaa lian, ja imu vie irronneen lian ja kosteuden laitteeseen. Tavallisessa höyrypesurissa irronnut lika pyyhitään liinalla pois.',
+	},
+	{
+		kysymys: 'Onko imevä höyrypesuri sama kuin tekstiilipesuri?',
+		vastaus: 'Ei ole. Tekstiilipesuri ruiskuttaa veden ja pesuaineen kankaaseen ja imee sen takaisin, joten se pesee sohvan ja maton. Imevä höyrypesuri on tehty koville pinnoille, kuten laatta- ja vinyylilattioille. Sohvan ja maton pesuun tarvitaan <a href="https://tekstiilipesuri.com/">tekstiilipesuri</a>.',
+	},
+	{
+		kysymys: 'Voiko imevän höyrypesurin vuokrata?',
+		vastaus: 'Tarkistamissamme vuokraamoissa ei ollut imeviä höyrypesureita lokakuussa 2026, vaan ne vuokrasivat tavallisia höyrypesureita. Vuokrahinnat ja laskelma ovat <a href="/hoyrypesuri-vuokraus-vai-osto/">vuokraus vai osto -sivulla</a>.',
+	},
+	{
+		kysymys: 'Paljonko imevä höyrypesuri maksaa?',
+		vastaus: `Vertailun imevät höyrypesurit maksavat suomalaisissa verkkokaupoissa ${hintavali(imevat)}. Tavallinen säiliömallinen höyrypesuri, kuten <a href="${mallisivut['SC 3']}">Kärcher ${sc3.nimi}</a>, maksaa ${euroa(sc3.hinta!)}.`,
+	},
+];
+---
+<Layout
+	title="Imevä höyrypesuri 2026 – paras imevä höyrypuhdistin ja höyryimuri"
+	description={`Imevä höyrypesuri eli höyryimuri höyryttää ja imee samalla vedolla. Vertailussa ${imevat.length} mallia: Kärcher SV 7 ja SCV 4, Polti Vaporetto 3 Clean ja Bissell Vac & Steam. Hinnat ${hintavali(imevat)}.`}
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Imevä höyrypesuri', sivu: '/imeva-hoyrypesuri/' }]} />
+		<span class="tp-label">Laitetyyppi</span>
+		<h1>Imevä höyrypesuri ja höyryimuri – vertailu 2026</h1>
+		<p>Imevä höyrypesuri eli höyryimuri on höyrypesuri, joka myös imee. Se höyryttää pinnan ja imee irronneen lian ja kosteuden samalla vedolla, Esimerkiksi Kärcherin mukaan SV 7 höyrypesee, imuroi ja kuivaa yhdellä kertaa. Vertailimme {imevat.length} Suomessa myytävää imevää höyrypesuria, ja ne maksavat {hintavali(imevat)}.</p>
+
+		<h2>Miten imevä höyrypesuri toimii?</h2>
+		<p>Tavallinen höyrypesuri irrottaa lian höyryllä, ja lika pyyhitään liinalla pois. Imevässä höyrypesurissa on lisäksi imuri. Imu vie irronneen lian ja kosteuden laitteen säiliöön, joten lattiaa ei tarvitse kuivata erikseen. Esimerkiksi Guardianin testissä (2025) tavallisen säiliömallin jäljiltä lattia jäi melko märäksi.</p>
+		<p>Imeviä höyrypesureita on kahta tyyppiä:</p>
+		<ul>
+			<li><strong>Pyörillä kulkeva höyryimuri</strong>, kuten <a href={mallisivut['SV 7']}>Kärcher SV 7</a>. Siinä on letku ja suuttimet lattioiden lisäksi ikkunoille, laatoille ja huonekaluille. SV 7:ssä on vesisuodatin ja HEPA-suodatin.</li>
+			<li><strong>Imuroiva höyrymoppi</strong>, kuten Bissell Vac & Steam, Polti Vaporetto 3 Clean ja Kärcher SCV 4. Se puhdistaa kovat lattiat varsimallisena laitteena, ja osasta irtoaa käsihöyrypuhdistin.</li>
+		</ul>
+		<p>Imevä höyrypesuri ei ole tekstiilipesuri. Se on tehty koville pinnoille, eikä se pese sohvaa tai mattoa. Myöskään Bissell CrossWave HydroSteam -laitteet eivät ole vertailussa, koska ne ovat lattianpesureita, joissa on höyrytoiminto.</p>
+
+		<h2>Paras imevä höyrypuhdistin: mallit vertailussa</h2>
+		<div class="mk-lista">
+			{kortit.map((r, i) => (
+				<Korttirivi tuote={r.t} sija={i + 1} tagi={r.tagi} otsikko={r.otsikko} otsikkoH3={r.otsikkoH3} sivu={r.sivu} kuvaus={r.kuvaus} />
+			))}
+		</div>
+		<MallistoTaulu tuotteet={imevat} sivut={sivut} />
+		<p class="tp-lahde">Tekniset tiedot: Kärcher, Polti ja Bissell. Hinnat suomalaisista verkkokaupoista, tarkistettu {paiva(vac.haettu)}.</p>
+
+		<h2>Imuroiva höyrymoppi vai höyryimuri?</h2>
+		<p>Valitse imuroiva höyrymoppi, jos haluat imuroida ja höyryttää kovat lattiat yhdellä kertaa. Bissell Vac & Steam painaa Bissellin mukaan {luku(vac.tekniset.painoKg!)} kg, ja sen virtajohto on {luku(vac.tekniset.virtajohtoM!)} m. Bissell kertoo, että Vac & Steam imuroi ja höyryttää joko yhtä aikaa tai erikseen. Polti Vaporetto 3 Cleanista irtoaa käsihöyrypuhdistin saumoihin ja hanoihin, ja sen mukana tulee Poltin mukaan 14 varustetta.</p>
+		<p>Valitse pyörillä kulkeva höyryimuri, kuten Kärcher SV 7, jos haluat puhdistaa samalla laitteella myös ikkunat, laatat ja huonekalut. SV 7 maksaa kuitenkin {euroa(sv7.hinta!)}, sen lämmitysaika on {luku(sv7.tekniset.lammitysaikaMin!)} minuuttia, ja se painaa {luku(sv7.tekniset.painoKg!)} kg. Jos imu ei ole välttämätön, tavallinen säiliömalli, kuten <a href={mallisivut['SC 3']}>Kärcher SC 3</a>, maksaa selvästi vähemmän.</p>
+
+		<h2>Imevä höyrypesuri testeissä</h2>
+		<ul>
+			<li><strong>The English Home (6.1.2026):</strong> Bissell Vac & Steam oli testin paras aikaa säästävä lattiahöyrypesuri. Testaajaa epäilytti aluksi laite, joka imuroi ja moppaa samaan aikaan, mutta tulos yllätti. Laite lämpeni 30 sekunnissa, ja imu keräsi lian keittiön lattialta. Se on kuitenkin painavampi kuin tavallinen höyrymoppi, eikä se testaajan mukaan korvaa tavallista imuria.</li>
+			<li><strong>Kuluttaja.fi (3.12.2024):</strong> laboratoriotestissä oli oma luokkansa höyrymopin ja imurin yhdistelmille, muun muassa Bissell Vac & Steamin 1977N-versiolle. Testin mukaan kaksi lähes 500 euron laitetta olivat pikemminkin varsi-imureita, joissa on höyrytoiminto. Mallikohtaiset tulokset ovat maksumuurin takana.</li>
+		</ul>
+		<p>Kärcher SV 7:ää, SCV 4:ää ja Polti Vaporetto 3 Cleania ei ollut lukemissamme testeissä.</p>
+		<p class="tp-lahde">Lähteet: <a href="https://www.theenglishhome.co.uk/buyers-guide/shopping/best-steam-cleaners/" target="_blank" rel="nofollow noopener">The English Home</a>, <a href="https://kuluttaja.fi/testi/hoyrypesurit/" target="_blank" rel="nofollow noopener">Kuluttaja.fi</a>. The English Home testasi Britannian myyntiversiota.</p>
+
+		<h2>Imevä höyrypesuri kokemuksia</h2>
+		<p>Keräämme Kärcher SV 7:n käyttäjien kokemuksia <a href={`${mallisivut['SV 7']}#kokemuksia`}>SV 7 -sivun lomakkeella</a>. Muista imevistä höyrypesureista voit kertoa kokemuksesi <a href="/#kokemuksia">etusivun lomakkeella</a>.</p>
+
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>
