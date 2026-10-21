@@ -1,0 +1,110 @@
+---
+// SCN: tuki (malli), intentti Decision, emopilari /karcher-hoyrypesurit/. Hakusanat: kärcher höyrypesuri sc5 10, höyrypesuri
+// sc 5 easyfix (ei volyymia) (Ahrefs 2026-10). Sivu tehdään provisiotuoton vuoksi (SCN.md, riski 3). Versiot: SC 5 EasyFix ja
+// SC 5 EasyFix Iron Select Bath Edition (myynnissä) sekä SC 5 Deluxe Signature Line (Kärcherin feed, ei myynnissä
+// 2026-10-12). Kirjoitettu hoyrypesuri-writer-skillillä (2026-10-21).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import TuoteSchema from '../components/tuote/TuoteSchema.astro';
+import TuoteHero from '../components/tuote/TuoteHero.astro';
+import TeknisetTiedot from '../components/tuote/TeknisetTiedot.astro';
+import VersioVertailu from '../components/tuote/VersioVertailu.astro';
+import Tuotekortti from '../components/tuote/Tuotekortti.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { paatuote, tuote, versiot, esiteltavat, luku, paiva, euroa, mallisivut, lammitysaika } from '../lib/tuotteet';
+
+const suositus = await paatuote('SC 5');
+const bath = await tuote('sc-5-easyfix-iron-select-bath-edition');
+const kaikki = esiteltavat(await versiot('SC 5'));
+const sc3 = await paatuote('SC 3');
+const sc4 = await paatuote('SC 4');
+const sv7 = await paatuote('SV 7');
+const t = suositus.tekniset;
+
+const ukk = [
+	{
+		kysymys: 'Mikä on Kärcher SC 5:n VapoHydro?',
+		vastaus: 'VapoHydro on Kärcherin mukaan toiminto, jolla höyryn vesimäärää säädetään. Guardianin testissä (2025) sitä kuvattiin toiminnoksi, joka yhdistää höyryn ja nopean kuuman vesisuihkun, jolloin lika irtoaa ja huuhtoutuu samalla vedolla.',
+	},
+	{
+		kysymys: 'Mikä ero on SC 5 EasyFixillä ja SC 5 EasyFix Iron Select Bath Editionilla?',
+		vastaus: `Höyrypesuri on sama. Bath Editionin mukana tulevat lisäksi EasyFinish-höyrysilitysrauta, Comfort-ikkunasuutin ja XXL-rakoharja, ja se maksaa ${euroa(bath.hinta!)}, kun SC 5 EasyFix maksaa ${euroa(suositus.hinta!)}. Kärcherin mukaan SC 5:een voi liittää silitysraudan, joten raudan saa myös erikseen.`,
+	},
+	{
+		kysymys: 'Kuinka nopeasti Kärcher SC 5 lämpenee?',
+		vastaus: `Kärcherin mukaan SC 5 on käyttövalmis ${luku(t.lammitysaikaMin!)} minuutissa. Guardianin testissä (2025) brittiläinen versio tarvitsi lähes kolme minuuttia täyteen höyryyn kylmästä. Kärcher SC 3:n lämmitysaika on ${lammitysaika(sc3.tekniset.lammitysaikaMin)}.`,
+	},
+	{
+		kysymys: 'Kannattaako Kärcher SC 5 ostaa?',
+		vastaus: `SC 5 kannattaa, jos kotona on paljon laattalattiaa ja pintoja, joita puhdistat pitkään kerrallaan. Guardian piti SC 5:tä tehokkaana, mutta useimmille kotitalouksille liian suurena, painavana ja kalliina. Useimpiin koteihin riittää <a href="${mallisivut['SC 3']}">Kärcher SC 3</a> (${euroa(sc3.hinta!)}).`,
+	},
+];
+---
+<Layout
+	title="Kärcher SC 5 höyrypesuri kokemuksia – EasyFix, Bath Edition ja VapoHydro (2026)"
+	description={`Kärcher SC 5 on Kärcherin tehokkain kotikäyttöön tarkoitettu höyrypesuri: ${luku(t.paineBar!)} bar, ${luku(t.sailioL!)} litran säiliö ja VapoHydro. Versiot, hinnat, testit ja tekniset tiedot.`}
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Kärcher', sivu: '/karcher-hoyrypesurit/' }, { nimi: 'Kärcher SC 5', sivu: mallisivut['SC 5'] }]} />
+		<TuoteSchema tuote={suositus} />
+		<TuoteHero tuote={suositus} otsikko="Kärcher SC 5 -höyrypesuri – EasyFix ja Bath Edition" yla="Kärcher · Tehokkain säiliömalli" merkinta="Suosituksemme">
+			<p>Kärcher SC 5 on Kärcherin tehokkain kotikäyttöön tarkoitettu höyrypesuri. Sen paine on {luku(t.paineBar!)} bar ja lämmitysteho {luku(t.tehoW!)} W, ja {luku(t.sailioL!)} litran säiliön voi täyttää kesken työn. Kärcherin mukaan yksi täyttö riittää noin {luku(t.pintaAlaM2!)} neliöön.</p>
+			<p>SC 5:ssä on VapoHydro-toiminto, jolla höyryn vesimäärää säädetään, ja siihen voi liittää silitysraudan. SC 5 EasyFix maksaa Kärcher.comissa {euroa(suositus.hinta!)}.</p>
+		</TuoteHero>
+
+		<h2>Kenelle Kärcher SC 5 sopii?</h2>
+		<div class="pros-cons-mini">
+			<div class="pros-mini">
+				<strong>+ Sopii:</strong>
+				<ul>
+					<li>Isoon kotiin, jossa on paljon laatta- ja kivilattiaa</li>
+					<li>Pinttyneeseen likaan: paine {luku(t.paineBar!)} bar ja VapoHydro-toiminto</li>
+					<li>Pitkiin siivouksiin: {luku(t.sailioL!)} litran säiliö täytetään kesken työn, ja virtajohto on {luku(t.virtajohtoM!)} m</li>
+				</ul>
+			</div>
+			<div class="cons-mini">
+				<strong>- Ei sovi:</strong>
+				<ul>
+					<li>Pieneen kotiin: laite painaa {luku(t.painoKg!)} kg ja vie tilaa</li>
+					<li>Nopeisiin siivouksiin: lämmitysaika on {luku(t.lammitysaikaMin!)} minuuttia</li>
+					<li>Tiukkaan budjettiin: {sc3.nimi} maksaa {euroa(sc3.hinta!)}</li>
+				</ul>
+			</div>
+		</div>
+
+		<h2>Kärcher SC 5 EasyFix ja Bath Edition – versiot vertailussa</h2>
+		<p>Kaikissa SC 5 -versioissa on sama höyrypesuri ja VapoHydro-toiminto. Versiot eroavat mukana tulevien varusteiden osalta.</p>
+		<h3>Kärcher SC 5 EasyFix</h3>
+		<p>SC 5 EasyFixin ({suositus.tuotenumero}) mukana tulevat lattiasuutin, käsisuutin, kohdesuutin, pyöreä harja, kaksi jatkoputkea ja kalkinpoistojauhetta. Höyryä säädetään laitteesta neljällä tasolla. Hinta on {euroa(suositus.hinta!)}.</p>
+		<h3>Kärcher SC 5 EasyFix Iron Select Bath Edition</h3>
+		<p>Bath Editionin ({bath.tuotenumero}) mukana tulevat lisäksi EasyFinish-höyrysilitysrauta, Comfort-ikkunasuutin ja XXL-rakoharja. Se maksaa {euroa(bath.hinta!)}.</p>
+		<h3>Kärcher SC 5 Deluxe Signature Line</h3>
+		<p>SC 5 Deluxe Signature Linessa on Kärcherin mukaan LED-valorengas ja enemmän varusteita, kuten mattoliukuri, voimasuutin ja suuri pyöreä harja. Se ei ollut myynnissä Kärcher.comissa {paiva(suositus.haettu)}.</p>
+		<VersioVertailu versiot={kaikki} paatuoteId={suositus.id} />
+		<p class="tp-lahde">Hinnat ja tekniset tiedot: Kärcher.com, tarkistettu {paiva(suositus.haettu)}.</p>
+
+		<h2>Tekniset tiedot: Kärcher {suositus.nimi}</h2>
+		<TeknisetTiedot tuote={suositus} />
+
+		<h2>Kärcher SC 5 testeissä</h2>
+		<ul>
+			<li><strong>Guardian (12.3.2025):</strong> SC 5:n brittiläinen versio oli testin tehokkain laite. VapoHydro irrotti mudan, ruokaroiskeet ja kuivuneen shampoon jäämät, ja ison irrotettavan säiliön voi täyttää jäähtymistä odottamatta. Laite tarvitsi kuitenkin lähes kolme minuuttia täyteen höyryyn, ja se kulutti yli 2 000 W. Testaajan mukaan SC 5 on useimmille kotitalouksille liian suuri, painava ja kallis.</li>
+			<li><strong>Kuluttaja.fi (3.12.2024):</strong> SC 5 EasyFix oli mukana laboratoriotestissä, mutta mallikohtaiset tulokset ovat maksumuurin takana.</li>
+			<li><strong>Test.se (päivitetty 17.8.2026):</strong> ruotsalainen koostesivu nimesi SC 5 EasyFixin parhaaksi premium-höyrypesuriksi.</li>
+		</ul>
+		<p class="tp-lahde">Lähteet: <a href="https://www.theguardian.com/thefilter/2025/mar/12/best-steam-cleaner-mop" target="_blank" rel="nofollow noopener">Guardian</a>, <a href="https://kuluttaja.fi/testi/hoyrypesurit/" target="_blank" rel="nofollow noopener">Kuluttaja.fi</a>, <a href="https://www.test.se/angtvatt/" target="_blank" rel="nofollow noopener">Test.se</a>. Guardian testasi Britannian myyntiversiota (SC 5 EasyFix Iron Plug).</p>
+
+		<h2>Kärcher SC 5 vai SC 4 tai SV 7?</h2>
+		<p><a href={mallisivut['SC 4']}>Kärcher SC 4</a> on kevyempi ja halvempi: suosittelemamme {sc4.nimi} maksaa {euroa(sc4.hinta!)}, ja sen paine on {luku(sc4.tekniset.paineBar!)} bar. SC 4:ssä ei ole VapoHydro-toimintoa eikä silitysraudan liitäntää.</p>
+		<p>Jos haluat, että irronnut lika ja kosteus imetään pois samalla vedolla, katso imevä <a href={mallisivut['SV 7']}>Kärcher SV 7</a> ({euroa(sv7.hinta!)}).</p>
+		<div class="mk-lista">
+			<Tuotekortti tuote={sc4} otsikko="Kärcher SC 4" sivu={mallisivut['SC 4']} kenelle="Kattila ja irrotettava säiliö, kevyempi kuin SC 5" tagi="Edullisempi" />
+			<Tuotekortti tuote={sv7} otsikko="Kärcher SV 7" sivu={mallisivut['SV 7']} kenelle="Höyry ja imu samalla vedolla" tagi="Imevä" />
+		</div>
+		<p>Kaikki Kärcherin mallit ovat <a href="/karcher-hoyrypesurit/">Kärcherin höyrypesureiden sivulla</a>.</p>
+
+		<Kokemuslomake malli="Kärcher SC 5" polku={mallisivut['SC 5']} />
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>

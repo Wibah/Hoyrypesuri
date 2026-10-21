@@ -1,0 +1,105 @@
+---
+// SCN: tuki (malli), intentti Decision, emopilari /karcher-hoyrypesurit/. Hakusanat: kärcher höyrypesuri sc4 40, kärcher sc4
+// höyrypesuri 10, höyrypesuri kärcher sc 4 easyfix ja kärcher sc 4 easy fix (ei volyymia) (Ahrefs 2026-10). Versiot: SC 4
+// Deluxe EasyFix ja SC 4 EasyFix Plus (Kärcherin feed). SC 4 EasyFix ei ole esiteltävissä malleissa (KARCHER_ESITELTAVAT).
+// Kirjoitettu hoyrypesuri-writer-skillillä (2026-10-21).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import TuoteSchema from '../components/tuote/TuoteSchema.astro';
+import TuoteHero from '../components/tuote/TuoteHero.astro';
+import TeknisetTiedot from '../components/tuote/TeknisetTiedot.astro';
+import VersioVertailu from '../components/tuote/VersioVertailu.astro';
+import Tuotekortti from '../components/tuote/Tuotekortti.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { paatuote, tuote, versiot, esiteltavat, luku, paiva, euroa, mallisivut, lammitysaika } from '../lib/tuotteet';
+
+const suositus = await paatuote('SC 4');
+const plus = await tuote('sc-4-easyfix-plus');
+const kaikki = esiteltavat(await versiot('SC 4'));
+const sc3 = await paatuote('SC 3');
+const sc5 = await paatuote('SC 5');
+const t = suositus.tekniset;
+const tp = plus.tekniset;
+const t3 = sc3.tekniset;
+const alennettu = suositus.hintaEnnenAlennusta != null && suositus.hintaEnnenAlennusta > suositus.hinta!;
+
+const ukk = [
+	{
+		kysymys: 'Mikä ero on Kärcher SC 4 Deluxe EasyFixillä ja SC 4 EasyFix Plussalla?',
+		vastaus: `Deluxe EasyFixissä on tehokkaampi laite: ${luku(t.tehoW!)} W, ${luku(t.paineBar!)} bar ja ${luku(t.sailioL!)} litran säiliö, kun EasyFix Plussassa on ${luku(tp.tehoW!)} W, ${luku(tp.paineBar!)} bar ja ${luku(tp.sailioL!)} litran säiliö. Deluxessa höyryä säädetään laitteesta kolmella tasolla, Plussassa kahvasta kahdella tasolla. Plussan mukana tulevat lisäksi voimasuutin, suuri pyöreä harja, toinen lattialiina ja mattoliukuri.`,
+	},
+	{
+		kysymys: 'Voiko Kärcher SC 4:ään lisätä vettä kesken siivouksen?',
+		vastaus: 'Voi. SC 4:ssä on kattilan lisäksi irrotettava vesisäiliö, jonka voi Kärcherin mukaan täyttää aina tarvittaessa. Työtä ei tarvitse keskeyttää laitteen jäähtymisen takia.',
+	},
+	{
+		kysymys: 'Kuinka nopeasti Kärcher SC 4 lämpenee?',
+		vastaus: `Kärcherin mukaan SC 4 Deluxe EasyFix on käyttövalmis ${luku(t.lammitysaikaMin!)} minuutissa ja SC 4 EasyFix Plus ${luku(tp.lammitysaikaMin!)} minuutissa. Kärcher SC 3:n lämmitysaika on ${lammitysaika(t3.lammitysaikaMin)}, mutta sen paine on pienempi.`,
+	},
+	{
+		kysymys: 'Millä kalkinpoistetaan Kärcher SC 4?',
+		vastaus: 'SC 4:n mukana tulee kolme pussia Kärcherin kalkinpoistojauhetta. Kalkinpoistoaine ja muut tarvikkeet ovat <a href="/karcher-hoyrypesuri-varaosat/">Kärcherin varaosasivulla</a>.',
+	},
+];
+---
+<Layout
+	title="Kärcher SC 4 höyrypesuri kokemuksia – Deluxe ja EasyFix Plus, hinnat (2026)"
+	description={`Kärcher SC 4 -höyrypesurin versiot, hinnat ja tekniset tiedot. ${luku(t.paineBar!)} bar, ${luku(t.sailioL!)} litran säiliö, joka täytetään kesken työn, ja ${luku(t.pintaAlaM2!)} m² yhdellä täytöllä.`}
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Kärcher', sivu: '/karcher-hoyrypesurit/' }, { nimi: 'Kärcher SC 4', sivu: mallisivut['SC 4'] }]} />
+		<TuoteSchema tuote={suositus} />
+		<TuoteHero tuote={suositus} otsikko="Kärcher SC 4 -höyrypesuri – Deluxe ja EasyFix Plus" yla="Kärcher · Säiliömalli kattilalla" merkinta="Suosituksemme">
+			<p>Kärcher SC 4 on säiliömalli, jossa on höyrykattila ja irrotettava vesisäiliö. Säiliön voi täyttää kesken työn, ja paine on suurempi kuin pienemmässä SC 3:ssa. Suosittelemamme {suositus.nimi} -version paine on {luku(t.paineBar!)} bar, säiliö {luku(t.sailioL!)} litraa, ja yksi täyttö riittää Kärcherin mukaan noin {luku(t.pintaAlaM2!)} neliöön.</p>
+			<p>{alennettu ? `Deluxe EasyFix on nyt alennettu, ja se maksaa ${euroa(suositus.hinta!)}, kun normaalihinta on ${euroa(suositus.hintaEnnenAlennusta!)}. Se on halvempi kuin SC 4 EasyFix Plus (${euroa(plus.hinta!)}), vaikka siinä on enemmän tehoa ja isompi säiliö.` : `Deluxe EasyFix maksaa ${euroa(suositus.hinta!)}.`}</p>
+		</TuoteHero>
+
+		<h2>Kenelle Kärcher SC 4 sopii?</h2>
+		<div class="pros-cons-mini">
+			<div class="pros-mini">
+				<strong>+ Sopii:</strong>
+				<ul>
+					<li>Isoon kotiin ja pitkiin siivouksiin: säiliön voi täyttää kesken työn</li>
+					<li>Pinttyneeseen likaan: paine on {luku(t.paineBar!)} bar, kun SC 3:ssa se on {luku(t3.paineBar!)} bar</li>
+					<li>Kovan veden alueille: mukana tulee kalkinpoistojauhetta</li>
+				</ul>
+			</div>
+			<div class="cons-mini">
+				<strong>- Ei sovi:</strong>
+				<ul>
+					<li>Nopeisiin siivouksiin: lämmitysaika on {luku(t.lammitysaikaMin!)} minuuttia, kun SC 3:lla se on {lammitysaika(t3.lammitysaikaMin)}</li>
+					<li>Kanniskeltavaksi portaissa: Deluxe painaa {luku(t.painoKg!)} kg</li>
+					<li>Mattojen ja sohvan pesuun: höyry ei ime likaa pois kankaasta</li>
+				</ul>
+			</div>
+		</div>
+
+		<h2>Kärcher SC 4 Deluxe EasyFix ja SC 4 EasyFix Plus – versiot vertailussa</h2>
+		<h3>Kärcher SC 4 Deluxe EasyFix</h3>
+		<p>SC 4 Deluxe EasyFix ({suositus.tuotenumero}) on SC 4:n tehokkaampi versio: {luku(t.tehoW!)} W, {luku(t.paineBar!)} bar ja {luku(t.sailioL!)} litran säiliö. Höyryä säädetään laitteesta kolmella tasolla, ja Kärcherin mukaan LED-valo näyttää käyttötilan. Mukana on rakoharja.</p>
+		<h3>Kärcher SC 4 EasyFix Plus</h3>
+		<p>SC 4 EasyFix Plussassa ({plus.tuotenumero}) on {luku(tp.tehoW!)} W, {luku(tp.paineBar!)} bar ja {luku(tp.sailioL!)} litran säiliö, ja höyryä säädetään kahvasta. Mukana tulevat voimasuutin, suuri pyöreä harja, kaksi lattialiinaa ja mattoliukuri. Plus maksaa {euroa(plus.hinta!)}.</p>
+		<VersioVertailu versiot={kaikki} paatuoteId={suositus.id} />
+		<p class="tp-lahde">Hinnat ja tekniset tiedot: Kärcher.com, tarkistettu {paiva(suositus.haettu)}.</p>
+
+		<h2>Tekniset tiedot: Kärcher {suositus.nimi}</h2>
+		<TeknisetTiedot tuote={suositus} />
+
+		<h2>Kärcher SC 4 testeissä</h2>
+		<p>Kuluttaja.fi:n laboratoriotestissä (3.12.2024) oli mukana SC 4 EasyFix, mutta mallikohtaiset tulokset ovat maksumuurin takana. Lukemissamme brittiläisissä testeissä SC 4:ää ei ollut. Käyttäjien kokemuksia keräämme <a href="#kokemuksia">sivun lopussa olevalla lomakkeella</a>.</p>
+		<p class="tp-lahde">Lähde: <a href="https://kuluttaja.fi/testi/hoyrypesurit/" target="_blank" rel="nofollow noopener">Kuluttaja.fi</a>.</p>
+
+		<h2>Kärcher SC 4 vai SC 3 tai SC 5?</h2>
+		<p><a href={mallisivut['SC 3']}>Kärcher SC 3</a> lämpenee nopeammin ({lammitysaika(t3.lammitysaikaMin)}) ja on kevyempi ({luku(t3.painoKg!)} kg), mutta sen paine on {luku(t3.paineBar!)} bar. Suosittelemamme {sc3.nimi} maksaa {euroa(sc3.hinta!)}. Useimpiin koteihin SC 3 riittää.</p>
+		<p><a href={mallisivut['SC 5']}>Kärcher SC 5</a>:n paine on {luku(sc5.tekniset.paineBar!)} bar ja säiliö {luku(sc5.tekniset.sailioL!)} litraa, ja siinä on VapoHydro-toiminto, joka yhdistää höyryn ja kuuman vesisuihkun. SC 5 EasyFix maksaa {euroa(sc5.hinta!)}.</p>
+		<div class="mk-lista">
+			<Tuotekortti tuote={sc3} otsikko="Kärcher SC 3" sivu={mallisivut['SC 3']} kenelle="Lämpenee 30 sekunnissa, sopii useimpiin koteihin" tagi="Nopeampi" />
+			<Tuotekortti tuote={sc5} otsikko="Kärcher SC 5" sivu={mallisivut['SC 5']} kenelle="Suurin paine ja säiliö sekä VapoHydro" tagi="Tehokkain" />
+		</div>
+		<p>Kaikki Kärcherin mallit ovat <a href="/karcher-hoyrypesurit/">Kärcherin höyrypesureiden sivulla</a>.</p>
+
+		<Kokemuslomake malli="Kärcher SC 4" polku={mallisivut['SC 4']} />
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>

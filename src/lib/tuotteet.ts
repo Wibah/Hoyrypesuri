@@ -11,7 +11,9 @@ export const paatuotteet = {
 	// SC 3: Deluxe EasyFix (Kärcherin feed, Villen päätös 2026-10-20), koska se on SC 3 EasyFixiä halvempi ja
 	// siinä on lisäksi rakoharja. Jos alennus päättyy, tarkista suositus.
 	'SC 3': 'sc-3-deluxe-easyfix',
-	'SC 4': 'sc-4-easyfix-plus',
+	// SC 4: Deluxe EasyFix (Kärcherin feed, 2026-10-21), koska se on alennettuna EasyFix Plussaa halvempi, tehokkaampi
+	// (2250 W, 4 bar) ja säiliö on isompi. Tarkista suositus, jos alennus päättyy.
+	'SC 4': 'sc-4-deluxe-easyfix',
 	'SC 5': 'sc-5-easyfix',
 	'SV 7': 'sv-7',
 } as const;

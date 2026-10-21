@@ -132,7 +132,7 @@ const ukk = [
 
 		<h2>Kärcher SC 3 vai SC 2 tai SC 4?</h2>
 		<p><a href={mallisivut['SC 2']}>SC 2</a> on SC 3:a pienempi. SC 2 Upright on höyrymoppi pelkille lattioille, ja se maksaa {euroa(sc2.hinta!)}. SC 2 EasyFix -säiliömallissa on vain {luku(sc2easy.tekniset.kattilaL!)} litran kattila ja lämmitysaika {luku(sc2easy.tekniset.lammitysaikaMin!)} minuuttia, ja vettä voi lisätä vasta jäähtyneenä. Jos haluat puhdistaa myös kylpyhuoneen ja keittiön, SC 3 on käytännöllisempi.</p>
-		<p><a href={mallisivut['SC 4']}>SC 4</a>:ssä on sekä kattila että irrotettava säiliö, ja sen paine on {luku(t4.paineBar!)}–4 bar. Lämmitysaika on kuitenkin {luku(t4.lammitysaikaMin!)} minuuttia, ja SC 4 EasyFix Plus maksaa {euroa(sc4.hinta!)}. Valitse SC 4, jos tarvitset enemmän painetta pinttyneeseen likaan ja puhdistat kerralla pitkään.</p>
+		<p><a href={mallisivut['SC 4']}>SC 4</a>:ssä on sekä kattila että irrotettava säiliö, ja sen paine on versiosta riippuen 3,5–4 bar. Suosittelemamme {sc4.nimi} lämpenee kuitenkin {luku(t4.lammitysaikaMin!)} minuutissa, ja se maksaa {euroa(sc4.hinta!)}. Valitse SC 4, jos tarvitset enemmän painetta pinttyneeseen likaan ja puhdistat kerralla pitkään.</p>
 		<div class="mk-lista">
 			<Tuotekortti tuote={sc2} otsikko="Kärcher SC 2 Upright" sivu={mallisivut['SC 2']} kenelle="Höyrymoppi pelkille lattioille" tagi="Lattioille" />
 			<Tuotekortti tuote={sc4} otsikko="Kärcher SC 4" sivu={mallisivut['SC 4']} kenelle="Kattila ja irrotettava säiliö, enemmän painetta" tagi="Enemmän painetta" />
