@@ -1,0 +1,71 @@
+[
+ {
+  "u": "https://www.vileda.de/uebersicht-elektrische-reinigung/dampfreiniger/steam-plus",
+  "u_fi": "https://www.vileda.fi/elektroniset-siivoustuotteet/vileda-steam-plus",
+  "nimi": "Vileda Steam Plus",
+  "ean": "4023103229716",
+  "spec": {
+   "Leistung (W)": "1550",
+   "Tankvolumen (l)": "0,4",
+   "Kabellänge (m)": "5",
+   "Produktgewicht (kg)": "2,3",
+   "Höhe (cm)": "126",
+   "Aufheizzeit (s)": "15"
+  },
+  "lieferumfang": [
+   "Dampfreiniger",
+   "Ersatzbezug",
+   "Handbuch",
+   "Teppichgleiter",
+   "250 ml Messbecher"
+  ],
+  "huomio": "vileda.fi: valmis käyttöön 15 sekunnissa, säädettävä höyryteho, mattosuutin lyhytkarvaisten mattojen raikastamiseen, vesitankin ikkuna, kolmiomainen moppi"
+ },
+ {
+  "u": "https://www.vileda.de/uebersicht-elektrische-reinigung/dampfreiniger/steam-plus-xxl",
+  "u_fi": "https://www.vileda.fi/elektroniset-siivoustuotteet/steam-xxl-hoyrymoppi",
+  "nimi": "Vileda Steam Plus XXL",
+  "ean": "4023103229754",
+  "spec": {
+   "Leistung (W)": "1550",
+   "Tankvolumen (l)": "0,4",
+   "Kabellänge (m)": "7",
+   "Produktgewicht (kg)": "2,4",
+   "Wischkopfbreite (cm)": "40",
+   "Aufheizzeit (s)": "15"
+  },
+  "lieferumfang": [
+   "Dampfreiniger",
+   "Ersatzbezug Standard",
+   "Handbuch",
+   "Teppichgleiter",
+   "250 ml Messbecher"
+  ],
+  "huomio": "40 cm leveä moppi isoille lattiapinnoille"
+ },
+ {
+  "u": "https://www.vileda.de/uebersicht-elektrische-reinigung/dampfreiniger/steam-plus-pro-compact",
+  "u_fi": null,
+  "nimi": "Vileda Steam Plus Pro",
+  "ean": "4023103263833",
+  "spec": {
+   "Aufheizzeit (s)": "15",
+   "Dampfstufen": "4 voreingestellte Stufen (Fliesen, Teppich, versiegelte Böden, empfindliche Böden)"
+  },
+  "lieferumfang": [],
+  "huomio": "Vileda ei ilmoita tehoa eikä säiliötä vileda.de:ssä. Sensitive-liina herkille lattioille; liinat pestään 60 °C:ssa ja vaihdetaan 6 kk välein (valmistaja)."
+ },
+ {
+  "u": "https://www.vileda.de/uebersicht-elektrische-reinigung/dampfreiniger/steam-plus-pro-xxl",
+  "u_fi": null,
+  "nimi": "Vileda Steam Plus Pro XXL",
+  "ean": "4023103263819",
+  "spec": {
+   "Aufheizzeit (s)": "15",
+   "Dampfstufen": "4 voreingestellte Stufen (Fliesen, Teppich, versiegelte Böden, empfindliche Böden)",
+   "Wischerplatte (cm)": "40"
+  },
+  "lieferumfang": [],
+  "huomio": "Vileda ei ilmoita tehoa eikä säiliötä vileda.de:ssä. Sensitive-liina herkille lattioille; liinat pestään 60 °C:ssa ja vaihdetaan 6 kk välein (valmistaja)."
+ }
+]

@@ -15,7 +15,8 @@
     "hae:kuvat": "python3 scripts/hae_kuvat.py",
     "lataa:feedit": "python3 scripts/lataa_feedit.py",
     "scn:linkit": "python3 scripts/linkkikartta.py",
-    "hae": "npm run hae:karcher && npm run hae:kuvat"
+    "hae": "npm run hae:karcher && npm run hae:kuvat",
+    "hae:merkit": "python3 scripts/muunna_merkit.py"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

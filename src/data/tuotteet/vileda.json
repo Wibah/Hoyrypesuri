@@ -1,0 +1,195 @@
+[
+	{
+		"id": "vileda-steam-plus",
+		"merkki": "Vileda",
+		"nimi": "Steam Plus",
+		"sarja": "Vileda Steam",
+		"tyyppi": "moppi",
+		"ammattilaite": false,
+		"tuotenumero": "4023103229716",
+		"kuvaus": "vileda.fi: valmis käyttöön 15 sekunnissa, säädettävä höyryteho, mattosuutin lyhytkarvaisten mattojen raikastamiseen, vesitankin ikkuna, kolmiomainen moppi",
+		"tekniset": {
+			"tehoW": 1550.0,
+			"paineBar": null,
+			"lammitysaikaMin": 0.25,
+			"sailioL": 0.4,
+			"kattilaL": null,
+			"pintaAlaM2": null,
+			"hoyryGmin": null,
+			"lampotilaC": null,
+			"virtajohtoM": 5.0,
+			"painoKg": 2.3,
+			"mitatMm": null
+		},
+		"teknisetValmistajalta": {
+			"Leistung (W)": "1550",
+			"Tankvolumen (l)": "0,4",
+			"Kabellänge (m)": "5",
+			"Produktgewicht (kg)": "2,3",
+			"Höhe (cm)": "126",
+			"Aufheizzeit (s)": "15",
+			"Huomio": "vileda.fi: valmis käyttöön 15 sekunnissa, säädettävä höyryteho, mattosuutin lyhytkarvaisten mattojen raikastamiseen, vesitankin ikkuna, kolmiomainen moppi"
+		},
+		"toimitusSisaltaa": [
+			"Dampfreiniger",
+			"Ersatzbezug",
+			"Handbuch",
+			"Teppichgleiter",
+			"250 ml Messbecher"
+		],
+		"ominaisuudet": [],
+		"hinta": 67.52,
+		"hintaEnnenAlennusta": null,
+		"myynnissa": true,
+		"vainTuotetiedot": false,
+		"kumppanikauppa": true,
+		"ostopaikka": {
+			"nimi": "Proshop",
+			"url": "https://www.proshop.fi/Hoeyrypesuri/Vileda-Hoeyrypesuri-Steam-Plus/3174100",
+			"napinTeksti": "Katso tarjous"
+		},
+		"valmistajanKuva": null,
+		"lahde": "https://www.vileda.fi/elektroniset-siivoustuotteet/vileda-steam-plus",
+		"haettu": "2026-10-21"
+	},
+	{
+		"id": "vileda-steam-plus-pro",
+		"merkki": "Vileda",
+		"nimi": "Steam Plus Pro",
+		"sarja": "Vileda Steam",
+		"tyyppi": "moppi",
+		"ammattilaite": false,
+		"tuotenumero": "4023103263833",
+		"kuvaus": "Vileda ei ilmoita tehoa eikä säiliötä vileda.de:ssä. Sensitive-liina herkille lattioille; liinat pestään 60 °C:ssa ja vaihdetaan 6 kk välein (valmistaja).",
+		"tekniset": {
+			"tehoW": null,
+			"paineBar": null,
+			"lammitysaikaMin": 0.25,
+			"sailioL": null,
+			"kattilaL": null,
+			"pintaAlaM2": null,
+			"hoyryGmin": null,
+			"lampotilaC": null,
+			"virtajohtoM": null,
+			"painoKg": null,
+			"mitatMm": null
+		},
+		"teknisetValmistajalta": {
+			"Aufheizzeit (s)": "15",
+			"Dampfstufen": "4 voreingestellte Stufen (Fliesen, Teppich, versiegelte Böden, empfindliche Böden)",
+			"Huomio": "Vileda ei ilmoita tehoa eikä säiliötä vileda.de:ssä. Sensitive-liina herkille lattioille; liinat pestään 60 °C:ssa ja vaihdetaan 6 kk välein (valmistaja)."
+		},
+		"toimitusSisaltaa": [],
+		"ominaisuudet": [],
+		"hinta": 147.9,
+		"hintaEnnenAlennusta": null,
+		"myynnissa": true,
+		"vainTuotetiedot": false,
+		"kumppanikauppa": true,
+		"ostopaikka": {
+			"nimi": "CS Megastore",
+			"url": "https://www.csmegastore.fi/i/26019362/vileda-steam-plus-pro-höyrymoppi",
+			"napinTeksti": "Katso tarjous"
+		},
+		"valmistajanKuva": null,
+		"lahde": "https://www.vileda.de/uebersicht-elektrische-reinigung/dampfreiniger/steam-plus-pro-compact",
+		"haettu": "2026-10-21"
+	},
+	{
+		"id": "vileda-steam-plus-pro-xxl",
+		"merkki": "Vileda",
+		"nimi": "Steam Plus Pro XXL",
+		"sarja": "Vileda Steam",
+		"tyyppi": "moppi",
+		"ammattilaite": false,
+		"tuotenumero": "4023103263819",
+		"kuvaus": "Vileda ei ilmoita tehoa eikä säiliötä vileda.de:ssä. Sensitive-liina herkille lattioille; liinat pestään 60 °C:ssa ja vaihdetaan 6 kk välein (valmistaja).",
+		"tekniset": {
+			"tehoW": null,
+			"paineBar": null,
+			"lammitysaikaMin": 0.25,
+			"sailioL": null,
+			"kattilaL": null,
+			"pintaAlaM2": null,
+			"hoyryGmin": null,
+			"lampotilaC": null,
+			"virtajohtoM": null,
+			"painoKg": null,
+			"mitatMm": null
+		},
+		"teknisetValmistajalta": {
+			"Aufheizzeit (s)": "15",
+			"Dampfstufen": "4 voreingestellte Stufen (Fliesen, Teppich, versiegelte Böden, empfindliche Böden)",
+			"Wischerplatte (cm)": "40",
+			"Huomio": "Vileda ei ilmoita tehoa eikä säiliötä vileda.de:ssä. Sensitive-liina herkille lattioille; liinat pestään 60 °C:ssa ja vaihdetaan 6 kk välein (valmistaja)."
+		},
+		"toimitusSisaltaa": [],
+		"ominaisuudet": [],
+		"hinta": 119.93,
+		"hintaEnnenAlennusta": null,
+		"myynnissa": true,
+		"vainTuotetiedot": false,
+		"kumppanikauppa": true,
+		"ostopaikka": {
+			"nimi": "CS Megastore",
+			"url": "https://www.csmegastore.fi/i/26019361/vileda-steam-plus-xxl-pro-steam-mop",
+			"napinTeksti": "Katso tarjous"
+		},
+		"valmistajanKuva": null,
+		"lahde": "https://www.vileda.de/uebersicht-elektrische-reinigung/dampfreiniger/steam-plus-pro-xxl",
+		"haettu": "2026-10-21"
+	},
+	{
+		"id": "vileda-steam-plus-xxl",
+		"merkki": "Vileda",
+		"nimi": "Steam Plus XXL",
+		"sarja": "Vileda Steam",
+		"tyyppi": "moppi",
+		"ammattilaite": false,
+		"tuotenumero": "4023103229754",
+		"kuvaus": "40 cm leveä moppi isoille lattiapinnoille",
+		"tekniset": {
+			"tehoW": 1550.0,
+			"paineBar": null,
+			"lammitysaikaMin": 0.25,
+			"sailioL": 0.4,
+			"kattilaL": null,
+			"pintaAlaM2": null,
+			"hoyryGmin": null,
+			"lampotilaC": null,
+			"virtajohtoM": 7.0,
+			"painoKg": 2.4,
+			"mitatMm": null
+		},
+		"teknisetValmistajalta": {
+			"Leistung (W)": "1550",
+			"Tankvolumen (l)": "0,4",
+			"Kabellänge (m)": "7",
+			"Produktgewicht (kg)": "2,4",
+			"Wischkopfbreite (cm)": "40",
+			"Aufheizzeit (s)": "15",
+			"Huomio": "40 cm leveä moppi isoille lattiapinnoille"
+		},
+		"toimitusSisaltaa": [
+			"Dampfreiniger",
+			"Ersatzbezug Standard",
+			"Handbuch",
+			"Teppichgleiter",
+			"250 ml Messbecher"
+		],
+		"ominaisuudet": [],
+		"hinta": 80.68,
+		"hintaEnnenAlennusta": null,
+		"myynnissa": true,
+		"vainTuotetiedot": false,
+		"kumppanikauppa": true,
+		"ostopaikka": {
+			"nimi": "Proshop",
+			"url": "https://www.proshop.fi/Hoeyrypesuri/Vileda-Hoeyrypesuri-Steam-Plus-XXL/3174124",
+			"napinTeksti": "Katso tarjous"
+		},
+		"valmistajanKuva": null,
+		"lahde": "https://www.vileda.fi/elektroniset-siivoustuotteet/steam-xxl-hoyrymoppi",
+		"haettu": "2026-10-21"
+	}
+]

@@ -1,0 +1,53 @@
+[
+ {
+  "sku": "4268N",
+  "u": "https://www.bissell.de/produkte/powerfresh-slimsteam",
+  "nimi": "Bissell PowerFresh SlimSteam 4268N",
+  "tyyppi": "2-in-1",
+  "spec": {
+   "Wattzahl": "1600 W",
+   "Wassertankkapazität": "0.3 l",
+   "Gewicht": "2.9 kg",
+   "Kabellänge": "7.6 m",
+   "Produkthöhe": "116.8 cm",
+   "Aufheizzeit (Text)": "30 Sekunden",
+   "Variable Dampfsteuerung": "Ja - Elektronisches Bedienfeld"
+  },
+  "mukana": [
+   "PowerFresh Slim Steam",
+   "Wischtuch für hartnäckige Verschmutzungen",
+   "weiches Wischtuch",
+   "Bürste mit grünen Borsten",
+   "abgewinkelter Schaber",
+   "Fugen-Aufsatz",
+   "flacher Schaber-Aufsatz",
+   "Wasserbecher",
+   "Wandhalterung"
+  ],
+  "huomio": "3-in-1: lattiahöyrymoppi, jatkovarsi ja käsihöyrypuhdistin. Tekstissä 0,35 l, taulukossa 0,3 l: käytetään taulukon arvoa."
+ },
+ {
+  "sku": "4266N",
+  "u": "https://www.bissell.de/produkte/vac-steam-4266n-1",
+  "nimi": "Bissell Vac & Steam 4266N",
+  "tyyppi": "imeva",
+  "spec": {
+   "Wattzahl": "1600 W",
+   "Wassertankkapazität": "0.4 l",
+   "Tank für Schmutzwasser": "950 ml",
+   "Gewicht": "4.8 kg",
+   "Kabellänge": "7.6 m",
+   "Geräuschpegel": "81 dB",
+   "Airwatts": "40",
+   "Variable Dampfsteuerung": "Bedienelemente am Handgriff (Hoch/Niedrig)"
+  },
+  "mukana": [
+   "Vac & Steam",
+   "Wischtuch zum Scheuern",
+   "weiches Wischtuch",
+   "2 Duftscheiben",
+   "Wasserbecher"
+  ],
+  "huomio": "Imuroi ja höyryttää kovat lattiat yhtä aikaa tai erikseen; kuivasäiliötekniikka pitää lian erillään höyrystä (valmistaja)."
+ }
+]

@@ -92,3 +92,34 @@ def lataa_kuva(tunnus, tt):
             print(f'  kuva ei latautunut: {tunnus} ({virhe})', file=sys.stderr)
 
 
+
+
+def tarjoukset_ean(eanit):
+    """EAN → lista varastossa olevista tarjouksista kaikista feedeistä. Vastaavuus tarkistetaan feedin gtin-kentästä
+    (etunollat poistettuina), joten myyntiversio on varmasti sama kuin valmistajan tiedoissa."""
+    csv.field_size_limit(10**9)
+    avaimet = {e.lstrip('0'): e for e in eanit}
+    tulos = {e: [] for e in eanit}
+    if not FEEDIT.exists():
+        print('Kansio .feedit puuttuu (npm run lataa:feedit), joten hintoja ei haeta.', file=sys.stderr)
+        return tulos
+    for kauppa, nimi in KAUPAT.items():
+        polku = FEEDIT / f'{kauppa}.tsv'
+        if not polku.exists():
+            continue
+        for r in csv.DictReader(open(polku, encoding='utf-8'), delimiter='\t', quotechar="'"):
+            e = avaimet.get((r.get('gtin') or '').strip().lstrip('0'))
+            if not e or r.get('availability') != 'in_stock':
+                continue
+            hinta, ale = eurot(r.get('price')), eurot(r.get('sale_price'))
+            url = urllib.parse.parse_qs(urllib.parse.urlparse(r.get('link') or '').query).get('url', [None])[0]
+            if hinta and url:
+                tulos[e].append({'kauppa': kauppa, 'nimi': nimi, 'url': url, 'kuva': r.get('image_link'),
+                                 'hinta': ale if ale and ale < hinta else hinta,
+                                 'ennen': hinta if ale and ale < hinta else None})
+    return tulos
+
+
+def halvin(tt):
+    """Muiden merkkien kuin Kärcherin ostopaikka: halvin varastossa oleva tarjous (painepesurit.fi:n sääntö)."""
+    return min(tt, key=lambda t: t['hinta']) if tt else None

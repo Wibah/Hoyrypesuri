@@ -1,0 +1,146 @@
+[
+ {
+  "sku": "FSM13E1",
+  "u": "https://www.blackanddecker.co.uk/product/fsm13e1-gb/1300w-steam-mop",
+  "nimi": "Black+Decker FSM13E1 Steam-Mop",
+  "spec": {
+   "Power [W]": "1300",
+   "Preheating Time [sec]": "15",
+   "Run-Time [min]": "15",
+   "Number of Accessories": "1"
+  },
+  "mukana": [
+   "Standard pad"
+  ],
+  "huomio": "Sivun tekstissä \"ready to use in 30 seconds\", taulukossa 15 s: ristiriita, lämpenemisaikaa ei käytetä.",
+  "hylatyt": [
+   "Preheating Time [sec]"
+  ]
+ },
+ {
+  "sku": "FSMH13E5",
+  "u": "https://www.blackanddecker.co.uk/product/fsmh13e5-gb/1300w-5in1-steam-mop",
+  "nimi": "Black+Decker FSMH13E5 5-in-1 Steam-Mop",
+  "spec": {
+   "Power [W]": "1300",
+   "Preheating Time [sec]": "20",
+   "Run-Time [min]": "15",
+   "Product Weight [Kg]": "1.8",
+   "Number of Accessories": "5"
+  },
+  "mukana": [
+   "Nozzle",
+   "Small brush",
+   "Grout brush",
+   "Microfibre pad",
+   "Small squeegee"
+  ],
+  "huomio": "Käsiosaksi muunnettava (handheld conversion).",
+  "hylatyt": []
+ },
+ {
+  "sku": "FSMH13E10",
+  "u": "https://www.blackanddecker.co.uk/product/fsmh13e10-gb/1300w-10in1-steam-mop",
+  "nimi": "Black+Decker FSMH13E10 10-in-1 Steam-Mop",
+  "spec": {
+   "Power [W]": "1300",
+   "Preheating Time [sec]": "300",
+   "Run-Time [min]": "17",
+   "Product Weight [Kg]": "0.0029",
+   "Number of Accessories": "10"
+  },
+  "mukana": [
+   "Large squeegee with foam plus cover",
+   "Small brush with copper bristles",
+   "Large brush",
+   "Grout brush",
+   "Small brush (2)",
+   "Carpet glider",
+   "Microfibre pad"
+  ],
+  "huomio": "Lämpenemisaika 300 s ja paino 0,0029 kg ovat virheellisiä.",
+  "hylatyt": [
+   "Preheating Time [sec]",
+   "Product Weight [Kg]"
+  ]
+ },
+ {
+  "sku": "FSMH1321",
+  "u": "https://www.blackanddecker.co.uk/product/fsmh1321-gb/1300w-steam-mop",
+  "nimi": "Black+Decker FSMH1321 Steam-Mop",
+  "spec": {
+   "Power [W]": "1600",
+   "Run-Time [min]": "20",
+   "Number of Accessories": "6"
+  },
+  "mukana": [
+   "Flexible accessories hose",
+   "Window squeegee",
+   "Small brush",
+   "Tile and grout brush",
+   "Standard pad",
+   "Microfiber cover for squeegee"
+  ],
+  "huomio": "Sivun otsikossa 1300W, taulukossa 1600 W; Suomen feedeissä 1300 W. Tehoa ei käytetä.",
+  "hylatyt": [
+   "Power [W]"
+  ]
+ },
+ {
+  "sku": "BHSM166DSM",
+  "u": "https://www.blackanddecker.co.uk/product/bhsm166dsm-gb/1600w-2-1-steam-mop-delta-head-steamitt-and-11-accessories",
+  "nimi": "Black+Decker BHSM166DSM 2-in-1 Steam-Mop",
+  "spec": {
+   "Preheating Time [sec]": "20",
+   "Run-Time [min]": "20",
+   "Product Weight [Kg]": "0.0028",
+   "Number of Accessories": "11"
+  },
+  "mukana": [
+   "SteaMitt hose",
+   "Rectangular microfibre floor pad",
+   "Delta microfibre floor pad",
+   "Microfibre SteaMitt pads (2)",
+   "Accessories hose",
+   "Small squeegee",
+   "Small squeegee sock",
+   "Small brush",
+   "Grout brush",
+   "Delta head",
+   "Carpet glider"
+  ],
+  "huomio": "Teho 1600 W sivun otsikosta. Paino 0,0028 kg on virheellinen.",
+  "hylatyt": [
+   "Product Weight [Kg]"
+  ]
+ },
+ {
+  "sku": "BHSM1610DSM",
+  "u": "https://www.blackanddecker.co.uk/product/bhsm1610dsm-gb/1600w-2in1-steam-mop-delta-head-steamitt-and-15-accessories",
+  "nimi": "Black+Decker BHSM1610DSM 2-in-1 Steam-Mop",
+  "spec": {
+   "Power [W]": "1600",
+   "Preheating Time [sec]": "20",
+   "Run-Time [min]": "20",
+   "Product Weight [Kg]": "0.0029",
+   "Number of Accessories": "15"
+  },
+  "mukana": [
+   "Accessories hose",
+   "Small squeegee sock",
+   "Small squeegee",
+   "Shot of steam brush (3)",
+   "Small brush",
+   "Grout brush",
+   "Carpet glider",
+   "Delta head",
+   "Rectangular microfibre floor pads (2)",
+   "Delta microfibre floor pad",
+   "Microfibre SteaMitt pad"
+  ],
+  "huomio": "Paino 0,0029 kg on virheellinen.",
+  "hylatyt": [
+   "Product Weight [Kg]"
+  ]
+ }
+]

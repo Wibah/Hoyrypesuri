@@ -1,0 +1,152 @@
+[
+	{
+		"id": "shark-s6001eu",
+		"merkki": "Shark",
+		"nimi": "Klik n' Flip S6001",
+		"sarja": "Shark Steam Mop",
+		"tyyppi": "moppi",
+		"ammattilaite": false,
+		"tuotenumero": "622356220736",
+		"kuvaus": "Kääntyvä kaksipuolinen moppi (Klik n Flip). Paino ja säiliö jätetty pois: ristiriitaisia.",
+		"tekniset": {
+			"tehoW": 1050.0,
+			"paineBar": null,
+			"lammitysaikaMin": null,
+			"sailioL": null,
+			"kattilaL": null,
+			"pintaAlaM2": null,
+			"hoyryGmin": null,
+			"lampotilaC": null,
+			"virtajohtoM": null,
+			"painoKg": null,
+			"mitatMm": null
+		},
+		"teknisetValmistajalta": {
+			"Gewicht (kg)": "4,7 kg",
+			"Wattleistung (W)": "1.050 W",
+			"Akkulaufzeit (Min.)": "15",
+			"Breite des Reinigungspfads (cm)": "25,91 cm",
+			"Kabellänge (cm)": "7,87 cm",
+			"Fassungsvermögen Staubbehälter (L)": "0,66 L",
+			"Käyttöaika yhdellä täytöllä (min)": "15",
+			"Huomio": "Kääntyvä kaksipuolinen moppi (Klik n Flip). Paino ja säiliö jätetty pois: ristiriitaisia."
+		},
+		"toimitusSisaltaa": [
+			"2 x Dirt Grip-Wischbezug",
+			"Auffüllbehälter",
+			"8 m Netzkabel"
+		],
+		"ominaisuudet": [],
+		"hinta": 96.26,
+		"hintaEnnenAlennusta": null,
+		"myynnissa": true,
+		"vainTuotetiedot": false,
+		"kumppanikauppa": true,
+		"ostopaikka": {
+			"nimi": "CS Megastore",
+			"url": "https://www.csmegastore.fi/i/7716748/shark-s6001eu-höyrymoppi-1200-w-0-4-l-klik-n-flip-monivärinen-valkoinen",
+			"napinTeksti": "Katso tarjous"
+		},
+		"valmistajanKuva": null,
+		"lahde": "https://www.sharkninja.de/shark-klik-n-flip-manueller-dampfreiniger/S6001EU.html",
+		"haettu": "2026-10-21"
+	},
+	{
+		"id": "shark-s6003eu",
+		"merkki": "Shark",
+		"nimi": "Klik n' Flip S6003",
+		"sarja": "Shark Steam Mop",
+		"tyyppi": "moppi",
+		"ammattilaite": false,
+		"tuotenumero": "622356220743",
+		"kuvaus": "Automaattinen höyrynsyöttö (Klik n Flip). Paino 9,4 kg on todennäköisesti pakkauksen paino.",
+		"tekniset": {
+			"tehoW": 1200.0,
+			"paineBar": null,
+			"lammitysaikaMin": null,
+			"sailioL": null,
+			"kattilaL": null,
+			"pintaAlaM2": null,
+			"hoyryGmin": null,
+			"lampotilaC": null,
+			"virtajohtoM": null,
+			"painoKg": null,
+			"mitatMm": null
+		},
+		"teknisetValmistajalta": {
+			"Gewicht (kg)": "9,4 kg",
+			"Wattleistung (W)": "1.200 W",
+			"Akkulaufzeit (Min.)": "11,5",
+			"Fassungsvermögen Staubbehälter (L)": "0,66 L",
+			"Käyttöaika yhdellä täytöllä (min)": "11,5",
+			"Huomio": "Automaattinen höyrynsyöttö (Klik n Flip). Paino 9,4 kg on todennäköisesti pakkauksen paino."
+		},
+		"toimitusSisaltaa": [
+			"2 x Dirt Grip-Wischbezug",
+			"Auffüllbehälter"
+		],
+		"ominaisuudet": [],
+		"hinta": 167.35,
+		"hintaEnnenAlennusta": null,
+		"myynnissa": true,
+		"vainTuotetiedot": false,
+		"kumppanikauppa": true,
+		"ostopaikka": {
+			"nimi": "Proshop",
+			"url": "https://www.proshop.fi/Hoeyrypesuri/Shark-Hoeyrypesuri-Klikkaa-ja-kaeaennae/3055259",
+			"napinTeksti": "Katso tarjous"
+		},
+		"valmistajanKuva": null,
+		"lahde": "https://www.sharkninja.de/shark-klik-n-flip-automatischer-dampfreiniger/S6003EU.html",
+		"haettu": "2026-10-21"
+	},
+	{
+		"id": "shark-s1000eu",
+		"merkki": "Shark",
+		"nimi": "S1000 Classic Steam Mop",
+		"sarja": "Shark Steam Mop",
+		"tyyppi": "moppi",
+		"ammattilaite": false,
+		"tuotenumero": "622356231107",
+		"kuvaus": "Höyryä pumpataan kahvan liikkeellä (Guardian 2025).",
+		"tekniset": {
+			"tehoW": 1050.0,
+			"paineBar": null,
+			"lammitysaikaMin": null,
+			"sailioL": null,
+			"kattilaL": null,
+			"pintaAlaM2": null,
+			"hoyryGmin": null,
+			"lampotilaC": null,
+			"virtajohtoM": null,
+			"painoKg": 2.61,
+			"mitatMm": null
+		},
+		"teknisetValmistajalta": {
+			"Gewicht (kg)": "2,61 kg",
+			"Wattleistung (W)": "1.050 W",
+			"Akkulaufzeit (Min.)": "15",
+			"Produktabmessungen (cm)": "18,29 x 16,31 x 62,31",
+			"Käyttöaika yhdellä täytöllä (min)": "15",
+			"Huomio": "Höyryä pumpataan kahvan liikkeellä (Guardian 2025)."
+		},
+		"toimitusSisaltaa": [
+			"2 x Dirt Grip-Wischbezug",
+			"Auffüllbehälter"
+		],
+		"ominaisuudet": [],
+		"hinta": 104.98,
+		"hintaEnnenAlennusta": null,
+		"myynnissa": true,
+		"vainTuotetiedot": false,
+		"kumppanikauppa": true,
+		"ostopaikka": {
+			"nimi": "Proshop",
+			"url": "https://www.proshop.fi/Hoeyrypesuri/Shark-Hoeyrypesuri-S1000-Steam-Mop/3405385",
+			"napinTeksti": "Katso tarjous"
+		},
+		"valmistajanKuva": null,
+		"lahde": "https://www.sharkninja.de/shark-dampfreiniger/S1000EU.html",
+		"haettu": "2026-10-21"
+	}
+]
