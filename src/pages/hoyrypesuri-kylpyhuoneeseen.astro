@@ -1,0 +1,98 @@
+---
+// SCN: tuki (käyttökohde), intentti Use Case, emopilari /. Hakusanat: höyrypesuri kylpyhuone 150, kylpyhuone höyrypesuri 10,
+// kärcher höyrypesuri kylpyhuone 10, höyrypesuri kylpyhuoneen saumat 40, laattojen saumat 10, saumat 10, höyrypesuri
+// kaakelit 30, höyrypesuri saunan lauteet 30, saunan pesuun 10, höyrypesuri kalkki 10 (Ahrefs 2026-10, noin 300).
+// Saunan lauteista ei ole lähteitä, joten sivu kertoo vain yleiset puupintojen varoitukset (hoyrypesuri-writerin
+// tietopohja, kohta 6). Kirjoitettu hoyrypesuri-writer-skillillä (2026-10-21).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import Tuotekortti from '../components/tuote/Tuotekortti.astro';
+import Ukk from '../components/Ukk.astro';
+import { paatuote, tuote, euroa, luku, mallisivut, lammitysaika } from '../lib/tuotteet';
+
+const sc3 = await paatuote('SC 3');
+const sc1 = await paatuote('SC 1');
+const bath = await tuote('sc-5-easyfix-iron-select-bath-edition');
+const polti = await tuote('polti-vaporetto-sv440-double');
+
+const ukk = [
+	{
+		kysymys: 'Mikä höyrypesuri sopii kylpyhuoneeseen?',
+		vastaus: `Kylpyhuoneeseen tarvitaan höyrypesuri, jossa on letku ja pieniä suuttimia saumoihin ja hanoihin. Suosittelemme säiliömallia <a href="${mallisivut['SC 3']}">Kärcher ${sc3.nimi}</a> (${euroa(sc3.hinta!)}), jonka mukana tulevat kohdesuutin, pyöreä harja ja rakoharja. Pelkkiin saumoihin ja hanoihin riittää käsimalli, kuten <a href="${mallisivut['SC 1']}">Kärcher SC 1</a> (${euroa(sc1.hinta!)}).`,
+	},
+	{
+		kysymys: 'Puhdistaako höyrypesuri kylpyhuoneen saumat?',
+		vastaus: 'Saumat ovat testien perusteella höyrypesurin vahvin kohde. Guardianin testissä (2025) höyry pehmensi pinttyneen lian laatoista ja suihkuseinistä niin, että sen sai kaavittua tai pyyhittyä pois. Käytä kohdesuutinta tai pientä pyöreää harjaa, ja pyyhi irronnut lika heti liinalla.',
+	},
+	{
+		kysymys: 'Poistaako höyrypesuri kalkin?',
+		vastaus: 'Höyry irrottaa kalkkia ja saippuajäämiä laatoista, hanoista ja suihkuseinistä. Kuluttaja.fi:n testissä (2024) kalkki- ja saippuatahrat olivat yksi testatuista tahroista. Kärcher neuvoo lisäämään hanojen sitkeään kalkkiin muutaman tipan etikkaa, antamaan sen vaikuttaa hetken ja höyryttämään uudelleen.',
+	},
+	{
+		kysymys: 'Voiko saunan lauteet pestä höyrypesurilla?',
+		vastaus: 'Emme löytäneet valmistajien ohjeita tai testejä, joissa höyrypesuria olisi käytetty saunan lauteisiin. Lähteet varoittavat höyryttämästä käsittelemätöntä puuta, ja The Sprucen mukaan huokoiset pinnat voivat vaurioitua vedestä. Jos lauteet ovat käsittelemätöntä puuta, kysy ohje lauteiden valmistajalta ennen höyryttämistä. Saunan laatat ja saumat voi puhdistaa kuten kylpyhuoneen.',
+	},
+	{
+		kysymys: 'Kalkkeutuuko höyrypesuri, jos vesi on kovaa?',
+		vastaus: `Kalkki on höyrypesurin tavallisin huoltoasia, ja kovan veden alueilla se korostuu. Kärcher SC 3:n mukana tulee kalkinpoistopatruuna, ja SC 4:n ja SC 5:n mukana kalkinpoistojauhetta. Polti Vaporetto SV-malleissa on kalkkisuodatin. Noudata valmistajan kalkinpoisto-ohjetta.`,
+	},
+];
+---
+<Layout
+	title="Höyrypesuri kylpyhuoneeseen – saumat, kaakelit ja kalkki (2026)"
+	description="Höyrypesuri kylpyhuoneen saumoihin, kaakeleihin, hanoihin ja kalkkiin: sopivat suuttimet, työtapa, varoitukset ja suosittelemamme höyrypesurit."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Höyrypesuri kylpyhuoneeseen', sivu: '/hoyrypesuri-kylpyhuoneeseen/' }]} />
+		<span class="tp-label">Opas</span>
+		<h1>Höyrypesuri kylpyhuoneeseen – saumat, kaakelit ja kalkki</h1>
+		<p>Höyrypesuri sopii kylpyhuoneeseen hyvin, koska kuuma höyry irrottaa laattojen saumoista, kaakeleista, hanoista ja suihkuseinistä lian, saippuajäämät ja kalkin ilman pesuaineita. Kylpyhuoneeseen tarvitaan laite, jossa on letku ja pieniä suuttimia: säiliömalli, käsimalli tai höyrymoppi, josta irtoaa käsiosa. Pelkkä höyrymoppi puhdistaa vain lattian.</p>
+
+		<h2>Höyrypesuri kylpyhuoneen saumoihin ja kaakeleihin</h2>
+		<p>Saumat ovat testien perusteella höyrypesurin vahvin kohde. Guardianin testissä (2025) Kärcher SC 3:n brittiläinen versio oli erinomainen pesualtaissa, laatoissa ja suihkuseinissä, koska höyry pehmensi pinttyneen lian niin, että sen sai kaavittua tai pyyhittyä pois. Kuluttaja.fi:n laboratoriotestissä (2024) laitteilla puhdistettiin rasvaisia saumoja, ja höyrypesurit puhdistivat kovat pinnat yleensä hyvin.</p>
+		<p>Kärcher suosittelee kylpyhuoneeseen pyöreitä harjoja, kohdesuutinta, froteeliinoja ja mikrokuituliinaa. Kylpyhuoneen osat ja suuttimet:</p>
+		<ul>
+			<li><strong>Laattojen saumat:</strong> kohdesuutin tai pieni pyöreä harja. Nailonharja sopii useimpiin saumoihin.</li>
+			<li><strong>Kaakelit ja seinät:</strong> käsisuutin ja mikrokuituliina.</li>
+			<li><strong>Suihkuseinä ja peili:</strong> ikkunasuutin tai -lasta. Kärcher SC 3:n mukana sitä ei tule, mutta sen saa lisävarusteena.</li>
+			<li><strong>Hanat ja suihkukahva:</strong> kohdesuutin. Kromi- ja teräspinnoille käytetään suutinta, joka ei naarmuta.</li>
+			<li><strong>Lattiakaivo:</strong> Kärcher neuvoo käyttämään pistesuutinta.</li>
+			<li><strong>WC ja lavuaari:</strong> kohdesuutin ja harja.</li>
+		</ul>
+
+		<h2>Näin puhdistat kylpyhuoneen höyrypesurilla</h2>
+		<ol>
+			<li>Tuuleta kylpyhuone, koska höyry kerääntyy pieneen tilaan.</li>
+			<li>Aloita ylhäältä: suihkuseinä, kaakelit ja hanat ennen lattiaa.</li>
+			<li>Höyrytä saumaa kohdesuuttimella tai harjalla hetki, ja pyyhi irronnut lika heti liinalla. Lika ei poistu höyryllä itsestään.</li>
+			<li>Kalkkiin ja saippuajäämiin anna höyryn vaikuttaa pidempään. Kärcherin mukaan sitkeään kalkkiin hanoissa voi lisätä muutaman tipan etikkaa, antaa vaikuttaa ja höyryttää uudelleen.</li>
+			<li>Puhdista lattia viimeisenä lattiasuuttimella ja liinalla.</li>
+			<li>Pese mikrokuituliinat 60 asteessa.</li>
+		</ol>
+		<p>Pidä käsi poissa höyryn ulostulosta. Råd & Rönin testissä (2019) monessa laitteessa käsi oli lähellä kuumaa höyryä, ja yli 100-asteinen höyry voi polttaa.</p>
+
+		<h2>Kalkki ja kova vesi</h2>
+		<p>Kalkki on höyrypesurin tavallisin huoltoasia. Kovan veden alueilla kalkkia kertyy sekä kylpyhuoneen pintoihin että laitteeseen. Valmistajat ratkaisevat laitteen kalkkeutumisen eri tavoin:</p>
+		<ul>
+			<li><strong>Kärcher SC 3:</strong> kalkinpoistopatruuna säiliön täyttöaukossa</li>
+			<li><strong>Kärcher SC 4 ja SC 5:</strong> mukana kalkinpoistojauhetta</li>
+			<li><strong>Polti Vaporetto SV -höyrymopit:</strong> kalkkisuodatin</li>
+		</ul>
+
+		<h2>Saunan laatat ja lauteet</h2>
+		<p>Saunan laatat ja saumat voi puhdistaa samoin kuin kylpyhuoneen. Lauteista emme löytäneet valmistajien ohjeita tai testejä. Lähteet varoittavat höyryttämästä käsittelemätöntä puuta, ja The Sprucen (2026) mukaan huokoiset pinnat voivat vaurioitua vedestä. Kysy siis lauteiden valmistajalta, kestääkö puu höyryä, ja kokeile ensin piilossa olevaan kohtaan.</p>
+
+		<h2>Suosittelemamme höyrypesurit kylpyhuoneeseen</h2>
+		<p>Suosittelemme kylpyhuoneeseen Kärcher {sc3.nimi} -mallia. Sen lämmitysaika on valmistajan mukaan {lammitysaika(sc3.tekniset.lammitysaikaMin)}, {luku(sc3.tekniset.sailioL!)} litran säiliön voi täyttää kesken työn, ja mukana tulevat kohdesuutin, pyöreä harja, rakoharja ja kalkinpoistopatruuna. Kärcher SC 5:n Bath Editionin mukana tulevat lisäksi ikkunasuutin ja XXL-rakoharja, mutta se on kalliimpi.</p>
+		<div class="mk-lista">
+			<Tuotekortti tuote={sc3} otsikko="Kärcher SC 3" sivu={mallisivut['SC 3']} kenelle="Säiliömalli, jossa on suuttimet saumoihin ja hanoihin" tagi="Suosituksemme" />
+			<Tuotekortti tuote={sc1} otsikko="Kärcher SC 1" sivu={mallisivut['SC 1']} kenelle="Käsimalli pelkkiin saumoihin ja hanoihin" tagi="Edullisin" />
+			<Tuotekortti tuote={bath} otsikko="Kärcher SC 5 Bath Edition" sivu={mallisivut['SC 5']} kenelle="Mukana ikkunasuutin ja XXL-rakoharja" tagi="Kylpyhuonepaketti" />
+			<Tuotekortti tuote={polti} otsikko="Polti Vaporetto SV440 Double" sivu="/polti-hoyrypesurit/" kenelle="Höyrymoppi, josta irtoaa käsiosa, mukana saumaharja" tagi="Moppi ja käsiosa" />
+		</div>
+		<p>Kaikki höyrypesurit ja suosituksemme eri käyttöön ovat <a href="/">höyrypesurivertailussa</a>.</p>
+		<p class="tp-lahde">Lähteet: <a href="https://www.theguardian.com/thefilter/2025/mar/12/best-steam-cleaner-mop" target="_blank" rel="nofollow noopener">Guardian</a>, <a href="https://kuluttaja.fi/testi/hoyrypesurit/" target="_blank" rel="nofollow noopener">Kuluttaja.fi</a>, <a href="https://www.karcher.com/se/kaercher-magazine/27-omraaden-i-hemmet-daer-aangtvaetten-goer-skillnad-foer-dig-och-miljoen.html" target="_blank" rel="nofollow noopener">Kärcher</a>, <a href="https://www.radron.se/tester/koksmaskiner-stadning/angtvattar/" target="_blank" rel="nofollow noopener">Råd & Rön</a>, <a href="https://www.thespruce.com/best-steam-cleaners-4158672" target="_blank" rel="nofollow noopener">The Spruce</a>.</p>
+
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>

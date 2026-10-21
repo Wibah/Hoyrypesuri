@@ -1,0 +1,86 @@
+---
+// SCN: tuki (käyttökohde), intentti Risk / Use Case, emopilari /hoyrymoppi/. Hakusanat: höyrymoppi laminaatti 100 (TP 100),
+// höyrypesuri laminaatti 40 (KD 26), höyrymoppi parketti 40, höyrypesuri parketti 30, höyrypesuri lattia 40, lattian höyrypesuri
+// 30, lattia höyrypesuri 30, höyrypesuri lattialle 20, puulattia 10, laattalattia 10, korkkilattia ja muovimatto (ei volyymia)
+// (Ahrefs 2026-10, noin 330). Riskit vain lähteistä (hoyrypesuri-writerin tietopohja, kohta 6): lähteet ovat laminaatista
+// eri mieltä, joten lattian valmistajan ohje ratkaisee. Kirjoitettu hoyrypesuri-writer-skillillä (2026-10-21).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import Tuotekortti from '../components/tuote/Tuotekortti.astro';
+import Ukk from '../components/Ukk.astro';
+import { tuote, euroa, mallisivut } from '../lib/tuotteet';
+
+const vileda = await tuote('vileda-steam-plus');
+const pro = await tuote('vileda-steam-plus-pro');
+const sc2 = await tuote('sc-2-upright');
+
+const ukk = [
+	{
+		kysymys: 'Voiko laminaattia pestä höyrymopilla?',
+		vastaus: 'Lähteet ovat tästä eri mieltä. Guardianin (2025) mukaan monet laminaatit kestävät höyryn. The English Homen (2026) mukaan laminaatti voi vääntyä höyrystä. Kärcher neuvoo käyttämään laminaatilla pienempää höyrytehoa, ja Test.se:n (2026) mukaan laminaatin on oltava kunnolla tiivistetty ja liimattu. Tarkista siis lattian valmistajan ohje ennen höyryttämistä.',
+	},
+	{
+		kysymys: 'Sopiiko höyrymoppi parketille?',
+		vastaus: 'Tiivistetylle parketille voi käyttää pientä höyrytehoa, jos lattian valmistaja sen sallii. Guardianin mukaan vanha parketti voi vaurioitua, koska höyry voi vaikuttaa puuhun tai liimaan. The Sprucen (2026) mukaan höyrymoppeja ei suositella vedelle herkille puulattioille, ja Test.se neuvoo varomaan käsittelemätöntä puuta.',
+	},
+	{
+		kysymys: 'Mille lattioille höyrymoppi sopii parhaiten?',
+		vastaus: 'Laatta-, klinkkeri- ja vinyylilattiat kestävät höyryn hyvin (Guardian 2025). Kärcherin mukaan höyry sopii myös klinkkerilattioihin ja laminaatille pienemmällä teholla. Osa vinyylilaatoista voi kuitenkin vaurioitua, koska liima pehmenee.',
+	},
+	{
+		kysymys: 'Mikä höyrymoppi sopii herkille lattioille?',
+		vastaus: `Valitse moppi, jossa on säädettävä höyry. Vileda Steam Plus Pro -malleissa (${euroa(pro.hinta!)}) on Viledan mukaan erillinen asetus herkille lattioille ja lämmönkestävä Sensitive-liina. Myös Vileda Steam Plussassa (${euroa(vileda.hinta!)}) ja Kärcher SC 2 Uprightissa (${euroa(sc2.hinta!)}) höyryä voi säätää.`,
+	},
+	{
+		kysymys: 'Voiko höyrymopilla pestä korkkilattian tai muovimaton?',
+		vastaus: 'Emme löytäneet valmistajien ohjeita tai testejä korkkilattiasta tai muovimatosta. Lähteet varoittavat huokoisista pinnoista ja pinnoista, joiden liima voi pehmetä. Kysy lattian valmistajalta, ja kokeile ensin piilossa olevaan kohtaan pienellä höyryteholla.',
+	},
+];
+---
+<Layout
+	title="Höyrymoppi laminaatille ja parketille – mille lattioille höyry sopii? (2026)"
+	description="Voiko laminaattia ja parkettia pestä höyrymopilla? Lähteiden ristiriitaiset ohjeet, lattiakohtaiset varoitukset ja höyrymopit, joissa on asetus herkille lattioille."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Höyrymoppi', sivu: '/hoyrymoppi/' }, { nimi: 'Höyrymoppi laminaatille', sivu: '/hoyrymoppi-laminaatille/' }]} />
+		<span class="tp-label">Opas</span>
+		<h1>Höyrymoppi laminaatille ja parketille – mille lattioille höyry sopii?</h1>
+		<p>Höyrymoppi sopii varmasti laatta-, klinkkeri- ja vinyylilattioille. Laminaatista ja parketista lähteet ovat eri mieltä: osa pitää tiivistettyä laminaattia turvallisena, osa varoittaa, että höyry voi vääntää laminaattia ja vahingoittaa vanhaa parkettia. Siksi lattian valmistajan ohje ratkaisee. Jos höyryä saa käyttää, käytä pienintä höyrytehoa ja kuivaa liinaa.</p>
+
+		<h2>Lattiat, joille höyrymoppi sopii</h2>
+		<div class="tp-taulu">
+			<table class="tp-versiot">
+				<thead><tr><th scope="col">Lattia</th><th scope="col">Höyrymoppi</th><th scope="col">Mitä lähteet sanovat</th></tr></thead>
+				<tbody>
+					<tr><th scope="row">Laatta ja klinkkeri</th><td>Sopii</td><td>Ei ongelmia (Guardian 2025). Kärcher suosittelee laattalattioille lattiasuutinta ja liinaa.</td></tr>
+					<tr><th scope="row">Vinyyli</th><td>Sopii yleensä</td><td>Vinyylilattiat eivät tuota ongelmia, mutta osa vinyylilaatoista voi vaurioitua, koska liima pehmenee (Guardian 2025).</td></tr>
+					<tr><th scope="row">Laminaatti</th><td>Valmistajan ohjeen mukaan</td><td>Monet laminaatit kestävät (Guardian 2025), mutta laminaatti voi vääntyä (The English Home 2026). Pienempi höyryteho (Kärcher), lattian on oltava tiivistetty ja liimattu (Test.se 2026).</td></tr>
+					<tr><th scope="row">Tiivistetty parketti</th><td>Valmistajan ohjeen mukaan</td><td>Vanha parketti voi vaurioitua (Guardian 2025). Höyrymoppeja ei suositella vedelle herkille puulattioille (The Spruce 2026).</td></tr>
+					<tr><th scope="row">Käsittelemätön puu</th><td>Ei suositella</td><td>Varo käsittelemätöntä puuta (Test.se 2026, The English Home 2026).</td></tr>
+					<tr><th scope="row">Korkki ja muovimatto</th><td>Valmistajan ohjeen mukaan</td><td>Emme löytäneet ohjeita. Lähteet varoittavat huokoisista pinnoista.</td></tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h2>Höyrymoppi laminaatille: näin vältät vauriot</h2>
+		<ol>
+			<li>Tarkista lattian valmistajan hoito-ohje. Jos ohje kieltää höyryn tai märkäpesun, älä käytä höyrymoppia.</li>
+			<li>Kokeile ensin piilossa olevaan kohtaan, esimerkiksi kaapin alle.</li>
+			<li>Valitse pienin höyryteho tai herkkien lattioiden asetus.</li>
+			<li>Tee hitaita, tasaisia vetoja, äläkä kastele lattiaa liikaa (Lynsey Crombie, Independent 2026).</li>
+			<li>Jos lattialle jää kosteutta, kuivaa se liinalla. Guardianin testissä (2025) osa höyrymopeista jätti lattian märäksi.</li>
+		</ol>
+
+		<h2>Höyrymopit, joissa on säädettävä höyry</h2>
+		<p>Herkille lattioille kannattaa valita moppi, jonka höyryä voi säätää. Vileda Steam Plus Pro -malleissa on neljä valmista asetusta, joista yksi on herkille lattioille, ja mukana on lämmönkestävä Sensitive-liina. Vileda Steam Plussassa höyryä voi säätää, ja Kärcher SC 2 Uprightissa höyryä säädetään kahvasta kahdella teholla.</p>
+		<div class="mk-lista">
+			<Tuotekortti tuote={pro} otsikko="Vileda Steam Plus Pro" sivu="/vileda-hoyrymoppi/" kenelle="Erillinen asetus ja Sensitive-liina herkille lattioille" tagi="Herkille lattioille" />
+			<Tuotekortti tuote={vileda} otsikko="Vileda Steam Plus" sivu="/vileda-hoyrymoppi/" kenelle="Säädettävä höyry, Guardianin testin paras höyrymoppi" tagi="Paras höyrymoppi" />
+			<Tuotekortti tuote={sc2} otsikko="Kärcher SC 2 Upright" sivu={mallisivut['SC 2']} kenelle="Kaksi höyrytehoa kahvassa" tagi="Kärcher" />
+		</div>
+		<p>Kaikki höyrymopit ovat <a href="/hoyrymoppi/">höyrymoppivertailussa</a>.</p>
+		<p class="tp-lahde">Lähteet: <a href="https://www.theguardian.com/thefilter/2025/mar/12/best-steam-cleaner-mop" target="_blank" rel="nofollow noopener">Guardian</a>, <a href="https://www.theenglishhome.co.uk/buyers-guide/shopping/best-steam-cleaners/" target="_blank" rel="nofollow noopener">The English Home</a>, <a href="https://www.thespruce.com/best-steam-cleaners-4158672" target="_blank" rel="nofollow noopener">The Spruce</a>, <a href="https://www.test.se/angtvatt/" target="_blank" rel="nofollow noopener">Test.se</a>, <a href="https://www.karcher.com/se/kaercher-magazine/27-omraaden-i-hemmet-daer-aangtvaetten-goer-skillnad-foer-dig-och-miljoen.html" target="_blank" rel="nofollow noopener">Kärcher</a>.</p>
+
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>
