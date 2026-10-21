@@ -29,7 +29,7 @@ const ukk = [
 	},
 	{
 		kysymys: 'Mikä ero on SC 5 EasyFixillä ja SC 5 EasyFix Iron Select Bath Editionilla?',
-		vastaus: `Höyrypesuri on sama. Bath Editionin mukana tulevat lisäksi EasyFinish-höyrysilitysrauta, Comfort-ikkunasuutin ja XXL-rakoharja, ja se maksaa ${euroa(bath.hinta!)}, kun SC 5 EasyFix maksaa ${euroa(suositus.hinta!)}. Kärcherin mukaan SC 5:een voi liittää silitysraudan, joten raudan saa myös erikseen.`,
+		vastaus: `Höyrypesuri on sama. Bath Editionin mukana tulevat lisäksi EasyFinish-höyrysilitysrauta, Comfort-ikkunasuutin ja XXL-rakoharja, ja se maksaa ${euroa(bath.hinta!)}, kun SC 5 EasyFix maksaa ${euroa(suositus.hinta!)}. Kärcherin mukaan SC 5:een voi liittää silitysraudan.`,
 	},
 	{
 		kysymys: 'Kuinka nopeasti Kärcher SC 5 lämpenee?',
@@ -96,7 +96,7 @@ const ukk = [
 		<p class="tp-lahde">Lähteet: <a href="https://www.theguardian.com/thefilter/2025/mar/12/best-steam-cleaner-mop" target="_blank" rel="nofollow noopener">Guardian</a>, <a href="https://kuluttaja.fi/testi/hoyrypesurit/" target="_blank" rel="nofollow noopener">Kuluttaja.fi</a>, <a href="https://www.test.se/angtvatt/" target="_blank" rel="nofollow noopener">Test.se</a>. Guardian testasi Britannian myyntiversiota (SC 5 EasyFix Iron Plug).</p>
 
 		<h2>Kärcher SC 5 vai SC 4 tai SV 7?</h2>
-		<p><a href={mallisivut['SC 4']}>Kärcher SC 4</a> on kevyempi ja halvempi: suosittelemamme {sc4.nimi} maksaa {euroa(sc4.hinta!)}, ja sen paine on {luku(sc4.tekniset.paineBar!)} bar. SC 4:ssä ei ole VapoHydro-toimintoa eikä silitysraudan liitäntää.</p>
+		<p><a href={mallisivut['SC 4']}>Kärcher SC 4</a> on kevyempi ja halvempi: suosittelemamme {sc4.nimi} maksaa {euroa(sc4.hinta!)}, ja sen paine on {luku(sc4.tekniset.paineBar!)} bar. Esittelemissämme SC 4 -versioissa ei Kärcherin tietojen mukaan ole VapoHydro-toimintoa.</p>
 		<p>Jos haluat, että irronnut lika ja kosteus imetään pois samalla vedolla, katso imevä <a href={mallisivut['SV 7']}>Kärcher SV 7</a> ({euroa(sv7.hinta!)}).</p>
 		<div class="mk-lista">
 			<Tuotekortti tuote={sc4} otsikko="Kärcher SC 4" sivu={mallisivut['SC 4']} kenelle="Kattila ja irrotettava säiliö, kevyempi kuin SC 5" tagi="Edullisempi" />

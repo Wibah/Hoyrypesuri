@@ -92,7 +92,7 @@ const ukk = [
 
 		<h2>Kärcher SC 4 vai SC 3 tai SC 5?</h2>
 		<p><a href={mallisivut['SC 3']}>Kärcher SC 3</a> lämpenee nopeammin ({lammitysaika(t3.lammitysaikaMin)}) ja on kevyempi ({luku(t3.painoKg!)} kg), mutta sen paine on {luku(t3.paineBar!)} bar. Suosittelemamme {sc3.nimi} maksaa {euroa(sc3.hinta!)}. Useimpiin koteihin SC 3 riittää.</p>
-		<p><a href={mallisivut['SC 5']}>Kärcher SC 5</a>:n paine on {luku(sc5.tekniset.paineBar!)} bar ja säiliö {luku(sc5.tekniset.sailioL!)} litraa, ja siinä on VapoHydro-toiminto, joka yhdistää höyryn ja kuuman vesisuihkun. SC 5 EasyFix maksaa {euroa(sc5.hinta!)}.</p>
+		<p><a href={mallisivut['SC 5']}>Kärcher SC 5</a>:n paine on {luku(sc5.tekniset.paineBar!)} bar ja säiliö {luku(sc5.tekniset.sailioL!)} litraa, ja siinä on VapoHydro-toiminto, jolla Kärcherin mukaan säädetään höyryn vesimäärää. SC 5 EasyFix maksaa {euroa(sc5.hinta!)}.</p>
 		<div class="mk-lista">
 			<Tuotekortti tuote={sc3} otsikko="Kärcher SC 3" sivu={mallisivut['SC 3']} kenelle="Lämpenee 30 sekunnissa, sopii useimpiin koteihin" tagi="Nopeampi" />
 			<Tuotekortti tuote={sc5} otsikko="Kärcher SC 5" sivu={mallisivut['SC 5']} kenelle="Suurin paine ja säiliö sekä VapoHydro" tagi="Tehokkain" />
