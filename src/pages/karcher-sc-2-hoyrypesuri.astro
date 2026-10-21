@@ -1,0 +1,127 @@
+---
+// SCN: tuki (malli), intentti Decision, emopilari /karcher-hoyrypesurit/. Hakusanat: kärcher höyrypesuri sc2 90,
+// kärcher sc2 höyrypesuri 30, kärcher höyrypesuri sc 2 easy fix 20, kärcher sc 2 deluxe höyrypesuri 20,
+// höyrypesuri kärcher sc 2 easyfix 10 (Ahrefs 2026-10). Versiot: SC 2 Upright (Kärcherin feed, päätuote) ja SC 2 EasyFix
+// (karcher.com, ei myynnissä 2026-10-12). SC 2 Deluxe EasyFix ei kuulu esiteltäviin malleihin (Villen päätös 2026-10-12),
+// joten se mainitaan vain tekstissä. Kirjoitettu hoyrypesuri-writer-skillillä (2026-10-21).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import TuoteSchema from '../components/tuote/TuoteSchema.astro';
+import TuoteHero from '../components/tuote/TuoteHero.astro';
+import TeknisetTiedot from '../components/tuote/TeknisetTiedot.astro';
+import VersioVertailu from '../components/tuote/VersioVertailu.astro';
+import Tuotekortti from '../components/tuote/Tuotekortti.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { paatuote, tuote, versiot, esiteltavat, luku, paiva, euroa, mallisivut, lammitysaika } from '../lib/tuotteet';
+
+const suositus = await paatuote('SC 2');
+const easyfix = await tuote('sc-2-easyfix');
+const kaikki = esiteltavat(await versiot('SC 2'));
+const sc1 = await paatuote('SC 1');
+const sc3 = await paatuote('SC 3');
+
+const t = suositus.tekniset;
+const te = easyfix.tekniset;
+const t3 = sc3.tekniset;
+
+const ukk = [
+	{
+		kysymys: 'Mikä ero on Kärcher SC 2 Uprightilla ja SC 2 EasyFixillä?',
+		vastaus: `SC 2 Upright on höyrymoppi pelkille lattioille. Sen lämmitysaika on ${lammitysaika(t.lammitysaikaMin)}, ja ${luku(t.sailioL!)} litran säiliön voi täyttää kesken työn. SC 2 EasyFix on säiliömalli, jossa on letku ja suuttimet myös saumoihin ja hanoihin. Siinä on ${luku(te.kattilaL!)} litran kattila, jonka lämmitysaika on ${luku(te.lammitysaikaMin!)} minuuttia, ja vettä lisätään vasta laitteen jäähdyttyä.`,
+	},
+	{
+		kysymys: 'Onko Kärcher SC 2 EasyFix myynnissä?',
+		vastaus: `Kärcher.com ei myynyt SC 2 EasyFixiä, kun tarkistimme hinnat ${paiva(easyfix.haettu)}. Jos tarvitset säiliömallin, katso <a href="${mallisivut['SC 3']}">Kärcher SC 3</a>. Sen säiliön voi täyttää kesken työn, ja lämmitysaika on ${lammitysaika(t3.lammitysaikaMin)}.`,
+	},
+	{
+		kysymys: 'Mikä on Kärcher SC 2 Deluxe?',
+		vastaus: `SC 2 Deluxe EasyFix on SC 2 EasyFixin versio, jossa on LED-valorengas, varustepussi ja rakoharja. Teho, paine ja kattila ovat Kärcherin mukaan samat kuin SC 2 EasyFixissä. Sekään ei ollut myynnissä Kärcher.comissa ${paiva(easyfix.haettu)}.`,
+	},
+	{
+		kysymys: 'Voiko Kärcher SC 2 Uprightilla puhdistaa laminaattia?',
+		vastaus: 'SC 2 Uprightissa on kaksi höyrytasoa, ja Kärcher neuvoo käyttämään laminaatilla pienempää höyrytehoa. Lähteet ovat laminaatista eri mieltä, joten tarkista lattian valmistajan ohje. Lisää tietoa on <a href="/hoyrymoppi-laminaatille/">laminaattioppaassa</a>.',
+	},
+	{
+		kysymys: 'Mistä saa Kärcher SC 2:n varaosat ja liinat?',
+		vastaus: 'Kärcher myy SC-sarjan EasyFix-lattialiinoja ja suuttimia erikseen. Yhteensopivat osat ovat <a href="/karcher-hoyrypesuri-varaosat/">Kärcherin höyrypesurin varaosasivulla</a>.',
+	},
+];
+---
+<Layout
+	title="Kärcher SC 2 höyrypesuri kokemuksia – Upright, EasyFix ja Deluxe (2026)"
+	description={`Kärcher SC 2 -höyrypesurin versiot, hinnat ja tekniset tiedot. SC 2 Upright on höyrymoppi lattioille, ja SC 2 EasyFix on säiliömalli, jossa on ${luku(te.kattilaL!)} litran kattila.`}
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Kärcher', sivu: '/karcher-hoyrypesurit/' }, { nimi: 'Kärcher SC 2', sivu: mallisivut['SC 2'] }]} />
+		<TuoteSchema tuote={suositus} />
+		<TuoteHero tuote={suositus} otsikko="Kärcher SC 2 -höyrypesuri – Upright ja EasyFix" yla="Kärcher · Höyrymoppi ja pieni säiliömalli" merkinta="Suosituksemme">
+			<p>Kärcherin SC 2 -sarjassa on kaksi erilaista laitetta. SC 2 Upright on höyrymoppi, joka puhdistaa vain lattioita, ja SC 2 EasyFix on pieni säiliömalli, jossa on letku ja suuttimet myös saumoihin ja hanoihin.</p>
+			<p>Suosittelemme SC 2 Uprightia, jos puhdistat höyryllä lähinnä laatta- ja vinyylilattioita. Sen lämmitysaika on valmistajan mukaan {lammitysaika(t.lammitysaikaMin)}, se painaa {luku(t.painoKg!)} kg, ja se maksaa Kärcher.comissa {euroa(suositus.hinta!)}. SC 2 EasyFix ei ollut myynnissä Kärcher.comissa {paiva(easyfix.haettu)}.</p>
+		</TuoteHero>
+
+		<h2>Kenelle Kärcher SC 2 Upright sopii?</h2>
+		<div class="pros-cons-mini">
+			<div class="pros-mini">
+				<strong>+ Sopii:</strong>
+				<ul>
+					<li>Laatta- ja vinyylilattioille, jotka haluat puhdistaa ilman pesuaineita</li>
+					<li>Nopeaan siivoukseen: lämmitysaika on {lammitysaika(t.lammitysaikaMin)}, ja {luku(t.sailioL!)} litran säiliö irrotetaan täyttöä varten</li>
+					<li>Pieneen säilytystilaan: moppi on {t.mitatMm!.replaceAll(' x ', ' × ')} mm</li>
+					<li>Herkemmille lattioille: höyryä säädetään kahvasta kahdella teholla</li>
+				</ul>
+			</div>
+			<div class="cons-mini">
+				<strong>- Ei sovi:</strong>
+				<ul>
+					<li>Saumoihin, hanoihin, liesiin ja suihkuseiniin: mukana on vain lattiasuutin</li>
+					<li>Isoihin lattiapintoihin yhdellä täytöllä: Kärcherin mukaan säiliö riittää noin {luku(t.pintaAlaM2!)} neliöön</li>
+					<li>Mattojen pesuun: höyry ei ime likaa pois kankaasta</li>
+				</ul>
+			</div>
+		</div>
+
+		<h2>Kärcher SC 2 Upright ja SC 2 EasyFix – versiot vertailussa</h2>
+		<p>SC 2 -sarjan versiot ovat eri laitteita, vaikka niillä on sama sarjanumero.</p>
+
+		<h3>Kärcher SC 2 Upright</h3>
+		<p>SC 2 Upright ({suositus.tuotenumero}) on höyrymoppi, jonka teho on {luku(t.tehoW!)} W. Mukana ovat EasyFix-lattiasuutin ja yksi lattialiina. Moppi maksaa Kärcher.comissa {euroa(suositus.hinta!)}.</p>
+
+		<h3>Kärcher SC 2 EasyFix</h3>
+		<p>SC 2 EasyFix ({easyfix.tuotenumero}) on pieni säiliömalli. Sen paine on {luku(te.paineBar!)} bar, ja siinä on {luku(te.kattilaL!)} litran kattila ja 2,2 metrin höyryletku. Mukana ovat lattiasuutin, käsisuutin, kohdesuutin, pyöreä harja ja kaksi jatkoputkea. Kattilan lämmitysaika on {luku(te.lammitysaikaMin!)} minuuttia, ja kattilaan lisätään vettä vasta, kun laite on jäähtynyt. {easyfix.myynnissa ? `SC 2 EasyFix maksaa Kärcher.comissa ${euroa(easyfix.hinta!)}.` : `SC 2 EasyFix ei ollut myynnissä Kärcher.comissa ${paiva(easyfix.haettu)}.`}</p>
+
+		<h3>Kärcher SC 2 Deluxe EasyFix</h3>
+		<p>SC 2 Deluxe EasyFix on SC 2 EasyFixin versio, jossa on LED-valorengas, varustepussi ja rakoharja. Kärcherin mukaan teho, paine ja kattila ovat samat kuin SC 2 EasyFixissä. Deluxe ei ollut myynnissä Kärcher.comissa {paiva(easyfix.haettu)}.</p>
+		<VersioVertailu versiot={kaikki} paatuoteId={suositus.id} />
+		<p class="tp-lahde">Hinnat ja tekniset tiedot: Kärcher.com, tarkistettu {paiva(suositus.haettu)}.</p>
+
+		<h2>Tekniset tiedot: Kärcher {suositus.nimi}</h2>
+		<TeknisetTiedot tuote={suositus} />
+
+		<h2>Kärcher SC 2 testeissä</h2>
+		<p>Kuluttaja.fi:n laboratoriotestissä (3.12.2024) olivat mukana sekä SC 2 EasyFix että SC 2 Upright. Mallikohtaiset tulokset ovat maksumuurin takana. Julkisten havaintojen mukaan testin höyrypesurit puhdistivat yleensä paremmin kuin höyrymopit, mutta mopit olivat helpompia ja nopeampia ottaa käyttöön. Sama ero näkyy SC 2 -sarjan teknisissä tiedoissa: Uprightin lämmitysaika on {lammitysaika(t.lammitysaikaMin)}, ja EasyFixin {luku(te.lammitysaikaMin!)} minuuttia.</p>
+		<p>Brittiläisissä testeissä, joita olemme lukeneet, SC 2:ta ei ollut mukana. Käyttäjien kokemuksia keräämme <a href="#kokemuksia">sivun lopussa olevalla lomakkeella</a>.</p>
+		<p class="tp-lahde">Lähde: <a href="https://kuluttaja.fi/testi/hoyrypesurit/" target="_blank" rel="nofollow noopener">Kuluttaja.fi</a>.</p>
+
+		<h2>Näin puhdistat lattian Kärcher SC 2 Uprightilla</h2>
+		<ol>
+			<li>Imuroi tai lakaise lattia ensin, jotta et levitä irtolikaa.</li>
+			<li>Kiinnitä EasyFix-liina lattiasuuttimeen, täytä säiliö ja odota, että moppi on käyttövalmis.</li>
+			<li>Valitse höyryteho kahvasta. Käytä laminaatilla ja muilla herkillä lattioilla pienempää tehoa.</li>
+			<li>Vedä moppia rauhallisesti. Kun säiliö tyhjenee, irrota se ja täytä uudelleen.</li>
+			<li>Pese liina 60 asteessa, ja tyhjennä säiliö käytön jälkeen.</li>
+		</ol>
+		<p>Lattiatyypeistä ja höyrystä kerrotaan lisää <a href="/hoyrymoppi-laminaatille/">laminaattioppaassa</a>. Kaikki Kärcherin mallit ovat <a href="/karcher-hoyrypesurit/">Kärcherin höyrypesureiden mallistotaulukossa</a>.</p>
+
+		<h2>Kärcher SC 2 vai SC 3 tai SC 1?</h2>
+		<p><a href={mallisivut['SC 3']}>Kärcher SC 3</a> on säiliömalli, jolla puhdistaa sekä lattiat että kylpyhuoneen ja keittiön. Sen lämmitysaika on {lammitysaika(t3.lammitysaikaMin)}, ja {luku(t3.sailioL!)} litran säiliön voi täyttää kesken työn. Suosittelemamme {sc3.nimi} maksaa {euroa(sc3.hinta!)}, eli {euroa(sc3.hinta! - suositus.hinta!)} enemmän kuin SC 2 Upright. Valitse SC 3, jos haluat puhdistaa muutakin kuin lattioita.</p>
+		<p><a href={mallisivut['SC 1']}>Kärcher SC 1</a> on käsimalli saumoihin, hanoihin ja liesiin. Se maksaa {euroa(sc1.hinta!)}, mutta ei sovi lattioille. Muiden merkkien höyrymoppeja vertaillaan <a href="/hoyrymoppi/">höyrymoppisivulla</a>.</p>
+		<div class="mk-lista">
+			<Tuotekortti tuote={sc3} otsikko="Kärcher SC 3" sivu={mallisivut['SC 3']} kenelle="Säiliömalli lattioille, kylpyhuoneeseen ja keittiöön" tagi="Koko kotiin" />
+			<Tuotekortti tuote={sc1} otsikko="Kärcher SC 1" sivu={mallisivut['SC 1']} kenelle="Käsimalli saumoihin, hanoihin ja liesiin" tagi="Pieniin kohteisiin" />
+		</div>
+
+		<Kokemuslomake malli="Kärcher SC 2" polku={mallisivut['SC 2']} />
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>
