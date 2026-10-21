@@ -1,0 +1,112 @@
+---
+// SCN: tuki (merkki ja mallisto), intentti Decision, emopilari /hoyrymoppi/. Hakusanat: vileda höyrymoppi 350 (TP 400),
+// vileda höyrymoppi kokemuksia 100, vileda steam plus höyrymoppi 80, höyrymoppi vileda 30, vileda steam xxl plus
+// höyrymoppi 10, vileda höyrymoppi käyttöohje 10, vileda steam höyrymoppi käyttöohje 10 (Ahrefs 2026-10). Kauppahaut
+// (Lidl, Prisma, Citymarket) jätetään pois. Merkkisivujen kyselypohja: merkki, hinta, kokemuksia (lomake) ja käyttöohje.
+// Kokemuslomake on vain tällä sivulla (SCN.md, riski 2). Tekniset tiedot vileda.de ja vileda.fi (data/vileda/).
+// Kirjoitettu hoyrypesuri-writer-skillillä (2026-10-21).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import TuoteSchema from '../components/tuote/TuoteSchema.astro';
+import TuoteHero from '../components/tuote/TuoteHero.astro';
+import MallistoTaulu from '../components/tuote/MallistoTaulu.astro';
+import Merkkikortit from '../components/tuote/Merkkikortit.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { merkinTuotteet, tuote, euroa, luku, paiva, hintavali, lammitysaika, mallisivut } from '../lib/tuotteet';
+
+const mallit = await merkinTuotteet('Vileda');
+const myynnissa = mallit.filter((t) => t.myynnissa && t.hinta != null);
+const suositus = await tuote('vileda-steam-plus');
+const xxl = await tuote('vileda-steam-plus-xxl');
+const pro = await tuote('vileda-steam-plus-pro');
+const proXxl = await tuote('vileda-steam-plus-pro-xxl');
+const sc2 = await tuote('sc-2-upright');
+const bd = await tuote('black-decker-fsm13e1');
+const t = suositus.tekniset;
+
+const ukk = [
+	{
+		kysymys: 'Mikä Vileda-höyrymoppi kannattaa ostaa?',
+		vastaus: `Useimpiin koteihin riittää Vileda Steam Plus (${euroa(suositus.hinta!)}). Isoille lattiapinnoille sopii Steam Plus XXL (${euroa(xxl.hinta!)}), jonka moppi on Viledan mukaan 40 cm leveä ja johto ${luku(xxl.tekniset.virtajohtoM!)} metriä. Pro-malleissa on neljä valmiiksi asetettua höyrytasoa ja erillinen asetus herkille lattioille.`,
+	},
+	{
+		kysymys: 'Mikä ero on Vileda Steam Plussalla ja Steam 3.0:lla?',
+		vastaus: 'Suomalaiset kaupat myyvät samaa höyrymoppia sekä nimellä Vileda Steam Plus että Vileda Steam 3.0 tai Steam Mop 3.0. Tuotteilla on sama EAN-koodi (4023103229716). Samoin Steam Plus XXL ja Steam Plus XXL 3.0 ovat sama laite.',
+	},
+	{
+		kysymys: 'Mistä löydän Vileda-höyrymopin käyttöohjeen?',
+		vastaus: 'Käyttöohje tulee mopin mukana, ja Viledan tuotesivuilla on ohjeet tuotteen käyttöön. Täytä säiliö mukana tulevalla mittakupilla, kytke moppi verkkovirtaan ja odota, että se on käyttövalmis. Viledan mukaan Steam Plus lämpenee 15 sekunnissa, ja sen lämpötilantunnistuksen ansiosta mopin voi irrottaa verkkovirrasta huonetta vaihtaessa ilman uutta odotusta.',
+	},
+	{
+		kysymys: 'Voiko Vileda-höyrymopilla puhdistaa parketin?',
+		vastaus: 'Viledan mukaan Steam Plussan säädettävä höyry sopii myös parketille ja mikrokuituliina puulattioille. Lähteet ovat kuitenkin parketista eri mieltä, ja vanha parketti voi vaurioitua höyrystä. Käytä pienintä höyrytehoa ja tarkista lattian valmistajan ohje. Lisää tietoa on <a href="/hoyrymoppi-laminaatille/">laminaattioppaassa</a>.',
+	},
+	{
+		kysymys: 'Mistä saa Vileda-höyrymopin vaihtoliinat?',
+		vastaus: 'Vileda myy Steam-mopeille ja Steam XXL -mopeille omat kahden liinan pakkauksensa, ja Pro-malleille on omat liinansa. Viledan mukaan Pro-mallien liinat pestään enintään 60 asteessa ja vaihdetaan puolen vuoden välein.',
+	},
+];
+---
+<Layout
+	title="Vileda höyrymoppi kokemuksia – Steam Plus, XXL ja Pro, hinnat (2026)"
+	description={`Vileda höyrymopit vertailussa: Steam Plus, Steam Plus XXL ja Pro-mallit. Hinnat ${hintavali(myynnissa)}, tekniset tiedot, testit, käyttöohje ja käyttäjien kokemukset.`}
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Höyrymoppi', sivu: '/hoyrymoppi/' }, { nimi: 'Vileda höyrymoppi', sivu: '/vileda-hoyrymoppi/' }]} />
+		<TuoteSchema tuote={suositus} />
+		<TuoteHero tuote={suositus} otsikko="Vileda höyrymoppi – Steam Plus, XXL ja Pro" yla="Vileda · Höyrymopit" merkinta="Suosituksemme">
+			<p>Vileda myy Suomessa neljää höyrymoppia: Steam Plussaa, Steam Plus XXL:ää ja kahta Pro-mallia. Kaikkien mopit lämpenevät Viledan mukaan 15 sekunnissa, ja ne puhdistavat lattiat höyryllä ja mikrokuituliinalla ilman pesuaineita. Hinnat ovat suomalaisissa verkkokaupoissa {hintavali(myynnissa)}.</p>
+			<p>Suosittelemme Vileda Steam Plussaa. Se on mopeista edullisin, painaa {luku(t.painoKg!)} kg, ja Guardianin testissä (2025) sen brittiläinen versio oli paras höyrymoppi.</p>
+		</TuoteHero>
+
+		<h2>Vileda höyrymoppi: mallit ja erot</h2>
+		<div class="tp-taulu">
+			<table class="tp-versiot">
+				<thead><tr><th scope="col">Malli</th><th scope="col">Moppi</th><th scope="col">Höyryn säätö</th><th scope="col">Hinta</th></tr></thead>
+				<tbody>
+					<tr><th scope="row">Vileda Steam Plus</th><td>Kolmiomainen, johto {luku(t.virtajohtoM!)} m</td><td>Säädettävä</td><td>{euroa(suositus.hinta!)}</td></tr>
+					<tr><th scope="row">Vileda Steam Plus XXL</th><td>40 cm leveä, johto {luku(xxl.tekniset.virtajohtoM!)} m</td><td>Säädettävä</td><td>{euroa(xxl.hinta!)}</td></tr>
+					<tr><th scope="row">Vileda Steam Plus Pro</th><td>Pienemmille pinnoille ja nurkkiin</td><td>4 valmista tasoa, myös herkille lattioille</td><td>{euroa(pro.hinta!)}</td></tr>
+					<tr><th scope="row">Vileda Steam Plus Pro XXL</th><td>40 cm leveä</td><td>4 valmista tasoa, myös herkille lattioille</td><td>{euroa(proXxl.hinta!)}</td></tr>
+				</tbody>
+			</table>
+		</div>
+		<p>Steam Plussan ja Steam Plus XXL:n teho on Viledan mukaan {luku(t.tehoW!)} W ja säiliö {luku(t.sailioL!)} litraa, ja mukana tulevat mattoliukuri, vaihtoliina ja 250 ml:n mittakuppi. Pro-mallien tehoa ja säiliötä Vileda ei ilmoita. Pro-malleissa höyrytaso valitaan kahvan napista neljästä asetuksesta (laatat, matto, tiivistetyt lattiat ja herkät lattiat), ja mukana on lämmönkestävä Sensitive-liina herkille lattioille.</p>
+		<p>Kaupat myyvät Steam Plussaa myös nimellä Steam 3.0 ja Steam Plus XXL:ää nimellä Steam Plus XXL 3.0. Laitteet ovat samat, ja niillä on sama EAN-koodi.</p>
+
+		<Merkkikortit tuotteet={mallit} otsikko="Vileda höyrymoppi hinta: mallit hintajärjestyksessä" ohita={suositus.id} />
+
+		<h2>Vileda höyrymopit taulukkona</h2>
+		<MallistoTaulu tuotteet={mallit} suositusId={suositus.id} />
+		<p class="tp-lahde">Tekniset tiedot: Vileda (vileda.de ja vileda.fi). Hinnat suomalaisista verkkokaupoista, tarkistettu {paiva(suositus.haettu)}.</p>
+
+		<h2>Vileda höyrymoppi testeissä</h2>
+		<ul>
+			<li><strong>Guardian (12.3.2025):</strong> Vileda Steam Mop Plus oli testin paras höyrymoppi. Se lämpeni 17 sekunnissa, ja kunnollinen höyry tuli noin 30 sekuntia myöhemmin. Testaaja kehui runsasta höyryä, kolmea höyrytasoa, selkeitä merkkivaloja ja mattoliukuria. Moppi kulutti kuitenkin enemmän sähköä kuin moni muu höyrymoppi, ja sen pää oli hieman leveä ahtaisiin paikkoihin.</li>
+			<li><strong>Kuluttaja.fi (3.12.2024):</strong> Vileda Steam Plus XXL oli mukana laboratoriotestissä, mutta mallikohtaiset tulokset ovat maksumuurin takana.</li>
+			<li><strong>Test.se (päivitetty 17.8.2026):</strong> ruotsalainen koostesivu nimesi Vileda Steamin parhaaksi höyrymopiksi testien ja käyttäjäarvioiden perusteella.</li>
+		</ul>
+		<p>Guardian testasi Britannian myyntiversiota, jonka varusteet voivat poiketa Suomessa myytävästä.</p>
+		<p class="tp-lahde">Lähteet: <a href="https://www.theguardian.com/thefilter/2025/mar/12/best-steam-cleaner-mop" target="_blank" rel="nofollow noopener">Guardian</a>, <a href="https://kuluttaja.fi/testi/hoyrypesurit/" target="_blank" rel="nofollow noopener">Kuluttaja.fi</a>, <a href="https://www.test.se/angtvatt/" target="_blank" rel="nofollow noopener">Test.se</a>.</p>
+
+		<h2>Vileda höyrymoppi käyttöohje</h2>
+		<ol>
+			<li>Imuroi tai lakaise lattia ensin.</li>
+			<li>Täytä säiliö mittakupilla. Säiliön ikkunasta näet, paljonko vettä on jäljellä.</li>
+			<li>Kiinnitä liina mopin alle ja kytke moppi verkkovirtaan. Moppi on Viledan mukaan käyttövalmis 15 sekunnissa.</li>
+			<li>Valitse höyryteho lattian mukaan. Käytä herkillä lattioilla pienintä tehoa tai Pro-mallin herkkien lattioiden asetusta.</li>
+			<li>Matoille kiinnitä mattoliukuri. Se raikastaa lyhytnukkaista mattoa, mutta ei pese sitä.</li>
+			<li>Pese liina pesukoneessa. Pro-mallien liinat pestään Viledan mukaan enintään 60 asteessa.</li>
+		</ol>
+		<p>Mopin varren voi irrottaa ja kiinnittää mopin taakse säilytystä varten, joten se mahtuu pieneen kaappiin.</p>
+
+		<h2>Vileda vai muu höyrymoppi?</h2>
+		<p>Vileda on Suomessa haetuin höyrymoppimerkki. Guardianin testissä (2025) Black+Decker FSM13E1 oli lähellä Vileda Steam Plussaa, ja se maksaa nyt {euroa(bd.hinta!)}. Kärcherin höyrymoppi <a href={mallisivut['SC 2']}>SC 2 Upright</a> maksaa {euroa(sc2.hinta!)}, ja sen säiliö on {luku(sc2.tekniset.sailioL!)} litraa. Viledan höyrymopit ovat pelkkiä lattiamoppeja. Jos haluat puhdistaa samalla laitteella myös saumoja ja hanoja, valitse malli, josta irtoaa käsiosa. Kaikkien merkkien höyrymopit ovat <a href="/hoyrymoppi/">höyrymoppivertailussa</a>.</p>
+
+		<Kokemuslomake malli="Vileda" polku="/vileda-hoyrymoppi/" mallikentta otsikko="Onko sinulla Vileda höyrymoppi kokemuksia? Kerro ne meille!">
+			<p>Keräämme Viledan höyrymoppien käyttäjien kokemuksia. Kerro, mikä malli sinulla on, millä lattioilla käytät sitä ja mikä toimii tai ei toimi. Luemme jokaisen kokemuksen ennen julkaisua.</p>
+		</Kokemuslomake>
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>
