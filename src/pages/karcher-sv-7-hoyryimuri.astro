@@ -1,0 +1,114 @@
+---
+// SCN: tuki (malli), intentti Decision, emopilari /karcher-hoyrypesurit/. Hakusanat: kärcher imevä höyrypesuri 40
+// (Parent keyword kärcher sv 7, TP 150), kärcher sv 7 imuroiva höyrypesuri 20, kärcher sv 7 imevä höyrypesuri 10,
+// kärcher höyrypesuri imulla ja imuri (ei volyymia) (Ahrefs 2026-10). Mallit: SV 7 (päätuote) ja SCV 4, molemmat Kärcherin
+// feedissä. Yleinen haku "imevä höyrypesuri" kuuluu sivulle /imeva-hoyrypesuri/, johon linkitetään sivuttain.
+// Kirjoitettu hoyrypesuri-writer-skillillä (2026-10-21). Lukemissamme testeissä SV 7:ää ja SCV 4:ää ei ollut.
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import TuoteSchema from '../components/tuote/TuoteSchema.astro';
+import TuoteHero from '../components/tuote/TuoteHero.astro';
+import TeknisetTiedot from '../components/tuote/TeknisetTiedot.astro';
+import Tuotekortti from '../components/tuote/Tuotekortti.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { paatuote, tuote, luku, paiva, euroa, mallisivut, lammitysaika } from '../lib/tuotteet';
+
+const suositus = await paatuote('SV 7');
+const scv4 = await tuote('scv-4');
+const sc3 = await paatuote('SC 3');
+const sc5 = await paatuote('SC 5');
+
+const t = suositus.tekniset;
+const v = suositus.teknisetValmistajalta;
+const ts = scv4.tekniset;
+const vs = scv4.teknisetValmistajalta;
+const scvAle = scv4.hintaEnnenAlennusta != null && scv4.hintaEnnenAlennusta > scv4.hinta!;
+
+const ukk = [
+	{
+		kysymys: 'Miten Kärcher SV 7 eroaa tavallisesta höyrypesurista?',
+		vastaus: `Tavallinen höyrypesuri irrottaa lian höyryllä, ja lika pyyhitään liinalla pois. SV 7 höyryttää ja imee samalla vedolla, joten irronnut lika ja kosteus imetään laitteeseen. Laitteessa on ${v['Vesisuodatin (l)']} litran vesisuodatin ja HEPA-suodatin. Kärcherin mukaan SV 7 höyrypesee, imuroi ja kuivaa yhdellä kertaa.`,
+	},
+	{
+		kysymys: 'Mikä ero on Kärcher SV 7:llä ja SCV 4:llä?',
+		vastaus: `SV 7 on pyörillä kulkeva laite, jossa on letku ja paljon suuttimia lattioille, ikkunoille, huonekaluille ja saumoille. SCV 4 on pystymallinen höyryimuri, jossa on tela lattioiden puhdistukseen. SCV 4:n lämmitysaika on ${lammitysaika(ts.lammitysaikaMin)}, ja se maksaa ${euroa(scv4.hinta!)}. SV 7:n lämmitysaika on ${luku(t.lammitysaikaMin!)} minuuttia, ja se maksaa ${euroa(suositus.hinta!)}.`,
+	},
+	{
+		kysymys: 'Voiko Kärcher SV 7:ään lisätä vettä kesken työn?',
+		vastaus: 'Voi. Kärcher ilmoittaa SV 7:n teknisissä tiedoissa jatkuvan täytön ja kaksoissäiliöjärjestelmän, joten työtä ei tarvitse keskeyttää laitteen jäähtymisen takia.',
+	},
+	{
+		kysymys: 'Tarvitseeko Kärcher SV 7 vaahdonestoainetta?',
+		vastaus: 'SV 7:n mukana tulee vaahdonestoainetta, jota käytetään laitteen vesisuodattimessa. Kärcher myy vaahdonestoainetta myös erikseen. Varaosat ja tarvikkeet ovat <a href="/karcher-hoyrypesuri-varaosat/">Kärcherin varaosasivulla</a>.',
+	},
+	{
+		kysymys: 'Pesekö Kärcher SV 7 sohvan tai maton?',
+		vastaus: 'SV 7:n mukana tulevat kalustesuulakkeet, mutta laite ei pese kangasta ruiskutuksella ja imulla kuten tekstiilipesuri. Sohvan ja maton pesuun tarvitaan <a href="https://tekstiilipesuri.com/">tekstiilipesuri</a>.',
+	},
+];
+---
+<Layout
+	title="Kärcher SV 7 kokemuksia – imevä höyrypesuri ja SCV 4 höyryimuri (2026)"
+	description={`Kärcher SV 7 on imevä höyrypesuri, joka höyryttää ja imee samalla vedolla. ${luku(t.paineBar!)} bar, ${v['Höyryn ulostulomäärä (g/min)']} g/min höyryä, vesisuodatin ja HEPA-suodatin. Vertailussa myös SCV 4.`}
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Kärcher', sivu: '/karcher-hoyrypesurit/' }, { nimi: 'Kärcher SV 7', sivu: mallisivut['SV 7'] }]} />
+		<TuoteSchema tuote={suositus} />
+		<TuoteHero tuote={suositus} otsikko="Kärcher SV 7 – imevä höyrypesuri ja SCV 4 -höyryimuri" yla="Kärcher · Imevä höyrypesuri" merkinta="Suosituksemme">
+			<p>Kärcher SV 7 on imevä höyrypesuri. Se höyryttää pinnan ja imee irronneen lian ja kosteuden samalla vedolla. Kärcherin mukaan SV 7 höyrypesee, imuroi ja kuivaa yhdellä kertaa. Höyrynpaine on {luku(t.paineBar!)} bar, höyryä tulee {v['Höyryn ulostulomäärä (g/min)']} g/min, ja imun moottoriteho on {v['Maks. moottoriteho (W)']} W.</p>
+			<p>SV 7 maksaa Kärcher.comissa {euroa(suositus.hinta!)}, ja se on Kärcherin kallein kotikäyttöön tarkoitettu höyrylaite. Edullisempi vaihtoehto lattioille on SCV 4 -höyryimuri.</p>
+		</TuoteHero>
+
+		<h2>Kenelle imevä höyrypesuri Kärcher SV 7 sopii?</h2>
+		<div class="pros-cons-mini">
+			<div class="pros-mini">
+				<strong>+ Sopii:</strong>
+				<ul>
+					<li>Kotiin, jossa halutaan höyryttää ja imuroida samalla laitteella kovat lattiat, laatat ja ikkunat</li>
+					<li>Lattioille, joiden pitää jäädä mahdollisimman kuiviksi: imu vie kosteuden pois samalla vedolla</li>
+					<li>Pitkiin siivouksiin: Kärcherin mukaan säiliötä voi täyttää jatkuvasti</li>
+					<li>Monenlaisiin pintoihin: mukana ovat lattia-, käsi-, kohde-, kaluste-, rako- ja ikkunasuulakkeet</li>
+				</ul>
+			</div>
+			<div class="cons-mini">
+				<strong>- Ei sovi:</strong>
+				<ul>
+					<li>Nopeaan käyttöön: lämmitysaika on {luku(t.lammitysaikaMin!)} minuuttia</li>
+					<li>Kanniskeltavaksi: laite painaa {luku(t.painoKg!)} kg ja on {t.mitatMm!.replaceAll(' x ', ' × ')} mm</li>
+					<li>Pieneen budjettiin: säiliömalli <a href={mallisivut['SC 3']}>SC 3</a> maksaa {euroa(sc3.hinta!)}</li>
+					<li>Sohvan ja maton pesuun: SV 7 ei pese kangasta kuten tekstiilipesuri</li>
+				</ul>
+			</div>
+		</div>
+
+		<h2>Miten Kärcher SV 7 toimii?</h2>
+		<p>SV 7:ssä on kaksi toimintoa samassa rungossa. Höyrypuoli kuumentaa veden höyryksi ja puhaltaa sen suulakkeesta {luku(t.paineBar!)} barin paineella. Imupuoli imee irronneen lian ja kosteuden laitteeseen. Laitteessa on {v['Vesisuodatin (l)']} litran vesisuodatin ja HEPA-suodatin, ja mukana tulee vaahdonestoainetta vesisuodatinta varten. Kärcherin mukaan alipaine on {v['Alipaine (mbar/kPa)'].split(' / ')[0]} mbar.</p>
+		<p>Lattiavarusteessa on Kärcherin mukaan kolme käyttötapaa koville ja puupintaisille lattioille. Puulattioilla tarkista silti lattian valmistajan ohje, sillä lähteet ovat höyrystä ja puusta eri mieltä (ks. <a href="/hoyrymoppi-laminaatille/">laminaattiopas</a>).</p>
+
+		<h2>Tekniset tiedot: Kärcher SV 7</h2>
+		<TeknisetTiedot tuote={suositus} />
+
+		<h2>Kärcher SCV 4 – höyryimuri lattioille</h2>
+		<p>Kärcher SCV 4 ({scv4.tuotenumero}) on pystymallinen höyryimuri lattioille. Kärcherin mukaan se poistaa karkean ja märän lian lattioilta höyryllä ilman pesuaineita. Laitteessa on tela, kahden tehon höyrynsäätö ja {luku(ts.sailioL!)} litran säiliö, joka irrotetaan täyttöä varten. Lämmitysaika on {lammitysaika(ts.lammitysaikaMin)}, ja yksi täyttö riittää noin {luku(ts.pintaAlaM2!)} neliöön. SCV 4 painaa {luku(ts.painoKg!)} kg, ja virtajohto on {luku(ts.virtajohtoM!)} m. {scvAle ? `SCV 4 maksaa nyt ${euroa(scv4.hinta!)}, kun normaalihinta on ${euroa(scv4.hintaEnnenAlennusta!)}.` : `SCV 4 maksaa ${euroa(scv4.hinta!)}.`}</p>
+		<p>Valitse SCV 4, jos haluat imevän laitteen vain lattioille. Valitse SV 7, jos haluat puhdistaa myös ikkunat, laatat, saumat ja huonekalut.</p>
+		<div class="mk-lista">
+			<Tuotekortti tuote={scv4} otsikko="Kärcher SCV 4" sivu={mallisivut['SV 7']} kenelle="Pystymallinen höyryimuri lattioille" tagi="Lattioille" />
+		</div>
+
+		<h2>Kärcher SV 7 testeissä</h2>
+		<p>Lukemissamme testeissä, kuten Kuluttaja.fi:n (2024), Guardianin (2025) ja Independentin (2026) testeissä, ei ollut mukana SV 7:ää eikä SCV 4:ää. Siksi emme voi kertoa testitulosta. Käyttäjien kokemuksia keräämme <a href="#kokemuksia">sivun lopussa olevalla lomakkeella</a>.</p>
+
+		<h2>Kärcher SV 7 vai tavallinen höyrypesuri?</h2>
+		<p>Tavallinen säiliömalli, kuten <a href={mallisivut['SC 3']}>Kärcher SC 3</a>, lämpenee nopeammin ja maksaa vähemmän: {sc3.nimi} maksaa {euroa(sc3.hinta!)}, ja sen lämmitysaika on {lammitysaika(sc3.tekniset.lammitysaikaMin)}. Irronnut lika pyyhitään kuitenkin liinalla, ja lattia jää kosteaksi. Guardianin testissä (2025) SC 3:n brittiläisen version jäljiltä lattia jäi melko märäksi.</p>
+		<p>Valitse SV 7, jos haluat, että lika ja kosteus imetään pois samalla vedolla, ja olet valmis maksamaan siitä. Muiden merkkien imevät höyrypesurit, kuten Polti Vaporetto 3 Clean ja Bissell Vac & Steam, ovat <a href="/imeva-hoyrypesuri/">imevä höyrypesuri -sivulla</a>.</p>
+		<div class="mk-lista">
+			<Tuotekortti tuote={sc3} otsikko="Kärcher SC 3" sivu={mallisivut['SC 3']} kenelle="Säiliömalli lattioille, kylpyhuoneeseen ja keittiöön" tagi="Edullisempi" />
+			<Tuotekortti tuote={sc5} otsikko="Kärcher SC 5" sivu={mallisivut['SC 5']} kenelle="Kärcherin tehokkain säiliömalli ilman imua" tagi="Ilman imua" />
+		</div>
+		<p class="tp-lahde">Hinnat ja tekniset tiedot: Kärcher.com, tarkistettu {paiva(suositus.haettu)}. Kaikki Kärcherin mallit ovat <a href="/karcher-hoyrypesurit/">Kärcherin höyrypesureiden mallistotaulukossa</a>.</p>
+
+		<Kokemuslomake malli="Kärcher SV 7" polku={mallisivut['SV 7']} mallikentta otsikko="Kärcher SV 7 kokemuksia" />
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>
