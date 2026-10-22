@@ -30,8 +30,9 @@ def eurot(arvo):
     return float(m.group(1)) if m else None
 
 
-def tarjoukset(skut, merkki):
-    """SKU → lista varastossa olevista tarjouksista kaikista feedeistä. merkki: pienillä kirjaimilla, esim. 'bissell'."""
+def tarjoukset(skut, merkki, raja=2000):
+    """SKU → lista varastossa olevista tarjouksista kaikista feedeistä. merkki: pienillä kirjaimilla, esim. 'bissell'.
+    raja: tätä kalliimmat hinnat hylätään virhehintoina (ammattilaitteille korkeampi)."""
     csv.field_size_limit(10**9)
     tulos = {s: [] for s in skut}
     if not FEEDIT.exists():
@@ -55,11 +56,11 @@ def tarjoukset(skut, merkki):
                     tulos[s].append({'kauppa': kauppa, 'nimi': nimi, 'url': url, 'kuva': r.get('image_link'),
                                      'hinta': ale if ale and ale < hinta else hinta,
                                      'ennen': hinta if ale and ale < hinta else None})
-    # Feedeissä on virhehintoja (esim. 46112.2 €), joten yli 2,5-kertaa mediaanin tai yli 2000 €:n hinnat pois.
+    # Feedeissä on virhehintoja (esim. 46112.2 €), joten yli 2,5-kertaa mediaanin tai rajan ylittävät hinnat pois.
     for s, tt in tulos.items():
         if tt:
             med = statistics.median(t['hinta'] for t in tt)
-            hylatyt = [t for t in tt if t['hinta'] > 2000 or (len(tt) > 1 and t['hinta'] > 2.5 * med)]
+            hylatyt = [t for t in tt if t['hinta'] > raja or (len(tt) > 1 and t['hinta'] > 2.5 * med)]
             for t in hylatyt:
                 print(f"  virhehinta ohitettu: {s} {t['nimi']} {t['hinta']} €", file=sys.stderr)
             tulos[s] = [t for t in tt if t not in hylatyt]

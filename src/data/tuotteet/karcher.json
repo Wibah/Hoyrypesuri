@@ -58,7 +58,7 @@
 		},
 		"valmistajanKuva": "https://s1.kaercher-media.com/mam/15164000/mainproduct/215728/d0.jpg",
 		"lahde": "https://www.karcher.com/fi/home-garden/hoeyrypuhdistimet/sc-1-15164000.html",
-		"haettu": "2026-10-12"
+		"haettu": "2026-10-22"
 	},
 	{
 		"id": "sc-1-multi-up-textile-edition",
@@ -121,7 +121,7 @@
 		},
 		"valmistajanKuva": "https://s1.kaercher-media.com/mam/15164210/mainproduct/cbbda20f-ac5e-477d-81aa-7de531cdf392/d0.jpg",
 		"lahde": "https://www.karcher.com/fi/home-garden/hoeyrypuhdistimet/sc-1-multi-up-textile-edition-15164210.html",
-		"haettu": "2026-10-12"
+		"haettu": "2026-10-22"
 	},
 	{
 		"id": "sc-2-deluxe-easyfix",
@@ -189,7 +189,7 @@
 		},
 		"valmistajanKuva": "https://s1.kaercher-media.com/mam/15134000/mainproduct/216547/d0.jpg",
 		"lahde": "https://www.karcher.com/fi/home-garden/hoeyrypuhdistimet/sc-2-deluxe-easyfix-15134000.html",
-		"haettu": "2026-10-12"
+		"haettu": "2026-10-22"
 	},
 	{
 		"id": "sc-2-easyfix",
@@ -246,9 +246,9 @@
 			"Höyryletku käsikahvalla: 2.2 m",
 			"Säilytyspaikat varusteille"
 		],
-		"hinta": null,
+		"hinta": 149,
 		"hintaEnnenAlennusta": null,
-		"myynnissa": false,
+		"myynnissa": true,
 		"ostopaikka": {
 			"nimi": "Kärcher.com",
 			"napinTeksti": "Katso tarjous",
@@ -256,7 +256,7 @@
 		},
 		"valmistajanKuva": "https://s1.kaercher-media.com/mam/15126000/mainproduct/216542/d0.jpg",
 		"lahde": "https://www.karcher.com/fi/home-garden/hoeyrypuhdistimet/sc-2-easyfix-15126000.html",
-		"haettu": "2026-10-12"
+		"haettu": "2026-10-22"
 	},
 	{
 		"id": "sc-2-upright",
@@ -314,7 +314,7 @@
 		},
 		"valmistajanKuva": "https://s1.kaercher-media.com/mam/15135000/mainproduct/4409c8c9-8f2f-44b6-9d47-c3145ffd949b/d0.jpg",
 		"lahde": "https://www.karcher.com/fi/home-garden/hoeyrypuhdistimet/sc-2-upright-15135000.html",
-		"haettu": "2026-10-12"
+		"haettu": "2026-10-22"
 	},
 	{
 		"id": "sc-3-deluxe-anniversary-edition",
@@ -349,7 +349,7 @@
 			"Vaiheiden määrä (Ph)": "1",
 			"Jännite (V)": "220 - 240",
 			"Taajuus (Hz)": "50 - 60",
-			"Väri": "musta",
+			"Väri": "Musta",
 			"Paino (ilman varusteita) (kg)": "3,3",
 			"Paino (sis. tuotepakkauksen) (kg)": "5,7",
 			"Mitat (p x l x k) (mm)": "361 x 251 x 282"
@@ -384,7 +384,7 @@
 		},
 		"valmistajanKuva": "https://s1.kaercher-media.com/mam/15134360/mainproduct/a0087b6e-c381-4ab9-965e-68b8b494adcd/d0.jpg",
 		"lahde": "https://www.karcher.com/fi/home-garden/hoeyrypuhdistimet/sc-3-deluxe-anniversary-edition-15134360.html",
-		"haettu": "2026-10-12"
+		"haettu": "2026-10-22"
 	},
 	{
 		"id": "sc-3-deluxe-easyfix",
@@ -455,7 +455,7 @@
 		},
 		"valmistajanKuva": "https://s1.kaercher-media.com/mam/15134300/mainproduct/216558/d0.jpg",
 		"lahde": "https://www.karcher.com/fi/home-garden/hoeyrypuhdistimet/sc-3-deluxe-easyfix-15134300.html",
-		"haettu": "2026-10-12"
+		"haettu": "2026-10-22"
 	},
 	{
 		"id": "sc-3-easyfix",
@@ -525,7 +525,7 @@
 		},
 		"valmistajanKuva": "https://s1.kaercher-media.com/mam/15136500/mainproduct/220251/d0.jpg",
 		"lahde": "https://www.karcher.com/fi/home-garden/hoeyrypuhdistimet/sc-3-easyfix-15136500.html",
-		"haettu": "2026-10-12"
+		"haettu": "2026-10-22"
 	},
 	{
 		"id": "sc-3-easyfix-go-further",
@@ -560,7 +560,7 @@
 			"Vaiheiden määrä (Ph)": "1",
 			"Jännite (V)": "220 - 240",
 			"Taajuus (Hz)": "50 - 60",
-			"Väri": "musta",
+			"Väri": "Musta",
 			"Paino (ilman varusteita) (kg)": "3,1",
 			"Paino (sis. tuotepakkauksen) (kg)": "4,6",
 			"Mitat (p x l x k) (mm)": "360 x 236 x 253"
@@ -595,7 +595,7 @@
 		},
 		"valmistajanKuva": "https://s1.kaercher-media.com/mam/15136650/mainproduct/809f1089-7123-40f9-89a6-9ab801821f6f/d0.jpg",
 		"lahde": "https://www.karcher.com/fi/home-garden/hoeyrypuhdistimet/sc-3-easyfix-go-further-15136650.html",
-		"haettu": "2026-10-12"
+		"haettu": "2026-10-22"
 	},
 	{
 		"id": "sc-3-easyfix-plus",
@@ -668,7 +668,7 @@
 		},
 		"valmistajanKuva": "https://s1.kaercher-media.com/mam/15136610/mainproduct/7c33e741-1d1f-447c-88e0-0a5bc12d0eff/d0.jpg",
 		"lahde": "https://www.karcher.com/fi/home-garden/hoeyrypuhdistimet/sc-3-easyfix-plus-15136610.html",
-		"haettu": "2026-10-12"
+		"haettu": "2026-10-22"
 	},
 	{
 		"id": "sc-4-deluxe-easyfix",
@@ -740,7 +740,7 @@
 		},
 		"valmistajanKuva": "https://s1.kaercher-media.com/mam/15134600/mainproduct/216559/d0.jpg",
 		"lahde": "https://www.karcher.com/fi/home-garden/hoeyrypuhdistimet/sc-4-deluxe-easyfix-15134600.html",
-		"haettu": "2026-10-12"
+		"haettu": "2026-10-22"
 	},
 	{
 		"id": "sc-4-easyfix",
@@ -801,9 +801,9 @@
 			"Integroitu on/off kytkin",
 			"Säilytyspaikat varusteille"
 		],
-		"hinta": null,
+		"hinta": 279,
 		"hintaEnnenAlennusta": null,
-		"myynnissa": false,
+		"myynnissa": true,
 		"ostopaikka": {
 			"nimi": "Kärcher.com",
 			"napinTeksti": "Katso tarjous",
@@ -811,7 +811,7 @@
 		},
 		"valmistajanKuva": "https://s1.kaercher-media.com/mam/15126300/mainproduct/217409/d0.jpg",
 		"lahde": "https://www.karcher.com/fi/home-garden/hoeyrypuhdistimet/sc-4-easyfix-15126300.html",
-		"haettu": "2026-10-12"
+		"haettu": "2026-10-22"
 	},
 	{
 		"id": "sc-4-easyfix-plus",
@@ -885,7 +885,7 @@
 		},
 		"valmistajanKuva": "https://s1.kaercher-media.com/mam/15126400/mainproduct/6b9f6b3a-c8ff-4428-b8ca-4b44a9364235/d0.jpg",
 		"lahde": "https://www.karcher.com/fi/home-garden/hoeyrypuhdistimet/sc-4-easyfix-plus-15126400.html",
-		"haettu": "2026-10-12"
+		"haettu": "2026-10-22"
 	},
 	{
 		"id": "sc-5-deluxe-signature-line",
@@ -962,7 +962,7 @@
 		},
 		"valmistajanKuva": "https://s1.kaercher-media.com/mam/15134910/mainproduct/b89d8ffd-08e9-4979-8088-3b9ca2f687f7/d0.jpg",
 		"lahde": "https://www.karcher.com/fi/home-garden/hoeyrypuhdistimet/sc-5-deluxe-signature-line-15134910.html",
-		"haettu": "2026-10-12"
+		"haettu": "2026-10-22"
 	},
 	{
 		"id": "sc-5-easyfix",
@@ -1035,7 +1035,7 @@
 		},
 		"valmistajanKuva": "https://s1.kaercher-media.com/mam/15126600/mainproduct/56742d7b-c10c-4feb-ae72-1f47e46e684e/d0.jpg",
 		"lahde": "https://www.karcher.com/fi/home-garden/hoeyrypuhdistimet/sc-5-easyfix-15126600.html",
-		"haettu": "2026-10-12"
+		"haettu": "2026-10-22"
 	},
 	{
 		"id": "sc-5-easyfix-iron-select-bath-edition",
@@ -1111,7 +1111,7 @@
 		},
 		"valmistajanKuva": "https://s1.kaercher-media.com/mam/15126660/mainproduct/d383d247-e923-4e1c-8b63-a3c14badc633/d0.jpg",
 		"lahde": "https://www.karcher.com/fi/home-garden/hoeyrypuhdistimet/sc-5-easyfix-iron-select-bath-edition-15126660.html",
-		"haettu": "2026-10-12"
+		"haettu": "2026-10-22"
 	},
 	{
 		"id": "scv-4",
@@ -1171,7 +1171,7 @@
 		},
 		"valmistajanKuva": "https://s1.kaercher-media.com/mam/10565300/mainproduct/3fd9b092-442e-4dc0-bf43-bbad344a9dc4/d0.jpg",
 		"lahde": "https://www.karcher.com/fi/home-garden/hoeyrypuhdistimet/scv-4-10565300.html",
-		"haettu": "2026-10-12"
+		"haettu": "2026-10-22"
 	},
 	{
 		"id": "sg-4-2-classic",
@@ -1220,9 +1220,9 @@
 			"Voimasuutin",
 			"Pistesuutin, pitkä"
 		],
-		"hinta": null,
+		"hinta": 948.78,
 		"hintaEnnenAlennusta": null,
-		"myynnissa": false,
+		"myynnissa": true,
 		"ostopaikka": {
 			"nimi": "Kärcher.com",
 			"napinTeksti": "Katso tarjous",
@@ -1230,7 +1230,7 @@
 		},
 		"valmistajanKuva": "https://s1.kaercher-media.com/mam/10923010/mainproduct/189146/d0.jpg",
 		"lahde": "https://www.karcher.com/fi/professional/hoeyrypuhdistimet-ja-hoeyryimurit/hoeyrypuhdistimet/sg-4-2-classic-10923010.html",
-		"haettu": "2026-10-12"
+		"haettu": "2026-10-22"
 	},
 	{
 		"id": "sg-4-2-classic-anniversary-edition",
@@ -1263,7 +1263,7 @@
 			"Virtajohdon pituus (m)": "5",
 			"Jännite (V)": "220 - 240",
 			"Taajuus (Hz)": "50",
-			"Väri": "musta",
+			"Väri": "Musta",
 			"Paino (ilman varusteita) (kg)": "7,1",
 			"Paino (sis. tuotepakkauksen) (kg)": "9,5",
 			"Mitat (p x l x k) (mm)": "460 x 298 x 265"
@@ -1290,7 +1290,7 @@
 		},
 		"valmistajanKuva": "https://s1.kaercher-media.com/mam/10923030/mainproduct/3d66cccc-38b4-486f-aac1-54b0750da69b/d0.jpg",
 		"lahde": "https://www.karcher.com/fi/professional/hoeyrypuhdistimet-ja-hoeyryimurit/hoeyrypuhdistimet/sg-4-2-classic-anniversary-edition-10923030.html",
-		"haettu": "2026-10-12"
+		"haettu": "2026-10-22"
 	},
 	{
 		"id": "sg-4-4",
@@ -1354,9 +1354,9 @@
 			"Boilerin turvalukitus",
 			"Käsikahvan turvalukitus"
 		],
-		"hinta": 1496.96,
+		"hinta": null,
 		"hintaEnnenAlennusta": null,
-		"myynnissa": true,
+		"myynnissa": false,
 		"ostopaikka": {
 			"nimi": "Kärcher.com",
 			"napinTeksti": "Katso tarjous",
@@ -1364,7 +1364,7 @@
 		},
 		"valmistajanKuva": "https://s1.kaercher-media.com/mam/10921040/mainproduct/57031/d0.jpg",
 		"lahde": "https://www.karcher.com/fi/professional/hoeyrypuhdistimet-ja-hoeyryimurit/hoeyrypuhdistimet/sg-4-4-10921040.html",
-		"haettu": "2026-10-12"
+		"haettu": "2026-10-22"
 	},
 	{
 		"id": "sgv-8-5",
@@ -1416,7 +1416,7 @@
 		},
 		"valmistajanKuva": "https://s1.kaercher-media.com/mam/10920100/mainproduct/50345/d0.jpg",
 		"lahde": "https://www.karcher.com/fi/professional/hoeyrypuhdistimet-ja-hoeyryimurit/hoeyryimurit/sgv-8-5-10920100.html",
-		"haettu": "2026-10-12"
+		"haettu": "2026-10-22"
 	},
 	{
 		"id": "sgv-8-5-classic",
@@ -1466,8 +1466,6 @@
 			"Käsisuutin: 150 mm",
 			"Pistesuutin: 185 mm",
 			"Pistesuuttimen adapteri: 140 mm",
-			"Pyöreä harjasuutin, ruostumaton teräs: 1 kpl",
-			"Pyöreä harjasuutin, messinki: 1 kpl",
 			"Pyöreä harjasuutin, musta: 1 kpl",
 			"Työntöaisa",
 			"Varustesäiliö"
@@ -1491,7 +1489,7 @@
 		},
 		"valmistajanKuva": "https://s1.kaercher-media.com/mam/10920190/mainproduct/50341/d0.jpg",
 		"lahde": "https://www.karcher.com/fi/professional/hoeyrypuhdistimet-ja-hoeyryimurit/hoeyryimurit/sgv-8-5-classic-10920190.html",
-		"haettu": "2026-10-12"
+		"haettu": "2026-10-22"
 	},
 	{
 		"id": "sv-7",
@@ -1565,6 +1563,6 @@
 		},
 		"valmistajanKuva": "https://s1.kaercher-media.com/mam/14394900/mainproduct/162447/d0.jpg",
 		"lahde": "https://www.karcher.com/fi/home-garden/hoeyrypuhdistimet/sv-7-14394900.html",
-		"haettu": "2026-10-12"
+		"haettu": "2026-10-22"
 	}
 ]

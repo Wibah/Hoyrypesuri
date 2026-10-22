@@ -46,7 +46,8 @@ const tyypit = [
 	{ otsikko: 'Höyrymoppi, josta irtoaa käsiosa', teksti: 'Sama laite lattioille ja pienille pinnoille. Säiliö ja teho ovat pienemmät kuin säiliömallissa.', esim: 'Esim. Black+Decker Steam-Mop, Kärcher SC 1 Multi & Up', sivu: '/hoyrymoppi/' },
 	{ otsikko: 'Käsimalli pieniin kohteisiin', teksti: 'Kevyt ja helppo säilyttää. Sopii saumoihin, hanoihin, uuniin ja suihkuseiniin, mutta ei lattioille.', esim: 'Esim. Kärcher SC 1, Bissell Steam Shot', sivu: mallisivut['SC 1'] },
 	{ otsikko: 'Imevä höyrypesuri', teksti: 'Höyryttää ja imee irronneen lian samalla vedolla, joten lattia jää kuivemmaksi. Painava ja kallis.', esim: 'Esim. Kärcher SV 7, Polti Vaporetto 3 Clean', sivu: '/imeva-hoyrypesuri/' },
-	{ otsikko: 'Kuivahöyry- ja ammattilaite', teksti: 'Korkeampi paine, iso kattila ja jatkuva täyttö pitkiin töihin. Hinta on moninkertainen kotikäyttöön tarkoitettuihin malleihin verrattuna.', esim: 'Esim. Kärcher SG 4/4', sivu: '/hoyrypesuri-ammattikayttoon/' },
+	{ otsikko: 'Ammattilaite', teksti: 'Iso kattila, jatkuva täyttö ja pitkä johto pitkiin töihin. Hinta on moninkertainen kotikäyttöön tarkoitettuihin malleihin verrattuna.', esim: 'Esim. Kärcher SG 4/4', sivu: '/hoyrypesuri-ammattikayttoon/' },
+	{ otsikko: 'Kuivahöyrypesuri', teksti: 'Korkeampi paine ja kuumempi höyry, joten pinnat jäävät valmistajien mukaan kuivemmiksi. Kallis, ja lämpeneminen kestää minuutteja.', esim: 'Esim. EV Atlantis EV3000i', sivu: '/kuivahoyrypesuri/' },
 ];
 
 const merkit = [
@@ -133,7 +134,7 @@ const ukk = [
 
 			<section class="es-osio">
 				<div class="es-otsikko"><div><span class="tp-label">Laitetyypit</span><h2 id="tyypit">Höyrypesuri kotikäyttöön: mikä tyyppi sopii mihinkin?</h2></div></div>
-				<p>Höyrypesurit jaetaan rakenteen mukaan kuuteen tyyppiin. Mitä enemmän pintoja haluat puhdistaa, sitä enemmän tarvitset suuttimia, letkua ja vettä. Samalla laite kuitenkin painaa enemmän ja lämpenee hitaammin.</p>
+				<p>Höyrypesurit jaetaan rakenteen mukaan seitsemään tyyppiin. Mitä enemmän pintoja haluat puhdistaa, sitä enemmän tarvitset suuttimia, letkua ja vettä. Samalla laite kuitenkin painaa enemmän ja lämpenee hitaammin.</p>
 				<div class="es-kortit">
 					{tyypit.map((k) => (
 						<a class="es-kortti" href={k.sivu}>

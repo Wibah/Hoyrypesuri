@@ -101,6 +101,8 @@ export const versionimi = (t: Tuote) => t.nimi.replace(/\s*\*EU$/, '');
 
 // 389 → "389 €", 311.2 → "311,20 €"
 export function euroa(hinta: number): string {
+	// Puuttuva hinta (tuote ei myynnissä) kaataa buildin, jotta sivulle ei tule "0,00 €".
+	if (typeof hinta !== 'number' || Number.isNaN(hinta)) throw new Error(`euroa: hinta puuttuu (${hinta})`);
 	const desimaalit = Number.isInteger(hinta) ? 0 : 2;
 	return new Intl.NumberFormat('fi-FI', {
 		style: 'currency',

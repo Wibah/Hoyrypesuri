@@ -32,11 +32,11 @@ const ukk = [
 	},
 	{
 		kysymys: 'Onko Kärcher SC 2 EasyFix myynnissä?',
-		vastaus: `Kärcher.com ei myynyt SC 2 EasyFixiä, kun tarkistimme hinnat ${paiva(easyfix.haettu)}. Jos tarvitset säiliömallin, katso <a href="${mallisivut['SC 3']}">Kärcher SC 3</a>. Sen säiliön voi täyttää kesken työn, ja lämmitysaika on ${lammitysaika(t3.lammitysaikaMin)}.`,
+		vastaus: `${easyfix.myynnissa ? `On. SC 2 EasyFix maksaa Kärcher.comissa ${euroa(easyfix.hinta!)} (tarkistettu ${paiva(easyfix.haettu)}). Sen kattilaan lisätään vettä vasta, kun laite on jäähtynyt.` : `Kärcher.com ei myynyt SC 2 EasyFixiä, kun tarkistimme hinnat ${paiva(easyfix.haettu)}.`} Jos haluat säiliömallin, jonka voi täyttää kesken työn, katso <a href="${mallisivut['SC 3']}">Kärcher SC 3</a>. Sen lämmitysaika on ${lammitysaika(t3.lammitysaikaMin)}.`,
 	},
 	{
 		kysymys: 'Mikä on Kärcher SC 2 Deluxe?',
-		vastaus: `SC 2 Deluxe EasyFix on SC 2 EasyFixin versio, jossa on LED-valorengas, varustepussi ja rakoharja. Teho, paine ja kattila ovat Kärcherin mukaan samat kuin SC 2 EasyFixissä. Sekään ei ollut myynnissä Kärcher.comissa ${paiva(easyfix.haettu)}.`,
+		vastaus: `SC 2 Deluxe EasyFix on SC 2 EasyFixin versio, jossa on LED-valorengas, varustepussi ja rakoharja. Teho, paine ja kattila ovat Kärcherin mukaan samat kuin SC 2 EasyFixissä. Deluxe ei ollut myynnissä Kärcher.comissa ${paiva(easyfix.haettu)}.`,
 	},
 	{
 		kysymys: 'Voiko Kärcher SC 2 Uprightilla puhdistaa laminaattia?',
@@ -57,7 +57,7 @@ const ukk = [
 		<TuoteSchema tuote={suositus} />
 		<TuoteHero tuote={suositus} otsikko="Kärcher SC 2 -höyrypesuri – Upright ja EasyFix" yla="Kärcher · Höyrymoppi ja pieni säiliömalli" merkinta="Suosituksemme">
 			<p>Kärcherin SC 2 -sarjassa on kaksi erilaista laitetta. SC 2 Upright on höyrymoppi, joka puhdistaa vain lattioita, ja SC 2 EasyFix on pieni säiliömalli, jossa on letku ja suuttimet myös saumoihin ja hanoihin.</p>
-			<p>Suosittelemme SC 2 Uprightia, jos puhdistat höyryllä lähinnä laatta- ja vinyylilattioita. Sen lämmitysaika on valmistajan mukaan {lammitysaika(t.lammitysaikaMin)}, se painaa {luku(t.painoKg!)} kg, ja se maksaa Kärcher.comissa {euroa(suositus.hinta!)}. SC 2 EasyFix ei ollut myynnissä Kärcher.comissa {paiva(easyfix.haettu)}.</p>
+			<p>Suosittelemme SC 2 Uprightia, jos puhdistat höyryllä lähinnä laatta- ja vinyylilattioita. Sen lämmitysaika on valmistajan mukaan {lammitysaika(t.lammitysaikaMin)}, se painaa {luku(t.painoKg!)} kg, ja se maksaa Kärcher.comissa {euroa(suositus.hinta!)}. {easyfix.myynnissa ? `Säiliömalli SC 2 EasyFix maksaa ${euroa(easyfix.hinta!)}.` : `SC 2 EasyFix ei ollut myynnissä Kärcher.comissa ${paiva(easyfix.haettu)}.`}</p>
 		</TuoteHero>
 
 		<h2>Kenelle Kärcher SC 2 Upright sopii?</h2>

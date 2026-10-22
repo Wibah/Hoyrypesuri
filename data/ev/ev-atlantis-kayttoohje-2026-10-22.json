@@ -1,0 +1,28 @@
+[
+ {
+  "sku": "EV3000i",
+  "u": "https://cdn.virtasenkauppa.fi/assets/46446-user-guide-atlantis-eu.pdf",
+  "nimi": "EV International Atlantis EV3000i",
+  "lahde": "EV International Ltd., User guide EV ATLANTIS (EU), sivu 6 (Technical data) ja sivut 2, 8 ja 10. Ohje on Virtasen kaupan tuotesivulla; EV3000i on Virtasen kaupan nimi samalle laitteelle.",
+  "spec": {
+   "Power supply": "220 - 240 V - 50/60 Hz",
+   "Max. total working power": "2850 W",
+   "Max. boiler power": "2000 W",
+   "Max. iron power": "850 W",
+   "Boiler capacity": "2.2 l",
+   "Capacity of the refilling tank": "2.1 l",
+   "Maximum pressure": "8 bar",
+   "Test pressure": "10 bar",
+   "Weight": "6,5 kg",
+   "Steam control": "Electronic",
+   "Size": "410 x 297 x 250 mm",
+   "Body": "100% AISI 304 INOX stainless steel (lifetime warranty against rust)",
+   "Steam temperature": "150 °C - 170 °C hot, dry steam (sivu 2)",
+   "Heat-up time": "about 3-5 minutes to convert the water into dry steam (sivu 8)",
+   "Steam levels": "three-tier steam control EV1, EV2, EV3 (sivu 10)",
+   "Hot water function": "hot water under high pressure, only for short-time work (sivu 10)"
+  },
+  "mukana": [],
+  "huomio": "Kuivahöyrypesuri, jossa on kattila ja erillinen täyttösäiliö. Valmistajan mukaan höyry on 150–170-asteista kuivaa höyryä. Valmistaja kieltää käytön lämmönarkoilla pinnoilla ja neuvoo käyttämään vain vesijohtovettä. Toimitussisältö jätetty pois, koska ohjeen Scope of supply -sivu ei erottele vakio- ja lisävarusteita yksiselitteisesti."
+ }
+]

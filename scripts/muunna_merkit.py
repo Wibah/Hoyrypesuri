@@ -11,6 +11,8 @@ Tekniset tiedot ovat valmistajien sivuilta selaimessa kerättyä raakadataa (siv
 - data/bissell/bissell-de-<päivä>.json: bissell.de:n Technische Produktdaten
 - data/shark/sharkninja-de-<päivä>.json: sharkninja.de (EU-mallit). Ristiriitaiset arvot (paino, johto senttimetreinä,
   'Staubbehälter') on lueteltu kentässä 'hylatyt'.
+- data/ev/ev-atlantis-kayttoohje-<päivä>.json: EV Internationalin käyttöohjeen (EV ATLANTIS) tekniset tiedot.
+  Feedissä ei ole EAN-koodia, joten tarjous haetaan mallinimellä EV3000i (feedtarjoukset.tarjoukset).
 
 Suomessa myytävä versio tunnistetaan EAN-koodilla (FEEDIT.md). Hinta, ostolinkki ja kuva tulevat kumppanifeedeistä
 (feedtarjoukset.tarjoukset_ean): halvin varastossa oleva tarjous. Linkki on kaupan suora tuotesivu, koska
@@ -24,7 +26,7 @@ import pathlib
 import re
 import statistics
 
-from feedtarjoukset import halvin, lataa_kuva, tarjoukset_ean
+from feedtarjoukset import halvin, lataa_kuva, tarjoukset, tarjoukset_ean
 
 JUURI = pathlib.Path(__file__).resolve().parent.parent
 TUOTTEET = JUURI / 'src/data/tuotteet'
@@ -188,7 +190,28 @@ def shark():
     return 'shark', tulos
 
 
-for tiedosto, tulos in (vileda(), polti(), blackdecker(), bissell(), shark()):
+def ev():
+    polku = viimeisin('ev', 'ev-atlantis-kayttoohje-*.json')
+    raaka = json.loads(polku.read_text(encoding='utf-8'))
+    hinnat = tarjoukset([r['sku'] for r in raaka], 'ev international', raja=10000)
+    tulos = []
+    for r in raaka:
+        sp = r['spec']
+        tek = tyhjat() | {
+            'tehoW': luku(sp['Max. boiler power']), 'paineBar': luku(sp['Maximum pressure']),
+            'sailioL': luku(sp['Capacity of the refilling tank']), 'kattilaL': luku(sp['Boiler capacity']),
+            'painoKg': luku(sp['Weight']), 'mitatMm': sp['Size'].removesuffix(' mm'),
+            'lammitysaikaMin': 5,  # "about 3-5 minutes", pidempi arvo
+            # Höyryn lämpötila (150–170 °C) on spec-kentässä; lampotilaC on kattilan lämpötila, jota ohje ei ilmoita.
+        }
+        tulos.append(tuote(id='ev-atlantis-ev3000i', merkki='EV International', nimi='Atlantis EV3000i', sarja='EV Atlantis',
+                           tyyppi='ammatti', ean=r['sku'], tekniset=tek, raaka={**sp, 'Lähde': r['lahde'], 'Huomio': r['huomio']},
+                           mukana=r['mukana'], kuvaus=r['huomio'], lahde=r['u'], haettu=paiva(polku), tarjoukset=hinnat[r['sku']])
+                     | {'ammattilaite': True})
+    return 'ev-international', tulos
+
+
+for tiedosto, tulos in (vileda(), polti(), blackdecker(), bissell(), shark(), ev()):
     tulos.sort(key=lambda t: t['nimi'])
     (TUOTTEET / f'{tiedosto}.json').write_text(json.dumps(tulos, ensure_ascii=False, indent='\t') + '\n', encoding='utf-8')
     print(f'{tiedosto}: {len(tulos)} mallia')

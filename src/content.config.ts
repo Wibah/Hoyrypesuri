@@ -6,7 +6,7 @@ import { z } from 'astro/zod';
 // karcher.json: npm run hae:karcher (karcher.com/fi, SC-, SV- ja SCV-mallit sekä SG- ja SGV-ammattilaitteet).
 // vileda.json, polti.json, black-decker.json, bissell.json ja shark.json: npm run hae:merkit (scripts/muunna_merkit.py:
 // valmistajien sivuilta selaimessa kerätty raakadata kansiossa data/, hinnat ja kuvat kumppanifeedeistä EAN-koodilla).
-const MERKKITIEDOSTOT = ['karcher', 'vileda', 'polti', 'black-decker', 'bissell', 'shark'];
+const MERKKITIEDOSTOT = ['karcher', 'vileda', 'polti', 'black-decker', 'bissell', 'shark', 'ev-international'];
 
 // Affiliate-tiedot (hinta, ostolinkki ja kuva kumppanikaupasta) tulevat erillisestä tiedostosta, jonka
 // tuottaa `npm run hae:affiliate` (scripts/hae_affiliate.py). Ne yhdistetään tässä tuotteisiin, jotta

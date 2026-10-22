@@ -1,0 +1,105 @@
+---
+// SCN: tuki (laitetyyppi), intentti Definition, emopilari /. Hakusanat: kuivahöyrypesuri 200 (Parent keyword
+// kuivahöyrypesuri, SERPissä AI Overview), atlantis höyrypesuri 20 (Ahrefs 2026-10). Ammattikäytön ostohaut kuuluvat
+// sivulle /hoyrypesuri-ammattikayttoon/. Lähteet: EV Internationalin käyttöohje (EV ATLANTIS), Kärcherin höyrypesuriesite
+// (2011) ja sivuston Kärcher-data. "Kuivahöyrylle" ei löytynyt standardoitua määritelmää, joten sivu kertoo sen.
+// Kirjoitettu hoyrypesuri-writer-skillillä (2026-10-22).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import TuoteSchema from '../components/tuote/TuoteSchema.astro';
+import Korttirivi from '../components/tuote/Korttirivi.astro';
+import TeknisetTiedot from '../components/tuote/TeknisetTiedot.astro';
+import Ukk from '../components/Ukk.astro';
+import { tuote, paatuote, euroa, luku, paiva, mallisivut, lammitysaika } from '../lib/tuotteet';
+
+const ev = await tuote('ev-atlantis-ev3000i');
+const sc3 = await paatuote('SC 3');
+const sc5 = await paatuote('SC 5');
+const sg44 = await tuote('sg-4-4');
+const t = ev.tekniset;
+const KARCHER_ESITE = 'https://s1.kaercher-media.com/asset/media/file/22577/steam-cleaner-english.pdf';
+const rel = 'nofollow noopener';
+
+const vertailu = [
+	{ nimi: `Kärcher ${sc3.nimi}`, sivu: mallisivut['SC 3'], t: sc3.tekniset, hinta: sc3.myynnissa ? euroa(sc3.hinta!) : 'ei myynnissä' },
+	{ nimi: `Kärcher ${sc5.nimi}`, sivu: mallisivut['SC 5'], t: sc5.tekniset, hinta: sc5.myynnissa ? euroa(sc5.hinta!) : 'ei myynnissä' },
+	{ nimi: `Kärcher ${sg44.nimi}`, sivu: '/hoyrypesuri-ammattikayttoon/', t: sg44.tekniset, hinta: sg44.myynnissa ? euroa(sg44.hinta!) : 'ei nyt myynnissä' },
+	{ nimi: `EV ${ev.nimi}`, sivu: '#ev-atlantis-ev3000i', t: ev.tekniset, hinta: ev.myynnissa ? euroa(ev.hinta!) : 'ei myynnissä' },
+];
+
+const ukk = [
+	{
+		kysymys: 'Mikä on kuivahöyrypesuri?',
+		vastaus: `Kuivahöyrypesuri on höyrypesuri, joka kuumentaa veden korkeammassa paineessa ja lämpötilassa kuin tavalliset kotikäyttöön tarkoitetut mallit. Valmistajien mukaan höyryssä on silloin vähemmän vettä, joten pinnat jäävät kuivemmiksi. Esimerkiksi EV Atlantiksen paine on valmistajan mukaan enintään ${luku(t.paineBar!)} bar, kun Kärcherin kotikäyttöön tarkoitetuissa SC-malleissa paine on 3–4,2 bar.`,
+	},
+	{
+		kysymys: 'Onko kuivahöyry parempaa kuin tavallinen höyry?',
+		vastaus: 'Valmistajien mukaan kuumempi ja paineisempi höyry irrottaa rasvaa ja kalkkia tehokkaammin ja kastelee pintoja vähemmän. Kuivahöyrylle ei kuitenkaan ole yhteistä mittaria. Myös Kärcher kutsuu kotikäyttöön tarkoitettujen höyrypesuriensa höyryä kuivaksi. Riippumattomia testejä, joissa kuivahöyrypesureita olisi verrattu tavallisiin, emme löytäneet.',
+	},
+	{
+		kysymys: 'Paljonko kuivahöyrypesuri maksaa?',
+		vastaus: `Suomen kumppanikaupoissa myynnissä ollut kuivahöyrypesuri EV Atlantis EV3000i maksoi ${ev.myynnissa ? euroa(ev.hinta!) : 'tarkistushetkellä ei myynnissä'} (${paiva(ev.haettu)}). Kotikäyttöön tarkoitettu Kärcher ${sc3.nimi} maksaa ${euroa(sc3.hinta!)}.`,
+	},
+	{
+		kysymys: 'Voiko kuivahöyrypesurilla puhdistaa parketin?',
+		vastaus: 'EV Internationalin käyttöohjeen mukaan oikein käytettynä Atlantiksen kuiva höyry ei vahingoita lattiaa, ja parketti kuivuu nopeasti. Samassa ohjeessa valmistaja kieltää käytön lämmönarkoilla pinnoilla. Tarkista siksi lattian valmistajan ohje ja kokeile ensin piilossa olevaan kohtaan pienimmällä höyryteholla.',
+	},
+];
+---
+<Layout
+	title="Kuivahöyrypesuri – mitä kuivahöyry on ja kannattaako se? (2026)"
+	description="Mikä on kuivahöyrypesuri ja miten se eroaa tavallisesta höyrypesurista? Paine, lämpötila ja hinta vertailussa sekä EV Atlantis EV3000i -kuivahöyrypesurin tiedot valmistajalta."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Kuivahöyrypesuri', sivu: '/kuivahoyrypesuri/' }]} />
+		<span class="tp-label">Opas</span>
+		<h1>Kuivahöyrypesuri – mitä kuivahöyry on ja kenelle se sopii?</h1>
+		<p>Kuivahöyrypesuri kuumentaa veden korkeammassa paineessa ja lämpötilassa kuin tavallinen höyrypesuri. Valmistajien mukaan höyryssä on silloin vähemmän vettä, joten pinnat jäävät kuivemmiksi. Kuivahöyrylle ei kuitenkaan ole yhteistä määritelmää eikä mittaria: myös Kärcher kutsuu kotikäyttöön tarkoitettujen mallien höyryä kuivaksi. Suomen kumppanikaupoissa myynnissä oli yksi kuivahöyrypesuriksi nimetty laite, EV International Atlantis EV3000i{ev.myynnissa ? `, joka maksaa ${euroa(ev.hinta!)}` : ''}. Useimpiin koteihin riittää tavallinen säiliömalli.</p>
+
+		<h2>Mitä kuivahöyry tarkoittaa?</h2>
+		<p>Höyrypesuri toimii kuin painekattila: vesi kuumennetaan suljetussa kattilassa, kunnes se kiehuu ja muuttuu höyryksi (Kärcherin höyrypesuriesite). Paineessa vesi kiehuu yli 100 asteessa, joten mitä korkeampi kattilan paine, sitä kuumempaa höyryä laite tekee. Kun höyry jäähtyy letkussa ja suuttimessa, osa siitä tiivistyy takaisin vedeksi. Kuivalla höyryllä valmistajat tarkoittavat höyryä, jossa on vähän tiivistynyttä vettä. Silloin pinnalle jää vähemmän kosteutta.</p>
+		<p>Valmistajat ilmoittavat lämpötilan eri kohdista. Kärcherin esitteen mukaan höyry on suuttimesta tullessaan noin 100-asteista, ja SG 4/4 -ammattilaitteen kattilan lämpötila on enintään {luku(sg44.tekniset.lampotilaC!)} °C. EV Internationalin mukaan Atlantiksen höyry on 150–170-asteista. Lukuja ei siksi voi verrata suoraan, mutta paine kertoo eron: Atlantiksen enimmäispaine on {luku(t.paineBar!)} bar.</p>
+		<div class="tp-taulu">
+			<table class="tp-versiot">
+				<thead><tr><th scope="col">Laite</th><th scope="col">Paine (enintään)</th><th scope="col">Lämmitysaika</th><th scope="col">Hinta</th></tr></thead>
+				<tbody>
+					{vertailu.map((v) => (
+						<tr><th scope="row"><a href={v.sivu}>{v.nimi}</a></th><td>{v.t.paineBar != null ? `${luku(v.t.paineBar)} bar` : '–'}</td><td>{v.t.lammitysaikaMin != null ? lammitysaika(v.t.lammitysaikaMin) : '–'}</td><td>{v.hinta}</td></tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+		<p class="tp-lahde">Tiedot valmistajilta: Kärcher.com ja EV Internationalin käyttöohje. Atlantiksen lämmitysaika on ohjeen mukaan 3–5 minuuttia. Hinnat tarkistettu {paiva(ev.haettu)}.</p>
+
+		<h2>Kuivahöyrypesuri vai tavallinen höyrypesuri?</h2>
+		<p>Kotiin, jossa höyrytetään kylpyhuone, keittiö ja lattiat muutaman kerran kuussa, tavallinen säiliömalli riittää. Kärcher {sc3.nimi} lämpenee {lammitysaika(sc3.tekniset.lammitysaikaMin)}, sen säiliön voi täyttää kesken työn, ja se maksaa {euroa(sc3.hinta!)}. Kuivahöyrypesurin hinta on moninkertainen.</p>
+		<p>Kuivahöyrypesuri sopii, jos höyrytät paljon ja pitkiä aikoja: esimerkiksi siivoat työksesi, puhdistat usein rasvaisia keittiöpintoja tai haluat pintojen kuivuvan heti. Valitse silloin laite, jonka säiliön voi täyttää kesken työn ja joka on tehty jatkuvaan käyttöön. Ammattikäyttöön tarkoitetut laitteet on vertailtu <a href="/hoyrypesuri-ammattikayttoon/">höyrypesuri ammattikäyttöön -sivulla</a>. Jos tarvitset tehokasta laitetta vain kerran, esimerkiksi muuttosiivoukseen, <a href="/hoyrypesuri-vuokraus-vai-osto/">vuokraus</a> tulee halvemmaksi.</p>
+
+		<h2>EV Atlantis EV3000i -kuivahöyrypesuri</h2>
+		<TuoteSchema tuote={ev} />
+		<p>Atlantis on bulgarialaisen EV International Ltd:n kuivahöyrypesuri. Valmistajan mukaan sen kattilan teho on {luku(t.tehoW!)} W, enimmäispaine {luku(t.paineBar!)} bar ja höyryn lämpötila 150–170 °C. Kattilaan mahtuu {luku(t.kattilaL!)} litraa vettä ja erilliseen täyttösäiliöön {luku(t.sailioL!)} litraa.</p>
+		<div class="mk-lista">
+			<Korttirivi tuote={ev} otsikko="EV Atlantis EV3000i" tagi="Kuivahöyry" kuvaus={`Kuivahöyrypesuri, ${luku(t.paineBar!)} bar, kolme höyrytasoa ja kuuma vesisuihku. Lämpenee valmistajan mukaan 3–5 minuutissa.`} />
+		</div>
+		<p>EV Internationalin käyttöohjeen mukaan Atlantiksesta kannattaa tietää nämä:</p>
+		<ul>
+			<li><strong>Lämpeneminen:</strong> vedestä tulee kuivaa höyryä noin 3–5 minuutissa, ja näyttö kertoo, kun käyttöpaine on saavutettu.</li>
+			<li><strong>Täyttö:</strong> laite pumppaa vettä täyttösäiliöstä kattilaan, ja näyttö ilmoittaa, kun säiliö pitää täyttää. Säiliöön laitetaan vain vesijohtovettä, ei pesuaineita.</li>
+			<li><strong>Höyrytehot:</strong> kolme höyrytasoa (EV1–EV3) sekä kuuma paineistettu vesi lyhyisiin töihin, kuten suihkukaapin kiskoihin ja lavuaarin ylivuotoaukkoon.</li>
+			<li><strong>Ennen työtä:</strong> letkuun tiivistynyt vesi poistetaan päästämällä höyryä täydellä teholla 10 sekunnin ajan.</li>
+			<li><strong>Käytön jälkeen:</strong> laitteen annetaan jäähtyä noin 30 minuuttia ennen säilytystä, ja kattila tyhjennetään, jos laitetta ei käytetä yli kolmeen viikkoon.</li>
+			<li><strong>Rajoitukset:</strong> lämmönarkoja pintoja ja sähkölaitteita ei saa höyryttää.</li>
+		</ul>
+		<p>Runko on valmistajan mukaan ruostumatonta AISI 304 -terästä, ja rungolla on elinikäinen ruostetakuu. Riippumattomia testejä Atlantiksesta emme löytäneet.</p>
+
+		<h3>Tekniset tiedot: EV Atlantis EV3000i</h3>
+		<TeknisetTiedot tuote={ev} />
+
+		<h2>Kuivahöyry lattioilla</h2>
+		<p>EV International kertoo käyttöohjeessaan, että Atlantiksen kuiva höyry ei oikein käytettynä vahingoita lattiaa ja että parketille voi kävellä heti puhdistuksen jälkeen. Väite on valmistajan. Lähteet ovat eri mieltä siitä, kestävätkö laminaatti ja parketti höyryä, joten lattian valmistajan ohje ratkaisee. Lattiakohtaiset varoitukset ovat <a href="/hoyrymoppi-laminaatille/">laminaatti- ja parkettioppaassa</a>.</p>
+
+		<p class="tp-lahde">Lähteet: <a href={ev.lahde} target="_blank" rel={rel}>EV International, EV ATLANTIS -käyttöohje</a>, <a href={KARCHER_ESITE} target="_blank" rel={rel}>Kärcher, Steam cleaner -esite (2011)</a> ja Kärcher.comin tekniset tiedot. Tarkistettu {paiva(ev.haettu)}.</p>
+
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>

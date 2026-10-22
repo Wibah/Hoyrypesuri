@@ -1,0 +1,60 @@
+[
+	{
+		"id": "ev-atlantis-ev3000i",
+		"merkki": "EV International",
+		"nimi": "Atlantis EV3000i",
+		"sarja": "EV Atlantis",
+		"tyyppi": "ammatti",
+		"ammattilaite": true,
+		"tuotenumero": "EV3000i",
+		"kuvaus": "Kuivahöyrypesuri, jossa on kattila ja erillinen täyttösäiliö. Valmistajan mukaan höyry on 150–170-asteista kuivaa höyryä. Valmistaja kieltää käytön lämmönarkoilla pinnoilla ja neuvoo käyttämään vain vesijohtovettä. Toimitussisältö jätetty pois, koska ohjeen Scope of supply -sivu ei erottele vakio- ja lisävarusteita yksiselitteisesti.",
+		"tekniset": {
+			"tehoW": 2000.0,
+			"paineBar": 8.0,
+			"lammitysaikaMin": 5,
+			"sailioL": 2.1,
+			"kattilaL": 2.2,
+			"pintaAlaM2": null,
+			"hoyryGmin": null,
+			"lampotilaC": null,
+			"virtajohtoM": null,
+			"painoKg": 6.5,
+			"mitatMm": "410 x 297 x 250"
+		},
+		"teknisetValmistajalta": {
+			"Power supply": "220 - 240 V - 50/60 Hz",
+			"Max. total working power": "2850 W",
+			"Max. boiler power": "2000 W",
+			"Max. iron power": "850 W",
+			"Boiler capacity": "2.2 l",
+			"Capacity of the refilling tank": "2.1 l",
+			"Maximum pressure": "8 bar",
+			"Test pressure": "10 bar",
+			"Weight": "6,5 kg",
+			"Steam control": "Electronic",
+			"Size": "410 x 297 x 250 mm",
+			"Body": "100% AISI 304 INOX stainless steel (lifetime warranty against rust)",
+			"Steam temperature": "150 °C - 170 °C hot, dry steam (sivu 2)",
+			"Heat-up time": "about 3-5 minutes to convert the water into dry steam (sivu 8)",
+			"Steam levels": "three-tier steam control EV1, EV2, EV3 (sivu 10)",
+			"Hot water function": "hot water under high pressure, only for short-time work (sivu 10)",
+			"Lähde": "EV International Ltd., User guide EV ATLANTIS (EU), sivu 6 (Technical data) ja sivut 2, 8 ja 10. Ohje on Virtasen kaupan tuotesivulla; EV3000i on Virtasen kaupan nimi samalle laitteelle.",
+			"Huomio": "Kuivahöyrypesuri, jossa on kattila ja erillinen täyttösäiliö. Valmistajan mukaan höyry on 150–170-asteista kuivaa höyryä. Valmistaja kieltää käytön lämmönarkoilla pinnoilla ja neuvoo käyttämään vain vesijohtovettä. Toimitussisältö jätetty pois, koska ohjeen Scope of supply -sivu ei erottele vakio- ja lisävarusteita yksiselitteisesti."
+		},
+		"toimitusSisaltaa": [],
+		"ominaisuudet": [],
+		"hinta": 3490.0,
+		"hintaEnnenAlennusta": 3590.0,
+		"myynnissa": true,
+		"vainTuotetiedot": false,
+		"kumppanikauppa": true,
+		"ostopaikka": {
+			"nimi": "Virtasen kauppa",
+			"url": "https://www.virtasenkauppa.fi/kuivahoyrypesuri-atlantis-ev3000i-ev-international-46446",
+			"napinTeksti": "Katso tarjous"
+		},
+		"valmistajanKuva": null,
+		"lahde": "https://cdn.virtasenkauppa.fi/assets/46446-user-guide-atlantis-eu.pdf",
+		"haettu": "2026-10-22"
+	}
+]

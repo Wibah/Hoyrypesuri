@@ -107,7 +107,7 @@ const ukk = [
 		<MallistoTaulu tuotteet={koti} suositusId={suositus.id} sivut={sarjanSivu} />
 
 		<h2>Kärcher Professional: höyrypesuri ammattikäyttöön</h2>
-		<p>Kärcherin ammattisarjan SG 4/4:ssä on {luku(sg44.tekniset.kattilaL!)} litran kattila, {luku(sg44.tekniset.paineBar!)} barin paine ja jatkuva täyttö, ja sen hinta on Kärcher.comissa {euroa(sg44.hinta!)}. Laite on tehty pitkiin töihin, ja sen lämmitysaika on valmistajan mukaan {lammitysaika(sg44.tekniset.lammitysaikaMin)}. Ammattilaitteiden vertailu on <a href="/hoyrypesuri-ammattikayttoon/">höyrypesuri ammattikäyttöön -sivulla</a>.</p>
+		<p>Kärcherin ammattisarjan SG 4/4:ssä on {luku(sg44.tekniset.kattilaL!)} litran kattila, {luku(sg44.tekniset.paineBar!)} barin paine ja jatkuva täyttö. {sg44.myynnissa ? `Sen hinta on Kärcher.comissa ${euroa(sg44.hinta!)}.` : `Se ei ollut myynnissä Kärcher.comissa ${paiva(sg44.haettu)}.`} Laite on tehty pitkiin töihin, ja sen lämmitysaika on valmistajan mukaan {lammitysaika(sg44.tekniset.lammitysaikaMin)}. Ammattilaitteiden vertailu on <a href="/hoyrypesuri-ammattikayttoon/">höyrypesuri ammattikäyttöön -sivulla</a>.</p>
 		<MallistoTaulu tuotteet={ammatti} />
 
 		<h2>Kärcherin höyrypesurin varaosat, liinat ja kalkinpoisto</h2>

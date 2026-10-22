@@ -53,7 +53,7 @@ const ukk = [
 	},
 	{
 		kysymys: 'Millaisen höyrypesurin vuokraamosta saa?',
-		vastaus: `Kaikki tarkistamamme vuokraamot vuokrasivat Kärcherin ammattilaitteita: neljä SG 4/4:ää ja yksi SG 4/2:ta. SG 4/4:ssä on ${luku(sg44.tekniset.kattilaL!)} litran kattila, ${luku(sg44.tekniset.paineBar!)} barin paine ja jatkuva täyttö, ja uutena se maksaa Kärcher.comissa ${euroa(sg44.hinta!)}. Lämmitysaika on valmistajan mukaan ${luku(sg44.tekniset.lammitysaikaMin!)} minuuttia.`,
+		vastaus: `Kaikki tarkistamamme vuokraamot vuokrasivat Kärcherin ammattilaitteita: neljä SG 4/4:ää ja yksi SG 4/2:ta. SG 4/4:ssä on ${luku(sg44.tekniset.kattilaL!)} litran kattila, ${luku(sg44.tekniset.paineBar!)} barin paine ja jatkuva täyttö. ${sg44.myynnissa ? `Uutena se maksaa Kärcher.comissa ${euroa(sg44.hinta!)}.` : `Uutena sitä ei ollut myynnissä Kärcher.comissa ${paiva(sg44.haettu)}.`} Lämmitysaika on valmistajan mukaan ${luku(sg44.tekniset.lammitysaikaMin!)} minuuttia.`,
 	},
 	{
 		kysymys: 'Voiko imevän höyrypesurin vuokrata?',
@@ -107,7 +107,7 @@ const ukk = [
 		<p>Kaikki ostettavat mallit ja suosituksemme eri käyttöön ovat <a href="/">höyrypesurivertailussa</a>.</p>
 
 		<h2>Höyrypesuri vuokra: hinnat vuokraamoissa</h2>
-		<p>Tarkistimme viiden vuokraamon hinnat. Kaikki vuokrasivat Kärcherin ammattilaitteita: neljä SG 4/4:ää ja yksi SG 4/2:ta. Kärcher.comissa SG 4/4 maksaa uutena {euroa(sg44.hinta!)}, ja siinä on {luku(sg44.tekniset.kattilaL!)} litran kattila ja {luku(sg44.tekniset.paineBar!)} barin paine.</p>
+		<p>Tarkistimme viiden vuokraamon hinnat. Kaikki vuokrasivat Kärcherin ammattilaitteita: neljä SG 4/4:ää ja yksi SG 4/2:ta. {sg44.myynnissa ? `Kärcher.comissa SG 4/4 maksaa uutena ${euroa(sg44.hinta!)}.` : `Uutta SG 4/4:ää ei ollut myynnissä Kärcher.comissa ${paiva(sg44.haettu)}.`} Siinä on {luku(sg44.tekniset.kattilaL!)} litran kattila ja {luku(sg44.tekniset.paineBar!)} barin paine.</p>
 		<VuokraTaulu />
 
 		<h2>Vuokraa höyrypesuri, jos…</h2>

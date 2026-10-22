@@ -1,0 +1,115 @@
+---
+// SCN: tuki, intentti Decision, emopilari /. Hakusanat: höyrypesuri ammattikäyttöön 90 (SERPissä Shopping Ads), kärcher
+// höyrypesuri ammattikäyttöön ja höyrypesuri sg 4/4 (volyymi tyhjä) (Ahrefs 2026-10). Kuivahöyryn määritelmä kuuluu
+// sivulle /kuivahoyrypesuri/ ja vuokrahinnat sivulle /hoyrypesuri-vuokraus-vai-osto/. Laitteet: Kärcher SG 4/4
+// (KARCHER_ESITELTAVAT; SG 4/2 Classic ja SGV 8/5 jätetään pois Villen päätöksellä 2026-10-12) ja EV Atlantis EV3000i.
+// Kirjoitettu hoyrypesuri-writer-skillillä (2026-10-22).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import Korttirivi from '../components/tuote/Korttirivi.astro';
+import TeknisetTiedot from '../components/tuote/TeknisetTiedot.astro';
+import Ukk from '../components/Ukk.astro';
+import vuokrat from '../data/vuokrahinnat.json';
+import varusteet from '../data/varusteet/karcher-sc.json';
+import { tuote, paatuote, euroa, luku, paiva, mallisivut, lammitysaika } from '../lib/tuotteet';
+
+const sg44 = await tuote('sg-4-4');
+const ev = await tuote('ev-atlantis-ev3000i');
+const sc5 = await paatuote('SC 5');
+const sc3 = await paatuote('SC 3');
+const s = sg44.tekniset;
+const e = ev.tekniset;
+const HUOLTOHAKU = 'https://www.karcher.com/fi/palvelut/asiakaspalvelu/jaelleenmyyjaehaku.html';
+const rel = 'nofollow noopener';
+
+const sgVuokrat = vuokrat.filter((v) => v.laite === 'Kärcher SG 4/4');
+const vrkHinnat = sgVuokrat.map((v) => v.hinnat.find((h) => h.kesto === '1 vuorokausi')?.hinta).filter((h): h is number => h != null);
+const sgVarusteet = varusteet.filter((x) => x.mallit.includes('SG 4/4'));
+
+const rivit = [
+	{ nimi: `Kärcher ${sc3.nimi}`, sivu: mallisivut['SC 3'], t: sc3.tekniset, kaytto: 'Koti' },
+	{ nimi: `Kärcher ${sc5.nimi}`, sivu: mallisivut['SC 5'], t: sc5.tekniset, kaytto: 'Koti' },
+	{ nimi: 'Kärcher SG 4/4', sivu: '#sg-4-4', t: s, kaytto: 'Ammattikäyttö' },
+	{ nimi: 'EV Atlantis EV3000i', sivu: '/kuivahoyrypesuri/', t: e, kaytto: 'Kuivahöyry' },
+];
+const arvo = (n: number | null, yksikko: string) => (n != null ? `${luku(n)} ${yksikko}` : '–');
+
+const ukk = [
+	{
+		kysymys: 'Mikä höyrypesuri sopii ammattikäyttöön?',
+		vastaus: `Ammattikäyttöön valitse laite, jonka säiliön voi täyttää kesken työn ja jonka kattila on iso. Kärcher SG 4/4:ssä on ${luku(s.kattilaL!)} litran kattila, ${luku(s.sailioL!)} litran säiliö ja ${luku(s.virtajohtoM!)} metrin virtajohto. Kuivahöyrypesuri EV Atlantis EV3000i on paineeltaan tehokkaampi (${luku(e.paineBar!)} bar), mutta se maksaa moninkertaisesti kotikäyttöön tarkoitettuun malliin verrattuna.`,
+	},
+	{
+		kysymys: 'Paljonko ammattikäyttöön tarkoitettu höyrypesuri maksaa?',
+		vastaus: `EV Atlantis EV3000i maksoi ${ev.myynnissa ? euroa(ev.hinta!) : 'tarkistushetkellä ei myynnissä'} (${paiva(ev.haettu)}). ${sg44.myynnissa ? `Kärcher SG 4/4 maksaa Kärcher.comissa ${euroa(sg44.hinta!)}.` : `Kärcher SG 4/4 ei ollut myynnissä Kärcher.comissa ${paiva(sg44.haettu)}.`} Satunnaiseen käyttöön SG 4/4:n voi vuokrata ${euroa(Math.min(...vrkHinnat))} – ${euroa(Math.max(...vrkHinnat))} vuorokaudessa.`,
+	},
+	{
+		kysymys: 'Mitä eroa on Kärcherin SC- ja SG-malleilla?',
+		vastaus: `SC-mallit on tarkoitettu kotikäyttöön, SG-mallit ammattikäyttöön. SG 4/4:n paine on sama ${luku(s.paineBar!)} bar kuin SC 4:ssä, mutta kattila on isompi (${luku(s.kattilaL!)} l), virtajohto pidempi (${luku(s.virtajohtoM!)} m) ja lämmitysaika pidempi (${lammitysaika(s.lammitysaikaMin)}). SG 4/4:ssä on lisäksi VapoHydro-toiminto, jolla höyryn vesimäärää säädetään.`,
+	},
+	{
+		kysymys: 'Sopivatko SC-mallien varusteet Kärcher SG 4/4:ään?',
+		vastaus: `Osa sopii. Kärcherin mukaan SG 4/4:ään sopii ${sgVarusteet.length} Kärcher.comissa myytävää höyrypesurin lisävarustetta, esimerkiksi käsisuutin, rakoharjasetti ja Comfort-ikkunasuutin. EasyFix-lattialiinat eivät ole SG 4/4:n yhteensopivien laitteiden listalla. Lista on <a href="/karcher-hoyrypesuri-varaosat/">Kärcherin varaosasivulla</a>.`,
+	},
+];
+---
+<Layout
+	title="Höyrypesuri ammattikäyttöön – Kärcher SG 4/4 ja kuivahöyrypesuri (2026)"
+	description="Höyrypesuri ammattikäyttöön: mitä ammattilaite tekee paremmin kuin kotikäyttöön tarkoitettu malli, Kärcher SG 4/4 ja EV Atlantis -kuivahöyrypesuri, hinnat ja vuokraus."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Höyrypesuri ammattikäyttöön', sivu: '/hoyrypesuri-ammattikayttoon/' }]} />
+		<span class="tp-label">Opas</span>
+		<h1>Höyrypesuri ammattikäyttöön – mitä ammattilaite tekee paremmin?</h1>
+		<p>Ammattikäyttöön tarkoitettu höyrypesuri on tehty pitkiin työpäiviin: siinä on iso kattila, jatkuva täyttö, pitkä virtajohto ja kestävä runko. Kotikäyttöön tarkoitetut mallit puhdistavat samoja pintoja, mutta niissä on pienempi kattila tai säiliö. Esittelemme kaksi ammattikäyttöön sopivaa laitetta: Kärcher SG 4/4 -höyrypuhdistimen ja EV Atlantis EV3000i -kuivahöyrypesurin. {sg44.myynnissa ? '' : `SG 4/4 ei ollut myynnissä Kärcher.comissa ${paiva(sg44.haettu)}, mutta sitä voi vuokrata.`}</p>
+
+		<h2>Ammattilaite vai kotikäyttöön tarkoitettu malli?</h2>
+		<p>Taulukossa ovat Kärcherin kotikäyttöön tarkoitetut suositusmallit ja ammattikäyttöön sopivat laitteet. Paine ei paljon eroa Kärcherin malleissa, mutta kattila, johto ja lämmitysaika eroavat.</p>
+		<div class="tp-taulu">
+			<table class="tp-versiot">
+				<thead><tr><th scope="col">Laite</th><th scope="col">Käyttö</th><th scope="col">Paine</th><th scope="col">Kattila / säiliö</th><th scope="col">Virtajohto</th><th scope="col">Lämmitysaika</th></tr></thead>
+				<tbody>
+					{rivit.map((r) => (
+						<tr>
+							<th scope="row"><a href={r.sivu}>{r.nimi}</a></th>
+							<td>{r.kaytto}</td>
+							<td>{arvo(r.t.paineBar, 'bar')}</td>
+							<td>{arvo(r.t.kattilaL, 'l')} / {arvo(r.t.sailioL, 'l')}</td>
+							<td>{arvo(r.t.virtajohtoM, 'm')}</td>
+							<td>{r.t.lammitysaikaMin != null ? lammitysaika(r.t.lammitysaikaMin) : '–'}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+		<p class="tp-lahde">Tiedot: Kärcher.com ja EV Internationalin käyttöohje (Atlantiksen lämmitysaika 3–5 minuuttia), tarkistettu {paiva(sg44.haettu)}.</p>
+		<p>Ammattilaite kannattaa, jos höyrytät useita tunteja päivässä, esimerkiksi siivousyrityksessä, kiinteistöhuollossa tai ravintolan keittiössä. Kotiin riittää yleensä säiliömalli, kuten <a href={mallisivut['SC 3']}>Kärcher SC 3</a> tai <a href={mallisivut['SC 5']}>SC 5</a>, jonka säiliön voi täyttää kesken työn.</p>
+
+		<h2 id="sg-4-4">Kärcher SG 4/4 – höyrypuhdistin ammattikäyttöön</h2>
+		<p>SG 4/4 on Kärcherin Professional-sarjan höyrypuhdistin. Kärcherin mukaan sen säiliön voi täyttää myös työn aikana. Laitteessa on {luku(s.kattilaL!)} litran kattila, {luku(s.sailioL!)} litran säiliö, {luku(s.paineBar!)} barin paine ja {luku(s.tehoW!)} watin lämmitysteho. Kattilan lämpötila on enintään {luku(s.lampotilaC!)} °C, ja lämmitysaika on {lammitysaika(s.lammitysaikaMin)}. VapoHydro-toiminnolla höyryn vesimäärää säädetään, jolloin lian voi myös huuhtoa.</p>
+		<p>Mukana tulevat käsisuutin harjalla, kaksi lattiasuutinta, kaksi jatkoputkea ja 2 metrin höyryletku käsikahvalla. Laite painaa {luku(s.painoKg!)} kg.</p>
+		<div class="mk-lista">
+			<Korttirivi tuote={sg44} otsikko="Kärcher SG 4/4" tagi="Ammattikäyttöön" kuvaus={`Professional-sarjan höyrypuhdistin, ${luku(s.kattilaL!)} litran kattila, jatkuva täyttö ja ${luku(s.virtajohtoM!)} metrin virtajohto.`} />
+		</div>
+		<TeknisetTiedot tuote={sg44} />
+
+		<h3>Kärcher SG 4/4 vuokralle</h3>
+		<p>Tarkistimme viiden vuokraamon hinnat, ja neljä niistä vuokrasi SG 4/4:ää. Vuorokausi maksoi {euroa(Math.min(...vrkHinnat))} – {euroa(Math.max(...vrkHinnat))}. Vuokraamot ja hinnat ovat <a href="/hoyrypesuri-vuokraus-vai-osto/">vuokraus vai osto -sivulla</a>.</p>
+		<ul>
+			{sgVuokrat.map((v) => <li><a href={v.lahde} target="_blank" rel={rel}>{v.vuokraamo}</a>, {v.paikkakunnat}</li>)}
+		</ul>
+
+		<h2>EV Atlantis EV3000i – kuivahöyrypesuri</h2>
+		<p>EV Internationalin Atlantis on kuivahöyrypesuri, jonka paine on valmistajan mukaan enintään {luku(e.paineBar!)} bar ja höyryn lämpötila 150–170 °C. Kattilan teho on {luku(e.tehoW!)} W, kattilaan mahtuu {luku(e.kattilaL!)} litraa ja täyttösäiliöön {luku(e.sailioL!)} litraa vettä. Höyrytasoja on kolme, ja kuumaa paineistettua vettä voi käyttää lyhyisiin töihin. Mitä kuivahöyry tarkoittaa ja miten se eroaa tavallisesta höyrystä, kerrotaan <a href="/kuivahoyrypesuri/">kuivahöyrypesurisivulla</a>.</p>
+		<div class="mk-lista">
+			<Korttirivi tuote={ev} otsikko="EV Atlantis EV3000i" sivu="/kuivahoyrypesuri/" tagi="Kuivahöyry" kuvaus={`Kuivahöyrypesuri, ${luku(e.paineBar!)} bar, kolme höyrytasoa ja ruostumattomasta teräksestä tehty runko.`} />
+		</div>
+
+		<h2>Ammattilaitteen huolto ja varusteet</h2>
+		<p>Kärcherin ammattilaitteita huoltavat valtuutetut huoltoliikkeet, jotka löydät <a href={HUOLTOHAKU} target="_blank" rel={rel}>Kärcherin jälleenmyyjä- ja huoltoliikehausta</a>. SG 4/4:ään sopii Kärcherin mukaan {sgVarusteet.length} Kärcher.comissa myytävää lisävarustetta, kuten {sgVarusteet.slice(0, 3).map((x) => x.nimi.toLowerCase()).join(', ')}. Lista on <a href="/karcher-hoyrypesuri-varaosat/">Kärcherin varaosasivulla</a>. EV International neuvoo käyttöohjeessaan käyttämään korjauksissa vain alkuperäisiä osia ja ottamaan vikatilanteessa yhteyttä huoltoon.</p>
+
+		<p class="tp-lahde">Lähteet: <a href={sg44.lahde} target="_blank" rel={rel}>Kärcher SG 4/4</a>, <a href={ev.lahde} target="_blank" rel={rel}>EV International, EV ATLANTIS -käyttöohje</a> ja vuokraamoiden hinnastot (tarkistettu {paiva(sgVuokrat[0].tarkistettu)}).</p>
+
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>
