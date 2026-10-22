@@ -1,0 +1,122 @@
+---
+// SCN: tuki (merkkikooste), intentti Comparison, emopilari /. Merkit, joille on hakuja mutta ei affiliate-linkkiä
+// (Ahrefs 2026-10): Dolphin noin 130 (dolphin höyrypesuri 40, hinta 40, kokemuksia 20, cwn dolphin 20, käyttöohje 10,
+// höyrypesuri dolphin 10), Lidl/Silvercrest noin 160, Emax noin 100 (emax höyrypesuri 60, 1500w 20, kokemuksia ja
+// käyttöohje 10), H2O noin 90 (h2o höyrymoppi 40, varaosat 40, h2o höyrypesuri 10), Ryobi 60, Philips höyrymoppi 40.
+// Lähteet tarkistettu 2026-10-22: ld-direct.fi ja puhdas.fi (Dolphin), motonet.fi (Emax), lidl.fi-haku (Silvercrest),
+// gigantti.fi (H2O), fi.ryobitools.eu (Ryobi), Philipsin ja jälleenmyyjien sivut (Philips). Ostolinkkejä ei ole.
+// Kirjoitettu hoyrypesuri-writer-skillillä (2026-10-22).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { paatuote, tuote, euroa, luku, mallisivut, lammitysaika } from '../lib/tuotteet';
+
+const sc3 = await paatuote('SC 3');
+const sv7 = await tuote('sv-7');
+const vileda = await tuote('vileda-steam-plus');
+const bd = await tuote('black-decker-bhsm1610dsm');
+const rel = 'nofollow noopener';
+const TARKISTETTU = '22.10.2026';
+
+const L = {
+	dolphin: 'https://ld-direct.fi/dolphin/',
+	dolphinOsat: 'https://puhdas.fi/',
+	emax: 'https://www.motonet.fi/fi/tuote/383155/Hoyrypesuri-1500W-12l',
+	h2o: 'https://www.gigantti.fi/product/kodin-pienkoneet/siivous-ja-vaatehuolto/lattianpesu/angmopp-h2o-mop-hd/639831',
+	ryobi: 'https://fi.ryobitools.eu/',
+	tekstiili: 'https://tekstiilipesuri.com/tekstiilipesuri-vai-hoyrypesuri/',
+};
+
+const yhteenveto = [
+	{ merkki: 'Dolphin (CWN)', tyyppi: 'Yhdistelmäpesuri, jossa on höyrysäiliö', myynti: 'Suoramyynti (L&D Direct)', osio: '#dolphin' },
+	{ merkki: 'Emax', tyyppi: 'Säiliömalli 1500 W', myynti: 'Motonetin tavaratalot', osio: '#emax' },
+	{ merkki: 'Silvercrest (Lidl)', tyyppi: 'Höyrymopit ja käsimallit', myynti: 'Lidlin kampanjatuotteet', osio: '#silvercrest' },
+	{ merkki: 'H2O', tyyppi: 'Höyrymoppi, josta irtoaa käsiosa', myynti: 'Ei saatavilla tarkistetussa kaupassa', osio: '#h2o' },
+	{ merkki: 'Ryobi', tyyppi: 'Ei höyrypesuria Suomessa', myynti: '–', osio: '#ryobi' },
+	{ merkki: 'Philips', tyyppi: 'Ei lattioille tarkoitettua höyrymoppia Suomessa', myynti: '–', osio: '#philips' },
+];
+
+const ukk = [
+	{
+		kysymys: 'Paljonko Dolphin-höyrypesuri maksaa?',
+		vastaus: `Dolphinin hintaa ei julkaista. Laitetta myy suoramyyntiyritys L&D Direct, ja hinnan saa tuote-esittelyssä tai asiakaspalvelusta. Vertailun vuoksi: imevä höyrypesuri Kärcher SV 7 maksaa ${euroa(sv7.hinta!)}, ja kotiin riittävä säiliömalli Kärcher ${sc3.nimi} ${euroa(sc3.hinta!)}.`,
+	},
+	{
+		kysymys: 'Mistä saan Dolphin-höyrypesurin käyttöohjeen?',
+		vastaus: `Dolphinin käyttöohjetta ei ole julkisesti verkossa. Kysy sitä L&D Directin asiakaspalvelusta, joka myy myös Dolphinin tarvikkeita ja varaosia, kuten höyrysäiliön painekorkkia, <a href="${L.dolphinOsat}" target="_blank" rel="${rel}">puhdas.fi-verkkokaupassa</a>.`,
+	},
+	{
+		kysymys: 'Onko Lidlillä höyrymoppia?',
+		vastaus: `Lidl myy Silvercrest-höyrylaitteita kampanjatuotteina, joten valikoima vaihtelee. Lidl.fi:n haussa ei ollut Silvercrest-höyrymoppia ${TARKISTETTU}. Jatkuvasti myynnissä olevia höyrymoppeja on <a href="/hoyrymoppi/">höyrymoppivertailussa</a>.`,
+	},
+	{
+		kysymys: 'Mistä saa H2O-höyrymopin varaosia?',
+		vastaus: 'Emme löytäneet suomalaista kauppaa, joka myisi H2O-mopin liinoja tai varaosia. Kysy ensin laitteen myyneeltä kaupalta. Jos varaosia ei saa, uuden mopin voi valita höyrymoppivertailusta, jossa on mallit, joihin liinoja myydään Suomessa.',
+	},
+	{
+		kysymys: 'Onko Ryobilla höyrypesuria?',
+		vastaus: `Ryobin suomalaisella sivustolla ei ollut höyrypesuria ${TARKISTETTU}. Ryobin siivouslaitteet ovat lattiapesureita, tekstiilipesureita ja märkä-kuivaimureita.`,
+	},
+];
+---
+<Layout
+	title="Höyrypesurimerkit – Dolphin, Emax, Lidl Silvercrest, H2O, Ryobi ja Philips (2026)"
+	description="Dolphin, Emax, Lidlin Silvercrest, H2O, Ryobi ja Philips: mitä höyrylaitteita merkeillä on Suomessa, mistä niitä saa ja mihin niitä kannattaa verrata."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Höyrypesurimerkit', sivu: '/hoyrypesurimerkit/' }]} />
+		<span class="tp-label">Merkit</span>
+		<h1>Höyrypesurimerkit – Dolphin, Emax, Silvercrest, H2O, Ryobi ja Philips</h1>
+		<p>Näitä merkkejä haetaan höyrypesurin kanssa, mutta yhtäkään niistä ei myydä kaupoissa, joiden hinnat seuraamme. Osa myydään suoramyynnissä tai vain yhden ketjun omana merkkinä, ja Ryobilla ja Philipsillä ei ole Suomessa lattioiden höyrypesuria lainkaan. Kerromme jokaisesta merkistä, mitä laitteita sillä on, mistä tiedot ovat ja mihin vertailemiimme malleihin sitä kannattaa verrata. Tiedot on tarkistettu {TARKISTETTU}.</p>
+		<div class="tp-taulu">
+			<table class="tp-versiot">
+				<thead><tr><th scope="col">Merkki</th><th scope="col">Höyrylaite</th><th scope="col">Myynti Suomessa</th></tr></thead>
+				<tbody>
+					{yhteenveto.map((m) => <tr><th scope="row"><a href={m.osio}>{m.merkki}</a></th><td>{m.tyyppi}</td><td>{m.myynti}</td></tr>)}
+				</tbody>
+			</table>
+		</div>
+
+		<h2 id="dolphin">Dolphin höyrypesuri (CWN Dolphin)</h2>
+		<p>Dolphin on yhdistelmäpesuri, jota myy espoolainen suoramyyntiyritys L&D Direct Oy. Yrityksen mukaan laitteen valmistaa saksalainen Robert Thomas Metall- und Elektrowerke, ja Dolphinia on myyty Suomessa vuodesta 2000. L&D Direct ei julkaise malleja, teknisiä tietoja eikä hintoja, vaan laitteen voi tilata tuote-esittelyyn. Dolphinin varusteissa on höyrysäiliön painekorkki, höyryharja sekä tekstiilin- ja matonpesusuulake, joten laitteessa on sekä höyry- että pesutoiminto.</p>
+		<p><strong>Dolphin höyrypesuri hinta ja kokemuksia:</strong> koska hintaa ei julkaista, sitä ei voi verrata kaupan laitteisiin. Kysy esittelyssä hinta, takuu ja varaosien hinnat. Kaupoista saatavista laitteista höyryn ja imun yhdistävät <a href="/imeva-hoyrypesuri/">imevät höyrypesurit</a>, kuten Kärcher SV 7 ({euroa(sv7.hinta!)}). Jos haluat pestä sohvan tai maton, tarvitset <a href={L.tekstiili}>tekstiilipesurin</a>. Jos sinulla on Dolphin, kerro kokemuksesi tämän sivun lopussa olevalla lomakkeella.</p>
+		<p class="tp-lahde">Lähteet: <a href={L.dolphin} target="_blank" rel={rel}>L&D Direct, Dolphin</a> ja <a href={L.dolphinOsat} target="_blank" rel={rel}>puhdas.fi</a>.</p>
+
+		<h2 id="emax">Emax höyrypesuri 1500 W</h2>
+		<p>Emax on Motonetin myymä merkki. Motonetin tuotesivun mukaan Emax-höyrypesurin (tuotenumero 38-3155) teho on 1500 W, paine 4 bar ja vesisäiliö 1,2 litraa. Laite painaa 3,65 kg, ja johto on 2,5 metriä pitkä. Mukana ovat höyrypistooli, jatkoputket, lattiaharja, suuttimia, mittakannu, puhdistusliina ja ikkunaharja. Hinta oli 79,90 €, ja laitetta sai vain tavarataloista. Motonetin sivulla oli 24 asiakasarviota, joiden keskiarvo oli 4,4/5.</p>
+		<p>Lämmitysaikaa Motonet ei kerro. Säiliön täyttöä kesken työn ei mainita. Vastaava säiliömalli on Kärcher {sc3.nimi}: sen paine on valmistajan mukaan {luku(sc3.tekniset.paineBar!)} bar, lämmitysaika {lammitysaika(sc3.tekniset.lammitysaikaMin)} ja hinta {euroa(sc3.hinta!)}. Säiliön voi täyttää kesken työn. Lisää on <a href={mallisivut['SC 3']}>Kärcher SC 3 -sivulla</a>. Emaxin käyttöohje tulee laitteen mukana. Kysy sitä Motonetista, jos ohje on kadonnut.</p>
+		<p class="tp-lahde">Lähde: <a href={L.emax} target="_blank" rel={rel}>Motonet, Emax höyrypesuri 1500 W 1,2 l</a>.</p>
+
+		<h2 id="silvercrest">Lidl höyrymoppi ja Silvercrest höyrypesuri</h2>
+		<p>Silvercrest on Lidlin oma merkki. Lidl myy Silvercrest-höyrylaitteita kampanjatuotteina, joten valikoima vaihtelee. Lidl.fi:n haussa ei ollut Silvercrest-höyrylaitetta {TARKISTETTU}. Muiden maiden Lidleissä samalla nimellä on myyty useita versioita, kuten höyrymopit SDM 1500 B2, C2 ja E1, ja niiden tekniset tiedot eroavat. Jos etsit käyttöohjetta tai varaosaa, katso mallikoodi laitteen tyyppikilvestä.</p>
+		<p>Jos haluat höyrymopin nyt, vertaile jatkuvasti myynnissä olevia malleja. Esimerkiksi Vileda Steam Plus maksaa {euroa(vileda.hinta!)}, ja se oli Guardianin testin (2025) paras höyrymoppi. Kaikki mallit ovat <a href="/hoyrymoppi/">höyrymoppivertailussa</a>.</p>
+
+		<h2 id="h2o">H2O höyrymoppi</h2>
+		<p>H2O on höyrymoppien merkki, jota on myyty Suomessa muun muassa Gigantissa. Uusin löytämämme malli on H2O Mop HD. Gigantin tuotesivun mukaan se on 1500 watin höyrymoppi, josta irtoaa käsihöyrypuhdistin. Siinä on kolme höyrytasoa, irrotettava vesisäiliö, vesisuodatin, 31 cm leveä moppi ja 6 metrin johto. Gigantissa H2O Mop HD ei ollut saatavilla {TARKISTETTU}, eikä H2O-mopin liinoja tai varaosia löytynyt suomalaisista kaupoista.</p>
+		<p>Jos H2O-mopin liina on kulunut eikä varaosia saa, vastaava laite on höyrymoppi, josta irtoaa käsiosa. Esimerkiksi Black+Decker BHSM1610DSM maksaa {euroa(bd.hinta!)}, ja sitä myydään suomalaisissa verkkokaupoissa. Lisää on <a href="/black-decker-hoyrypesurit/">Black+Decker-sivulla</a>.</p>
+		<p class="tp-lahde">Lähde: <a href={L.h2o} target="_blank" rel={rel}>Gigantti, H2O Mop HD</a>.</p>
+
+		<h2 id="ryobi">Ryobi höyrypesuri</h2>
+		<p>Ryobin suomalaisella sivustolla ei ollut höyrypesuria {TARKISTETTU}. Ryobin siivouslaitteet ovat lattiapesureita, tekstiilipesureita (SwiftClean) ja märkä-kuivaimureita. Jos etsit Ryobin laitetta sohvan tai maton pesuun, se on tekstiilipesuri: niistä kerrotaan <a href={L.tekstiili}>tekstiilipesuri.comissa</a>. Kovien pintojen höyrypuhdistukseen tarvitset höyrypesurin, kuten <a href={mallisivut['SC 3']}>Kärcher SC 3:n</a>.</p>
+		<p class="tp-lahde">Lähde: <a href={L.ryobi} target="_blank" rel={rel}>Ryobi Suomi</a>.</p>
+
+		<h2 id="philips">Philips höyrymoppi</h2>
+		<p>Emme löytäneet Philipsin sivuilta tai suomalaisista kaupoista lattioille tarkoitettua Philips-höyrymoppia. Löytämämme Philipsin höyrylaitteet ovat vaatehöyrystimiä ja höyrysilitysrautoja, joilla raikastetaan ja silitetään kankaita. Lattioiden höyrypesuun sopivat mallit ovat <a href="/hoyrymoppi/">höyrymoppivertailussa</a>.</p>
+
+		<h2>Merkit, joita vertailemme</h2>
+		<p>Kärcherin, Viledan, Poltin ja Black+Deckerin malleja saa suomalaisista verkkokaupoista, ja niille on omat sivunsa:</p>
+		<ul>
+			<li><a href="/karcher-hoyrypesurit/">Kärcher</a>: SC 1–SC 5, SV 7 ja ammattikäyttöön tarkoitettu SG 4/4</li>
+			<li><a href="/vileda-hoyrymoppi/">Vileda</a>: Steam-höyrymopit</li>
+			<li><a href="/polti-hoyrypesurit/">Polti</a>: Vaporetto-säiliömallit, höyrymopit ja imevä 3 Clean</li>
+			<li><a href="/black-decker-hoyrypesurit/">Black+Decker</a>: Steam-Mop-höyrymopit, joista irtoaa käsiosa</li>
+		</ul>
+		<p>Kaikkien merkkien vertailu on <a href="/">etusivulla</a>.</p>
+
+		<Kokemuslomake malli="Höyrypesurimerkit" polku="/hoyrypesurimerkit/" mallikentta otsikko="Onko sinulla Dolphin, Emax, Silvercrest tai H2O? Kerro kokemuksesi!">
+			<p>Keräämme kokemuksia merkeistä, joista on vähän julkista tietoa. Kerro, mikä laite sinulla on, mitä puhdistat ja mikä toimii tai ei toimi. Luemme jokaisen kokemuksen ennen julkaisua.</p>
+		</Kokemuslomake>
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>
