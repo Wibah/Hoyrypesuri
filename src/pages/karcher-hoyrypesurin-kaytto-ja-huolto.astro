@@ -1,0 +1,177 @@
+---
+// SCN: tuki (ylläpito), intentti Risk, emopilari /karcher-hoyrypesurit/. Hakusanat: kärcher höyrypesuri käyttöohje 60,
+// höyrypesuri käyttö 30, kärcher höyrypesuri korkki ei aukea 20, kärcher höyrypesuri ei toimi 10, kärcher höyrypesuri
+// huolto, kärcher höyrypesuri käyttö ja höyrypesuri kalkinpoisto (volyymi tyhjä) (Ahrefs 2026-10). Varaosat ja
+// kalkinpoistotarvikkeiden hinnat ovat sivulla /karcher-hoyrypesuri-varaosat/. Lähteet vain Kärcheriltä: karcher.com/fi:n
+// Usein kysyttyä -sivu ja mallien suomenkieliset käyttöohjeet (tarkistettu 2026-10-22). Kirjoitettu
+// hoyrypesuri-writer-skillillä (2026-10-22).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import Ukk from '../components/Ukk.astro';
+import varusteet from '../data/varusteet/karcher-sc.json';
+import { euroa, mallisivut } from '../lib/tuotteet';
+
+const rel = 'nofollow noopener';
+const UKK_KARCHER = 'https://www.karcher.com/fi/palvelut/asiakaspalvelu/usein-kysyttyae.html';
+const HUOLTOHAKU = 'https://www.karcher.com/fi/palvelut/asiakaspalvelu/jaelleenmyyjaehaku.html';
+const ohje = (bta: string) => `https://s1.kaercher-media.com/documents/manuals/raw/000/${bta}.pdf`;
+const ohjeet = [
+	{ malli: 'SC 1', bta: 'BTA-5547100-000-15', sivu: mallisivut['SC 1'] },
+	{ malli: 'SC 2 EasyFix', bta: 'BTA-5546018-000-12', sivu: mallisivut['SC 2'] },
+	{ malli: 'SC 2 Upright', bta: 'BTA-5831887-000-05', sivu: mallisivut['SC 2'] },
+	{ malli: 'SC 3 EasyFix', bta: 'BTA-5544676-000-10', sivu: mallisivut['SC 3'] },
+	{ malli: 'SC 4 Deluxe EasyFix', bta: 'BTA-5831875-000-03', sivu: mallisivut['SC 4'] },
+	{ malli: 'SC 5 EasyFix', bta: 'BTA-5848399-000-05', sivu: mallisivut['SC 5'] },
+];
+const patruuna = varusteet.find((x) => x.id === '28630180')!;
+const jauhe = varusteet.find((x) => x.id === '62961930')!;
+
+const viat = [
+	{ oire: 'Höyryvipua ei voi painaa', syy: 'Lapsilukko on päällä. SC-malleissa se on höyrymäärän valitsimessa.', korjaus: 'Käännä höyrymäärän valitsin eteen (SC 1:ssä paina lapsilukko ylös).' },
+	{ oire: 'Ei höyryä (SC 1, SC 2 EasyFix)', syy: 'Höyrykattilassa ei ole vettä.', korjaus: 'Irrota pistoke, pura paine höyryvivulla ja lisää vettä turvalukon kautta.' },
+	{ oire: 'Ei höyryä tai vähän höyryä, vaikka säiliössä on vettä (SC 3)', syy: 'Kalkinpoistopatruuna puuttuu, on väärin paikallaan, se on irrotettu täytön ajaksi tai se on kuivahtanut.', korjaus: 'Paina patruuna tiukasti paikalleen ja pidä se paikallaan täytön aikana. Kuivahtanut patruuna huuhdellaan juoksevan veden alla pari minuuttia.' },
+	{ oire: 'Punainen vedenpuutteen merkkivalo vilkkuu (SC 3)', syy: 'Pumpun kuivakäyntisuoja on lauennut.', korjaus: 'Kytke laite pois ja takaisin päälle. Tarkista patruuna ja säiliön vesi.' },
+	{ oire: 'Laite sammuu itsestään tai patruunan merkkivalo palaa (SC 3)', syy: 'Kalkinpoistopatruunan käyttöaika on lopussa.', korjaus: 'Vaihda patruuna ja pidä RESET-painiketta painettuna 4 sekuntia.' },
+	{ oire: 'Merkkivalo vilkkuu nopeasti punaisena (SC 2 Upright)', syy: 'Kalkinpoistopatruuna on vaihdettava. Pumppu pysähtyy, kun käyttöaika loppuu.', korjaus: 'Vaihda patruuna. Paina höyryvipua, kytke pistoke ja pidä vipua painettuna 7 sekuntia.' },
+	{ oire: 'LED vilkkuu nopeasti punaisena ja kuuluu äänimerkki (SC 4)', syy: 'Vesisäiliössä ei ole vettä.', korjaus: 'Täytä vesisäiliö. Kattilan täyttö voi kestää useita minuutteja.' },
+	{ oire: 'Höyryä tulee vähemmän, lämpeneminen kestää tai vettä tulee paljon', syy: 'Höyrykattilassa on kalkkia. SC 1:ssä myös höyrysuutin voi olla tukossa.', korjaus: 'Poista kalkki kattilasta (ohje alla). Tukkeutunut suutin puhdistetaan varusteet irrotettuna.' },
+	{ oire: 'Höyryn mukana tulee vettä', syy: 'Letkuun on jäänyt lauhdevettä, kattilassa on liikaa vettä, tai laitetta kallistetaan (SC 1: yli 30°).', korjaus: 'Suuntaa höyry ensin liinaan, kunnes sitä tulee tasaisesti. Kiinnitä mikrokuituliina vasta, kun varusteet ovat lämmenneet.' },
+	{ oire: 'Höyryä tulee turvalukon ohi', syy: 'Turvakorkin juuren O-rengas puuttuu tai on rikki.', korjaus: 'Tarkista O-rengas. Rengassarja on varaosasivulla.' },
+	{ oire: 'Kahva kuumenee', syy: 'Pienen höyrynipan uran O-rengas puuttuu.', korjaus: 'Tarkista O-rengas.' },
+	{ oire: 'Laitteesta kuuluu pumppaavaa ääntä', syy: 'Esisäiliöllä varustetuissa malleissa pumppu siirtää vettä kattilaan.', korjaus: 'Ääni on normaali.' },
+	{ oire: 'Vedenmäärän merkkivalo palaa jatkuvasti', syy: 'Termostaatissa voi olla vika.', korjaus: 'Vie laite huoltoon.' },
+];
+
+const ukk = [
+	{
+		kysymys: 'Mistä löydän Kärcher-höyrypesurini käyttöohjeen?',
+		vastaus: 'Kärcher julkaisee käyttöohjeet tuotesivuillaan ja aineistopankissaan PDF-muodossa. Ohjeet ovat monikielisiä, ja suomenkielinen osio on mukana. Tämän sivun alussa on linkit nykyisten SC-mallien ohjeisiin.',
+	},
+	{
+		kysymys: 'Voiko Kärcherin höyrypesurissa käyttää tislattua vettä?',
+		vastaus: 'Kärcherin mukaan SC-malleissa voi käyttää tavallista vesijohtovettä. SC 1:n ja SC 2 EasyFixin käyttöohjeiden mukaan jatkuvasti tislattua vettä käytettäessä kattilan kalkinpoistoa ei tarvita. SC 4:ään saa käyttää enintään 50 % tislattua vettä sekoitettuna vesijohtoveteen, eikä siihen saa laittaa pyykinkuivaajan lauhdevettä tai sadevettä.',
+	},
+	{
+		kysymys: 'Saako höyrypesurin veteen laittaa pesuainetta tai tuoksua?',
+		vastaus: 'Ei saa. Kärcherin mukaan laitteen takuu raukeaa, jos veteen sekoitetaan pesuainetta tai muuta ainetta.',
+	},
+	{
+		kysymys: 'Kuinka usein Kärcherin höyrypesurista poistetaan kalkki?',
+		vastaus: 'Kärcherin mukaan noin puolen vuoden välein, jos laitetta käytetään kerran viikossa, ja kerran vuodessa, jos sitä käytetään harvemmin. Käyttöohjeissa väli on kerrottu kattilan täyttökertoina veden kovuuden mukaan. Patruunamalleissa (SC 2 Upright ja SC 3) vaihdetaan patruuna merkkivalon ilmoittaessa.',
+	},
+	{
+		kysymys: 'Miksi Kärcherin höyrypesurin korkki ei aukea?',
+		vastaus: 'Kärcherin mukaan höyrykattila on todennäköisesti vielä paineen alaisena. Turvalukkoa ei voi avata, ennen kuin paine on purettu. Ohje on tämän sivun kohdassa Kärcher höyrypesurin korkki ei aukea.',
+	},
+];
+---
+<Layout
+	title="Kärcher höyrypesuri käyttöohje – korkki ei aukea, kalkinpoisto ja viat (2026)"
+	description="Kärcher-höyrypesurin käyttö ja huolto: käyttöohjeet malleittain, mitä tehdä kun korkki ei aukea tai laite ei toimi, ja kalkinpoisto Kärcherin ohjeiden mukaan."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Kärcher', sivu: '/karcher-hoyrypesurit/' }, { nimi: 'Käyttö ja huolto', sivu: '/karcher-hoyrypesurin-kaytto-ja-huolto/' }]} />
+		<span class="tp-label">Opas</span>
+		<h1>Kärcher höyrypesurin käyttö ja huolto – käyttöohje ja yleisimmät viat</h1>
+		<p>Kärcherin SC-höyrypesureita on kolmea rakennetta, ja käyttö ja huolto riippuvat siitä. SC 1:ssä ja SC 2 EasyFixissä on höyrykattila, joka täytetään turvalukon kautta, eikä vettä voi lisätä, ennen kuin paine on purettu. SC 2 Upright ja SC 3 kuumentavat vettä säiliöstä, ja kalkki suodatetaan kalkinpoistopatruunalla. SC 4:ssä ja SC 5:ssä on kattila ja irrotettava vesisäiliö, jonka voi täyttää milloin tahansa. Tämän sivun ohjeet perustuvat Kärcherin käyttöohjeisiin ja Kärcher Oy:n Usein kysyttyä -sivuun.</p>
+
+		<div class="tp-taulu">
+			<table class="tp-versiot">
+				<thead><tr><th scope="col">Malli</th><th scope="col">Rakenne</th><th scope="col">Veden lisääminen</th><th scope="col">Kalkinpoisto</th></tr></thead>
+				<tbody>
+					<tr><th scope="row"><a href={mallisivut['SC 1']}>SC 1</a></th><td>Höyrykattila ja turvalukko</td><td>Pois päältä ja paineettomana, 200 ml kerrallaan</td><td>Kalkinpoistoaine kattilaan</td></tr>
+					<tr><th scope="row"><a href={mallisivut['SC 2']}>SC 2 EasyFix</a></th><td>Höyrykattila ja turvalukko</td><td>Pois päältä ja paineettomana, enintään 1 litra</td><td>Kalkinpoistoaine kattilaan</td></tr>
+					<tr><th scope="row"><a href={mallisivut['SC 2']}>SC 2 Upright</a></th><td>Vesisäiliö ja kalkinpoistopatruuna</td><td>Patruuna pysyy paikallaan täytön ajan</td><td>Patruunan vaihto merkkivalon mukaan</td></tr>
+					<tr><th scope="row"><a href={mallisivut['SC 3']}>SC 3</a></th><td>Läpivirtauslämmitin ja kalkinpoistopatruuna</td><td>Milloin tahansa patruunan kannen kautta</td><td>Patruunan vaihto merkkivalon mukaan</td></tr>
+					<tr><th scope="row"><a href={mallisivut['SC 4']}>SC 4</a> ja <a href={mallisivut['SC 5']}>SC 5</a></th><td>Höyrykattila ja irrotettava vesisäiliö</td><td>Milloin tahansa, pumppu täyttää kattilan</td><td>Kalkinpoistoaine kattilaan huoltolukon kautta</td></tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h2>Kärcher höyrypesuri käyttöohje</h2>
+		<p>Kärcherin käyttöohjeet ovat monikielisiä PDF-tiedostoja, joissa on suomenkielinen osio. Nykyisten mallien ohjeet:</p>
+		<ul>
+			{ohjeet.map((o) => <li><a href={ohje(o.bta)} target="_blank" rel={rel}>Kärcher {o.malli} -käyttöohje (PDF)</a></li>)}
+		</ul>
+		<p>Käytön perusvaiheet ovat samat kaikissa SC-malleissa:</p>
+		<ol>
+			<li>Lakaise tai imuroi lattia ennen höyrytystä, jotta irtolika ei levitä.</li>
+			<li>Täytä vesi mallin ohjeen mukaan. Käytä vesijohtovettä. Pesuaineet ja tuoksut ovat kiellettyjä, ja niiden käyttö raukaisee takuun.</li>
+			<li>Kytke laite päälle ja odota, kunnes merkkivalo kertoo laitteen olevan käyttövalmis.</li>
+			<li>Valitse höyrymäärä. SC 2 EasyFixin ja SC 3:n valitsimessa on kolme asentoa: suurin höyrymäärä, vähennetty höyrymäärä ja lapsilukko.</li>
+			<li>Suuntaa höyry ensin liinaan, kunnes sitä tulee tasaisesti. Kiinnitä mikrokuituliina vasta, kun varusteet ovat lämmenneet, jotta liina ei kastu.</li>
+		</ol>
+		<p>Kärcherin mukaan höyry on suuttimesta tullessaan 100-asteista ja puhdistettavalla pinnalla noin 84-asteista. Desinfiointiin Kärcher neuvoo liikuttamaan suutinta noin 30 cm sekunnissa limittäisin vedoin.</p>
+
+		<h2>Kärcher höyrypesurin korkki ei aukea</h2>
+		<p>Korkki eli turvalukko on SC 1:ssä ja SC 2 EasyFixissä. Kärcherin mukaan se ei aukea, kun höyrykattila on vielä paineen alaisena, ja turvalukko on tehty niin, ettei sitä voi avata paineisena. Kärcher Oy neuvoo toimimaan näin:</p>
+		<ol>
+			<li>Kytke pistoke ja anna laitteen lämmetä noin minuutti.</li>
+			<li>Paina höyryvipua kuin höyryttäisit. Höyryä tulee vain, jos kattilassa on vielä vettä.</li>
+			<li>Pidä vipua painettuna, tartu toisella kädellä turvakorkkiin, paina alas ja käännä. Suojaa käsi esimerkiksi siivousliinalla.</li>
+			<li>Irrota pistoke ja anna laitteen jäähtyä.</li>
+			<li>Jos korkki ei auennut, kokeile uudelleen noin 10 minuutin kuluttua. Korkki pyörii tyhjää, kun turvalukko on päällä, ja aukeaa, kun siinä tuntuu vastus.</li>
+		</ol>
+		<p>Jos korkki ei vieläkään aukea, Kärcherin mukaan kierteisiin on todennäköisesti kertynyt kalkkia tai metalliosat ovat juuttuneet kiinni. Silloin laite viedään korjattavaksi. Kierteitä voi suojata kalkinpoiston yhteydessä: Kärcher neuvoo liottamaan korkin kalkinpoistoliuoksessa, puhdistamaan kierteet pienellä harjalla ja voitelemaan ne vaseliinilla.</p>
+
+		<h2>Kärcher höyrypesuri ei toimi: viat ja korjaukset</h2>
+		<p>Irrota pistoke ja anna laitteen jäähtyä ennen kuin korjaat vikaa. Kärcherin mukaan vian poistaminen on vaarallista, kun laite on kytkettynä verkkoon tai vielä kuuma.</p>
+		<div class="tp-taulu">
+			<table class="tp-versiot tp-varaosat">
+				<thead><tr><th scope="col">Oire</th><th scope="col">Syy</th><th scope="col">Korjaus</th></tr></thead>
+				<tbody>
+					{viat.map((v) => <tr><th scope="row">{v.oire}</th><td data-otsikko="Syy">{v.syy}</td><td data-otsikko="Korjaus">{v.korjaus}</td></tr>)}
+				</tbody>
+			</table>
+		</div>
+		<p>Jos vika ei ole taulukossa tai korjaus ei auta, vie laite valtuutettuun huoltoon. Lähimmän löydät <a href={HUOLTOHAKU} target="_blank" rel={rel}>Kärcherin jälleenmyyjä- ja huoltoliikehausta</a>. Varaosat ja niiden tilaus ovat <a href="/karcher-hoyrypesuri-varaosat/">Kärcherin varaosasivulla</a>.</p>
+
+		<h2>Kärcher höyrypesurin kalkinpoisto</h2>
+		<p>Kalkki on höyrypesurin tavallisin huoltoasia. Kärcherin mukaan pitkään kertynyttä kalkkia ei saa pois pelkällä höyryllä, eikä kalkkiintunut kattila tuota yhtä paljon höyryä.</p>
+		<h3>Kattilamallit: SC 1, SC 2 EasyFix, SC 4 ja SC 5</h3>
+		<ol>
+			<li>Kytke laite pois päältä ja anna sen jäähtyä.</li>
+			<li>Avaa turvalukko (SC 1 ja SC 2 EasyFix) tai huoltolukko (SC 4 ja SC 5: lukko avataan jatkoputken päällä) ja tyhjennä kattila.</li>
+			<li>Sekoita Kärcherin kalkinpoistoaine veteen. SC 1:n, SC 4:n ja SC 5:n ohjeissa annos on 1 annosteluyksikkö 0,5 litraan vettä, SC 2 EasyFixin ohjeessa 2 annosteluyksikköä litraan vettä.</li>
+			<li>Kaada liuos kattilaan. Älä sulje kattilaa, äläkä kytke laitetta päälle.</li>
+			<li>Anna vaikuttaa noin 8 tuntia ja tyhjennä liuos.</li>
+			<li>Huuhtele kattila 2–3 kertaa kylmällä vedellä ja tyhjennä se.</li>
+		</ol>
+		<p>Käytä vain Kärcherin kalkinpoistoainetta, sillä Kärcherin mukaan väärä aine tai annostelu voi vaurioittaa laitetta. Kalkinpoistojauhe maksaa Kärcher.comissa {euroa(jauhe.hinta)}. Liuos voi syövyttää herkkiä pintoja, joten täytä ja tyhjennä kattila varovasti.</p>
+		<p>Väli riippuu veden kovuudesta. Kärcher Oy:n mukaan kalkki poistetaan noin puolen vuoden välein, jos laitetta käytetään kerran viikossa, ja kerran vuodessa harvemmin käytettynä. Käyttöohjeissa väli on kerrottu kattilan tai säiliön täyttökertoina:</p>
+		<div class="tp-taulu">
+			<table class="tp-versiot">
+				<thead><tr><th scope="col">Veden kovuus</th><th scope="col">°dH</th><th scope="col">SC 2 EasyFix (kattilan täyttöä)</th><th scope="col">SC 4 ja SC 5 (säiliön täyttöä)</th></tr></thead>
+				<tbody>
+					<tr><th scope="row">I pehmeä</th><td>0–7</td><td>55</td><td>100</td></tr>
+					<tr><th scope="row">II keskikova</th><td>7–14</td><td>45</td><td>90</td></tr>
+					<tr><th scope="row">III kova</th><td>14–21</td><td>35</td><td>75</td></tr>
+					<tr><th scope="row">IV erittäin kova</th><td>yli 21</td><td>25</td><td>50</td></tr>
+				</tbody>
+			</table>
+		</div>
+		<p>Vesijohtoveden kovuuden saat vesilaitokselta. Jos käytät kaivovettä, kovuus selviää vesianalyysistä. SC 1:n ja SC 2 EasyFixin ohjeiden mukaan kattilan kalkinpoistoa ei tarvita, jos laitteessa käytetään jatkuvasti tislattua vettä. Lisäksi kattila huuhdellaan SC 2 EasyFixissä ja SC 4:ssä viimeistään joka kymmenennen täytön jälkeen: täytä kattila vedellä, heiluta sitä voimakkaasti ja tyhjennä.</p>
+
+		<h3>Patruunamallit: SC 2 Upright ja SC 3</h3>
+		<p>Kalkinpoistopatruunassa on rakeita, jotka suodattavat kalkin vedestä, joten muuta kalkinpoistoa ei tarvita. Rakeiden värin muuttuminen on Kärcherin mukaan vaaratonta. Patruuna vaihdetaan, kun merkkivalo ilmoittaa siitä. Kovalla vedellä se tapahtuu useammin. SC 3:ssa laitteeseen säädetään veden kovuus ennen ensimmäistä käyttöä ja aina muuton jälkeen, ja tehdasasetus on kovin taso IV. Uusi patruuna maksaa Kärcher.comissa {euroa(patruuna.hinta)}.</p>
+		<ul>
+			<li>Älä aseta käytettyä patruunaa takaisin, sillä se voi vaurioittaa laitetta.</li>
+			<li>Patruunan vaihdon jälkeen höyryä voi tulla aluksi heikosti ja vettä voi tippua. SC 3:ssa täysi höyrymäärä saavutetaan noin 30 minuutin kuluttua, SC 2 Uprightissa noin 50 sekunnin kuluttua.</li>
+			<li>Työskentele aina patruuna paikallaan. Ilman patruunaa laite kalkkiintuu.</li>
+		</ul>
+
+		<h2>Huolto ja säilytys</h2>
+		<ul>
+			<li><strong>Ennen säilytystä:</strong> paina höyryvipua, jotta paine purkautuu, ja avaa turvakorkki. Jos laitetta käytetään harvoin, tyhjennä ylimääräinen vesi. SC 2 Uprightin säiliö tyhjennetään, jos laitetta ei käytetä yli kahteen kuukauteen, koska vesi voi pilaantua.</li>
+			<li><strong>Liinat:</strong> pese enintään 60 asteessa ilman huuhteluainetta, jotta ne imevät likaa. Mikrokuituliinoja ei saa kuivata kuivausrummussa.</li>
+			<li><strong>Raidat lattiassa:</strong> imuroi lattia hyvin ennen pesua, älä käytä pesuainetta ja pese liina käyttökertojen välissä.</li>
+		</ul>
+
+		<h2>Mille pinnoille Kärcheriä ei saa käyttää?</h2>
+		<p>Kärcherin käyttöohjeiden mukaan höyry voi vaurioittaa vahaa, huonekalujen kiillotusainetta, muovipäällysteitä ja maalia sekä irrottaa liimattuja suojalistoja. Laitetta ei saa käyttää sinetöimättömille puu- ja parkettilattioille eikä maalatuille tai muovipäällysteisille pinnoille, kuten keittiökalusteille ja oville. Kärcher Oy:n mukaan laminaattia, parkettia ja puulattiaa voi puhdistaa varovasti, kun lattiaan ei jää vesilätäköitä eikä suutinta pidetä pitkään samassa kohdassa. Kunnossa olevia laattasaumoja höyry ei vahingoita, mutta irtoavaa sauma-ainetta se voi irrottaa. Lattioista kerrotaan lisää <a href="/hoyrymoppi-laminaatille/">laminaatti- ja parkettioppaassa</a>.</p>
+
+		<p class="tp-lahde">Lähteet: <a href={UKK_KARCHER} target="_blank" rel={rel}>Kärcher Oy, Usein kysyttyä</a> ja Kärcherin käyttöohjeet (SC 1, SC 2 EasyFix, SC 2 Upright, SC 3 EasyFix, SC 4 Deluxe EasyFix ja SC 5 EasyFix), tarkistettu 22.10.2026.</p>
+
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>
