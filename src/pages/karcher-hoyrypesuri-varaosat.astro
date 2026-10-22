@@ -1,0 +1,195 @@
+---
+// SCN: tuki (ylläpito), intentti Use Case, emopilari /karcher-hoyrypesurit/. Hakusanat: kärcher höyrypesuri varaosat 150,
+// kärcher höyrypesuri lisäosat 30, kärcher höyrypesuri liinat 20, kärcher höyrypesuri tarvikkeet 10, kärcher höyrypesuri
+// sc2 varaosat 10, höyrypesuri kalkinpoisto (volyymi tyhjä) (Ahrefs 2026-10, noin 220). Kauppahaku "varaosat motonet"
+// jätetään pois. Käyttö- ja vikahaut kuuluvat sivulle /karcher-hoyrypesurin-kaytto-ja-huolto/.
+// Lähteet: karcher.com/fi:n varaosasivu (tilausohje), varusteet npm run hae:varusteet (Kärcherin feed ja varustesivujen
+// Yhteensopivat laitteet -listat), mallien toimitussisältö karcher.json. Kirjoitettu hoyrypesuri-writer-skillillä (2026-10-22).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import Ukk from '../components/Ukk.astro';
+import varusteet from '../data/varusteet/karcher-sc.json';
+import { merkinTuotteet, esiteltavat, euroa, paiva, mallisivut } from '../lib/tuotteet';
+
+const VARAOSASIVU = 'https://www.karcher.com/fi/palvelut/asiakaspalvelu/varaosat.html';
+const HUOLTOHAKU = 'https://www.karcher.com/fi/palvelut/asiakaspalvelu/jaelleenmyyjaehaku.html';
+const rel = 'nofollow noopener';
+
+type Varuste = (typeof varusteet)[number];
+const v = (id: string) => varusteet.find((x) => x.id === id)!;
+const haettu = varusteet[0].haettu;
+
+// Sivustolla esitellyt Kärcher-mallit sarjoittain (KARCHER_ESITELTAVAT).
+const mallit = esiteltavat(await merkinTuotteet('Kärcher')).sort((a, b) => a.nimi.localeCompare(b.nimi, 'fi', { numeric: true }));
+const sarjat = [...new Set(mallit.map((t) => t.sarja ?? t.nimi))];
+const sopiiMalliin = (x: Varuste, nimi: string) => x.mallit.includes(nimi);
+
+// Sopii-sarake: sarjan nimi, jos varuste sopii kaikkiin sarjan esiteltyihin malleihin, muuten mallien nimet.
+function sopii(x: Varuste): string {
+	if (!x.mallit.length) return 'Kärcherin mukaan höyrypesureihin yleisesti';
+	const osat: string[] = [];
+	for (const s of sarjat) {
+		const sarjassa = mallit.filter((t) => (t.sarja ?? t.nimi) === s);
+		const sopivat = sarjassa.filter((t) => sopiiMalliin(x, t.nimi));
+		if (!sopivat.length) continue;
+		osat.push(sopivat.length === sarjassa.length ? s : sopivat.map((t) => t.nimi).join(', '));
+	}
+	return osat.join(', ');
+}
+
+const liinat = varusteet.filter((x) => x.ryhma === 'Puhdistusliinasarja');
+const suuttimet = varusteet.filter((x) => ['Suuttimet', 'Harjasetti'].includes(x.ryhma) || ['28630620', '28633320', '28630210'].includes(x.id));
+const sv7 = varusteet.filter((x) => ['Imuroiva höyrypuhdistin', 'Vaahdonesto'].includes(x.ryhma));
+const patruuna = v('28630180');
+const jauhe = v('62961930');
+const herkat = v('28633400');
+const karkea = v('28633420');
+const rako = v('28633240');
+const xxlRako = v('28633340');
+const ikkuna = v('28633360');
+const tekstiili = v('28633320');
+const liukuri = v('28632690');
+const sc1Lattia = v('28633380');
+const jatkoletku = v('28630210');
+
+const upright = varusteet.filter((x) => sopiiMalliin(x, 'SC 2 Upright'));
+const sc2EasyFix = varusteet.filter((x) => sopiiMalliin(x, 'SC 2 EasyFix'));
+// Patruuna, jos se on mallin yhteensopivien laitteiden listalla tai toimitussisällössä; jauhe toimitussisällöstä.
+const kalkinpoisto = (t: (typeof mallit)[number]) =>
+	sopiiMalliin(patruuna, t.nimi) || t.toimitusSisaltaa.some((r) => r.startsWith('Kalkinpoistopatruuna'))
+		? 'Kalkinpoistopatruuna'
+		: t.toimitusSisaltaa.some((r) => r.startsWith('Kalkinpoistoaine'))
+			? 'Kalkinpoistojauhe (3 pussia mukana)'
+			: '–';
+
+const ukk = [
+	{
+		kysymys: 'Mistä saan varaosan Kärcherin höyrypesuriin?',
+		vastaus: `Lisävarusteet, kuten liinat, suuttimet, harjat ja kalkinpoistopatruunat, voit ostaa Kärcher.comin verkkokaupasta. Varsinaiset varaosat, joita ei myydä lisävarusteina, tilataan Kärcher Oy:ltä sähköpostilla osoitteesta info@karcher.fi. Kärcher veloittaa jokaisesta varaosatilauksesta 12,50 €:n käsittely- ja toimitusmaksun. Samoja osia myyvät valtuutetut huoltoliikkeet, jotka löydät <a href="${HUOLTOHAKU}" target="_blank" rel="${rel}">Kärcherin huoltoliikehausta</a>.`,
+	},
+	{
+		kysymys: 'Sopivatko Kärcherin lisävarusteet kaikkiin SC-malleihin?',
+		vastaus: `Useimmat sopivat. Käsisuutin, rakoharjasetti, pistesuutin ja EasyFix-lattialiinat sopivat Kärcherin mukaan SC 1 – SC 5 -malleihin. SC 2 Upright -höyrymoppiin sopivat kuitenkin vain lattialiinat, mattoliukuri ja kalkinpoistopatruuna, ja SC 1 -malleihin sopii vain osa: esimerkiksi Comfort-ikkunasuutin sopii SC 1 Multi & Upiin mutta ei SC 1:n perusmalliin. Tarkista malli tämän sivun taulukoista ennen ostoa.`,
+	},
+	{
+		kysymys: 'Mistä löydän Kärcher-höyrypesurini tuotenumeron?',
+		vastaus: 'Tuotenumero on laitteen tyyppikilvessä muodossa 1.xxx-xxx.0. Nykyisten mallien tuotenumerot ovat tämän sivun mallitaulukossa. Tuotenumero tarvitaan, kun tilaat varaosan Kärcheriltä tai huoltoliikkeestä.',
+	},
+	{
+		kysymys: 'Miten Kärcherin höyrypesurista poistetaan kalkki?',
+		vastaus: `Se riippuu mallista. SC 2 Uprightiin, SC 3 -malleihin ja SCV 4:ään sopii kalkinpoistopatruuna (${euroa(patruuna.hinta)}), joka Kärcherin mukaan poistaa kalkin vedestä automaattisesti. SC 4- ja SC 5 -mallien mukana tulee kolme pussia kalkinpoistojauhetta, ja lisää jauhetta saa Kärcher.comista (${euroa(jauhe.hinta)}). Käytä mallisi käyttöohjetta, sillä kalkinpoiston ohje on siinä.`,
+	},
+	{
+		kysymys: 'Kuinka usein Kärcherin höyrypesurin liinat pitää vaihtaa?',
+		vastaus: 'Kärcher ei kerro vaihtoväliä. Guardianin testin (2025) mukaan harjat ja mopin liinat voivat kulua noin vuodessa, joten liinoja kannattaa ostaa varalle, jos höyrytät lattioita usein.',
+	},
+];
+---
+<Layout
+	title="Kärcher höyrypesuri varaosat ja lisäosat – liinat, suuttimet ja kalkinpoisto (2026)"
+	description="Kärcherin höyrypesurin varaosat ja lisäosat malleittain: EasyFix-liinat, suuttimet, harjat ja kalkinpoisto SC 1 – SC 5 -malleihin sekä Kärcherin varaosatilauksen ohje."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Kärcher', sivu: '/karcher-hoyrypesurit/' }, { nimi: 'Varaosat', sivu: '/karcher-hoyrypesuri-varaosat/' }]} />
+		<span class="tp-label">Opas</span>
+		<h1>Kärcher höyrypesuri varaosat, lisäosat ja liinat</h1>
+		<p>Kärcherin höyrypesuriin saa kahdenlaisia osia. Lisävarusteita, kuten liinoja, suuttimia, harjoja ja kalkinpoistopatruunoita, myydään Kärcher.comin verkkokaupassa: niitä on höyrypesureille {varusteet.length}, ja ne maksavat {euroa(Math.min(...varusteet.map((x) => x.hinta)))} – {euroa(Math.max(...varusteet.map((x) => x.hinta)))}. Muut varaosat tilataan Kärcheriltä sähköpostilla tai ostetaan valtuutetusta huoltoliikkeestä. Lähes kaikki suuttimet ja liinat sopivat Kärcherin mukaan SC 1 – SC 5 -malleihin, mutta SC 2 Upright -höyrymoppiin ja SC 1 -malleihin sopii vain osa.</p>
+
+		<h2>Kärcher höyrypesurin liinat</h2>
+		<p>EasyFix-lattiasuuttimen liina kiinnitetään tarranauhalla, ja sen voi irrottaa koskematta likaan astumalla liinan lenkin päälle. Liinoja on neljää tyyppiä. Yleisliina sopii useimmille koville lattioille. Herkille lattioille tehdyt liinat ({euroa(herkat.hinta)}) siirtävät Kärcherin mukaan lattiaan vähemmän kosteutta ja lämpöä, joten ne sopivat tiivistetylle laminaatille ja parketille, jos lattian valmistaja sallii höyryn. Karkea Ultra Abrasive -liina ({euroa(karkea.hinta)}) irrottaa pinttynyttä likaa, ja monitoimisetissä on kaikkia kolmea. Käsisuuttimeen ja nivellettyyn käsisuuttimeen on omat mikrokuituliinansa.</p>
+		<div class="tp-taulu">
+			<table class="tp-versiot tp-varaosat">
+				<thead><tr><th scope="col">Liinasetti</th><th scope="col">Tuotenumero</th><th scope="col">Sopii malleihin</th><th scope="col">Hinta</th></tr></thead>
+				<tbody>
+					{liinat.map((x) => (
+						<tr><th scope="row"><a href={x.url} target="_blank" rel={rel}>{x.nimi}</a></th><td data-otsikko="Tuotenumero">{x.tuotenumero}</td><td class="tp-sopii" data-otsikko="Sopii">{sopii(x)}</td><td data-otsikko="Hinta">{euroa(x.hinta)}</td></tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+		<p>Guardianin testin (2025) mukaan harjat ja mopin liinat voivat kulua noin vuodessa. Lattiamateriaalien riskeistä kerrotaan lisää <a href="/hoyrymoppi-laminaatille/">laminaatti- ja parkettioppaassa</a>.</p>
+
+		<h2>Kärcher höyrypesuri lisäosat: suuttimet ja harjat</h2>
+		<p>Valitse lisäosa sen mukaan, mitä puhdistat:</p>
+		<ul>
+			<li><strong>Laattasaumat:</strong> rakoharjasetti ({euroa(rako.hinta)}) käsisuuttimeen tai XXL-rakoharja ({euroa(xxlRako.hinta)}), joka kiinnitetään lattiasuuttimen tilalle, jotta saumoja voi pestä seisaaltaan. Kylpyhuoneen puhdistuksesta kerrotaan lisää <a href="/hoyrypesuri-kylpyhuoneeseen/">kylpyhuoneoppaassa</a>.</li>
+			<li><strong>Ikkunat ja peilit:</strong> Comfort-ikkunasuutin ({euroa(ikkuna.hinta)}). SC 1:n perusmalli ei ole sen yhteensopivien laitteiden listalla.</li>
+			<li><strong>Vaatteet ja verhot:</strong> tekstiilihöyrystin ({euroa(tekstiili.hinta)}) siliää ryppyjä ja raikastaa kankaita. Lauhtunut vesi kerätään sen omaan säiliöön.</li>
+			<li><strong>Matot:</strong> mattoliukuri ({euroa(liukuri.hinta)}) kiinnitetään EasyFix-lattiasuuttimeen, ja sillä raikastetaan maton pintaa. Maton pesuun tarvitaan <a href="https://tekstiilipesuri.com/tekstiilipesuri-vai-hoyrypesuri/">tekstiilipesuri</a>.</li>
+			<li><strong>SC 1:n lattiat:</strong> SC 1:n perusmalli on käsimalli. Kärcherin mukaan EasyFix-lattiasuutinsetti SC 1 ({euroa(sc1Lattia.hinta)}) tekee siitä lattiamopin, ja jatkoletku ({euroa(jatkoletku.hinta)}) helpottaa kulmien ja syvennysten puhdistusta.</li>
+		</ul>
+		<div class="tp-taulu">
+			<table class="tp-versiot tp-varaosat">
+				<thead><tr><th scope="col">Lisäosa</th><th scope="col">Tuotenumero</th><th scope="col">Sopii malleihin</th><th scope="col">Hinta</th></tr></thead>
+				<tbody>
+					{suuttimet.map((x) => (
+						<tr><th scope="row"><a href={x.url} target="_blank" rel={rel}>{x.nimi}</a></th><td data-otsikko="Tuotenumero">{x.tuotenumero}</td><td class="tp-sopii" data-otsikko="Sopii">{sopii(x)}</td><td data-otsikko="Hinta">{euroa(x.hinta)}</td></tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+
+		<h2>Kärcher höyrypesurin kalkinpoisto</h2>
+		<p>Kärcherin höyrypesureissa on kaksi tapaa poistaa kalkki. Kalkinpoistopatruuna ({euroa(patruuna.hinta)}) poistaa Kärcherin mukaan kalkin vedestä automaattisesti ja pidentää laitteen käyttöikää. Patruuna sopii SC 2 Uprightiin, SC 3 -malleihin ja SCV 4:ään, ja yksi patruuna tulee SC 3 -mallien, SCV 4:n ja SC 1 Multi & Upin mukana. SC 4- ja SC 5 -mallien mukana tulee kolme pussia kalkinpoistojauhetta, ja lisäjauhetta saa Kärcher.comista ({euroa(jauhe.hinta)}). Kalkki on höyrypesurin tavallisin huoltoasia, ja kovan veden alueilla se korostuu (Independent 2026). Suomessa tämä koskee esimerkiksi kaivovettä. Kalkinpoiston vaiheet ovat mallin käyttöohjeessa.</p>
+		<ul>
+			<li><a href={patruuna.url} target="_blank" rel={rel}>{patruuna.nimi}</a> ({patruuna.tuotenumero}): {sopii(patruuna)}, {euroa(patruuna.hinta)}</li>
+			<li><a href={jauhe.url} target="_blank" rel={rel}>{jauhe.nimi}</a> ({jauhe.tuotenumero}): {euroa(jauhe.hinta)}</li>
+		</ul>
+
+		<h2>Kärcher SC 2 varaosat</h2>
+		<p>SC 2 -sarjassa on kaksi hyvin erilaista laitetta, joten lisävarusteetkin eroavat. SC 2 EasyFix on säiliömalli, ja siihen sopii Kärcherin mukaan {sc2EasyFix.length} lisävarustetta, muun muassa käsisuutin, rakoharjat ja ikkunasuutin. SC 2 Upright on höyrymoppi, ja siihen sopii vain {upright.length} lisävarustetta:</p>
+		<ul>
+			{upright.map((x) => <li><a href={x.url} target="_blank" rel={rel}>{x.nimi}</a> ({euroa(x.hinta)})</li>)}
+		</ul>
+		<p>Mallien erot ovat <a href={mallisivut['SC 2']}>Kärcher SC 2 -sivulla</a>.</p>
+
+		<h2>SV 7 -höyryimurin varusteet</h2>
+		<p>SV 7 on imevä höyrypesuri, joten sen kuluvat osat eroavat SC-malleista. Imuveteen lisätään vaahdonestoainetta, ja SV 7:ssä on HEPA-suodatin. SC-mallien liinat ja suuttimet eivät ole SV 7:n yhteensopivien laitteiden listalla, joten sen varusteet ostetaan erikseen:</p>
+		<div class="tp-taulu">
+			<table class="tp-versiot tp-varaosat">
+				<thead><tr><th scope="col">Varuste</th><th scope="col">Tuotenumero</th><th scope="col">Hinta</th></tr></thead>
+				<tbody>
+					{sv7.map((x) => (
+						<tr><th scope="row"><a href={x.url} target="_blank" rel={rel}>{x.nimi}</a></th><td data-otsikko="Tuotenumero">{x.tuotenumero}</td><td data-otsikko="Hinta">{euroa(x.hinta)}</td></tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+		<p>SV 7:n ja SCV 4:n erot ovat <a href={mallisivut['SV 7']}>Kärcher SV 7 -sivulla</a>.</p>
+
+		<h2>Kärcherin mallien tuotenumerot ja lisävarusteet</h2>
+		<p>Taulukossa ovat sivustolla esiteltyjen Kärcher-mallien tuotenumerot tyyppikilvestä, Kärcher.comin lisävarusteiden määrä ja kalkinpoistotapa. Lisävarusteiden hinnat ovat Kärcher.comista, ja ne on tarkistettu {paiva(haettu)}.</p>
+		<div class="tp-taulu">
+			<table class="tp-versiot tp-varaosat">
+				<thead><tr><th scope="col">Malli</th><th scope="col">Tuotenumero</th><th scope="col">Lisävarusteita</th><th scope="col">Kalkinpoisto</th></tr></thead>
+				<tbody>
+					{mallit.map((t) => (
+						<tr>
+							<th scope="row">{mallisivut[t.sarja ?? ''] ? <a href={mallisivut[t.sarja ?? '']}>Kärcher {t.nimi}</a> : `Kärcher ${t.nimi}`}</th>
+							<td data-otsikko="Tuotenumero">{t.tuotenumero}</td>
+							<td data-otsikko="Lisävarusteita">{varusteet.filter((x) => sopiiMalliin(x, t.nimi)).length}</td>
+							<td data-otsikko="Kalkinpoisto">{kalkinpoisto(t)}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+
+		<h2>Näin tilaat Kärcherin varaosan</h2>
+		<p>Kärcher Oy:n varaosat tilataan 19.5.2025 alkaen sähköpostilla. Kuluttajalaitteen varaosa tilataan näin:</p>
+		<ol>
+			<li>Katso laitteen tuotenumero tyyppikilvestä (muoto 1.xxx-xxx.0).</li>
+			<li>Etsi tarvitsemasi osa <a href={VARAOSASIVU} target="_blank" rel={rel}>Kärcherin varaosasivulta</a>.</li>
+			<li>Lähetä tilaus osoitteeseen info@karcher.fi. Kerro viestissä yhteystietosi ja osan tiedot varaosasivun ohjeen mukaan.</li>
+			<li>Kärcher vastaa sähköpostiin ja lähettää laskun. Jokaisesta varaosatilauksesta veloitetaan 12,50 €:n käsittely- ja toimitusmaksu.</li>
+		</ol>
+		<p>Jos et tiedä, mikä osa tarvitaan, ota tyyppikilvestä valokuva ja lähetä se vian kuvauksen ja yhteystietojesi kanssa osoitteeseen info@karcher.fi.</p>
+
+		<h2>Varaosa vai huolto?</h2>
+		<p>Kärcherin varaosasivulla listatut osat voit ostaa ja vaihtaa itse. Niitä myyvät myös valtuutetut huoltoliikkeet, joilla on käytössään varaosakuvat. Kärcherin mukaan muut osat on tarkoitettu vaihdettavaksi vain valtuutetussa huoltoliikkeessä, joten vie laite huoltoon, jos tarvittavaa osaa ei ole listassa. Lähimmän huoltoliikkeen löydät <a href={HUOLTOHAKU} target="_blank" rel={rel}>Kärcherin jälleenmyyjä- ja huoltoliikehausta</a>. Laitteiden erot ja hinnat ovat <a href="/karcher-hoyrypesurit/">Kärcherin höyrypesurien sivulla</a>.</p>
+
+		<p class="tp-lahde">Lähteet: <a href={VARAOSASIVU} target="_blank" rel={rel}>Kärcher Oy, varaosat</a>, Kärcher.comin varustesivut (yhteensopivat laitteet) ja <a href="https://www.theguardian.com/thefilter/2025/mar/12/best-steam-cleaner-mop" target="_blank" rel={rel}>Guardian</a>, <a href="https://www.independent.co.uk/extras/indybest/house-garden/household-appliances/best-steam-cleaner-uk-b1783309.html" target="_blank" rel={rel}>Independent</a>. Tarkistettu {paiva(haettu)}.</p>
+
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>
