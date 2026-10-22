@@ -11,9 +11,10 @@ Tuotteiden ja feedirivien vastaavuudet ovat käsin tarkistettuja tiedostossa scr
 ehdokkaista valitaan varastossa oleva, ja jos useampi on varastossa, halvin. Jos yksikään ehdokas ei ole
 varastossa, tuotetta ei merkitä, jolloin sivulla säilyy valmistajan ostopaikka.
 
-Kärcherin tuotteet ja varaosat saavat affiliate-linkin vain Kärcherin omasta ohjelmasta (kauppa 'karcher',
-feed käytössä 2026-09-28), jonka provisio on 12 %, kun muiden kauppojen provisio on noin 4 % (Villen päätös
-2026-09-25). Skripti poistaa Kärcherin tuotteilta muiden kauppojen ehdokkaat varmuuden vuoksi.
+Kärcherin tuotteiden ostopaikkajärjestys (Villen päätös hoyrypesuri.fi:lle 2026-10-22): 1) Kärcherin oma ohjelma
+(kauppa 'karcher', 12 %), ja jos tuote ei ole siellä varastossa, 2) eStore (kauppa 'estore', 12 %). Muiden
+kauppojen ehdokkaat poistetaan Kärcherin tuotteilta. Jos kumpikaan ei ole varastossa, tuotteelle jää
+valmistajan ostopaikka (karcher.com).
 
 Versiot (tyyppi 'versio') ovat valmistajan pakettiversioita, joita myydään vain kumppanikaupoissa, esim. Nilfisk
 Classic 110-5 PC (terassipesuri) tai Car Wash (autonpesuvarusteet). Pesuri on sama kuin perusmallissa, joten
@@ -58,9 +59,11 @@ KAUPAT = {
     'multitronic': ('1930975666', '2468', 'Multitronic'),
     'proshop': ('1875158453', '2143', 'Proshop'),
     'karcher': ('1855383366', '2231', 'Kärcher'),
+    'estore': ('1960533616', '2749', 'eStore'),
     'virtasenkauppa': ('1637080519', '653', 'Virtasenkauppa'),
 }
 NAPPI = 'Katso tarjous'
+KARCHER_JARJESTYS = ['karcher', 'estore']
 
 
 def hinta(arvo):
@@ -101,20 +104,21 @@ def lataa_kuva(tunnus, url):
 def karcher_idt():
     idt = set()
     for polku in ('src/data/tuotteet/karcher.json', 'src/data/varaosat/karcher.json'):
-        idt |= {t['id'] for t in json.loads((JUURI / polku).read_text(encoding='utf-8'))}
+        if (JUURI / polku).exists():
+            idt |= {t['id'] for t in json.loads((JUURI / polku).read_text(encoding='utf-8'))}
     return idt
 
 
 def main():
     kohteet = json.loads(KOHTEET.read_text(encoding='utf-8'))
     karcher = karcher_idt()
-    # Kärcherin tuotteille vain Kärcherin oma ohjelma (12 %); muiden kauppojen ehdokkaat poistetaan.
+    # Kärcherin tuotteille vain Kärcherin oma ohjelma ja eStore; muiden kauppojen ehdokkaat poistetaan.
     for k in kohteet:
         if k['id'] in karcher and k['tyyppi'] != 'kuva':
-            muut = [e for e in k['ehdokkaat'] if e['kauppa'] != 'karcher']
+            muut = [e for e in k['ehdokkaat'] if e['kauppa'] not in KARCHER_JARJESTYS]
             if muut:
                 print(f'OHITETTU KÄRCHERIN MUU KAUPPA: {k["nimi"]} ({", ".join(e["kauppa"] for e in muut)})', file=sys.stderr)
-            k['ehdokkaat'] = [e for e in k['ehdokkaat'] if e['kauppa'] == 'karcher']
+            k['ehdokkaat'] = [e for e in k['ehdokkaat'] if e['kauppa'] in KARCHER_JARJESTYS]
     kohteet = [k for k in kohteet if k['ehdokkaat']]
     tarve = {}
     for k in kohteet:
@@ -153,7 +157,11 @@ def main():
         if not vaihtoehdot:
             print(f'ei varastossa: {k["nimi"]}', file=sys.stderr)
             continue
-        h, kauppa, r, normaali = min(vaihtoehdot, key=lambda v: v[0])
+        if k['id'] in karcher:
+            # Ensisijaisesti Kärcherin oma ohjelma, vasta sitten eStore (ei halvin).
+            h, kauppa, r, normaali = min(vaihtoehdot, key=lambda v: (KARCHER_JARJESTYS.index(v[1]), v[0]))
+        else:
+            h, kauppa, r, normaali = min(vaihtoehdot, key=lambda v: v[0])
         tieto = {
             'ostopaikka': {'nimi': KAUPAT[kauppa][2], 'url': r['link'], 'napinTeksti': NAPPI},
             'hinta': h,
