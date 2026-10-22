@@ -13,7 +13,7 @@ Hakumäärät ovat Ahrefsista (välilehdet gid=1 ja gid=992037549 sekä höyrymo
 
 | Sivu | Tyyppi | Emopilari | Intentti | Linkki-intentti | Entiteetti / huomiot | Hakusanat (Ahrefs/kk) | Vaihe |
 |---|---|---|---|---|---|---|---|
-| `/` Höyrypesuri – vertailu ja ostajan opas | Pilari | – | Definition + Decision | Definition + Conversion | Höyrypesuri ja sen tyypit (säiliö, käsi, moppi, imevä). TOP-kortit feedin laitteista, ohjaus yläosassa: ”Haluatko pestä sohvan tai maton? Tarvitset tekstiilipesurin.” Käsimallit osiona. Osio ”Höyrypesuri kotikäyttöön: mikä tyyppi sopii mihinkin?” ja suositusotsikko ”Hyvä höyrypesuri kotikäyttöön – suosituksemme 2026”; UKK:hon kysymys ”Mikä on paras höyrypesuri kotiin?” (Villen ohje 2026-10-12); omaa kotikäyttösivua ei tehdä, koska kotikäyttöhaut saavat alle 10 hakua ja intentti on sama kuin pilarilla (Villen päätös 2026-10-12). Merkkiosio, joka linkittää Kärcher-hubiin, Vileda-, Polti- ja Black+Decker-sivuille sekä merkkikoosteeseen (Villen päätös 2026-10-12: sivusto on monimerkkinen, ei Kärcherin mikrosivusto). Kokemuslomake. | höyrypesuri 5 300, höyrypuhdistin 250, paras 150, kokemuksia 100, hyvä 40, tehokas 40 (SC 5:n kortin H3), testivoittaja 20 (testiosion H2), kotikäyttöön ja paras kotiin noin 10, höyrypesurit 80, hyvä/tehokas/vertailu/testivoittaja noin 140, hinta/tarjous noin 70 | 1, rakennettu 2026-10-12 |
+| `/` | Pilari (Höyrypesuri – vertailu ja ostajan opas) | – | Definition + Decision | Definition + Conversion | Höyrypesuri ja sen tyypit (säiliö, käsi, moppi, imevä). TOP-kortit feedin laitteista, ohjaus yläosassa: ”Haluatko pestä sohvan tai maton? Tarvitset tekstiilipesurin.” Käsimallit osiona. Osio ”Höyrypesuri kotikäyttöön: mikä tyyppi sopii mihinkin?” ja suositusotsikko ”Hyvä höyrypesuri kotikäyttöön – suosituksemme 2026”; UKK:hon kysymys ”Mikä on paras höyrypesuri kotiin?” (Villen ohje 2026-10-12); omaa kotikäyttösivua ei tehdä, koska kotikäyttöhaut saavat alle 10 hakua ja intentti on sama kuin pilarilla (Villen päätös 2026-10-12). Merkkiosio, joka linkittää Kärcher-hubiin, Vileda-, Polti- ja Black+Decker-sivuille sekä merkkikoosteeseen (Villen päätös 2026-10-12: sivusto on monimerkkinen, ei Kärcherin mikrosivusto). Kokemuslomake. | höyrypesuri 5 300, höyrypuhdistin 250, paras 150, kokemuksia 100, hyvä 40, tehokas 40 (SC 5:n kortin H3), testivoittaja 20 (testiosion H2), kotikäyttöön ja paras kotiin noin 10, höyrypesurit 80, hyvä/tehokas/vertailu/testivoittaja noin 140, hinta/tarjous noin 70 | 1, rakennettu 2026-10-12 |
 | `/karcher-hoyrypesurit/` | Alapilari (merkki-hub) | `/` | Comparison / Decision | Support | Kärcherin mallisto SC 1–SC 5, Upright-mopit, SV 7, SCV 4 ja SG; mallistotaulu ja kortit mallisivuille | kärcher höyrypesuri 1 800, höyrypesuri kärcher 500, höyrypuhdistin kärcher 80 (ensimmäinen H2), kokemuksia 50, tarjous 20 | 1, rakennettu 2026-10-20 |
 | `/karcher-sc-1-hoyrypesuri/` | Tuki (malli) | `/karcher-hoyrypesurit/` | Decision | Conversion | SC 1 (perusmalli 1.516-400, karcher.com) ja SC 1 Multi & Up Textile Edition (Kärcherin feed); omistaa myös haun ”pieni höyrypesuri” (Ahrefsin Parent keyword on kärcher sc1) | SC 1 -muodot noin 140, pieni höyrypesuri 110 | 1, rakennettu 2026-10-21 |
 | `/karcher-sc-2-hoyrypesuri/` | Tuki (malli) | `/karcher-hoyrypesurit/` | Decision | Conversion | SC 2 EasyFix (karcher.com) ja SC 2 Upright (Kärcherin feed, höyrymoppi; Villen päätös 2026-10-12). Sivu vertaa säiliömallia ja moppia. SC 2 Upright esitellään myös höyrymoppisivulla. | SC 2 -muodot noin 170 | 1, rakennettu 2026-10-21 |
@@ -79,3 +79,158 @@ Hakumäärät ovat Ahrefsista (välilehdet gid=1 ja gid=992037549 sekä höyrymo
 | SC 5 -sivulla on vain noin 10 hakua. | Low | Sivu kannattaa tehdä provisiotuoton vuoksi (12 %, korkein hinta). Vaihtoehtona on SC 4:n ja SC 5:n yhteissivu. |
 | Kärcherin feedistä puuttuvat mallit. | Ratkaistu | Villen päätös 2026-10-12: Kärcherin feedistä puuttuvista malleista otetaan mukaan kolme eniten haettua, **SC 1 EasyFix, SC 2 EasyFix ja SC 3 EasyFix** (sarjojen SC 1, SC 2 ja SC 3 perusmallit; SC 1 noin 250, SC 2 noin 170 ja SC 3 noin 150 hakua, ja ”sc 2 easyfix” ja ”sc 3 easyfix” saavat noin 30 hakua kumpikin). Ne linkitetään suoraan karcher.comiin ilman provisiota. Kaikki muut sivustolla esiteltävät mallit ovat sellaisia, joille saadaan affiliate-linkki. Pois jäävät mm. SC 1, SC 1 Multi, SC 1 Multi & Up, SC 1 Upright, SC 2 EasyFix Plus, SC 2 Deluxe, SC 3 Upright, SC 3 Deluxe Textile Edition, SC 4 EasyFix, SC 4 EasyFix Iron, SC 4 Deluxe Iron, SC 5 EasyFix Iron, SG 4/2 Classic ja SGV 8/5. |
 | Valmistajan tekniset tiedot puuttuvat (paine, säiliö, lämpenemisaika). | Medium | Tee hakuskripti `hae-karcher-hoyry.mjs` painepesurit.fi:n `hae-karcher.mjs`:n mallilla, ennen kuin mallisivut kirjoitetaan. |
+
+## Linkkikartta
+
+Koottu valmiista sivustosta skriptillä `scripts/linkkikartta.py`. Leipätekstin sisäiset linkit ilman valikkoa ja murupolkua, yksi rivi kohdetta kohden (149 linkkiä).
+
+| Mistä | Mihin | Ankkuri | Linkki-intentti |
+|---|---|---|---|
+| `/` | `/hoyrymoppi/` | Lattiat | Alas (tuki) |
+| `/` | `/hoyrypesuri-kylpyhuoneeseen/` | Kylpyhuone | Alas (tuki) |
+| `/` | `/karcher-sc-3-hoyrypesuri/` | Koko koti | Sivuttain |
+| `/` | `/imeva-hoyrypesuri/` | Imevä malli | Alas (tuki) |
+| `/` | `/hoyrypesuri-vuokraus-vai-osto/` | Vuokraus | Alas (tuki) |
+| `/` | `/karcher-hoyrypesurit/` | Kärcher-opas → | Alas (tuki) |
+| `/` | `/karcher-sc-2-hoyrypesuri/` | Kärcher SC 2 Upright | Sivuttain |
+| `/` | `/karcher-sc-1-hoyrypesuri/` | Kärcher SC 1 | Sivuttain |
+| `/` | `/karcher-sc-5-hoyrypesuri/` | Kärcher SC 5 EasyFix | Sivuttain |
+| `/` | `/karcher-sv-7-hoyryimuri/` | Kärcher SV 7 | Sivuttain |
+| `/` | `/hoyrypesuri-ammattikayttoon/` | Ammattilaite Iso kattila, jatkuva täyttö ja pitkä johto pitkiin töihin. Hinta on | Alas (tuki) |
+| `/` | `/kuivahoyrypesuri/` | Kuivahöyrypesuri Korkeampi paine ja kuumempi höyry, joten pinnat jäävät valmista | Alas (tuki) |
+| `/` | `/karcher-sc-4-hoyrypesuri/` | Kärcher SC 4 Deluxe EasyFix | Sivuttain |
+| `/` | `/vileda-hoyrymoppi/` | Vileda Steam-höyrymopit lattioille. Kärcherin jälkeen haetuin merkki. Katso mall | Sivuttain |
+| `/` | `/polti-hoyrypesurit/` | Polti Vaporetto-säiliömallit, -höyrymopit ja imevä Vaporetto 3 Clean. Katso mall | Alas (tuki) |
+| `/` | `/black-decker-hoyrypesurit/` | Black+Decker Steam-Mop-höyrymopit, joista monesta irtoaa käsiosa. Katso mallit → | Alas (tuki) |
+| `/` | `/hoyrypesurimerkit/` | Muut merkit Dolphin, H2O, Emax, Silvercrest ja muut. Katso mallit → | Alas (tuki) |
+| `/` | `/hoyrymoppi-laminaatille/` | laminaattioppaassa | Sivuttain |
+| `/black-decker-hoyrypesurit/` | `/hoyrymoppi-laminaatille/` | laminaattioppaassa | Sivuttain |
+| `/black-decker-hoyrypesurit/` | `/hoyrymoppi/` | höyrymoppivertailussa | Sivuttain |
+| `/black-decker-hoyrypesurit/` | `/` | höyrypesurivertailussa | Ylös (pilari) |
+| `/hoyrymoppi-laminaatille/` | `/vileda-hoyrymoppi/` | Vileda Steam Plus | Sivuttain |
+| `/hoyrymoppi-laminaatille/` | `/karcher-sc-2-hoyrypesuri/` | Kärcher SC 2 Upright | Sivuttain |
+| `/hoyrymoppi-laminaatille/` | `/hoyrymoppi/` | höyrymoppivertailussa | Ylös (pilari) |
+| `/hoyrymoppi/` | `/` | etusivun lomakkeella | Ylös (pilari) |
+| `/hoyrymoppi/` | `/vileda-hoyrymoppi/` | Vileda Steam Plus | Sivuttain |
+| `/hoyrymoppi/` | `/black-decker-hoyrypesurit/` | Black+Decker FSM13E1 | Sivuttain |
+| `/hoyrymoppi/` | `/karcher-sc-2-hoyrypesuri/` | Kärcher SC 2 Upright | Sivuttain |
+| `/hoyrymoppi/` | `/karcher-sc-1-hoyrypesuri/` | Kärcher SC 1 Multi & Up Textile Edition | Sivuttain |
+| `/hoyrymoppi/` | `/karcher-sc-3-hoyrypesuri/` | SC 3:een | Sivuttain |
+| `/hoyrymoppi/` | `/karcher-hoyrypesurit/` | Kärcherin höyrypesureiden sivulla | Sivuttain |
+| `/hoyrymoppi/` | `/polti-hoyrypesurit/` | Polti Vaporetto SV440 Double | Sivuttain |
+| `/hoyrymoppi/` | `/hoyrymoppi-laminaatille/` | höyrymoppi laminaatille -oppaassa | Sivuttain |
+| `/hoyrymoppi/` | `/hoyrypesurimerkit/` | höyrypesurimerkkien sivulla | Sivuttain |
+| `/hoyrypesuri-ammattikayttoon/` | `/karcher-sc-3-hoyrypesuri/` | Kärcher SC 3 | Sivuttain |
+| `/hoyrypesuri-ammattikayttoon/` | `/karcher-sc-5-hoyrypesuri/` | SC 5 | Sivuttain |
+| `/hoyrypesuri-ammattikayttoon/` | `/kuivahoyrypesuri/` | EV Atlantis EV3000i | Sivuttain |
+| `/hoyrypesuri-ammattikayttoon/` | `/` | höyrypesurivertailussa | Ylös (pilari) |
+| `/hoyrypesuri-ammattikayttoon/` | `/hoyrypesuri-vuokraus-vai-osto/` | vuokraus vai osto -sivulla | Sivuttain |
+| `/hoyrypesuri-ammattikayttoon/` | `/karcher-hoyrypesuri-varaosat/` | Kärcherin varaosasivulla | Sivuttain |
+| `/hoyrypesuri-kylpyhuoneeseen/` | `/karcher-sc-3-hoyrypesuri/` | Kärcher SC 3 | Sivuttain |
+| `/hoyrypesuri-kylpyhuoneeseen/` | `/karcher-sc-1-hoyrypesuri/` | Kärcher SC 1 | Sivuttain |
+| `/hoyrypesuri-kylpyhuoneeseen/` | `/karcher-sc-5-hoyrypesuri/` | Kärcher SC 5 Bath Edition | Sivuttain |
+| `/hoyrypesuri-kylpyhuoneeseen/` | `/polti-hoyrypesurit/` | Polti Vaporetto SV440 Double | Sivuttain |
+| `/hoyrypesuri-kylpyhuoneeseen/` | `/` | höyrypesurivertailussa | Ylös (pilari) |
+| `/hoyrypesuri-vuokraus-vai-osto/` | `/karcher-sc-1-hoyrypesuri/` | Kärcher SC 1 | Sivuttain |
+| `/hoyrypesuri-vuokraus-vai-osto/` | `/karcher-sc-2-hoyrypesuri/` | Kärcher SC 2 Upright | Sivuttain |
+| `/hoyrypesuri-vuokraus-vai-osto/` | `/karcher-sc-3-hoyrypesuri/` | Kärcher SC 3 | Sivuttain |
+| `/hoyrypesuri-vuokraus-vai-osto/` | `/karcher-sc-5-hoyrypesuri/` | Kärcher SC 5 EasyFix (säiliömalli) | Sivuttain |
+| `/hoyrypesuri-vuokraus-vai-osto/` | `/karcher-sv-7-hoyryimuri/` | Kärcher SV 7 | Sivuttain |
+| `/hoyrypesuri-vuokraus-vai-osto/` | `/` | höyrypesurivertailussa | Ylös (pilari) |
+| `/hoyrypesuri-vuokraus-vai-osto/` | `/imeva-hoyrypesuri/` | imevä höyrypesuri -sivulla | Sivuttain |
+| `/hoyrypesurimerkit/` | `/imeva-hoyrypesuri/` | imevät höyrypesurit | Sivuttain |
+| `/hoyrypesurimerkit/` | `/karcher-sc-3-hoyrypesuri/` | Kärcher SC 3:n | Sivuttain |
+| `/hoyrypesurimerkit/` | `/hoyrymoppi/` | höyrymoppivertailussa | Sivuttain |
+| `/hoyrypesurimerkit/` | `/black-decker-hoyrypesurit/` | Black+Decker | Sivuttain |
+| `/hoyrypesurimerkit/` | `/karcher-hoyrypesurit/` | Kärcher | Sivuttain |
+| `/hoyrypesurimerkit/` | `/vileda-hoyrymoppi/` | Vileda | Sivuttain |
+| `/hoyrypesurimerkit/` | `/polti-hoyrypesurit/` | Polti | Sivuttain |
+| `/hoyrypesurimerkit/` | `/` | etusivulla | Ylös (pilari) |
+| `/imeva-hoyrypesuri/` | `/karcher-sv-7-hoyryimuri/` | Kärcher SV 7 | Sivuttain |
+| `/imeva-hoyrypesuri/` | `/polti-hoyrypesurit/` | Polti Vaporetto 3 Clean | Sivuttain |
+| `/imeva-hoyrypesuri/` | `/karcher-sc-3-hoyrypesuri/` | Kärcher SC 3 | Sivuttain |
+| `/imeva-hoyrypesuri/` | `/` | etusivun lomakkeella | Ylös (pilari) |
+| `/imeva-hoyrypesuri/` | `/hoyrypesuri-vuokraus-vai-osto/` | vuokraus vai osto -sivulla | Sivuttain |
+| `/karcher-hoyrypesuri-varaosat/` | `/hoyrymoppi-laminaatille/` | laminaatti- ja parkettioppaassa | Sivuttain |
+| `/karcher-hoyrypesuri-varaosat/` | `/hoyrypesuri-kylpyhuoneeseen/` | kylpyhuoneoppaassa | Sivuttain |
+| `/karcher-hoyrypesuri-varaosat/` | `/karcher-hoyrypesurin-kaytto-ja-huolto/` | Kärcherin höyrypesurin käyttö ja huolto -sivulla | Sivuttain |
+| `/karcher-hoyrypesuri-varaosat/` | `/karcher-sc-2-hoyrypesuri/` | Kärcher SC 2 EasyFix | Sivuttain |
+| `/karcher-hoyrypesuri-varaosat/` | `/karcher-sv-7-hoyryimuri/` | Kärcher SV 7 | Sivuttain |
+| `/karcher-hoyrypesuri-varaosat/` | `/karcher-sc-1-hoyrypesuri/` | Kärcher SC 1 | Sivuttain |
+| `/karcher-hoyrypesuri-varaosat/` | `/karcher-sc-3-hoyrypesuri/` | Kärcher SC 3 EasyFix | Sivuttain |
+| `/karcher-hoyrypesuri-varaosat/` | `/karcher-sc-4-hoyrypesuri/` | Kärcher SC 4 EasyFix Plus | Sivuttain |
+| `/karcher-hoyrypesuri-varaosat/` | `/karcher-sc-5-hoyrypesuri/` | Kärcher SC 5 EasyFix | Sivuttain |
+| `/karcher-hoyrypesuri-varaosat/` | `/karcher-hoyrypesurit/` | Kärcherin höyrypesurien sivulla | Ylös (pilari) |
+| `/karcher-hoyrypesurin-kaytto-ja-huolto/` | `/karcher-hoyrypesurit/` | Kärcherin höyrypesurien sivulla | Ylös (pilari) |
+| `/karcher-hoyrypesurin-kaytto-ja-huolto/` | `/karcher-sc-1-hoyrypesuri/` | SC 1 | Sivuttain |
+| `/karcher-hoyrypesurin-kaytto-ja-huolto/` | `/karcher-sc-2-hoyrypesuri/` | SC 2 EasyFix | Sivuttain |
+| `/karcher-hoyrypesurin-kaytto-ja-huolto/` | `/karcher-sc-3-hoyrypesuri/` | SC 3 | Sivuttain |
+| `/karcher-hoyrypesurin-kaytto-ja-huolto/` | `/karcher-sc-4-hoyrypesuri/` | SC 4 | Sivuttain |
+| `/karcher-hoyrypesurin-kaytto-ja-huolto/` | `/karcher-sc-5-hoyrypesuri/` | SC 5 | Sivuttain |
+| `/karcher-hoyrypesurin-kaytto-ja-huolto/` | `/karcher-hoyrypesuri-varaosat/` | Kärcherin varaosasivulla | Sivuttain |
+| `/karcher-hoyrypesurin-kaytto-ja-huolto/` | `/hoyrymoppi-laminaatille/` | laminaatti- ja parkettioppaassa | Sivuttain |
+| `/karcher-hoyrypesurit/` | `/karcher-sc-1-hoyrypesuri/` | SC 1 | Alas (tuki) |
+| `/karcher-hoyrypesurit/` | `/karcher-sc-2-hoyrypesuri/` | Kärcher SC 2 | Alas (tuki) |
+| `/karcher-hoyrypesurit/` | `/karcher-sc-3-hoyrypesuri/` | Kärcher SC 3 | Alas (tuki) |
+| `/karcher-hoyrypesurit/` | `/karcher-sc-4-hoyrypesuri/` | Kärcher SC 4 | Alas (tuki) |
+| `/karcher-hoyrypesurit/` | `/karcher-sc-5-hoyrypesuri/` | SC 5 | Alas (tuki) |
+| `/karcher-hoyrypesurit/` | `/karcher-sv-7-hoyryimuri/` | Kärcher SV 7 | Alas (tuki) |
+| `/karcher-hoyrypesurit/` | `/vileda-hoyrymoppi/` | Vileda | Sivuttain |
+| `/karcher-hoyrypesurit/` | `/polti-hoyrypesurit/` | Polti | Sivuttain |
+| `/karcher-hoyrypesurit/` | `/black-decker-hoyrypesurit/` | Black+Decker | Sivuttain |
+| `/karcher-hoyrypesurit/` | `/hoyrymoppi/` | höyrymoppeja | Sivuttain |
+| `/karcher-hoyrypesurit/` | `/` | etusivulla | Ylös (pilari) |
+| `/karcher-hoyrypesurit/` | `/hoyrypesuri-ammattikayttoon/` | höyrypesuri ammattikäyttöön -sivulla | Sivuttain |
+| `/karcher-hoyrypesurit/` | `/karcher-hoyrypesuri-varaosat/` | Kärcher höyrypesuri varaosat -sivulla | Alas (tuki) |
+| `/karcher-hoyrypesurit/` | `/karcher-hoyrypesurin-kaytto-ja-huolto/` | Kärcherin höyrypesurin käyttö ja huolto -sivulla | Alas (tuki) |
+| `/karcher-hoyrypesurit/` | `/hoyrypesuri-vuokraus-vai-osto/` | vuokraus vai osto -vertailu | Sivuttain |
+| `/karcher-hoyrypesurit/` | `/imeva-hoyrypesuri/` | imevä höyrypesuri -sivulla | Sivuttain |
+| `/karcher-sc-1-hoyrypesuri/` | `/karcher-hoyrypesuri-varaosat/` | Kärcherin höyrypesurin varaosasivulla | Sivuttain |
+| `/karcher-sc-1-hoyrypesuri/` | `/karcher-hoyrypesurin-kaytto-ja-huolto/` | käyttö ja huolto -sivulla | Sivuttain |
+| `/karcher-sc-1-hoyrypesuri/` | `/hoyrypesuri-kylpyhuoneeseen/` | kylpyhuoneoppaassa | Sivuttain |
+| `/karcher-sc-1-hoyrypesuri/` | `/karcher-hoyrypesurit/` | Kärcherin höyrypesureiden mallistotaulukossa | Ylös (pilari) |
+| `/karcher-sc-1-hoyrypesuri/` | `/karcher-sc-2-hoyrypesuri/` | SC 2 Upright | Sivuttain |
+| `/karcher-sc-1-hoyrypesuri/` | `/karcher-sc-3-hoyrypesuri/` | SC 3 | Sivuttain |
+| `/karcher-sc-2-hoyrypesuri/` | `/karcher-hoyrypesuri-varaosat/` | Kärcherin höyrypesurin varaosasivulla | Sivuttain |
+| `/karcher-sc-2-hoyrypesuri/` | `/karcher-hoyrypesurin-kaytto-ja-huolto/` | käyttö ja huolto -sivulla | Sivuttain |
+| `/karcher-sc-2-hoyrypesuri/` | `/hoyrymoppi-laminaatille/` | laminaattioppaassa | Sivuttain |
+| `/karcher-sc-2-hoyrypesuri/` | `/karcher-hoyrypesurit/` | Kärcherin höyrypesureiden mallistotaulukossa | Ylös (pilari) |
+| `/karcher-sc-2-hoyrypesuri/` | `/karcher-sc-3-hoyrypesuri/` | Kärcher SC 3 | Sivuttain |
+| `/karcher-sc-2-hoyrypesuri/` | `/karcher-sc-1-hoyrypesuri/` | Kärcher SC 1 | Sivuttain |
+| `/karcher-sc-2-hoyrypesuri/` | `/hoyrymoppi/` | höyrymoppisivulla | Sivuttain |
+| `/karcher-sc-3-hoyrypesuri/` | `/karcher-sc-5-hoyrypesuri/` | SC 5 | Sivuttain |
+| `/karcher-sc-3-hoyrypesuri/` | `/hoyrypesuri-kylpyhuoneeseen/` | kylpyhuoneoppaassa | Sivuttain |
+| `/karcher-sc-3-hoyrypesuri/` | `/karcher-hoyrypesurit/` | Kärcherin höyrypesureiden mallistotaulukossa | Ylös (pilari) |
+| `/karcher-sc-3-hoyrypesuri/` | `/karcher-sc-2-hoyrypesuri/` | SC 2 | Sivuttain |
+| `/karcher-sc-3-hoyrypesuri/` | `/karcher-sc-4-hoyrypesuri/` | SC 4 | Sivuttain |
+| `/karcher-sc-3-hoyrypesuri/` | `/hoyrymoppi/` | höyrymoppeja | Sivuttain |
+| `/karcher-sc-3-hoyrypesuri/` | `/karcher-hoyrypesuri-varaosat/` | Kärcherin varaosasivulla | Sivuttain |
+| `/karcher-sc-3-hoyrypesuri/` | `/hoyrymoppi-laminaatille/` | laminaattioppaassa | Sivuttain |
+| `/karcher-sc-4-hoyrypesuri/` | `/karcher-sc-3-hoyrypesuri/` | Kärcher SC 3 | Sivuttain |
+| `/karcher-sc-4-hoyrypesuri/` | `/karcher-sc-5-hoyrypesuri/` | Kärcher SC 5 | Sivuttain |
+| `/karcher-sc-4-hoyrypesuri/` | `/karcher-hoyrypesurit/` | Kärcherin höyrypesureiden sivulla | Ylös (pilari) |
+| `/karcher-sc-4-hoyrypesuri/` | `/karcher-hoyrypesuri-varaosat/` | Kärcherin varaosasivulla | Sivuttain |
+| `/karcher-sc-5-hoyrypesuri/` | `/karcher-hoyrypesuri-varaosat/` | Kärcherin höyrypesurin varaosasivulla | Sivuttain |
+| `/karcher-sc-5-hoyrypesuri/` | `/karcher-sc-4-hoyrypesuri/` | Kärcher SC 4 | Sivuttain |
+| `/karcher-sc-5-hoyrypesuri/` | `/karcher-sv-7-hoyryimuri/` | Kärcher SV 7 | Sivuttain |
+| `/karcher-sc-5-hoyrypesuri/` | `/karcher-hoyrypesurit/` | Kärcherin höyrypesureiden sivulla | Ylös (pilari) |
+| `/karcher-sc-5-hoyrypesuri/` | `/karcher-sc-3-hoyrypesuri/` | Kärcher SC 3 | Sivuttain |
+| `/karcher-sv-7-hoyryimuri/` | `/karcher-sc-3-hoyrypesuri/` | SC 3 | Sivuttain |
+| `/karcher-sv-7-hoyryimuri/` | `/karcher-hoyrypesuri-varaosat/` | Kärcherin varaosasivulla | Sivuttain |
+| `/karcher-sv-7-hoyryimuri/` | `/hoyrymoppi-laminaatille/` | laminaattiopas | Sivuttain |
+| `/karcher-sv-7-hoyryimuri/` | `/imeva-hoyrypesuri/` | imevä höyrypesuri -sivulla | Sivuttain |
+| `/karcher-sv-7-hoyryimuri/` | `/karcher-sc-5-hoyrypesuri/` | Kärcher SC 5 | Sivuttain |
+| `/karcher-sv-7-hoyryimuri/` | `/karcher-hoyrypesurit/` | Kärcherin höyrypesureiden mallistotaulukossa | Ylös (pilari) |
+| `/kuivahoyrypesuri/` | `/` | höyrypesurivertailussa | Ylös (pilari) |
+| `/kuivahoyrypesuri/` | `/karcher-sc-3-hoyrypesuri/` | Kärcher SC 3 Deluxe EasyFix | Sivuttain |
+| `/kuivahoyrypesuri/` | `/karcher-sc-5-hoyrypesuri/` | Kärcher SC 5 EasyFix | Sivuttain |
+| `/kuivahoyrypesuri/` | `/hoyrypesuri-ammattikayttoon/` | Kärcher SG 4/4 | Sivuttain |
+| `/kuivahoyrypesuri/` | `/hoyrypesuri-vuokraus-vai-osto/` | vuokraus | Sivuttain |
+| `/kuivahoyrypesuri/` | `/hoyrymoppi-laminaatille/` | laminaatti- ja parkettioppaassa | Sivuttain |
+| `/polti-hoyrypesurit/` | `/imeva-hoyrypesuri/` | imevä höyrypesuri -sivulla | Sivuttain |
+| `/polti-hoyrypesurit/` | `/karcher-sc-3-hoyrypesuri/` | Kärcher SC 3 | Sivuttain |
+| `/polti-hoyrypesurit/` | `/` | höyrypesurivertailussa | Ylös (pilari) |
+| `/polti-hoyrypesurit/` | `/hoyrymoppi/` | höyrymoppivertailussa | Sivuttain |
+| `/vileda-hoyrymoppi/` | `/karcher-sc-2-hoyrypesuri/` | SC 2 Upright | Sivuttain |
+| `/vileda-hoyrymoppi/` | `/hoyrymoppi/` | höyrymoppivertailussa | Ylös (pilari) |
+| `/vileda-hoyrymoppi/` | `/hoyrymoppi-laminaatille/` | laminaattioppaassa | Sivuttain |

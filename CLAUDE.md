@@ -2,15 +2,32 @@
 
 Suomenkielinen affiliate-sivusto, joka vertailee Suomessa myytäviä höyrypesureita, höyrypuhdistimia ja höyrymoppeja. Kärcher on pääpainopiste, mutta sivusto on monimerkkinen vertailusivusto, ei Kärcherin mikrosivusto (Villen päätös 2026-10-12). Omistaja on Ville Hinkkanen. Sisarsivusto on tekstiilipesuri.com (`~/Projects/tekstiilipesuri`).
 
-**Tila 2026-10-12:** koodipohja on kopioitu tekstiilipesuri.comista, ja etusivu on rakennettu. Sivustoa ei julkaista ennen kuin se on kokonaan valmis (Villen ohje 2026-10-12), joten `JULKAISTU = false` tiedostossa `src/layouts/Layout.astro` (noindex), eikä Vercel-projektia tai domainia kytketä. Suunnitelma on tiedostoissa `SUUNNITELMA.md` (tausta ja avoimet tehtävät), `SCN.md` (sivut, linkit ja riskit) ja `FEEDIT.md` (kumppanifeedien laitteet). Kun rakentaminen alkaa, koodipohja kopioidaan painepesurit.fi:stä, ja tämä tiedosto täydennetään tekstiilipesuri.comin `CLAUDE.md`:n mallilla. Siitä puuttuvat vielä osiot Rakenne ja Data, ja Tekniikka-osio on vain luonnos.
+**Tila 2026-10-22:** SCN:n vaiheet 1–3 on rakennettu (25 sivua). Sivustoa ei julkaista ennen kuin se on kokonaan valmis (Villen ohje 2026-10-12), joten `JULKAISTU = false` tiedostossa `src/layouts/Layout.astro` (noindex), eikä Vercel-projektia tai domainia kytketä. Ennen julkaisua puuttuvat Adtraction-kanava ja kumppanuudet sekä Vercel ja domain. Suunnitelma on tiedostoissa `SUUNNITELMA.md` (tausta ja avoimet tehtävät), `SCN.md` (sivut, linkit ja riskit) ja `FEEDIT.md` (kumppanifeedien laitteet).
 
 ## Tekniikka ja julkaisu
 
 - **GitHub:** `Wibah/Hoyrypesuri` (yksityinen), päähaara `main` (luotu 2026-10-12).
-- **Koodipohja:** kopioidaan painepesurit.fi:stä (`~/Projects/painepesurit`) samaan tapaan kuin tekstiilipesuri.comiin (Astro, `src/styles/site.css`, tuotekomponentit, affiliate-middleware). Tarkista ensin tekstiilipesuri.comin ratkaisut, koska se on uudempi kopio samasta pohjasta.
+- **Koodipohja:** kopioitu tekstiilipesuri.comista, joka on painepesurit.fi:n (`~/Projects/painepesurit`) pohjan uudempi kopio: Astro 7, Tailwind 4 ja `src/styles/site.css`, tuotekomponentit ja affiliate-middleware. Kun korjaat jotain pohjasta perittyä, tarkista ensin tekstiilipesuri.comin ratkaisu. `scripts/hae_affiliate.py` ja `scripts/yhteiset.mjs` ovat vielä painepesurit.fi:n kopioita, ja ne sovitetaan, kun hoyrypesuri.fi:n Adtraction-kanava on olemassa.
 - **Kanoninen domain on `https://hoyrypesuri.fi`** (ostettu 2026-10-04, ilman ääkkösiä; brändi kirjoitetaan sivuilla muodossa Höyrypesuri.fi). höyrypesuri.fi kuuluu Yellow Service Oy:lle. hoyrypesurit.fi oli vapaana, ja sen voi rekisteröidä ohjaukseksi.
 - **Vercel:** projektia ei ole vielä. Kun se tehdään, jokainen push `main`-haaraan julkaisee sivuston, joten aja `npm run build` ennen pushia.
 - **Dev-palvelin:** `.claude/launch.json` → `hoyrypesuri-dev`, portti 4341 (painepesurit.fi 4321, tekstiilipesuri.com 4331). Node 22 (nvm: `~/.nvm/versions/node/v22.23.2`).
+
+## Rakenne
+
+- **Layout ja yhteiset komponentit:** `src/layouts/Layout.astro` (title, description, `JULKAISTU`-kytkin ja noindex), `src/components/Header.astro` (valikot Kärcher, Laitetyypit, Merkit ja Oppaat), `Footer.astro` (luottamussivut), `Ukk.astro` (näkyvä UKK ja FAQPage-JSON-LD samasta taulukosta), `Murupolku.astro` (BreadcrumbList) ja `Kokemuslomake.astro` (Formspree; `mallikentta` merkkisivuille, joilla käyttäjä kertoo oman mallinsa).
+- **Tuotekomponentit** (`src/components/tuote/`): TuoteHero (sivun H1, avainluvut ja ostolaatikko; vain sivun alkuun), Ostolaatikko, TuoteKuva, TeknisetTiedot, TuoteSchema, VersioVertailu (mallisivujen versiot), MallistoTaulu, Merkkikortit, Korttirivi (kaikki tuotekortit), Tuotekortti, ToplistaRivi (etusivun toplista) ja VuokraTaulu (`vuokrahinnat.json`).
+- **Kirjasto** `src/lib/tuotteet.ts`: mallisivujen päätuotteet (`paatuotteet`) ja polut (`mallisivut`), `KARCHER_ESITELTAVAT` ja `esiteltavat()`, `tyyppinimet`, tuotehaut (`tuote`, `paatuote`, `merkinTuotteet`, `versiot`) ja muotoilijat (`euroa`, `luku`, `paiva`, `hintavali`, `lammitysaika`, `vesi`). `euroa()` kaataa buildin, jos hinta puuttuu, joten myynnistä poistuneen tuotteen hinta on aina tarkistettava ehdolla `myynnissa`.
+- **Data:** content collection `tuotteet` (`src/content.config.ts`) yhdistää merkkitiedostot `src/data/tuotteet/*.json` ja affiliate-tiedot (`src/data/affiliate.json`, kun kanava on olemassa). Varaosasivun data on `src/data/varusteet/karcher-sc.json`.
+- **Middleware** `src/middleware.ts`: lisää hoyrypesuri.fi:n Adtraction-linkkeihin EPI-tunnisteen ja affiliate-ilmoituksen vain sivuille, joilla on affiliate-linkkejä. Kanavan tunnus puuttuu vielä (`KANAVA`).
+- **Sivut** (`src/pages/`, SCN-kartta `SCN.md`:ssä):
+  - pilari `index.astro`
+  - Kärcher: hub `karcher-hoyrypesurit`, mallisivut `karcher-sc-1` … `karcher-sc-5-hoyrypesuri` ja `karcher-sv-7-hoyryimuri`, `karcher-hoyrypesuri-varaosat`, `karcher-hoyrypesurin-kaytto-ja-huolto`
+  - laitetyypit: `hoyrymoppi`, `imeva-hoyrypesuri`, `kuivahoyrypesuri`, `hoyrypesuri-ammattikayttoon`
+  - merkit: `vileda-hoyrymoppi`, `polti-hoyrypesurit`, `black-decker-hoyrypesurit`, `hoyrypesurimerkit`
+  - oppaat: `hoyrypesuri-kylpyhuoneeseen`, `hoyrymoppi-laminaatille`, `hoyrypesuri-vuokraus-vai-osto`
+  - luottamussivut: `nain-vertailemme`, `tietoa-meista`, `ota-yhteytta`, `tietosuojaseloste`
+- **Sivun alkukommentti:** jokaisen sivun frontmatterin kommentissa ovat SCN-tyyppi, intentti, emopilari, hakusanat volyymeineen, lähteet ja kirjoituspäivä. Päivitä kommentti, kun muutat sivua.
+- **SCN-tarkistus:** `npm run scn:linkit` (`scripts/linkkikartta.py`) kokoaa buildatusta sivustosta `SCN.md`:n linkkikartan ja ilmoittaa rikkinäiset linkit, orposivut ja puuttuvat linkit emopilariin. Aja `npm run build` ensin.
 
 ## Data
 
@@ -18,7 +35,10 @@ Suomenkielinen affiliate-sivusto, joka vertailee Suomessa myytäviä höyrypesur
 - **EV International (kuivahöyry):** `data/ev/ev-atlantis-kayttoohje-<päivä>.json` (valmistajan käyttöohjeen tekniset tiedot) muunnetaan `npm run hae:merkit` → `src/data/tuotteet/ev-international.json`. Feedissä ei ole EAN-koodia, joten Virtasen kaupan tarjous haetaan mallinimellä EV3000i.
 - **Kärcherin varusteet:** `npm run hae:varusteet` (`scripts/hae_karcher_varusteet.py`) lukee Kärcherin feedin höyrypesurien lisävarusteet ja jokaisen varustesivun Yhteensopivat laitteet -listan (vain nykyiset mallit) → `src/data/varusteet/karcher-sc.json` (31 varustetta 2026-10-22). Käytössä sivulla `/karcher-hoyrypesuri-varaosat/`.
 - **Tuotekuvat:** `npm run hae:kuvat` (`scripts/hae_kuvat.py`) lataa kuvat Kärcherin, CS Megastoren ja Multitronicin feedeistä tuotenumerolla kansioon `src/assets/tuotteet/`.
-- **Muiden merkkien data** (Vileda, Polti, Black+Decker) puuttuu vielä. Se lisätään merkkisivujen yhteydessä tekstiilipesuri.comin mallilla (oma tiedosto per merkki, `MERKKITIEDOSTOT` tiedostossa `src/content.config.ts`).
+- **Muut merkit:** `npm run hae:merkit` (`scripts/muunna_merkit.py`) muuntaa valmistajien sivuilta selaimessa kerätyn raakadatan (`data/vileda`, `data/polti`, `data/blackdecker`, `data/bissell`, `data/shark`, `data/ev`) tiedostoiksi `src/data/tuotteet/<merkki>.json`. Suomessa myytävä versio tunnistetaan EAN-koodilla, ja hinta, linkki ja kuva tulevat halvimmasta varastossa olevasta kumppanifeedin tarjouksesta (`scripts/feedtarjoukset.py`). Virheelliset valmistajan arvot luetellaan raakadatan kentässä `hylatyt`. Merkkitiedostot luetellaan `MERKKITIEDOSTOT`-listassa tiedostossa `src/content.config.ts`.
+- **Feedit:** `npm run lataa:feedit` (`scripts/lataa_feedit.py`) lataa kumppanifeedit kansioon `.feedit/` (ei versionhallinnassa).
+- **Vuokrahinnat:** `src/data/vuokrahinnat.json` päivitetään käsin vuokraamoiden sivuilta (kenttä `tarkistettu`).
+- **Hakusanat:** Ahrefs-taulukot ovat kansiossa `data/ahrefs/`.
 - **Mallisivujen päätuotteet ja polut:** `src/lib/tuotteet.ts` (`paatuotteet`, `mallisivut`).
 
 ## Affiliate

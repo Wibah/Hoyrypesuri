@@ -17,7 +17,7 @@ import sys
 JUURI = pathlib.Path(__file__).resolve().parent.parent
 DIST = JUURI / 'dist'
 SCN = JUURI / 'SCN.md'
-INFO = {'/tietoa-meista/', '/ota-yhteytta/', '/tietosuojaseloste/'}
+INFO = {'/tietoa-meista/', '/ota-yhteytta/', '/tietosuojaseloste/', '/nain-vertailemme/'}
 PILARIT = {'/', '/karcher-hoyrypesurit/'}
 
 
